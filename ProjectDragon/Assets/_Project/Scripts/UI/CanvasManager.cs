@@ -7,7 +7,7 @@ namespace _Project.Scripts.UI
     {
         public static CanvasManager Instance;
 
-        private List<ICanvas> _sceneCanvases;
+        public readonly List<ICanvas> SceneCanvases = new List<ICanvas>();
 
         #region Unity Methods
 
@@ -23,34 +23,24 @@ namespace _Project.Scripts.UI
             }
         }
 
-        private void OnEnable()
-        {
-            MasterCanvas.Instance.SignAsCurrentCanvasManager(this);
-        }
-
-        private void OnDisable()
-        {
-            MasterCanvas.Instance.RemoveCurrentCanvasManager();
-        }
-
         #endregion
 
         #region Public Methods
 
         public void Subscribe(ICanvas canvas)
         {
-            if (_sceneCanvases.Contains(canvas))
+            if (SceneCanvases.Contains(canvas))
                 return;
             
-            _sceneCanvases.Add(canvas);
+            SceneCanvases.Add(canvas);
         }
         
         public void Unsubscribe(ICanvas canvas)
         {
-            if (!_sceneCanvases.Contains(canvas))
+            if (!SceneCanvases.Contains(canvas))
                 return;
             
-            _sceneCanvases.Remove(canvas);
+            SceneCanvases.Remove(canvas);
         }
 
         #endregion
@@ -59,7 +49,7 @@ namespace _Project.Scripts.UI
 
         public void ChangeInteractableStatus(bool status)
         {
-            foreach (ICanvas canvas in _sceneCanvases)
+            foreach (ICanvas canvas in SceneCanvases)
             {
                 canvas.ChangeInteractableStatus(status);
             }

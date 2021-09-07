@@ -40,11 +40,14 @@ namespace _Project.Scripts.Network.Photon
         #endregion
 
         #region Unity Methods
-        
-        private void Start()
+
+        private void OnEnable()
         {
             PlayFabLogin.OnLoginSuccess += ConnectToPhotonChat;
-            
+        }
+
+        private void Start()
+        {
             _chatClient = new ChatClient(this);
         }
 
@@ -52,6 +55,11 @@ namespace _Project.Scripts.Network.Photon
         {
             // make sure we receive massages and being connected.
             _chatClient.Service();
+        }
+
+        private void OnDisable()
+        {
+            PlayFabLogin.OnLoginSuccess -= ConnectToPhotonChat;
         }
 
         #endregion

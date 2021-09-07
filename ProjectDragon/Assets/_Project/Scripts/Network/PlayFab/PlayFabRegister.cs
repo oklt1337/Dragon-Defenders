@@ -32,7 +32,7 @@ namespace _Project.Scripts.Network.PlayFab
 
         #region Unity Methods
 
-        private void Start()
+        private void OnEnable()
         {
             //RegisterCanvas.OnClickRegisterButton += Register;
         }

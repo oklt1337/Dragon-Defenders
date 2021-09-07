@@ -63,16 +63,19 @@ namespace _Project.Scripts.Network.Photon
 
         #region Unity Methods
 
-        private void Start()
+        public override void OnEnable()
         {
             PlayFabLogin.OnLoginSuccess += ConnectWithPlayFabData;
-
+        }
+        
+        private void Start()
+        {
             if (PhotonNetwork.IsConnected)
                 return;
             ConnectToPhoton(null, null);
         }
 
-        private void OnDestroy()
+        public override void OnDisable()
         {
             PlayFabLogin.OnLoginSuccess -= ConnectWithPlayFabData;
         }

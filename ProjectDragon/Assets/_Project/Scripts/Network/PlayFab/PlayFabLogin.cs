@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using _Project.Scripts.Network.PlayerData;
+using _Project.Scripts.UI.Login;
 using _Project.Scripts.Utility;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -42,23 +43,21 @@ namespace _Project.Scripts.Network.PlayFab
 
         #region Unity Methods
 
-        private void Start()
+        private void OnEnable()
         {
             //PlayFabRegister.Instance.OnRegisterSuccess += Login;
-            //LoginCanvas.OnClickLoginButton += Login;
+            LoginScreen.OnTryLogin += Login;
+        }
 
-            /*if (string.IsNullOrEmpty(PlayFabSettings.TitleId))
-            {
-                PlayFabSettings.TitleId = "4FCAD";
-            }*/
-
+        private void Start()
+        {
             LoginWithSavedData();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             //PlayFabRegister.Instance.OnRegisterSuccess -= Login;
-            //LoginCanvas.OnClickLoginButton -= Login;
+            LoginScreen.OnTryLogin -= Login;
         }
 
         #endregion
@@ -104,7 +103,8 @@ namespace _Project.Scripts.Network.PlayFab
 
         private void LoginWithSavedData()
         {
-            if (!loginData.autoLogin) return;
+            if (!loginData.autoLogin) 
+                return;
 
             Debug.Log("Login with saved player data.");
             Login(PlayerPrefs.GetString("USERNAME"), PlayerPrefs.GetString("PASSWORD"), loginData.autoLogin);
