@@ -1,19 +1,60 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts.UI
+namespace _Project.Scripts.UI.Login
 {
-    public class CanvasManager : MonoBehaviour
+    public class CanvasManager : MonoBehaviour, ICanvas
     {
-        // Start is called before the first frame update
-        void Start()
+        public static CanvasManager Instance;
+
+        private List<ICanvas> _sceneCanvases;
+
+        #region Unity Methods
+
+        private void Awake()
         {
-        
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        #endregion
+
+        #region Public Methods
+
+        public void Subscribe(ICanvas canvas)
         {
-        
+            if (_sceneCanvases.Contains(canvas))
+                return;
+            
+            _sceneCanvases.Add(canvas);
         }
+        
+        public void Unsubscribe(ICanvas canvas)
+        {
+            if (!_sceneCanvases.Contains(canvas))
+                return;
+            
+            _sceneCanvases.Remove(canvas);
+        }
+
+        #endregion
+
+        #region ICanvas
+
+        public void ChangeInteractableStatus(bool status)
+        {
+            foreach (ICanvas canvas in _sceneCanvases)
+            {
+                canvas.ChangeInteractableStatus(status);
+            }
+        }
+
+        #endregion
     }
 }
