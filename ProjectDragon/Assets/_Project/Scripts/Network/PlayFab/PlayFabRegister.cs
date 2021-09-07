@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.UI.Login;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -34,12 +35,12 @@ namespace _Project.Scripts.Network.PlayFab
 
         private void OnEnable()
         {
-            //RegisterCanvas.OnClickRegisterButton += Register;
+            RegisterScreen.OnTryRegister += Register;
         }
 
         private void OnDestroy()
         {
-            //RegisterCanvas.OnClickRegisterButton -= Register;
+            RegisterScreen.OnTryRegister -= Register;
         }
 
         #endregion

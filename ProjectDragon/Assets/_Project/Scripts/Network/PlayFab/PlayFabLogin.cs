@@ -36,7 +36,6 @@ namespace _Project.Scripts.Network.PlayFab
 
         public static event Action<string, string> OnLoginSuccess;
         public static event Action OnLogoutSuccess;
-
         public static event Action<string> OnLoginFailed;
 
         #endregion
@@ -45,7 +44,7 @@ namespace _Project.Scripts.Network.PlayFab
 
         private void OnEnable()
         {
-            //PlayFabRegister.Instance.OnRegisterSuccess += Login;
+            PlayFabRegister.OnRegisterSuccess += Login;
             LoginScreen.OnTryLogin += Login;
         }
 
@@ -56,7 +55,7 @@ namespace _Project.Scripts.Network.PlayFab
 
         private void OnDisable()
         {
-            //PlayFabRegister.Instance.OnRegisterSuccess -= Login;
+            PlayFabRegister.OnRegisterSuccess -= Login;
             LoginScreen.OnTryLogin -= Login;
         }
 
