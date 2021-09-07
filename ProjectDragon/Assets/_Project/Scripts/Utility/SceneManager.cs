@@ -21,7 +21,7 @@ namespace _Project.Scripts.Utility
 
         private void Awake()
         {
-            if (Instance != this)
+            if (Instance != null)
             {
                 Destroy(gameObject);
             }

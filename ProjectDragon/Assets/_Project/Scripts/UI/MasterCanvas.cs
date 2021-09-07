@@ -33,12 +33,12 @@ namespace _Project.Scripts.UI
 
         private void Start()
         {
-            PhotonConnector.OnDisconnectedFromPhoton += LostConnection;
+            PhotonConnector.OnPhotonDisconnected += LostConnection;
         }
 
         private void OnDestroy()
         {
-            PhotonConnector.OnDisconnectedFromPhoton -= LostConnection;
+            PhotonConnector.OnPhotonDisconnected -= LostConnection;
         }
 
         #endregion

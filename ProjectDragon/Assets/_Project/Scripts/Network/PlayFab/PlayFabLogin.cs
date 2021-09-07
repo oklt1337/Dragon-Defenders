@@ -11,7 +11,8 @@ namespace _Project.Scripts.Network.PlayFab
     {
         #region Serializable Fields
 
-        [Header("LoginData")] [SerializeField] private LoginData loginData;
+        [Header("LoginData")] 
+        [SerializeField] private LoginData loginData;
 
         #endregion
 
@@ -30,10 +31,10 @@ namespace _Project.Scripts.Network.PlayFab
 
         #region Public Events
 
-        public event Action<string, string> OnLoginSuccess;
-        public event Action OnLogoutSuccess;
+        public static event Action<string, string> OnLoginSuccess;
+        public static event Action OnLogoutSuccess;
 
-        public event Action<string> OnLoginFailed;
+        public static event Action<string> OnLoginFailed;
 
         #endregion
 

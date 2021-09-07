@@ -30,7 +30,7 @@ namespace _Project.Scripts.Network
 
         private void Awake()
         {
-            if (Instance != this)
+            if (Instance != null)
             {
                 Destroy(gameObject);
             }
