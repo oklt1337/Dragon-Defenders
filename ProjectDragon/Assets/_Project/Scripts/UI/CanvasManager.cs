@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts.UI.Login
+namespace _Project.Scripts.UI
 {
     public class CanvasManager : MonoBehaviour, ICanvas
     {
@@ -21,6 +21,16 @@ namespace _Project.Scripts.UI.Login
             {
                 Instance = this;
             }
+        }
+
+        private void OnEnable()
+        {
+            MasterCanvas.Instance.SignAsCurrentCanvasManager(this);
+        }
+
+        private void OnDisable()
+        {
+            MasterCanvas.Instance.RemoveCurrentCanvasManager();
         }
 
         #endregion
