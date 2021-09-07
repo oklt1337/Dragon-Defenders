@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Network.Photon
 {
@@ -35,7 +37,8 @@ namespace _Project.Scripts.Network.Photon
 
         #region Events
 
-        public event Action OnConnectedToPhoton;
+        public static event Action OnConnectedToPhoton;
+        public static event Action<string> OnDisconnectedFromPhoton;
 
         #endregion
 
@@ -43,15 +46,37 @@ namespace _Project.Scripts.Network.Photon
 
         private void Start()
         {
-            NetworkManager.Instance.PlayFabManager.PlayFabLogin.OnLoginSuccess += ConnectToPhoton;
+            NetworkManager.Instance.PlayFabManager.PlayFabLogin.OnLoginSuccess += ConnectWithPlayFabData;
+            
+            ConnectToPhoton(null, null);
+        }
+
+        private void OnDestroy()
+        {
+            NetworkManager.Instance.PlayFabManager.PlayFabLogin.OnLoginSuccess -= ConnectWithPlayFabData;
         }
 
         #endregion
 
         #region Private Methods
 
-        private void ConnectToPhoton(string displayName, string id)
+        private void ConnectWithPlayFabData(string displayName, string id)
         {
+            if (!PhotonNetwork.IsConnected) 
+                return;
+            
+            PhotonNetwork.Disconnect();
+            ConnectToPhoton(displayName, id);
+        }
+
+        private void ConnectToPhoton([CanBeNull] string displayName, [CanBeNull] string id)
+        {
+            if (string.IsNullOrEmpty(displayName))
+            {
+                displayName = "Guest#" + Random.Range(0, 9999);
+                id = displayName;
+            }
+            
             Debug.Log($"Connect to Photon as {displayName}");
 
             // Set AppVersion.
@@ -61,7 +86,7 @@ namespace _Project.Scripts.Network.Photon
             PhotonNetwork.GameVersion = GameVersion;
 
             // Creating AuthValues
-            var authValues = new AuthenticationValues
+            AuthenticationValues authValues = new AuthenticationValues
             {
                 UserId = id
             };

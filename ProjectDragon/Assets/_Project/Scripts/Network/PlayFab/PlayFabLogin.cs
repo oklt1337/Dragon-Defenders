@@ -11,23 +11,19 @@ namespace _Project.Scripts.Network.PlayFab
     {
         #region Serializable Fields
 
-        [Header("LoginData")]
-        [SerializeField] 
-        private LoginData loginData;
-        
+        [Header("LoginData")] [SerializeField] private LoginData loginData;
+
         #endregion
-        
+
         #region Private Fields
 
         private string _userName;
         private string _password;
-        private LoginData _loginData;
 
         #endregion
 
         #region Public Fields
 
-        public bool LoginStatus { get; private set; }
         public bool AutoLogin => loginData.autoLogin;
 
         #endregion
@@ -37,7 +33,7 @@ namespace _Project.Scripts.Network.PlayFab
         public event Action<string, string> OnLoginSuccess;
         public event Action OnLogoutSuccess;
 
-        public event Action<string> OnLoginFailed; 
+        public event Action<string> OnLoginFailed;
 
         #endregion
 
@@ -74,9 +70,9 @@ namespace _Project.Scripts.Network.PlayFab
         {
             _userName = newUserName;
 
-            if (!_loginData.autoLogin)
+            if (!loginData.autoLogin)
             {
-                PlayerPrefs.SetString("USERNAME" ,_userName);
+                PlayerPrefs.SetString("USERNAME", _userName);
             }
         }
 
@@ -88,9 +84,9 @@ namespace _Project.Scripts.Network.PlayFab
         {
             _password = newPassword;
 
-            if (!_loginData.autoLogin)
+            if (!loginData.autoLogin)
             {
-                PlayerPrefs.SetString("PASSWORD" ,_password);
+                PlayerPrefs.SetString("PASSWORD", _password);
             }
         }
 
@@ -100,17 +96,17 @@ namespace _Project.Scripts.Network.PlayFab
         /// <param name="autoLogin">Bool that represents if player want to stay signed in for the next time he opens the app</param>
         private void SetLoginData(bool autoLogin)
         {
-            _loginData.autoLogin = autoLogin;
+            loginData.autoLogin = autoLogin;
         }
-        
+
         private void LoginWithSavedData()
         {
-            if (!_loginData.autoLogin) return;
-            
+            if (!loginData.autoLogin) return;
+
             Debug.Log("Login with saved player data.");
-            Login(PlayerPrefs.GetString("USERNAME"), PlayerPrefs.GetString("PASSWORD"), _loginData.autoLogin);
+            Login(PlayerPrefs.GetString("USERNAME"), PlayerPrefs.GetString("PASSWORD"), loginData.autoLogin);
         }
-        
+
         /// <summary>
         /// Login in to PlayFab.
         /// </summary>
@@ -121,15 +117,15 @@ namespace _Project.Scripts.Network.PlayFab
         {
             SetUserName(userName);
             SetPassword(password);
-            
+
             // make sure bool is not null so no error occurs
             if (autoLogin != null)
             {
-                SetLoginData((bool) autoLogin);
+                SetLoginData((bool)autoLogin);
             }
-            
+
             if (!IsValidUserName() || !IsValidPassword()) return;
-            
+
             Debug.Log("Login");
             LoginWithPlayFabRequest();
         }
@@ -139,7 +135,7 @@ namespace _Project.Scripts.Network.PlayFab
             PlayerPrefs.DeleteAll();
             loginData.autoLogin = false;
         }
-        
+
         /// <summary>
         /// Check if Username is Valid
         /// for a Username to be valid it must be
@@ -191,7 +187,8 @@ namespace _Project.Scripts.Network.PlayFab
             {
                 DisplayName = displayName
             };
-            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdateSuccess, OnFailedToUpdateDisplayName);
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdateSuccess,
+                OnFailedToUpdateDisplayName);
         }
 
         #endregion
@@ -205,10 +202,9 @@ namespace _Project.Scripts.Network.PlayFab
         {
             Debug.Log("Logout");
             PlayFabClientAPI.ForgetAllCredentials();
-            LoginStatus = false;
             OnLogoutSuccess?.Invoke();
         }
-        
+
         #endregion
 
         #region PlayFab Callbacks
@@ -217,24 +213,23 @@ namespace _Project.Scripts.Network.PlayFab
         {
             Debug.Log($"Login Successful: {result.PlayFabId}");
 
-            LoginStatus = true;
             UpdateDisplayName(_userName);
-            
+
             OnLoginSuccess?.Invoke(_userName, result.PlayFabId);
             SceneManager.Instance.ChangeScene(Scene.MainMenu);
         }
-        
+
         private void OnFailedToLogin(PlayFabError error)
         {
             Debug.LogError($"ERROR {error.GenerateErrorReport()}");
             OnLoginFailed?.Invoke(error.GenerateErrorReport());
         }
-        
+
         private void OnDisplayNameUpdateSuccess(UpdateUserTitleDisplayNameResult result)
         {
             Debug.Log($"DisplayName Updated Successful: {result.DisplayName}");
         }
-        
+
         private void OnFailedToUpdateDisplayName(PlayFabError error)
         {
             Debug.LogError($"ERROR {error.GenerateErrorReport()}");
