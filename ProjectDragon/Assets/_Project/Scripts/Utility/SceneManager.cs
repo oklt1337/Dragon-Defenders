@@ -16,12 +16,12 @@ namespace _Project.Scripts.Utility
     
     public class SceneManager : MonoBehaviour
     {
-        public static Scene CurrentScene => GetCurrentScene();
-
         [SerializeField] private float loadingLoginSceneDelay = 3f;
 
         private Coroutine _loadingLoginSceneCo;
 
+        public static Scene CurrentScene => GetCurrentScene();
+        
         private void Start()
         {
             LoadLoginScene();
