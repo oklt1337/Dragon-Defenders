@@ -1,6 +1,5 @@
 using System.Collections;
 using _Project.Scripts.Network.Photon;
-using _Project.Scripts.Utility;
 using TMPro;
 using UnityEngine;
 

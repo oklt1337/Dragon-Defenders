@@ -1,6 +1,4 @@
 using System;
-using _Project.Scripts.Network.PlayFab;
-using _Project.Scripts.Utility;
 using ExitGames.Client.Photon;
 using Photon.Chat;
 using Photon.Pun;
