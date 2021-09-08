@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Project.Scripts.Network;
 using Photon.Pun;
 using UnityEngine;
 
@@ -17,13 +18,16 @@ namespace _Project.Scripts.Utility
     public class SceneManager : MonoBehaviour
     {
         [SerializeField] private float loadingLoginSceneDelay = 3f;
-
+        
         private Coroutine _loadingLoginSceneCo;
 
         public static Scene CurrentScene => GetCurrentScene();
         
         private void Start()
         {
+            if (NetworkManager.Instance.PlayFabManager.PlayFabLogin.AutoLogin)
+                return;
+            
             LoadLoginScene();
         }
 
