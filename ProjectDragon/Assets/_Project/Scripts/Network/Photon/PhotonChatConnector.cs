@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Network.PlayFab;
+using _Project.Scripts.Utility;
 using ExitGames.Client.Photon;
 using Photon.Chat;
 using Photon.Pun;
@@ -43,7 +44,7 @@ namespace _Project.Scripts.Network.Photon
 
         private void OnEnable()
         {
-            PlayFabLogin.OnLoginSuccess += ConnectToPhotonChat;
+            PhotonConnector.OnPhotonConnected += ConnectToPhotonChat;
         }
 
         private void Start()
@@ -59,7 +60,7 @@ namespace _Project.Scripts.Network.Photon
 
         private void OnDisable()
         {
-            PlayFabLogin.OnLoginSuccess -= ConnectToPhotonChat;
+            PhotonConnector.OnPhotonConnected -= ConnectToPhotonChat;
         }
 
         #endregion
@@ -69,13 +70,13 @@ namespace _Project.Scripts.Network.Photon
         /// <summary>
         /// Connecting Client to Photon Chat.
         /// </summary>
-        private void ConnectToPhotonChat(string userName, string id)
+        private void ConnectToPhotonChat()
         {
             Debug.Log("Connecting to Photon Chat.");
             
             AuthenticationValues authValues = new AuthenticationValues
             {
-                UserId = id
+                UserId = PhotonNetwork.LocalPlayer.UserId
             };
             _chatClient.AuthValues = authValues;
 

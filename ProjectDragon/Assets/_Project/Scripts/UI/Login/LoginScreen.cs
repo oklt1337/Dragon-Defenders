@@ -13,14 +13,13 @@ namespace _Project.Scripts.UI.Login
         [SerializeField] private Button loginButton;
         [SerializeField] private Button registerButton;
 
-        public static Action<string, string, bool?> OnTryLogin;
+        public static Action<string, string, bool> OnTryLogin;
 
         #region Unity Methods
 
         private void OnEnable()
         {
             CanvasManager.Instance.Subscribe(this);
-            userName.Select();
         }
 
         private void OnDisable()
@@ -37,7 +36,7 @@ namespace _Project.Scripts.UI.Login
             if (string.IsNullOrEmpty(userName.text) || string.IsNullOrEmpty(password.text))
                 return;
             
-            OnTryLogin?.Invoke(userName.text, password.text, rememberMe);
+            OnTryLogin?.Invoke(userName.text, password.text, rememberMe.isOn);
             userName.text = string.Empty;
             password.text = string.Empty;
         }
