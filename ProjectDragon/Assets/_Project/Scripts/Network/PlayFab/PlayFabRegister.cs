@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.UI.Login;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -25,21 +26,21 @@ namespace _Project.Scripts.Network.PlayFab
 
         #region Pubic Events
 
-        public static event Action<string,string,bool?> OnRegisterSuccess;
+        public static event Action<string,string,bool> OnRegisterSuccess;
         public static event Action<string> OnRegisterFailed;
 
         #endregion
 
         #region Unity Methods
 
-        private void Start()
+        private void OnEnable()
         {
-            //RegisterCanvas.OnClickRegisterButton += Register;
+            RegisterScreen.OnTryRegister += Register;
         }
 
         private void OnDestroy()
         {
-            //RegisterCanvas.OnClickRegisterButton -= Register;
+            RegisterScreen.OnTryRegister -= Register;
         }
 
         #endregion
@@ -67,33 +68,6 @@ namespace _Project.Scripts.Network.PlayFab
         {
             return _password.Length >= 6;
         }
-        
-        /// <summary>
-        /// Setting Username
-        /// </summary>
-        /// <param name="newUserName">Username to Login to PlayFab</param>
-        public void SetUserName(string newUserName)
-        {
-            _userName = newUserName;
-        }
-
-        /// <summary>
-        /// Setting Email
-        /// </summary>
-        /// <param name="newEmail"></param>
-        public void SetEmail(string newEmail)
-        {
-            _email = newEmail;
-        }
-
-        /// <summary>
-        /// Setting Password
-        /// </summary>
-        /// <param name="newPassword">Password to Login to PlayFab</param>
-        public void SetPassword(string newPassword)
-        {
-            _password = newPassword;
-        }
 
         /// <summary>
         /// Sending Request to PlayFab with userName and Password.
@@ -102,9 +76,9 @@ namespace _Project.Scripts.Network.PlayFab
         /// </summary>
         private void RegisterPlayFabUserRequest()
         {
-            Debug.Log($"Register to PlayFab as {_userName}");
+            Debug.Log($"Try register to PlayFab as {_userName}");
 
-            var request = new RegisterPlayFabUserRequest
+            RegisterPlayFabUserRequest request = new RegisterPlayFabUserRequest
             {
                 Username = _userName,
                 Email = _email,
@@ -112,27 +86,27 @@ namespace _Project.Scripts.Network.PlayFab
             };
             PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterPlayFabSuccess, OnFailedToRegister);
         }
-
-        #endregion
-
-        #region Public Methods
-
+        
         /// <summary>
         /// Login in to PlayFab.
         /// </summary>
         /// <param name="email">email register with</param>
         /// <param name="userName">userName registers with</param>
         /// <param name="password">password registers with</param>
-        public void Register(string email, string userName, string password)
+        private void Register(string email, string userName, string password)
         {
-            SetEmail(email);
-            SetUserName(userName);
-            SetPassword(password);
+            _email = email;
+            _userName = userName;
+            _password = password;
             
             if (!IsValidUserName() || !IsValidPassword()) return;
             RegisterPlayFabUserRequest();
         }
-        
+
+        #endregion
+
+        #region Public Methods
+
         #endregion
 
         #region PlayFab Callbacks
@@ -141,10 +115,10 @@ namespace _Project.Scripts.Network.PlayFab
         {
             Debug.Log($"Registration Successful: {result.PlayFabId}");
 
-            OnRegisterSuccess?.Invoke(_userName, _password, null);
+            OnRegisterSuccess?.Invoke(_userName, _password, false);
         }
         
-        private void OnFailedToRegister(PlayFabError error)
+        private static void OnFailedToRegister(PlayFabError error)
         {
             Debug.LogError($"ERROR {error.GenerateErrorReport()}");
 

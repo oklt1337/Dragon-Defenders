@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Network.PlayerData
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Tools/loginData")]
     public class LoginData : ScriptableObject
     {
         public bool autoLogin;

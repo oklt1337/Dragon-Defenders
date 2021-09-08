@@ -1,44 +1,32 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using _Project.Scripts.Network.Photon;
+using _Project.Scripts.Utility;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Scripts.UI
 {
     public class MasterCanvas : MonoBehaviour
     {
-        public static MasterCanvas Instance;
-
         [SerializeField] private GameObject lostConnectionImage;
         [SerializeField] private TextMeshProUGUI errorMessageText;
-        
-        private ICanvas _canvasManager;
+
+        [SerializeField] private CanvasManager canvasManager;
+
+        private Coroutine _lostConnectionCo;
 
         #region Unity Methods
 
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-            }
-        }
-
-        private void Start()
+        private void OnEnable()
         {
             PhotonConnector.OnPhotonDisconnected += LostConnection;
+            PhotonConnector.OnPhotonConnected += Reconnected;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             PhotonConnector.OnPhotonDisconnected -= LostConnection;
+            PhotonConnector.OnPhotonConnected -= Reconnected;
         }
 
         #endregion
@@ -50,44 +38,32 @@ namespace _Project.Scripts.UI
             lostConnectionImage.SetActive(true);
             errorMessageText.text = error;
             errorMessageText.gameObject.SetActive(true);
-            _canvasManager?.ChangeInteractableStatus(false);
+            canvasManager.ChangeInteractableStatus(false);
 
             yield return new WaitForSeconds(3f);
-            
+
             lostConnectionImage.SetActive(false);
             errorMessageText.text = string.Empty;
             errorMessageText.gameObject.SetActive(false);
-            _canvasManager?.ChangeInteractableStatus(true);
+            canvasManager.ChangeInteractableStatus(false);
         }
-        
+
         /// <summary>
         /// Start Coroutine that shows lost connection.
         /// </summary>
         /// <param name="errorMessage"></param>
         private void LostConnection(string errorMessage)
         {
-            StartCoroutine(LostConnectionCo(errorMessage));
+            if (_lostConnectionCo != null)
+                StopCoroutine(_lostConnectionCo);
+            
+            _lostConnectionCo = StartCoroutine(LostConnectionCo(errorMessage));
         }
 
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        /// Set Current Canvas Manager
-        /// </summary>
-        /// <param name="canvasManager"></param>
-        public void SignAsCurrentCanvasManager(ICanvas canvasManager)
+        private void Reconnected()
         {
-            _canvasManager = canvasManager;
-        }
-
-        /// <summary>
-        /// Remove Current CanvasManager
-        /// </summary>
-        public void RemoveCurrentCanvasManager()
-        {
-            _canvasManager = null;
+            if (_lostConnectionCo != null)
+                StopCoroutine(_lostConnectionCo);
         }
 
         #endregion

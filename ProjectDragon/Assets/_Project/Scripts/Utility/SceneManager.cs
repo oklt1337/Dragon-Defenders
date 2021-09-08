@@ -1,13 +1,14 @@
+using System;
+using System.Collections;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace _Project.Scripts.Utility
 {
     public enum Scene
     {
         Intro,
-        LogReg,
+        Login,
         MainMenu,
         Lobby,
         InGame
@@ -15,38 +16,51 @@ namespace _Project.Scripts.Utility
     
     public class SceneManager : MonoBehaviour
     {
-        public static SceneManager Instance;
-        
-        public UnityEngine.SceneManagement.Scene CurrentScene => UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        public static Scene CurrentScene => GetCurrentScene();
 
-        private void Awake()
+        [SerializeField] private float loadingLoginSceneDelay = 3f;
+
+        private Coroutine _loadingLoginSceneCo;
+
+        private void Start()
         {
-            if (Instance != null)
+            LoadLoginScene();
+        }
+
+        private static Scene GetCurrentScene()
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex switch
             {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-            }
+                0 => Scene.Intro,
+                1 => Scene.Login,
+                2 => Scene.MainMenu,
+                3 => Scene.Lobby,
+                4 => Scene.InGame,
+                _ => throw new IndexOutOfRangeException()
+            };
+        }
+
+        private void LoadLoginScene()
+        {
+            if (_loadingLoginSceneCo != null)
+                StopCoroutine(_loadingLoginSceneCo);
+
+            _loadingLoginSceneCo = StartCoroutine(LoadLoginSceneCo());
+        }
+
+        private IEnumerator LoadLoginSceneCo()
+        {
+            yield return new WaitForSeconds(loadingLoginSceneDelay);
+            ChangeScene(Scene.Login);
         }
 
         /// <summary>
         /// Change Scene with Photon LoadLevel
         /// </summary>
         /// <param name="newScene">enum Scene</param>
-        public void ChangeScene(Scene newScene)
+        public static void ChangeScene(Scene newScene)
         {
             PhotonNetwork.LoadLevel(newScene.ToString());
-        }
-
-        /// <summary>
-        /// Change Scene with Unity SceneManager Async
-        /// </summary>
-        /// <param name="newScene">enum Scene</param>
-        public void ChangeSceneAsync(Scene newScene)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(newScene.ToString());
         }
     }
 }

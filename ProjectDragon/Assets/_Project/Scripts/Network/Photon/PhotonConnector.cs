@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Project.Scripts.Network.PlayFab;
+using _Project.Scripts.Utility;
 using JetBrains.Annotations;
 using Photon.Pun;
 using Photon.Realtime;
@@ -63,43 +64,24 @@ namespace _Project.Scripts.Network.Photon
 
         #region Unity Methods
 
-        private void Start()
+        public override void OnEnable()
         {
-            PlayFabLogin.OnLoginSuccess += ConnectWithPlayFabData;
-
-            if (PhotonNetwork.IsConnected)
-                return;
-            ConnectToPhoton(null, null);
+            base.OnEnable();
+            PlayFabLogin.OnLoginSuccess += ConnectToPhoton;
         }
 
-        private void OnDestroy()
+        public override void OnDisable()
         {
-            PlayFabLogin.OnLoginSuccess -= ConnectWithPlayFabData;
+            base.OnDisable();
+            PlayFabLogin.OnLoginSuccess -= ConnectToPhoton;
         }
 
         #endregion
 
         #region Private Methods
 
-        private void ConnectWithPlayFabData(string displayName, string id)
+        private void ConnectToPhoton(string displayName, string id)
         {
-            Debug.Log("Connecting with PlayFabData.");
-            
-            if (!PhotonNetwork.IsConnected)
-                return;
-
-            PhotonNetwork.Disconnect();
-            ConnectToPhoton(displayName, id);
-        }
-
-        private void ConnectToPhoton([CanBeNull] string displayName, [CanBeNull] string id)
-        {
-            if (string.IsNullOrEmpty(displayName))
-            {
-                displayName = "Guest#" + Random.Range(0, 9999);
-                id = displayName;
-            }
-
             Debug.Log($"Connect to Photon as {displayName}");
 
             // Set AppVersion.
@@ -136,7 +118,7 @@ namespace _Project.Scripts.Network.Photon
 
         private void CreatePhotonRoom()
         {
-            var option = new RoomOptions
+            RoomOptions option = new RoomOptions
             {
                 MaxPlayers = 1,
                 IsOpen = false,
@@ -224,6 +206,10 @@ namespace _Project.Scripts.Network.Photon
         {
             Debug.Log($"Joined Lobby: {PhotonNetwork.CurrentLobby}");
             OnPhotonJoinedLobby?.Invoke();
+
+            if (SceneManager.CurrentScene != Scene.Lobby)
+                return;
+            SceneManager.ChangeScene(Scene.MainMenu);
         }
 
         public override void OnLeftLobby()

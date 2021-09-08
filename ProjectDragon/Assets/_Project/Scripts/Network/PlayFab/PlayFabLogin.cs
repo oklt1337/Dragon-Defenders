@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Network.PlayerData;
+using _Project.Scripts.UI.Login;
 using _Project.Scripts.Utility;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -33,30 +34,27 @@ namespace _Project.Scripts.Network.PlayFab
 
         public static event Action<string, string> OnLoginSuccess;
         public static event Action OnLogoutSuccess;
-
         public static event Action<string> OnLoginFailed;
 
         #endregion
 
         #region Unity Methods
 
+        private void OnEnable()
+        {
+            PlayFabRegister.OnRegisterSuccess += Login;
+            LoginScreen.OnTryLogin += Login;
+        }
+
         private void Start()
         {
-            //PlayFabRegister.Instance.OnRegisterSuccess += Login;
-            //LoginCanvas.OnClickLoginButton += Login;
-
-            /*if (string.IsNullOrEmpty(PlayFabSettings.TitleId))
-            {
-                PlayFabSettings.TitleId = "4FCAD";
-            }*/
-
             LoginWithSavedData();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
-            //PlayFabRegister.Instance.OnRegisterSuccess -= Login;
-            //LoginCanvas.OnClickLoginButton -= Login;
+            PlayFabRegister.OnRegisterSuccess -= Login;
+            LoginScreen.OnTryLogin -= Login;
         }
 
         #endregion
@@ -98,11 +96,17 @@ namespace _Project.Scripts.Network.PlayFab
         private void SetLoginData(bool autoLogin)
         {
             loginData.autoLogin = autoLogin;
+            
+            if (loginData.autoLogin == false)
+            {
+                DeletePlayerPrefsData();
+            }
         }
 
         private void LoginWithSavedData()
         {
-            if (!loginData.autoLogin) return;
+            if (!loginData.autoLogin) 
+                return;
 
             Debug.Log("Login with saved player data.");
             Login(PlayerPrefs.GetString("USERNAME"), PlayerPrefs.GetString("PASSWORD"), loginData.autoLogin);
@@ -114,20 +118,17 @@ namespace _Project.Scripts.Network.PlayFab
         /// <param name="userName">userName to Login with</param>
         /// <param name="password">password to Login with</param>
         /// <param name="autoLogin">bool that determined if on next login will be automatically logs in</param>
-        private void Login(string userName, string password, bool? autoLogin)
+        private void Login(string userName, string password, bool autoLogin)
         {
             SetUserName(userName);
             SetPassword(password);
 
             // make sure bool is not null so no error occurs
-            if (autoLogin != null)
-            {
-                SetLoginData((bool)autoLogin);
-            }
+            SetLoginData(autoLogin);
 
-            if (!IsValidUserName() || !IsValidPassword()) return;
-
-            Debug.Log("Login");
+            if (!IsValidUserName() || !IsValidPassword()) 
+                return;
+            
             LoginWithPlayFabRequest();
         }
 
@@ -166,9 +167,9 @@ namespace _Project.Scripts.Network.PlayFab
         /// </summary>
         private void LoginWithPlayFabRequest()
         {
-            Debug.Log($"Login to PlayFab as {_userName}");
+            Debug.Log($"Try login to PlayFab as {_userName}");
 
-            var request = new LoginWithPlayFabRequest
+            LoginWithPlayFabRequest request = new LoginWithPlayFabRequest
             {
                 Username = _userName,
                 Password = _password
@@ -182,9 +183,9 @@ namespace _Project.Scripts.Network.PlayFab
         /// <param name="displayName">string new displayName</param>
         private void UpdateDisplayName(string displayName)
         {
-            Debug.Log($"Updating PlayFab Accounts DisplayName: {displayName}");
+            Debug.Log($"Try updating PlayFab Accounts DisplayName: {displayName}");
 
-            var request = new UpdateUserTitleDisplayNameRequest
+            UpdateUserTitleDisplayNameRequest request = new UpdateUserTitleDisplayNameRequest
             {
                 DisplayName = displayName
             };
@@ -213,11 +214,10 @@ namespace _Project.Scripts.Network.PlayFab
         private void OnLoginPlayFabSuccess(LoginResult result)
         {
             Debug.Log($"Login Successful: {result.PlayFabId}");
-
             UpdateDisplayName(_userName);
 
             OnLoginSuccess?.Invoke(_userName, result.PlayFabId);
-            SceneManager.Instance.ChangeScene(Scene.MainMenu);
+            SceneManager.ChangeScene(Scene.MainMenu);
         }
 
         private void OnFailedToLogin(PlayFabError error)
