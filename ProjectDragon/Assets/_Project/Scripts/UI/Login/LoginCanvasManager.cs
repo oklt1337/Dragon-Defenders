@@ -27,8 +27,13 @@ namespace _Project.Scripts.UI.Login
             registerScreen.SetActive(false);
         }
 
-        public void ActivateRegisterScreen()
+        public void ActivateRegisterScreen(string userNameText)
         {
+            if (!string.IsNullOrEmpty(userNameText))
+            {
+                registerScreen.GetComponent<RegisterScreen>().SetUserName(userNameText);
+            }
+
             registerScreen.SetActive(true);
             loginScreen.SetActive(false);
         }

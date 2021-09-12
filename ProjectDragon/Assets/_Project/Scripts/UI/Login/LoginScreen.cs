@@ -37,15 +37,25 @@ namespace _Project.Scripts.UI.Login
                 return;
             
             OnTryLogin?.Invoke(userName.text, password.text, rememberMe.isOn);
-            userName.text = string.Empty;
-            password.text = string.Empty;
+            ClearInputs();
         }
 
         public void OnClickRegister()
         {
-            LoginCanvasManager.Instance.ActivateRegisterScreen();
+            LoginCanvasManager.Instance.ActivateRegisterScreen(userName.text);
+            ClearInputs();
         }
         
+        #endregion
+
+        #region Private Methods
+
+        private void ClearInputs()
+        {
+            userName.text = string.Empty;
+            password.text = string.Empty;
+        }
+
         #endregion
 
         #region ICanvas

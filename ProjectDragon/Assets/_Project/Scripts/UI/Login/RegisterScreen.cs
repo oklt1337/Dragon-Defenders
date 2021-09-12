@@ -42,10 +42,7 @@ namespace _Project.Scripts.UI.Login
             {
                 OnTryRegister?.Invoke(email.text, userName.text, password.text);
 
-                email.text = string.Empty;
-                userName.text = string.Empty;
-                password.text = string.Empty;
-                repeatPassword.text = string.Empty;
+                ClearInputs();
             }
             else
             {
@@ -57,12 +54,30 @@ namespace _Project.Scripts.UI.Login
         public void OnClickBack()
         {
             LoginCanvasManager.Instance.ActivateLoginScreen();
+            ClearInputs();
         }
 
         public void OnSelectedPassword()
         {
             password.textComponent.color = Color.black;
             repeatPassword.textComponent.color = Color.black;
+        }
+
+        public void SetUserName(string userNameText)
+        {
+            userName.text = userNameText;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void ClearInputs()
+        {
+            email.text = string.Empty;
+            userName.text = string.Empty;
+            password.text = string.Empty;
+            repeatPassword.text = string.Empty;
         }
 
         #endregion
