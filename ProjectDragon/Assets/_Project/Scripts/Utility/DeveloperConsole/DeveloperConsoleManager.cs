@@ -46,7 +46,7 @@ namespace _Project.Scripts.Utility.DeveloperConsole
         {
             if (!Input.GetKeyDown(KeyCode.BackQuote)) 
                 return;
-            
+
             Toggle();
         }
 

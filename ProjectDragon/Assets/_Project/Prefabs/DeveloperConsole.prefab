@@ -509,6 +509,7 @@ MonoBehaviour:
   prefix: /
   commands:
   - {fileID: 11400000, guid: 6fd0dee3fd3c3eb4c8afab7062b01051, type: 2}
+  - {fileID: 11400000, guid: 76e57a18f150f964e89a08849d16a2f6, type: 2}
   console: {fileID: 8298953314287478579}
   inputField: {fileID: 8298953313763269323}
   debugLog: {fileID: 8861406632076233174}
