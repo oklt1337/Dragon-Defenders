@@ -3,16 +3,14 @@ using static _Project.Scripts.Gameplay.GameManager;
 
 namespace _Project.Scripts.Gameplay.Enemies
 {
-    public class PopcornEnemy : Enemy
+    public class Flier : Mover
     {
-    
-
         /// <summary>
-        /// Walks to the Base.
+        /// Flies to the Base.
         /// </summary>
-        public void WalkToBase()
+        public void FlyToBase()
         {
-            agent.SetDestination(Instance.HQ.transform.position);
+            
         }
     }
 }

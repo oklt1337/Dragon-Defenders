@@ -1,19 +1,19 @@
-using System;
+using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Enemies.EnemyBehaviourTree
 {
-    public class WalkToBase : Node
+    public class FlyToBase : Node
     {
-        private Runner _owner;
+        private Flier _owner;
 
-        public WalkToBase(Runner newOwner)
+        public FlyToBase(Flier newOwner)
         {
             _owner = newOwner;
         }
 
         public override NodeState Evaluate()
         {
-            _owner.WalkToBase();
+            _owner.FlyToBase();
             return NodeState.Working;
         }
     }

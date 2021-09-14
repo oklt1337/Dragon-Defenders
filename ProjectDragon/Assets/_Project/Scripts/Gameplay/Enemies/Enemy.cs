@@ -9,16 +9,17 @@ namespace _Project.Scripts.Gameplay.Enemies
     {
        [SerializeField] private string enemyName;
        [SerializeField] private GameObject enemyModel;
-       [SerializeField] private float health;
+       [SerializeField] protected float health;
+       [SerializeField] protected float maxHealth;
        [SerializeField] private float defense;
-       [SerializeField] private float speed;
+       [SerializeField] protected float speed;
        [SerializeField] private float maxSpeed;
        [SerializeField] private float hqDamage;
        [SerializeField] private float expDrop;
        [SerializeField] private float goldDrop;
        [SerializeField] internal NavMeshAgent agent;
 
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
             if(damage < defense)
                 return;
