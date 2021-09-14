@@ -5,8 +5,6 @@ namespace _Project.Scripts.Gameplay.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public static EnemySpawner EnemySpawnerInstance;
-        
        [SerializeField] private int waveSize;
        [SerializeField] private int killedEnemies;
 
@@ -14,18 +12,7 @@ namespace _Project.Scripts.Gameplay.Enemies
 
         public int KilledEnemies => killedEnemies;
         public int WaveSize => waveSize;
-
-        private void Awake()
-        {
-            if (EnemySpawnerInstance != null)
-            {
-                Destroy(this);
-                return;
-            }
-
-            EnemySpawnerInstance = this;
-        }
-
+        
         /// <summary>
         /// Increases the amount of killed enemies and potentially ends the wave.
         /// </summary>

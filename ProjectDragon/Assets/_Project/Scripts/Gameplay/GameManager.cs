@@ -21,8 +21,8 @@ namespace _Project.Scripts.Gameplay
         /*
         [SerializeField] private UnitManager _unitManager;
         [SerializeField] private Player _player;
-        [SerializedField] private GameObject _hq;
         */
+        [SerializeField] private GameObject hq;
 
         
         public EnemySpawner EnemySpawner => enemySpawner;
@@ -30,8 +30,8 @@ namespace _Project.Scripts.Gameplay
         /*
         public UnitManager UnitManager => _unitManager;
         public Player Player => _player;
-        public GameObject HQ => _hq;
         */
+        public GameObject HQ => hq;
 
         private void Awake()
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,12 @@ namespace _Project.Scripts.Gameplay.Enemies
 
         private int _currentWave;
 
-        public void SpawnNextWave()
+        private void Awake()
+        {
+            GameManager.Instance.EnemySpawner.OnWaveSucces += SpawnNextWave;
+        }
+
+        private void SpawnNextWave()
         {
             _currentWave++;
         }
