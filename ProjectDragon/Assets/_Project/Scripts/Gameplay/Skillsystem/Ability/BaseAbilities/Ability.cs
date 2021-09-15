@@ -13,5 +13,14 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
         {
             
         }
+        
+        public virtual void Cast(Transform enemy)
+        {
+            
+        }
+        public virtual void Cast(Transform owner, Transform enemy)
+        {
+            
+        }
     }
 }
