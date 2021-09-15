@@ -10,7 +10,7 @@ namespace _Project.Scripts.Gameplay.Enemies
         /// </summary>
         public void WalkToBase()
         {
-            agent.SetDestination(Instance.HQ.transform.position);
+            agent.SetDestination(Instance.Hq.transform.position);
         }
     }
 }
