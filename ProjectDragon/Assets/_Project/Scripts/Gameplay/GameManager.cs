@@ -1,5 +1,6 @@
 using _Project.Scripts.Gameplay.Enemies;
 using _Project.Scripts.Gameplay.Player;
+using _Project.Scripts.Gameplay.Unit;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay
@@ -20,18 +21,14 @@ namespace _Project.Scripts.Gameplay
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private PlayerModel player;
-        /*
-        [SerializeField] private UnitManager _unitManager;
-        */
+        [SerializeField] private UnitManager unitManager;
         [SerializeField] private GameObject hq;
 
         
         public EnemySpawner EnemySpawner => enemySpawner;
         public WaveManager WaveManager => waveManager;
         public PlayerModel PlayerModel => player;
-        /*
-        public UnitManager UnitManager => _unitManager;
-        */
+        public UnitManager UnitManager => unitManager;
         public GameObject Hq => hq;
 
         private void Awake()

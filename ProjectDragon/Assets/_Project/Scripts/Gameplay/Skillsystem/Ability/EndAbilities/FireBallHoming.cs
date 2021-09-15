@@ -32,7 +32,7 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability
         
         //Getcomponent and setting values better values 
         tmpFireBall.GetComponent<FireBallHomingObject>().Damage = baseDamage;
-        tmpFireBall.GetComponent<FireBallHomingObject>().Speed = speed;
+        //tmpFireBall.GetComponent<FireBallHomingObject>().Speed = speed;
         objects.Add(tmpFireBall);
          
       }
