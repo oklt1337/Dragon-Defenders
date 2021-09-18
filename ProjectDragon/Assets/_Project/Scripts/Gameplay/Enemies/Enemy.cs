@@ -1,6 +1,6 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
-using static _Project.Scripts.Gameplay.Enemies.EnemySpawner;
 using static _Project.Scripts.Gameplay.GameManager;
 
 namespace _Project.Scripts.Gameplay.Enemies
@@ -17,7 +17,7 @@ namespace _Project.Scripts.Gameplay.Enemies
        [SerializeField] private float hqDamage;
        [SerializeField] private float expDrop;
        [SerializeField] private float goldDrop;
-       [SerializeField] internal NavMeshAgent agent;
+       [SerializeField] protected NavMeshAgent agent;
 
         public virtual void TakeDamage(float damage)
         {
@@ -33,6 +33,7 @@ namespace _Project.Scripts.Gameplay.Enemies
         private void Death()
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
+            // Instance.PlayerModel.AddMoney(goldDrop);
             Destroy(this);
         }
     }
