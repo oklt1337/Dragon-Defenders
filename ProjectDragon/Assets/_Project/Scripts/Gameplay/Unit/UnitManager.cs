@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Unit
@@ -13,9 +14,10 @@ namespace _Project.Scripts.Gameplay.Unit
             set => units = value;
         }
 
-        private void PlaceUnit(Unit unit, Vector3 spawnPoint)
-        {   //photon instanziert;
-            Instantiate(unit.gameObject, spawnPoint,Quaternion.identity, this.transform);
+        private void PlaceUnit(string unitString, Vector3 spawnPoint)
+        {
+            //Instantiate(unit.gameObject, spawnPoint,Quaternion.identity, this.transform);
+            PhotonNetwork.Instantiate(unitString, spawnPoint, Quaternion.identity);
         }
         
         

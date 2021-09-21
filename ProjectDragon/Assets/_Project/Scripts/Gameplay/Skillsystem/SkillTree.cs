@@ -5,11 +5,24 @@ namespace _Project.Scripts.Gameplay.Skillsystem
 {
     public class SkillTree : MonoBehaviour
     {
-        public List<Ability.BaseAbilities.Ability> allPossibleSkillTree;
+        [SerializeField] private List<Ability.BaseAbilities.Ability> allPossibleSkillTree;
 
-        private void UpgradeCommanderAbilities()
+        public List<Ability.BaseAbilities.Ability> AllPossibleSkillTree
+        {
+            get => allPossibleSkillTree;
+            set => allPossibleSkillTree = value;
+        }
+
+        public void UpgradeCommanderAbilities()
         {
         
         }
+        
+        public void UpgradeUnitAbilities()
+        {
+            //change when skilltree is decided how to
+            //allPossibleSkillTree.IndexOf()
+        }
+        
     }
 }

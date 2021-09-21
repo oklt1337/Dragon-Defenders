@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Unit.UnitDatabases
 {
-    [CreateAssetMenu(menuName="Tools/BaseUnitDataBase")]
+    [CreateAssetMenu(menuName="Tools/Units/BaseUnitDataBase")]
     public class BaseUnitDataBase : ScriptableObject
     {
         public string unitName;
