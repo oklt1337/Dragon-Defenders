@@ -60,15 +60,15 @@ namespace _Project.Scripts.Gameplay.Unit
             //think About This
             
             //offline way also parent again in photon
-            //ability = Instantiate(skillTree.AllPossibleSkillTree[0],transform);
+            ability = Instantiate(skillTree.AllPossibleSkillTree[0],transform);
             
             //Photon way
-            /**/
+            /*
             string loadResourceAbility = "Abilities/" + skillTree.AllPossibleSkillTree[0].gameObject.name;
-            Debug.Log(loadResourceAbility);
+            //Debug.Log(loadResourceAbility);
             GameObject abilityObject = PhotonNetwork.Instantiate(loadResourceAbility,transform.position,Quaternion.identity);
             ability = abilityObject.GetComponent<Ability>();
-            
+            */
             cooldown = ability.Cooldown;
             
             //
@@ -122,18 +122,18 @@ namespace _Project.Scripts.Gameplay.Unit
             {
                 temp = skillTree.AllPossibleSkillTree.IndexOf(ability) + 1;
                 //Destroy(ability.gameObject);
-                PhotonNetwork.Destroy(ability.gameObject);
+                //PhotonNetwork.Destroy(ability.gameObject);
                 
                 //
-                //Destroy(ability.gameObject);
-                //ability = Instantiate(skillTree.AllPossibleSkillTree[temp],transform);
+                Destroy(ability.gameObject);
+                ability = Instantiate(skillTree.AllPossibleSkillTree[temp],transform);
                 //
 
-                /**/
+                /*
                 string loadResourceAbility = "Abilities/" + skillTree.AllPossibleSkillTree[temp].gameObject.name;
                 GameObject abilityObject = PhotonNetwork.Instantiate(loadResourceAbility,transform.position,Quaternion.identity);
                 ability = abilityObject.GetComponent<Ability>();
-                
+                */
             }
              
         }

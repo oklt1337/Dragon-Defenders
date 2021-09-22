@@ -18,18 +18,19 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability
          //check if cast can be casted
          if (!isCastable) return;
          
-         /*
+         
          GameObject tmpFireBall = Instantiate(castObject, 
             spawnPosition.transform.position, 
             quaternion.identity,
            spawnPosition.transform);
-         */
          
+         /*
          GameObject tmpFireBall = PhotonNetwork.Instantiate(
             "Projectiles/" + castObject.name,
             spawnPosition.position,
             Quaternion.identity
          );
+         */
          
          HomingProjectile projectile = tmpFireBall.GetComponent<HomingProjectile>();
          projectile.Target = enemy;

@@ -14,19 +14,20 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.EndAbilities.CombatAbili
             //check if cast can be casted
             if (!isCastable) return;
             
-            /*
+            
             GameObject rune = Instantiate(castObject, 
                 spawnPosition.transform.position, 
                 Quaternion.identity,
                 spawnPosition.transform);
             rune.transform.localScale *= maxDistance;
-            */
+            
+            /*
             GameObject rune = PhotonNetwork.Instantiate(
                 "Projectiles/" + castObject.name,
                 spawnPosition.position,
                 Quaternion.identity
             );
-            
+            */
             
             
             

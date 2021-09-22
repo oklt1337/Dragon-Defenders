@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace _Project.Scripts.Gameplay.Unit
+namespace _Project.Scripts.Gameplay.Unit.BaseUnits
 {
     public abstract class Utility : Unit
     {

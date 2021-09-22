@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Gameplay.Unit.EndUnits
 {
-    public class AoeUilityUnit : Utility
+    public class AoeUilityUnit : BaseUnits.Utility
     {
         protected override void Update()
         {

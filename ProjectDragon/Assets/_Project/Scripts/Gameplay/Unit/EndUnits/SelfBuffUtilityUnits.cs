@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 
 namespace _Project.Scripts.Gameplay.Unit.EndUnits
 {
-    public class SelfBuffUtilityUnits : Utility
+    public class SelfBuffUtilityUnits : BaseUnits.Utility
     {
         protected override void Update()
         {

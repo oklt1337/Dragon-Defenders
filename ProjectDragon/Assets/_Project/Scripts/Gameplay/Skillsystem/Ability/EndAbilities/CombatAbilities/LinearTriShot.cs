@@ -16,20 +16,21 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.EndAbilities.CombatAbili
             if (!isCastable) return;
             for(int i = 0; i < 3 ;i++){
                 
-                /*
+                
                 GameObject tempTriShot = Instantiate(castObject, 
                     spawnPosition.transform.position, 
                     quaternion.identity,
                     spawnPosition.transform);
                 tempTriShot.transform.rotation = Quaternion.LookRotation(enemy.position - tempTriShot.transform.position);
                 tempTriShot.transform.Rotate(0,-45 + (i * 45),0);
-                */
                 
+                /*
                 GameObject tempTriShot = PhotonNetwork.Instantiate(
                     "Projectiles/" + castObject.name,
                     spawnPosition.position,
                     Quaternion.identity
                 );
+                */
                 
                 LinearProjectiles projectile = tempTriShot.GetComponent<LinearProjectiles>();
                 projectile.Speed = Speed;

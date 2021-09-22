@@ -16,11 +16,9 @@ public class AoeUtilityAbilityTest1 : AoeUtilityAbility
 
     public override void Cast()
     {
-        Debug.Log(!isCastable);
+        //Debug.Log(!isCastable);
         if (!isCastable ||_possibleBeneficiaries.Count == 0) return;
-
-
-        Debug.Log("has received AoeExperience!");
+        
         CastEffect();
 
         ResetCoolDown();

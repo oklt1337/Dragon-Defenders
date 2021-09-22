@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Gameplay.Unit.UnfinishedUnits
 {
-    public class UtilityTestUnit : Utility
+    public class UtilityTestUnit : BaseUnits.Utility
     {
     
     }
