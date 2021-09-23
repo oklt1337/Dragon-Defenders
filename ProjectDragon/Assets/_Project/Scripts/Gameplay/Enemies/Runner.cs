@@ -1,5 +1,5 @@
 using UnityEngine;
-using static _Project.Scripts.Gameplay.GameManager;
+using static _Project.GamePlay.GameManager.Scripts.GameManager;
 
 namespace _Project.Scripts.Gameplay.Enemies
 {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Enemies
