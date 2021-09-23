@@ -12,7 +12,7 @@ namespace _Project.Utility.SceneManager.Scripts
         Login,
         MainMenu,
         Lobby,
-        InGame
+        GameScene
     }
     
     public class SceneManager : MonoBehaviour
@@ -75,7 +75,7 @@ namespace _Project.Utility.SceneManager.Scripts
                 1 => Scene.Login,
                 2 => Scene.MainMenu,
                 3 => Scene.Lobby,
-                4 => Scene.InGame,
+                4 => Scene.GameScene,
                 _ => throw new IndexOutOfRangeException()
             };
         }
