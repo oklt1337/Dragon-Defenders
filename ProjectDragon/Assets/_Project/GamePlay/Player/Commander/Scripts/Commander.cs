@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Project.Scripts.Animation;
+using _Project.Scripts.Gameplay.Enemies;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
@@ -31,14 +33,14 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         [SerializeField] private List<Ability> abilities;
         [SerializeField] private AnimationHandler animationHandler;
         [SerializeField] private SoundHandler soundHandler;
-        //[SerializeField] private InputHandler InputHandler;
+        [SerializeField] private InputHandler inputHandler;
         //[SerializeField] private CollisionHandler CollisionHandler;
 
         #endregion
 
         #region Private Fields
 
-        
+        private Coroutine _movementCo;
 
         #endregion
 
@@ -165,6 +167,12 @@ namespace _Project.GamePlay.Player.Commander.Scripts
             private set => soundHandler = value;
         }
 
+        public InputHandler InputHandler
+        {
+            get => inputHandler;
+            private set => inputHandler = value;
+        }
+
         #endregion
 
         #region Events
@@ -175,15 +183,38 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         #region Unity Methods
 
-        
+        private void Start()
+        {
+            inputHandler.OnTouch += Move;
+        }
 
         #endregion
 
         #region Private Methods
+        
+        private void Move(Vector3 moveTo)
+        {
+            moveTo.y = transform.position.y;
+
+            if(_movementCo != null)
+                StopCoroutine(_movementCo);
+            
+            _movementCo = StartCoroutine(LerpMovementCo(moveTo));
+        }
 
         private void ChangeAnimation(AnimationClip animationClip)
         {
             
+        }
+
+        private IEnumerator LerpMovementCo(Vector3 moveTo)
+        {
+            while (transform.position != moveTo)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, moveTo, speed * Time.deltaTime);
+                
+                yield return null;
+            }
         }
 
         #endregion
