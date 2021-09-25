@@ -1,6 +1,4 @@
-using System;
-
-namespace _Project.Scripts.Gameplay.Enemies.EnemyBehaviourTree
+namespace _Project.Enemies.Scripts.EnemyBehaviourTree
 {
     public class WalkToBase : Node
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies.EnemyBehaviourTree
+namespace _Project.Enemies.Scripts
 {
-    public class FlyToCommander : Node
+    public class MeleeAttacker : Attacker
     {
         // Start is called before the first frame update
         void Start()
@@ -14,11 +14,6 @@ namespace _Project.Scripts.Gameplay.Enemies.EnemyBehaviourTree
         void Update()
         {
         
-        }
-
-        public override NodeState Evaluate()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

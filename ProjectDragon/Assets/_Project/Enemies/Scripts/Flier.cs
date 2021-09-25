@@ -1,7 +1,4 @@
-using UnityEngine;
-using static _Project.GamePlay.GameManager.Scripts.GameManager;
-
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.Enemies.Scripts
 {
     public class Flier : Mover
     {

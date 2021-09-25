@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.Enemies.Scripts
 {
     public class TestEnemy : Enemy
     {

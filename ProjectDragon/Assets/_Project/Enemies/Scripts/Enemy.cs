@@ -1,23 +1,33 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 using static _Project.GamePlay.GameManager.Scripts.GameManager;
 
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.Enemies.Scripts
 {
     public abstract class Enemy : MonoBehaviour
     {
+        #region Serialized Fields
+        
        [SerializeField] private string enemyName;
        [SerializeField] private GameObject enemyModel;
-       [SerializeField] protected float health;
-       [SerializeField] protected float maxHealth;
        [SerializeField] private float defense;
-       [SerializeField] protected float speed;
        [SerializeField] private float maxSpeed;
        [SerializeField] private float hqDamage;
        [SerializeField] private float expDrop;
        [SerializeField] private float goldDrop;
+
+        #endregion
+        
+        #region Protected Fields
+
+        
        [SerializeField] protected NavMeshAgent agent;
+       [SerializeField] protected float health;
+       [SerializeField] protected float maxHealth;
+       [SerializeField] protected float speed;
+
+        #endregion
+        
 
         public virtual void TakeDamage(float damage)
         {
