@@ -19,7 +19,6 @@ namespace _Project.Enemies.Scripts
         #endregion
         
         #region Protected Fields
-
         
        [SerializeField] protected NavMeshAgent agent;
        [SerializeField] protected float health;

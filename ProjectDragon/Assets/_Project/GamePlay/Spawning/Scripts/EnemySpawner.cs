@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using _Project.Enemies.Scripts;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Enemies
@@ -22,6 +25,11 @@ namespace _Project.Scripts.Gameplay.Enemies
             
             if(KilledEnemies >= WaveSize)
                 OnWaveSucces?.Invoke();
+        }
+
+        public IEnumerator SpawnEnemies(List<Enemy> enemies)
+        {
+            return null;
         }
     }
 }

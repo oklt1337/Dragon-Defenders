@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.GamePlay.Spawning.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
@@ -13,12 +11,14 @@ namespace _Project.Scripts.Gameplay.Enemies
 
         private void Awake()
         {
-            GameManager.Instance.EnemySpawner.OnWaveSucces += SpawnNextWave;
+            GameManager.Scripts.GameManager.Instance.EnemySpawner.OnWaveSucces += AdvanceToNextWave;
         }
 
-        private void SpawnNextWave()
+        // Increases the wave count and tells the enemy spawner what to spawn.
+        private void AdvanceToNextWave()
         {
             _currentWave++;
+            GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[_currentWave].Enemies);
         }
     }
 }
