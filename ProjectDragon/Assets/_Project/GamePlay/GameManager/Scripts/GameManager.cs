@@ -1,3 +1,4 @@
+using _Project.GamePlay.Player.CommanderModel.Library;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.Scripts;
 using _Project.Scripts.Gameplay.Enemies;
@@ -20,6 +21,8 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region SerializedFields
 
+        [SerializeField] private CommanderLibrary commanderLibrary;
+        
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private PlayerModel player;
@@ -48,6 +51,8 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region Public Properties
 
+        public CommanderLibrary CommanderLibrary => commanderLibrary;
+        
         public EnemySpawner EnemySpawner => enemySpawner;
         public WaveManager WaveManager => waveManager;
         public PlayerModel PlayerModel => player;

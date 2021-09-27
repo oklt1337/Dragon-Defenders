@@ -6,13 +6,12 @@ namespace _Project.GamePlay.Player.Commander.Scripts
     public class InputHandler : MonoBehaviour
     {
         #region SerializeFields
-
-        [SerializeField] private Camera commanderCam;
+        
 
         #endregion
 
         #region Private Fields
-        
+
         private Vector3 _mousePos;
 
         #endregion
@@ -26,6 +25,8 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         #endregion
 
         #region Public Properties
+
+        public Camera CommanderCam { get; internal set; }
 
         #endregion
 
@@ -43,8 +44,8 @@ namespace _Project.GamePlay.Player.Commander.Scripts
                 return;
 
             Vector3 screenPos = Input.mousePosition;
-            screenPos.z = commanderCam.nearClipPlane;
-            Ray ray = commanderCam.ScreenPointToRay(screenPos);
+            screenPos.z = CommanderCam.nearClipPlane;
+            Ray ray = CommanderCam.ScreenPointToRay(screenPos);
             if (!Physics.Raycast(ray, out RaycastHit hitInfo))
                 return;
             OnTouch?.Invoke(hitInfo.point);
@@ -61,8 +62,8 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         private Vector3 GetTouchPosInWorldCoord()
         {
             Vector3 screenPosMobile = Input.GetTouch(0).position;
-            screenPosMobile.z = commanderCam.nearClipPlane;
-            Ray rayMobile = commanderCam.ScreenPointToRay(screenPosMobile);
+            screenPosMobile.z = CommanderCam.nearClipPlane;
+            Ray rayMobile = CommanderCam.ScreenPointToRay(screenPosMobile);
             return Physics.Raycast(rayMobile, out RaycastHit hitInfoMobile) ? hitInfoMobile.point : Vector3.zero;
         }
         

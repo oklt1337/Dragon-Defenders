@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Project.Scripts.Animation;
 using _Project.Scripts.Gameplay.Enemies;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
-using _Project.Scripts.Sound;
 using UnityEngine;
 
 namespace _Project.GamePlay.Player.Commander.Scripts
@@ -16,30 +14,27 @@ namespace _Project.GamePlay.Player.Commander.Scripts
     {
         #region SerializeFields
 
-        [SerializeField] private string commanderName;
-        [SerializeField] private GameObject commanderModel;
-        [SerializeField] private Factions.Faction faction;
-        [SerializeField] private Factions.Class commanderClass;
-        [SerializeField] private float health;
-        [SerializeField] private float mana;
-        [SerializeField] private float attackDamageModifier;
-        [SerializeField] private float defense;
-        [SerializeField] private float speed;
-        [SerializeField] private byte rank;
-        [SerializeField] private byte level;
-        [SerializeField] private float experience;
-        [SerializeField] private PointAndClickDamageAbility primaryAttack;
-        [SerializeField] private SkillTree skillTree;
-        [SerializeField] private List<Ability> abilities;
-        [SerializeField] private AnimationHandler animationHandler;
-        [SerializeField] private SoundHandler soundHandler;
-        [SerializeField] private InputHandler inputHandler;
-        //[SerializeField] private CollisionHandler CollisionHandler;
-
         #endregion
 
         #region Private Fields
 
+        private string _commanderName;
+        private GameObject _commanderObj;
+        private Factions.Faction _faction;
+        private Factions.Class _commanderClass;
+        private float _health;
+        private float _mana;
+        private float _attackDamageModifier;
+        private float _defense;
+        private float _speed;
+        private byte _rank;
+        private byte _level;
+        private float _experience;
+        private PointAndClickDamageAbility _primaryAttack;
+        private SkillTree _skillTree;
+        private List<Ability> _abilities;
+        private Animator _animator;
+        
         private Coroutine _movementCo;
 
         #endregion
@@ -60,35 +55,35 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         public string CommanderName
         {
-            get => commanderName;
-            private set => commanderName = value;
+            get => _commanderName;
+            private set => _commanderName = value;
         }
 
-        public GameObject CommanderModel
+        public GameObject CommanderObj
         {
-            get => commanderModel;
-            private set => commanderModel = value;
+            get => _commanderObj;
+            private set => _commanderObj = value;
         }
 
         public Factions.Faction Faction
         {
-            get => faction;
-            private set => faction = value;
+            get => _faction;
+            private set => _faction = value;
         }
 
         public Factions.Class CommanderClass
         {
-            get => commanderClass;
-            private set => commanderClass = value;
+            get => _commanderClass;
+            private set => _commanderClass = value;
         }
 
         public float Health
         {
-            get => health;
+            get => _health;
             private set
             {
-                health = value;
-                if (health <= 0)
+                _health = value;
+                if (_health <= 0)
                 {
                     OnDeath?.Invoke();
                 }
@@ -97,80 +92,68 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         public float Mana
         {
-            get => mana;
-            private set => mana = value;
+            get => _mana;
+            private set => _mana = value;
         }
 
         public float AttackDamageModifier
         {
-            get => attackDamageModifier;
-            private set => attackDamageModifier = value;
+            get => _attackDamageModifier;
+            private set => _attackDamageModifier = value;
         }
 
         public float Defense
         {
-            get => defense;
-            private set => defense = value;
+            get => _defense;
+            private set => _defense = value;
         }
 
         public float Speed
         {
-            get => speed;
-            private set => speed = value;
+            get => _speed;
+            private set => _speed = value;
         }
 
         public byte Rank
         {
-            get => rank;
-            private set => rank = value;
+            get => _rank;
+            private set => _rank = value;
         }
 
         public byte Level
         {
-            get => level;
-            private set => level = value;
+            get => _level;
+            private set => _level = value;
         }
 
         public float Experience
         {
-            get => experience;
-            private set => experience = value;
+            get => _experience;
+            private set => _experience = value;
         }
 
         public PointAndClickDamageAbility PrimaryAttack
         {
-            get => primaryAttack;
-            private set => primaryAttack = value;
+            get => _primaryAttack;
+            private set => _primaryAttack = value;
         }
 
         public SkillTree SkillTree
         {
-            get => skillTree;
-            private set => skillTree = value;
+            get => _skillTree;
+            private set => _skillTree = value;
         }
 
         public List<Ability> Abilities
         {
-            get => abilities;
-            private set => abilities = value;
+            get => _abilities;
+            private set => _abilities = value;
         }
 
-        public AnimationHandler AnimationHandler
+        public Animator Animator
         {
-            get => animationHandler;
-            private set => animationHandler = value;
-        }
-
-        public SoundHandler SoundHandler
-        {
-            get => soundHandler;
-            private set => soundHandler = value;
-        }
-
-        public InputHandler InputHandler
-        {
-            get => inputHandler;
-            private set => inputHandler = value;
+            get => _animator;
+            set => _animator = value;
         }
 
         #endregion
@@ -183,35 +166,15 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         #region Unity Methods
 
-        private void Start()
-        {
-            inputHandler.OnTouch += Move;
-        }
-
         #endregion
 
         #region Private Methods
-        
-        private void Move(Vector3 moveTo)
-        {
-            moveTo.y = transform.position.y;
-
-            if(_movementCo != null)
-                StopCoroutine(_movementCo);
-            
-            _movementCo = StartCoroutine(LerpMovementCo(moveTo));
-        }
-
-        private void ChangeAnimation(AnimationClip animationClip)
-        {
-            
-        }
 
         private IEnumerator LerpMovementCo(Vector3 moveTo)
         {
             while (transform.position != moveTo)
             {
-                transform.position = Vector3.MoveTowards(transform.position, moveTo, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, moveTo, _speed * Time.deltaTime);
                 
                 yield return null;
             }
@@ -221,7 +184,35 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         #region Protected Methods
 
+        internal void Move(Vector3 moveTo)
+        {
+            moveTo.y = transform.position.y;
+
+            if(_movementCo != null)
+                StopCoroutine(_movementCo);
+            
+            _movementCo = StartCoroutine(LerpMovementCo(moveTo));
+        }
         
+        internal void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
+        {
+            _commanderName = commanderModel.commanderName;
+            _commanderObj = commanderModel.commanderObj;
+            _faction = commanderModel.faction;
+            _commanderClass = commanderModel.commanderClass;
+            _health = commanderModel.health;
+            _mana = commanderModel.mana;
+            _attackDamageModifier = commanderModel.attackDamageModifier;
+            _defense = commanderModel.defense;
+            _speed = commanderModel.speed;
+            _rank = commanderModel.rank;
+            _level = commanderModel.level;
+            _experience = commanderModel.experience;
+            _primaryAttack = commanderModel.primaryAttack;
+            _skillTree = commanderModel.skillTree;
+            _abilities = commanderModel.abilities;
+            _animator = commanderModel.animator;
+        }
 
         #endregion
 
@@ -229,7 +220,13 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         public void TakeDamage(float dmg)
         {
-            health -= dmg;
+            _health -= dmg;
+
+            if (!(_health <= 0)) 
+                return;
+            
+            _health = 0;
+            OnDeath?.Invoke();
         }
 
         #endregion

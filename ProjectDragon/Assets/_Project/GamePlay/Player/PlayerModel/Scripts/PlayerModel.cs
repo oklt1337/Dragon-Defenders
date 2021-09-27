@@ -1,5 +1,9 @@
 using System;
 using _Project.GamePlay.GameManager.Scripts;
+using _Project.GamePlay.Player.Commander.Scripts;
+using _Project.GamePlay.Player.CommanderModel.Library;
+using ExitGames.Client.Photon;
+using Photon.Pun;
 using UnityEngine;
 
 namespace _Project.GamePlay.Player.PlayerModel.Scripts
@@ -8,33 +12,34 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
     {
         #region SerializeFields
 
-        [SerializeField] private Camera buildCamera;
+        [Header("Commander")] [SerializeField] private Commander.Scripts.Commander commander;
+
+        [Header("Cameras")] [SerializeField] private Camera buildCamera;
         [SerializeField] private Camera commanderCamera;
+
+        [Header("Handler")] [SerializeField] private AnimationHandler animationHandler;
+        [SerializeField] private SoundHandler soundHandler;
+
+        [SerializeField] private InputHandler inputHandler;
+        //[SerializeField] private CollisionHandler CollisionHandler;
 
         #endregion
 
         #region Private Fields
 
         private int _money;
-        private Commander.Scripts.Commander _commander;
 
         #endregion
 
         #region Protected Fields
 
-        
-
         #endregion
 
         #region Public Fields
 
-        
-
         #endregion
 
         #region Public Properties
-
-        
 
         #endregion
 
@@ -42,12 +47,28 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         private void Awake()
         {
-            //change camera event 
+            InitializeCommander();
+        }
+
+        private void Start()
+        {
+            inputHandler.OnTouch += commander.Move;
+            inputHandler.CommanderCam = commanderCamera;
+            animationHandler.Animator = commander.Animator;
         }
 
         #endregion
 
         #region Private Methods
+
+        private void InitializeCommander()
+        {
+            /*Hashtable hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
+            if (!hashTable.ContainsKey("Commander"))
+                return;*/
+           CommanderModel.Scripts.CommanderModel commanderModel = GameManager.Scripts.GameManager.Instance.CommanderLibrary.CommanderModels[Commanders.Commander1];
+           commander.SetStats(commanderModel);
+        }
 
         private void ChangeCamera(GameState state)
         {
@@ -76,13 +97,9 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         #region Protected Methods
 
-        
-
         #endregion
 
         #region Public Methods
-
-        
 
         #endregion
     }
