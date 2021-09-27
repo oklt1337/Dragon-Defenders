@@ -1,3 +1,5 @@
+using _Project.GamePlay.GameManager.Scripts;
+
 namespace _Project.Enemies.Scripts
 {
     public class Flier : Mover
@@ -7,7 +9,7 @@ namespace _Project.Enemies.Scripts
         /// </summary>
         public void FlyToBase()
         {
-            
+            agent.SetDestination(GameManager.Instance.Hq.transform.position);
         }
     }
 }

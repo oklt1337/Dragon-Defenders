@@ -3,6 +3,7 @@ namespace _Project.Enemies.Scripts.EnemyBehaviourTree
     public class WalkToCommander : Node
     {
         private Attacker _owner;
+        
         public WalkToCommander(Attacker newOwner)
         {
             _owner = newOwner;
