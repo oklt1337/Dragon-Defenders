@@ -47,12 +47,13 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         private void Awake()
         {
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ChangeCamera;
+            inputHandler.OnTouch += commander.Move;
             InitializeCommander();
         }
 
         private void Start()
         {
-            inputHandler.OnTouch += commander.Move;
             inputHandler.CommanderCam = commanderCamera;
             animationHandler.Animator = commander.Animator;
         }
@@ -83,9 +84,13 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                     commanderCamera.gameObject.SetActive(true);
                     break;
                 case GameState.Prepare:
+                    buildCamera.gameObject.SetActive(true);
+                    commanderCamera.gameObject.SetActive(false);
                     Debug.LogError($"GameState: {state}");
                     break;
                 case GameState.End:
+                    buildCamera.gameObject.SetActive(false);
+                    commanderCamera.gameObject.SetActive(true);
                     Debug.LogError($"GameState: {state}");
                     break;
                 default:

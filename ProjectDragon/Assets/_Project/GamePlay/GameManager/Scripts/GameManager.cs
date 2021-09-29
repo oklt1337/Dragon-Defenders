@@ -1,3 +1,4 @@
+using System;
 using _Project.GamePlay.Player.CommanderModel.Library;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.Scripts;
@@ -33,7 +34,7 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region Private Fields
 
-        
+        private GameState _currentGameState;
 
         #endregion
 
@@ -51,6 +52,16 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region Public Properties
 
+        public GameState CurrentGameState
+        {
+            get => _currentGameState;
+            private set
+            {
+                _currentGameState = value;
+                OnGameStateChanged?.Invoke(CurrentGameState);
+            }
+        }
+
         public CommanderLibrary CommanderLibrary => commanderLibrary;
         
         public EnemySpawner EnemySpawner => enemySpawner;
@@ -63,7 +74,7 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region Events
 
-        
+        public event Action<GameState> OnGameStateChanged;
 
         #endregion
 
@@ -79,6 +90,11 @@ namespace _Project.GamePlay.GameManager.Scripts
             {
                 Instance = this;
             }
+        }
+
+        private void Start()
+        {
+            CurrentGameState = GameState.Wave;
         }
 
         #endregion
