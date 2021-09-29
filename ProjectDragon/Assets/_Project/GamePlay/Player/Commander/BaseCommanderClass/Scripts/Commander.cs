@@ -1,19 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Project.Scripts.Gameplay.Enemies;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
+using UnityEditor.Animations;
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.Commander.Scripts
+namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
     public class Commander : MonoBehaviour
     {
         #region SerializeFields
 
+        [SerializeField] private Animator animator;
+        
         #endregion
 
         #region Private Fields
@@ -23,6 +25,7 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         private Factions.Faction _faction;
         private Factions.Class _commanderClass;
         private float _health;
+        private float _maxHealth;
         private float _mana;
         private float _attackDamageModifier;
         private float _defense;
@@ -33,7 +36,7 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         private PointAndClickDamageAbility _primaryAttack;
         private SkillTree _skillTree;
         private List<Ability> _abilities;
-        private Animator _animator;
+        private AnimatorController _animatorController;
         
         private Coroutine _movementCo;
 
@@ -76,6 +79,12 @@ namespace _Project.GamePlay.Player.Commander.Scripts
             get => _commanderClass;
             private set => _commanderClass = value;
         }
+        
+        public float MAXHealth
+        {
+            get => _maxHealth;
+            internal set => _maxHealth = value;
+        }
 
         public float Health
         {
@@ -93,25 +102,25 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         public float Mana
         {
             get => _mana;
-            private set => _mana = value;
+            internal set => _mana = value;
         }
 
         public float AttackDamageModifier
         {
             get => _attackDamageModifier;
-            private set => _attackDamageModifier = value;
+            internal set => _attackDamageModifier = value;
         }
 
         public float Defense
         {
             get => _defense;
-            private set => _defense = value;
+            internal set => _defense = value;
         }
 
         public float Speed
         {
             get => _speed;
-            private set => _speed = value;
+            internal set => _speed = value;
         }
 
         public byte Rank
@@ -147,13 +156,13 @@ namespace _Project.GamePlay.Player.Commander.Scripts
         public List<Ability> Abilities
         {
             get => _abilities;
-            private set => _abilities = value;
+            internal set => _abilities = value;
         }
 
         public Animator Animator
         {
-            get => _animator;
-            set => _animator = value;
+            get => animator;
+            set => animator = value;
         }
 
         #endregion
@@ -211,7 +220,7 @@ namespace _Project.GamePlay.Player.Commander.Scripts
             _primaryAttack = commanderModel.primaryAttack;
             _skillTree = commanderModel.skillTree;
             _abilities = commanderModel.abilities;
-            _animator = commanderModel.animator;
+            _animatorController = commanderModel.animatorController;
         }
 
         #endregion
@@ -220,7 +229,7 @@ namespace _Project.GamePlay.Player.Commander.Scripts
 
         public void TakeDamage(float dmg)
         {
-            _health -= dmg;
+            _health -= dmg / _defense;
 
             if (!(_health <= 0)) 
                 return;

@@ -1,9 +1,7 @@
 using System;
 using _Project.GamePlay.GameManager.Scripts;
-using _Project.GamePlay.Player.Commander.Scripts;
-using _Project.GamePlay.Player.CommanderModel.Library;
-using ExitGames.Client.Photon;
-using Photon.Pun;
+using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
+using _Project.GamePlay.Player.Commander.CommanderModel.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.Player.PlayerModel.Scripts
@@ -12,15 +10,17 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
     {
         #region SerializeFields
 
-        [Header("Commander")] [SerializeField] private Commander.Scripts.Commander commander;
+        [Header("Commander")] 
+        [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
 
-        [Header("Cameras")] [SerializeField] private Camera buildCamera;
+        [Header("Cameras")] 
+        [SerializeField] private Camera buildCamera;
         [SerializeField] private Camera commanderCamera;
 
-        [Header("Handler")] [SerializeField] private AnimationHandler animationHandler;
-        [SerializeField] private SoundHandler soundHandler;
-
-        [SerializeField] private InputHandler inputHandler;
+        [Header("Handler")] 
+        [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
+        [SerializeField] private SoundHandler.Scripts.SoundHandler soundHandler;
+        [SerializeField] private InputHandler.Scripts.InputHandler inputHandler;
         //[SerializeField] private CollisionHandler CollisionHandler;
 
         #endregion
@@ -40,6 +40,8 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         #endregion
 
         #region Public Properties
+
+        public Commander.BaseCommanderClass.Scripts.Commander Commander => commander;
 
         #endregion
 
@@ -67,7 +69,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
             /*Hashtable hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
             if (!hashTable.ContainsKey("Commander"))
                 return;*/
-           CommanderModel.Scripts.CommanderModel commanderModel = GameManager.Scripts.GameManager.Instance.CommanderLibrary.CommanderModels[Commanders.Commander1];
+           CommanderModel commanderModel = GameManager.Scripts.GameManager.Instance.CommanderLibrary.CommanderModels[Commanders.Commander1];
            commander.SetStats(commanderModel);
         }
 
@@ -84,7 +86,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                     commanderCamera.gameObject.SetActive(true);
                     break;
                 case GameState.Prepare:
-                    buildCamera.gameObject.SetActive(true);
+                    buildCamera.gameObject.SetActive(false);
                     commanderCamera.gameObject.SetActive(false);
                     Debug.LogError($"GameState: {state}");
                     break;
@@ -106,6 +108,20 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         #region Public Methods
 
+        public void Build(int cost)
+        {
+            if (_money <= cost)
+                return;
+            _money -= cost;
+            
+            //Build stuff
+        }
+        
+        public void AddMoney(int amount)
+        {
+            _money += amount;
+        }
+        
         #endregion
     }
 }

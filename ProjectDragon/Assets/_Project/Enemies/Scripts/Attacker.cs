@@ -1,5 +1,5 @@
 using _Project.GamePlay.GameManager.Scripts;
-using _Project.GamePlay.Player.Commander.Scripts;
+using _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 
 namespace _Project.Enemies.Scripts

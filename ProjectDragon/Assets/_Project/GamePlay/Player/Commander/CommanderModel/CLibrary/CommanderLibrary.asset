@@ -16,7 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 2d5ffe7c17f5c574c910e70003020d44, type: 2}
+    - {fileID: 11400000, guid: 6c20afa110d5f5640bd2f384ccd72366, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,12 +24,12 @@ MonoBehaviour:
     SerializationNodes:
     - Name: CommanderModels
       Entry: 7
-      Data: 0|Unity.VisualScripting.FlexibleDictionary`2[[_Project.GamePlay.Player.CommanderModel.Library.Commanders,
-        Assembly-CSharp],[_Project.GamePlay.Player.CommanderModel.Scripts.CommanderModel,
-        Assembly-CSharp]], Unity.VisualScripting.Core
+      Data: 0|System.Collections.Generic.Dictionary`2[[_Project.GamePlay.Player.Commander.CommanderModel.CLibrary.Commanders,
+        Assembly-CSharp],[_Project.GamePlay.Player.Commander.CommanderModel.Scripts.CommanderModel,
+        Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[_Project.GamePlay.Player.CommanderModel.Library.Commanders,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[_Project.GamePlay.Player.Commander.CommanderModel.CLibrary.Commanders,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12

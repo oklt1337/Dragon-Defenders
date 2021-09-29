@@ -14,7 +14,7 @@ namespace _Project.Enemies.Scripts
        [SerializeField] private float maxSpeed;
        [SerializeField] private float hqDamage;
        [SerializeField] private float expDrop;
-       [SerializeField] private float goldDrop;
+       [SerializeField] private int goldDrop;
 
         #endregion
         
@@ -42,7 +42,7 @@ namespace _Project.Enemies.Scripts
         private void Death()
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
-            // Instance.PlayerModel.AddMoney(goldDrop);
+            Instance.PlayerModel.AddMoney(goldDrop);
             Destroy(this);
         }
     }

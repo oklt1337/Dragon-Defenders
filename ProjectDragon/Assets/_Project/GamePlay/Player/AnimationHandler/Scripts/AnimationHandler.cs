@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.Commander.Scripts
+namespace _Project.GamePlay.Player.AnimationHandler.Scripts
 {
     public class AnimationHandler : MonoBehaviour
     {

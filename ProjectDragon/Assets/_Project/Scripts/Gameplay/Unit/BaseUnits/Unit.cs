@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
-using _Project.GamePlay.Player.Commander.Scripts;
+using _Project.GamePlay.Player.AnimationHandler.Scripts;
+using _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts;
+using _Project.GamePlay.Player.SoundHandler.Scripts;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;

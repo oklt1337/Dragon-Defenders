@@ -3,9 +3,10 @@ using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
+using UnityEditor.Animations;
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.CommanderModel.Scripts
+namespace _Project.GamePlay.Player.Commander.CommanderModel.Scripts
 {
     [CreateAssetMenu(menuName = "Tools/CommanderModel", fileName = "CommanderModel")]
     public class CommanderModel : ScriptableObject
@@ -22,9 +23,9 @@ namespace _Project.GamePlay.Player.CommanderModel.Scripts
         public byte rank;
         public byte level;
         public float experience;
-        public PointAndClickDamageAbility primaryAttack;
         public SkillTree skillTree;
+        public PointAndClickDamageAbility primaryAttack;
         public List<Ability> abilities;
-        public Animator animator;
+        public AnimatorController animatorController;
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.Commander.Scripts
+namespace _Project.GamePlay.Player.InputHandler.Scripts
 {
     public class InputHandler : MonoBehaviour
     {

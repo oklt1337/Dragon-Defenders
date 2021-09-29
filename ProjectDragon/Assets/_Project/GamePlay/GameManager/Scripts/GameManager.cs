@@ -1,5 +1,5 @@
 using System;
-using _Project.GamePlay.Player.CommanderModel.Library;
+using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.Scripts;
 using _Project.Scripts.Gameplay.Enemies;
@@ -29,6 +29,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         [SerializeField] private PlayerModel player;
         [SerializeField] private UnitManager unitManager;
         [SerializeField] private GameObject hq;
+        [SerializeField] private Camera cameraTrackingShot;
 
         #endregion
 
@@ -94,6 +95,7 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         private void Start()
         {
+            cameraTrackingShot.gameObject.SetActive(false);
             CurrentGameState = GameState.Wave;
         }
 

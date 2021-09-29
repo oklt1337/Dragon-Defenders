@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.CommanderModel.Library
+namespace _Project.GamePlay.Player.Commander.CommanderModel.CLibrary
 {
     [CreateAssetMenu(menuName = "Tools/CommanderLibrary", fileName = "CommanderLibrary")]
     public class CommanderLibrary : SerializedScriptableObject
