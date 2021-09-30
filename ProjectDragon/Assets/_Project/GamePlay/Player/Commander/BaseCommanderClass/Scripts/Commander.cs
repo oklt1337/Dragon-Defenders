@@ -15,6 +15,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region SerializeFields
 
         [SerializeField] private Animator animator;
+        [SerializeField] private float minDamage = 10f;
         
         #endregion
 
@@ -30,6 +31,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private float _attackDamageModifier;
         private float _defense;
         private float _speed;
+        private bool _dyingBreath;
         private byte _rank;
         private byte _level;
         private float _experience;
@@ -227,11 +229,22 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Public Methods
 
-        public void TakeDamage(float dmg)
+        public void TakeDamage(float damage)
         {
-            _health -= dmg / _defense;
+            damage = Mathf.Clamp((damage * _health / _maxHealth), minDamage, damage) / _defense;
 
-            if (!(_health <= 0)) 
+            if (_health - damage <= 0 && !_dyingBreath)
+            {
+                _health = 1f;
+                _dyingBreath = true;
+            }
+            else
+            {
+                _health -= damage;
+                _dyingBreath = false;
+            }
+
+            if (!(_health <= 0) || _dyingBreath) 
                 return;
             
             _health = 0;
