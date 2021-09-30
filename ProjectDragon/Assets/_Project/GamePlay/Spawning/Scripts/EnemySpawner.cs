@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.AI.Enemies.Scripts;
 using _Project.Enemies.Scripts;
 using UnityEngine;
 

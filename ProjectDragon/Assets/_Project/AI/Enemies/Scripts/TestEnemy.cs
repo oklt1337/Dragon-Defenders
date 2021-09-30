@@ -1,3 +1,4 @@
+using _Project.AI.Enemies.Scripts;
 using UnityEngine;
 
 namespace _Project.Enemies.Scripts

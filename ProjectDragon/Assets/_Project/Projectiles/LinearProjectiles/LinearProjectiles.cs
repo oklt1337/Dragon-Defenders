@@ -1,4 +1,5 @@
 using System;
+using _Project.AI.Enemies.Scripts;
 using _Project.Enemies.Scripts;
 using _Project.Scripts.Gameplay.Enemies;
 using UnityEngine;

@@ -1,4 +1,5 @@
 using System;
+using _Project.GamePlay.HQManager.Scripts;
 using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.Scripts;
@@ -28,7 +29,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private PlayerModel player;
         [SerializeField] private UnitManager unitManager;
-        [SerializeField] private GameObject hq;
+        [SerializeField] private HqManager hqManager;
         [SerializeField] private Camera cameraTrackingShot;
 
         #endregion
@@ -69,7 +70,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         public WaveManager WaveManager => waveManager;
         public PlayerModel PlayerModel => player;
         public UnitManager UnitManager => unitManager;
-        public GameObject Hq => hq;
+        public HqManager Hq => hqManager;
 
         #endregion
 
