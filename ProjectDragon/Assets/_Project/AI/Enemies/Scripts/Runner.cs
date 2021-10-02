@@ -1,6 +1,8 @@
+using System;
+using _Project.Enemies.Scripts;
 using UnityEngine;
 
-namespace _Project.Enemies.Scripts
+namespace _Project.AI.Enemies.Scripts
 {
     public class Runner : Mover
     {
@@ -9,6 +11,11 @@ namespace _Project.Enemies.Scripts
         [SerializeField] private Vector3 currentWayPoint;
 
         #endregion
+
+        private void Update()
+        {
+            WalkToBase();
+        }
 
         #region Publid Methods
 

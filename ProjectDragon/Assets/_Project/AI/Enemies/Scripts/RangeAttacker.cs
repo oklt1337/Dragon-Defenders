@@ -1,6 +1,6 @@
-using UnityEngine;
+using _Project.Enemies.Scripts;
 
-namespace _Project.Enemies.Scripts
+namespace _Project.AI.Enemies.Scripts
 {
     public class RangeAttacker : Attacker
     {

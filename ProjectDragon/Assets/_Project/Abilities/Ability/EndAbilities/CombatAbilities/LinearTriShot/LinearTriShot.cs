@@ -1,4 +1,3 @@
-using _Project.Scripts.Gameplay.Enemies;
 using _Project.Scripts.Gameplay.Projectiles;
 using Photon.Pun;
 using Unity.Mathematics;
