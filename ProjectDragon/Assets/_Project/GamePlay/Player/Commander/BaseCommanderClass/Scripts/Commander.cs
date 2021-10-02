@@ -11,6 +11,12 @@ using UnityEngine.AI;
 
 namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
+    public enum State
+    {
+        Idle,
+        Move
+    }
+    
     public class Commander : MonoBehaviour
     {
         #region SerializeFields
@@ -41,6 +47,8 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private List<Ability> _abilities;
         private AnimatorController _animatorController;
         private const float MINDamage = 10f;
+        private Vector3 _destination;
+        private State _currentState;
 
         private Coroutine _movementCo;
 
@@ -174,24 +182,30 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region Events
 
         public event Action OnDeath;
+        public event Action OnMovementFinished;
 
         #endregion
 
         #region Unity Methods
 
+        private void Awake()
+        {
+            _currentState = State.Idle;
+        }
+
+        private void Update()
+        {
+            if (!(Math.Abs(_destination.x - transform.position.x) < 0.1) ||
+                !(Math.Abs(_destination.z - transform.position.z) < 0.1) || _currentState != State.Move) 
+                return;
+            
+            _currentState = State.Idle;
+            OnMovementFinished?.Invoke();
+        }
+
         #endregion
 
         #region Private Methods
-
-        private IEnumerator LerpMovementCo(Vector3 moveTo)
-        {
-            while (transform.position != moveTo)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, moveTo, _speed * Time.deltaTime);
-                
-                yield return null;
-            }
-        }
 
         #endregion
 
@@ -199,14 +213,16 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         internal void Move(Vector3 moveTo)
         {
-            navMeshAgent.SetDestination(moveTo);
-
-            /*moveTo.y = transform.position.y;
-
-            if(_movementCo != null)
-                StopCoroutine(_movementCo);
-            
-            _movementCo = StartCoroutine(LerpMovementCo(moveTo));*/
+            if (navMeshAgent.SetDestination(moveTo))
+            {
+                _destination = moveTo;
+                GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(_destination);
+                _currentState = State.Move;
+            }
+            else
+            {
+                _destination = Vector3.zero;
+            }
         }
         
         internal void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)

@@ -1,4 +1,5 @@
 using System;
+using _Project.GamePlay.CommanderWaypoint.Scripts;
 using _Project.GamePlay.HQManager.Scripts;
 using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
@@ -30,6 +31,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         [SerializeField] private PlayerModel player;
         [SerializeField] private UnitManager unitManager;
         [SerializeField] private HqManager hqManager;
+        [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
         [SerializeField] private Camera cameraTrackingShot;
 
         #endregion
@@ -71,6 +73,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         public PlayerModel PlayerModel => player;
         public UnitManager UnitManager => unitManager;
         public HqManager Hq => hqManager;
+        public CommanderMoveIndicator CommanderMoveIndicator => commanderMoveIndicator;
 
         #endregion
 
