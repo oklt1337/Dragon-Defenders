@@ -3,6 +3,8 @@ using _Project.GamePlay.GameManager.Scripts;
 using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.Commander.CommanderModel.Scripts;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace _Project.GamePlay.Player.PlayerModel.Scripts
 {

@@ -7,15 +7,16 @@ using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
     public class Commander : MonoBehaviour
     {
         #region SerializeFields
-
+        
+        [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
-        [SerializeField] private float minDamage = 10f;
         
         #endregion
 
@@ -39,7 +40,8 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private SkillTree _skillTree;
         private List<Ability> _abilities;
         private AnimatorController _animatorController;
-        
+        private const float MINDamage = 10f;
+
         private Coroutine _movementCo;
 
         #endregion
@@ -197,12 +199,14 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         internal void Move(Vector3 moveTo)
         {
-            moveTo.y = transform.position.y;
+            navMeshAgent.SetDestination(moveTo);
+
+            /*moveTo.y = transform.position.y;
 
             if(_movementCo != null)
                 StopCoroutine(_movementCo);
             
-            _movementCo = StartCoroutine(LerpMovementCo(moveTo));
+            _movementCo = StartCoroutine(LerpMovementCo(moveTo));*/
         }
         
         internal void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
@@ -223,6 +227,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             _skillTree = commanderModel.skillTree;
             _abilities = commanderModel.abilities;
             _animatorController = commanderModel.animatorController;
+            navMeshAgent.speed = _speed;
         }
 
         #endregion
@@ -231,7 +236,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         public void TakeDamage(float damage)
         {
-            damage = Mathf.Clamp((damage * _health / _maxHealth), minDamage, damage) / _defense;
+            damage = Mathf.Clamp((damage * _health / _maxHealth), MINDamage, damage) / _defense;
 
             if (_health - damage <= 0 && !_dyingBreath)
             {
