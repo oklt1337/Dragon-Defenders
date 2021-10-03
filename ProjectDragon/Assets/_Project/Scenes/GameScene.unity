@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 78609703}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1256,12 +1256,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1311666254}
+  - component: {fileID: 1311666250}
   - component: {fileID: 1311666253}
   - component: {fileID: 1311666252}
   - component: {fileID: 1311666251}
-  - component: {fileID: 1311666250}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1311666249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57d100a7275ef74da6b07e5f2e29f89, type: 3}
+  m_Script: {fileID: 11500000, guid: 78430d6eb3b8f484ca40d75b45f2b1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: 
@@ -1290,8 +1290,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   speed: 0
-  speedUpValue: 0
-  currentWayPoint: {x: 0, y: 0, z: 0}
+  isMovingBack: 0
 --- !u!65 &1311666251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1363,7 +1362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311666249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: 1, z: -3.871029}
+  m_LocalPosition: {x: 0.62, y: 0.5, z: -3.871029}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
