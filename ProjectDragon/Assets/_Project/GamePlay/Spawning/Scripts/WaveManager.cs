@@ -6,19 +6,27 @@ namespace _Project.GamePlay.Spawning.Scripts
     public class WaveManager : MonoBehaviour
     {
         [SerializeField] private List<Wave> waves = new List<Wave>();
-
-        private int _currentWave;
+        [SerializeField] private int currentWave;
 
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.EnemySpawner.OnWaveSucces += AdvanceToNextWave;
         }
 
-        // Increases the wave count and tells the enemy spawner what to spawn.
+        /// <summary>
+        /// Increases the wave count.
+        /// </summary>
         private void AdvanceToNextWave()
         {
-            _currentWave++;
-            GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[_currentWave].Enemies);
+            currentWave++;
+        }
+
+        /// <summary>
+        ///  Tells the enemy spawner what to spawn.
+        /// </summary>
+        public void SpawnNextWave()
+        {
+           StartCoroutine(GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[currentWave].Enemies));
         }
     }
 }

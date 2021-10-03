@@ -10,6 +10,7 @@ namespace _Project.GamePlay.Spawning.Scripts
     {
        [SerializeField] private int waveSize;
        [SerializeField] private int killedEnemies;
+       [SerializeField] private float enemySpawnDelay;
 
        public Action OnWaveSucces;
 
@@ -37,9 +38,18 @@ namespace _Project.GamePlay.Spawning.Scripts
                 OnWaveSucces?.Invoke();
         }
 
-        public IEnumerator SpawnEnemies(List<Enemy> enemies)
+        /// <summary>
+        /// Spawns a list of enemies with a small delay between each of them.
+        /// </summary>
+        /// <param name="enemies"></param>
+        /// <returns></returns>
+        public IEnumerator SpawnEnemies(List<GameObject> enemies)
         {
-            return null;
+            foreach (var enemy in enemies)
+            {
+                Instantiate(enemy, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(enemySpawnDelay);
+            }
         }
     }
 }

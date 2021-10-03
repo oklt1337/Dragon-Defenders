@@ -7,8 +7,8 @@ namespace _Project.GamePlay.Spawning.Scripts
 {
     public class Wave : MonoBehaviour
     {
-       [SerializeField] private List<Enemy> enemies = new List<Enemy>();
+       [SerializeField] private List<GameObject> enemies = new List<GameObject>();
 
-       public List<Enemy> Enemies => enemies;
+       public List<GameObject> Enemies => enemies;
     }
 }
