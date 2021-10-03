@@ -7,6 +7,7 @@ TagManager:
   - Unit/Tower
   - Enemy
   - Ability
+  - Ground
   layers:
   - Default
   - TransparentFX

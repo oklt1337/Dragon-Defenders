@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.AI.Enemies.Scripts;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
@@ -207,25 +208,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Methods
 
-        #endregion
-
-        #region Protected Methods
-
-        internal void Move(Vector3 moveTo)
-        {
-            if (navMeshAgent.SetDestination(moveTo))
-            {
-                _destination = moveTo;
-                GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(_destination);
-                _currentState = State.Move;
-            }
-            else
-            {
-                _destination = Vector3.zero;
-            }
-        }
-        
-        internal void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
+        private void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
         {
             _commanderName = commanderModel.commanderName;
             _commanderObj = commanderModel.commanderObj;
@@ -244,6 +227,36 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             _abilities = commanderModel.abilities;
             _animatorController = commanderModel.animatorController;
             navMeshAgent.speed = _speed;
+        }
+
+        public void Move(Vector3 moveTo)
+        {
+            if (navMeshAgent.SetDestination(moveTo))
+            {
+                _destination = moveTo;
+                GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(_destination);
+                _currentState = State.Move;
+            }
+            else
+            {
+                _destination = Vector3.zero;
+            }
+        }
+
+        public void Attack(Component target)
+        {
+            Debug.Log(target.name);
+            
+            //_primaryAttack.Cast(target.transform);
+        }
+        
+        #endregion
+
+        #region Protected Methods
+
+        internal void InitializeCommander(CommanderModel.Scripts.CommanderModel commanderModel)
+        {
+            SetStats(commanderModel);
         }
 
         #endregion

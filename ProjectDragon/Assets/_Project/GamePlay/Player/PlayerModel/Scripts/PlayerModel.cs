@@ -52,8 +52,8 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ChangeCamera;
-            inputHandler.OnTouch += commander.Move;
-            InitializeCommander();
+            inputHandler.OnTouch += ProcessInput;
+            Initialize();
         }
 
         private void Start()
@@ -66,13 +66,28 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         #region Private Methods
 
-        private void InitializeCommander()
+        private void ProcessInput(Ray ray)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Enemy"))
+                {
+                    commander.Attack(hit.transform);
+                }
+                else if (hit.collider.CompareTag("Ground"))
+                {
+                    commander.Move(hit.point);
+                }
+            }
+        }
+
+        private void Initialize()
         {
             /*Hashtable hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
             if (!hashTable.ContainsKey("Commander"))
                 return;*/
            CommanderModel commanderModel = GameManager.Scripts.GameManager.Instance.CommanderLibrary.CommanderModels[Commanders.Commander1];
-           commander.SetStats(commanderModel);
+           commander.InitializeCommander(commanderModel);
         }
 
         private void ChangeCamera(GameState state)

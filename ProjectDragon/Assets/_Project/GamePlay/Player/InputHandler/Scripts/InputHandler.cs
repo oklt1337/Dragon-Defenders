@@ -32,7 +32,7 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
 
         #region Events
 
-        public event Action<Vector3> OnTouch;
+        public event Action<Ray> OnTouch;
         
         #endregion
 
@@ -46,9 +46,8 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
             Vector3 screenPos = Input.mousePosition;
             screenPos.z = CommanderCam.nearClipPlane;
             Ray ray = CommanderCam.ScreenPointToRay(screenPos);
-            if (!Physics.Raycast(ray, out RaycastHit hitInfo))
-                return;
-            OnTouch?.Invoke(hitInfo.point);
+            
+            OnTouch?.Invoke(ray);
             
             if (Input.touchCount == 0)
                 return;
@@ -59,12 +58,12 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
 
         #region Private Methods
 
-        private Vector3 GetTouchPosInWorldCoord()
+        private Ray GetTouchPosInWorldCoord()
         {
             Vector3 screenPosMobile = Input.GetTouch(0).position;
             screenPosMobile.z = CommanderCam.nearClipPlane;
             Ray rayMobile = CommanderCam.ScreenPointToRay(screenPosMobile);
-            return Physics.Raycast(rayMobile, out RaycastHit hitInfoMobile) ? hitInfoMobile.point : Vector3.zero;
+            return rayMobile;
         }
         
         #endregion
