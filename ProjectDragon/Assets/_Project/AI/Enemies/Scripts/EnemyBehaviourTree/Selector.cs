@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace _Project.Enemies.Scripts.EnemyBehaviourTree
+namespace _Project.AI.Enemies.Scripts.EnemyBehaviourTree
 {
     public class Selector : Node
     {

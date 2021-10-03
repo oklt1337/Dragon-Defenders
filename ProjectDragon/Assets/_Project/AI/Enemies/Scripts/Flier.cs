@@ -1,6 +1,6 @@
 using _Project.GamePlay.GameManager.Scripts;
 
-namespace _Project.Enemies.Scripts
+namespace _Project.AI.Enemies.Scripts
 {
     public class Flier : Mover
     {
