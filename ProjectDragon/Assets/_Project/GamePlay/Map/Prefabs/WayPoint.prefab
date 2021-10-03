@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -8590786045965603482}
   - component: {fileID: 3350318637752307149}
   - component: {fileID: 1483060153168370048}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WayPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2920953334691257628}
   - component: {fileID: 3412075415884503754}
   - component: {fileID: 2608860054849231554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Indicator for deving
   m_TagString: Untagged
   m_Icon: {fileID: 0}

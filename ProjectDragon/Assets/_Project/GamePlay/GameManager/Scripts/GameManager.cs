@@ -118,7 +118,10 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region Public Methods
 
-        
+        public void ChangeState(GameState state)
+        {
+            CurrentGameState = state;
+        }
 
         #endregion
     }
