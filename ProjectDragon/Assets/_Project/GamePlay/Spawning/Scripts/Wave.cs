@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace _Project.GamePlay.Spawning.Scripts
 {
-    public class Wave : MonoBehaviour
+    [CreateAssetMenu(menuName = "Tools/Wave")]
+    public class Wave : ScriptableObject
     {
        [SerializeField] private List<GameObject> enemies = new List<GameObject>();
 

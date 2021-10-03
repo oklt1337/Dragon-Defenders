@@ -26,7 +26,9 @@ namespace _Project.GamePlay.Spawning.Scripts
         /// </summary>
         public void SpawnNextWave()
         {
-           StartCoroutine(GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[currentWave].Enemies));
+            // For the Alpha we only use one wave.
+           //StartCoroutine(GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[currentWave].Enemies));
+           StartCoroutine(GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[0].Enemies));
         }
     }
 }
