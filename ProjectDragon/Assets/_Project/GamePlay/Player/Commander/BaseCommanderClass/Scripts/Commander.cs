@@ -183,7 +183,6 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region Events
 
         public event Action OnDeath;
-        public event Action OnMovementFinished;
 
         #endregion
 
@@ -192,16 +191,6 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void Awake()
         {
             _currentState = State.Idle;
-        }
-
-        private void Update()
-        {
-            if (!(Math.Abs(_destination.x - transform.position.x) < 0.1) ||
-                !(Math.Abs(_destination.z - transform.position.z) < 0.1) || _currentState != State.Move) 
-                return;
-            
-            _currentState = State.Idle;
-            OnMovementFinished?.Invoke();
         }
 
         #endregion

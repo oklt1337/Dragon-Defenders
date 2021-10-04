@@ -8,11 +8,6 @@ namespace _Project.GamePlay.CommanderWaypoint.Scripts
         [SerializeField] private GameObject prefab;
         private GameObject _initializedObj;
 
-        private void Start()
-        {
-            GameManager.Scripts.GameManager.Instance.PlayerModel.Commander.OnMovementFinished += DeletePoint;
-        }
-
         private void DeletePoint()
         {
             if (_initializedObj != null)
