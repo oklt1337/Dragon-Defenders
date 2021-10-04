@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.Spawning.Scripts
@@ -10,25 +11,26 @@ namespace _Project.GamePlay.Spawning.Scripts
 
         private void Awake()
         {
-            GameManager.Scripts.GameManager.Instance.EnemySpawner.OnWaveSucces += AdvanceToNextWave;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
+        }
+        
+        private void OnDestroy()
+        {
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
         }
 
         /// <summary>
-        /// Increases the wave count.
+        /// Increases the wave count and updates the enemy spawners next enemies.
         /// </summary>
-        private void AdvanceToNextWave()
+        private void AdvanceToNextWave(GameState state)
         {
+            if(state != GameState.Build)
+                return;
+            
             currentWave++;
-        }
-
-        /// <summary>
-        ///  Tells the enemy spawner what to spawn.
-        /// </summary>
-        public void SpawnNextWave()
-        {
             // For the Alpha we only use one wave.
-           //StartCoroutine(GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[currentWave].Enemies));
-           StartCoroutine(GameManager.Scripts.GameManager.Instance.EnemySpawner.SpawnEnemies(waves[0].Enemies));
+            //GameManager.Scripts.GameManager.Instance.EnemySpawner.UpdateNextEnemies(waves[currentWave].Enemies);
+            GameManager.Scripts.GameManager.Instance.EnemySpawner.UpdateNextEnemies(waves[0].Enemies);
         }
     }
 }

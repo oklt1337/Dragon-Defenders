@@ -5,6 +5,7 @@ using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.Scripts;
 using _Project.Scripts.Gameplay.Unit;
+using _Project.UI.In_Game.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.GameManager.Scripts
@@ -32,6 +33,9 @@ namespace _Project.GamePlay.GameManager.Scripts
         [SerializeField] private HqManager hqManager;
         [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
         [SerializeField] private Camera cameraTrackingShot;
+        [SerializeField] private HUD hud;
+        [SerializeField] private CommanderHUD commanderHUD;
+        [SerializeField] private BuildHUD buildHUD;
 
         #endregion
 
@@ -74,6 +78,10 @@ namespace _Project.GamePlay.GameManager.Scripts
         public HqManager Hq => hqManager;
         public CommanderMoveIndicator CommanderMoveIndicator => commanderMoveIndicator;
 
+        public HUD HUD => hud;
+        public CommanderHUD CommanderHUD => commanderHUD;
+        public BuildHUD BuildHUD => buildHUD;
+
         #endregion
 
         #region Events
@@ -94,6 +102,9 @@ namespace _Project.GamePlay.GameManager.Scripts
             {
                 Instance = this;
             }
+
+            BuildHUD.OnWaveStart += ChangeState;
+            enemySpawner.OnWaveSuccess += ChangeState;
         }
 
         private void Start()
@@ -118,7 +129,7 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region Public Methods
 
-        public void ChangeState(GameState state)
+        private void ChangeState(GameState state)
         {
             CurrentGameState = state;
         }

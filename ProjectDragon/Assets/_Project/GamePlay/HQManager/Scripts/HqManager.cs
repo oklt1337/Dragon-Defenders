@@ -1,4 +1,5 @@
 using System;
+using _Project.GamePlay.HQ.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.HQManager.Scripts
@@ -24,6 +25,8 @@ namespace _Project.GamePlay.HQManager.Scripts
         #endregion
 
         #region Public Properties
+        
+        public Hq Hq => hq;
 
         #endregion
 

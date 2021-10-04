@@ -1,3 +1,4 @@
+using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 using static _Project.GamePlay.GameManager.Scripts.GameManager;
@@ -12,9 +13,9 @@ namespace _Project.AI.Enemies.Scripts
        [SerializeField] private GameObject enemyModel;
        [SerializeField] private float defense;
        [SerializeField] private float maxSpeed;
-       [SerializeField] private float hqDamage;
        [SerializeField] private float expDrop;
        [SerializeField] private int goldDrop;
+       [SerializeField] private int hqDamage;
 
         #endregion
         
@@ -27,6 +28,13 @@ namespace _Project.AI.Enemies.Scripts
 
         #endregion
         
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("HQ"))
+            {
+                Instance.Hq.Hq.TakeDamage(hqDamage);
+            }
+        }
 
         public virtual void TakeDamage(float damage)
         {

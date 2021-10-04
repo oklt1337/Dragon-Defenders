@@ -12,17 +12,22 @@ namespace _Project.UI.In_Game.Scripts
         [SerializeField] private TextMeshProUGUI money;
         [SerializeField] private TextMeshProUGUI waveCount;
 
+        private void OnEnable()
+        {
+            CanvasManager.Instance.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            CanvasManager.Instance.Unsubscribe(this);
+        }
+        
         public void ChangeInteractableStatus(bool status)
         {
             settings.interactable = status;
         }
 
         public void OnClickSettings()
-        {
-            
-        }
-
-        public void ChangeActiveHUD()
         {
             
         }
