@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.Spawning.Scripts
+namespace _Project.GamePlay.Spawning.WaveManager.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private List<Wave> waves = new List<Wave>();
+        [SerializeField] private List<Wave.Scripts.Wave> waves = new List<Wave.Scripts.Wave>();
         [SerializeField] private int currentWave;
 
         private void Awake()

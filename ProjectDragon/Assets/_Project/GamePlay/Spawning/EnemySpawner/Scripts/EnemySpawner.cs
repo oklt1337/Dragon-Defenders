@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using _Project.GamePlay.GameManager.Scripts;
+using UnityEngine;
 
-namespace _Project.GamePlay.Spawning.Scripts
+namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
 {
     public class EnemySpawner : MonoBehaviour
     {
@@ -18,7 +18,6 @@ namespace _Project.GamePlay.Spawning.Scripts
         public event Action<GameState> OnWaveSuccess;
         
         public int KilledEnemies => killedEnemies;
-        public int WaveSize => waveSize;
 
         #region Unity Methods
 
@@ -51,7 +50,7 @@ namespace _Project.GamePlay.Spawning.Scripts
         {
             killedEnemies++;
 
-            if (KilledEnemies >= WaveSize)
+            if (KilledEnemies >= waveSize)
                 OnWaveSuccess?.Invoke(GameState.Build);
         }
 
@@ -62,6 +61,7 @@ namespace _Project.GamePlay.Spawning.Scripts
         public void UpdateNextEnemies(List<GameObject> nextEnemies)
         {
             _enemies = nextEnemies;
+            waveSize = nextEnemies.Count;
         }
 
         #endregion

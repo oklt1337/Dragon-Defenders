@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using _Project.AI.Enemies.Scripts;
-using _Project.Enemies.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.Spawning.Scripts
+namespace _Project.GamePlay.Spawning.Wave.Scripts
 {
     [CreateAssetMenu(menuName = "Tools/Wave")]
     public class Wave : ScriptableObject
