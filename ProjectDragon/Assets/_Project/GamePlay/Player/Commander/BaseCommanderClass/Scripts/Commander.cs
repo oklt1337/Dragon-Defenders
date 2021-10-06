@@ -237,8 +237,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         public void Attack(Component target)
         {
             Debug.Log(target.name);
-            
-            //_primaryAttack.Cast(target.transform);
+            _primaryAttack.Cast( transform,target.transform);
         }
         
         #endregion

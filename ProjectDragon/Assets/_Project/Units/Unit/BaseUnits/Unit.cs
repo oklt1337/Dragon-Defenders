@@ -73,7 +73,7 @@ namespace _Project.Units.Unit.BaseUnits
 
         protected virtual void InstantiateAbility(GameObject abilityPrefab, bool resetCoolDownModifier = false)
         {
-            GameObject tempAbilityGameObject = PhotonNetwork.InstantiateRoomObject(string.Concat(abilityPath,baseUnitDataBase.AbilityGameObject.name),Vector3.zero, quaternion.identity);
+            GameObject tempAbilityGameObject = PhotonNetwork.Instantiate(string.Concat(abilityPath,baseUnitDataBase.AbilityGameObject.name),Vector3.zero, quaternion.identity);
             tempAbilityGameObject.transform.SetParent(transform);
             ability = tempAbilityGameObject.GetComponent<Ability>();
             ability.Start();
@@ -87,7 +87,6 @@ namespace _Project.Units.Unit.BaseUnits
             {
                 cooldown = ability.Cooldown * coolDownModifier;
             }
-            
         }
         protected virtual void InitiateSkillTree()
         {
