@@ -10,7 +10,6 @@ namespace _Project.UI.MainMenu.TEMPMYASS
     {
         public void OnClickPlay()
         {
-            NetworkManager.Instance.PhotonManager.PhotonConnector.CreateRoom();
             SceneManager.ChangeScene(Scene.GameScene);
         }
     }
