@@ -1,4 +1,5 @@
 using System;
+using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.Player.InputHandler.Scripts
@@ -6,7 +7,6 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
     public class InputHandler : MonoBehaviour
     {
         #region SerializeFields
-        
 
         #endregion
 
@@ -33,22 +33,25 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
         #region Events
 
         public event Action<Ray> OnTouch;
-        
+
         #endregion
 
         #region Unity Methods
 
         private void Update()
         {
+            if (GameManager.Scripts.GameManager.Instance.CurrentGameState != GameState.Wave)
+                return;
+
             if (!Input.GetMouseButtonDown(0))
                 return;
 
             Vector3 screenPos = Input.mousePosition;
             screenPos.z = CommanderCam.nearClipPlane;
             Ray ray = CommanderCam.ScreenPointToRay(screenPos);
-            
+
             OnTouch?.Invoke(ray);
-            
+
             if (Input.touchCount == 0)
                 return;
             OnTouch?.Invoke(GetTouchPosInWorldCoord());
@@ -65,7 +68,7 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
             Ray rayMobile = CommanderCam.ScreenPointToRay(screenPosMobile);
             return rayMobile;
         }
-        
+
         #endregion
 
         #region Protected Methods

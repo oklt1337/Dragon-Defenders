@@ -30,10 +30,11 @@ namespace _Project.AI.Enemies.Scripts
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("HQ"))
-            {
-                Instance.Hq.Hq.TakeDamage(hqDamage);
-            }
+            if (!other.CompareTag("HQ")) 
+                return;
+            
+            Instance.Hq.Hq.TakeDamage(hqDamage);
+            Death();
         }
 
         public virtual void TakeDamage(float damage)
@@ -51,7 +52,7 @@ namespace _Project.AI.Enemies.Scripts
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
             Instance.PlayerModel.AddMoney(goldDrop);
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace _Project.UI.In_Game.Scripts
 {
-    public class CommanderHUD : MonoBehaviour,ICanvas
+    public class CommanderHUD : MonoBehaviour, ICanvas
     {
         [SerializeField] private Button[] abilities;
         [SerializeField] private Slider commanderHealth;
@@ -20,12 +20,12 @@ namespace _Project.UI.In_Game.Scripts
 
         private void OnEnable()
         {
-            CanvasManager.Instance.Subscribe(this);
+            //CanvasManager.Instance.Subscribe(this);
         }
 
         private void OnDisable()
         {
-            CanvasManager.Instance.Unsubscribe(this);
+            //CanvasManager.Instance.Unsubscribe(this);
         }
 
         private void OnDestroy()

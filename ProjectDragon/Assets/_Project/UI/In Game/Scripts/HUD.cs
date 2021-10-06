@@ -14,12 +14,12 @@ namespace _Project.UI.In_Game.Scripts
 
         private void OnEnable()
         {
-            CanvasManager.Instance.Subscribe(this);
+            //CanvasManager.Instance.Subscribe(this);
         }
 
         private void OnDisable()
         {
-            CanvasManager.Instance.Unsubscribe(this);
+            //CanvasManager.Instance.Unsubscribe(this);
         }
         
         public void ChangeInteractableStatus(bool status)

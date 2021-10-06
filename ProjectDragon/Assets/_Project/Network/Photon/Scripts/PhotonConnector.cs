@@ -156,6 +156,17 @@ namespace _Project.Network.Photon.Scripts
 
         #region Public Methods
 
+        public void CreateRoom()
+        {
+            RoomOptions options = new RoomOptions
+            {
+                IsVisible = false,
+                IsOpen = false,
+                MaxPlayers = 1
+            };
+            PhotonNetwork.CreateRoom(string.Empty, options, TypedLobby.Default);
+        }
+
         #endregion
 
         #region Photon Callbacks

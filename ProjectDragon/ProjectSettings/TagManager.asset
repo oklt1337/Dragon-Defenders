@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Ability
   - Ground
+  - HQ
   layers:
   - Default
   - TransparentFX

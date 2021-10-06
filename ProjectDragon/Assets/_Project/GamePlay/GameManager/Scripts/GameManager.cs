@@ -19,6 +19,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         End
     }
     
+    [DefaultExecutionOrder(-100)]
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
@@ -111,7 +112,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         private void Start()
         {
             cameraTrackingShot.gameObject.SetActive(false);
-            CurrentGameState = GameState.Wave;
+            CurrentGameState = GameState.Build;
         }
 
         #endregion

@@ -116,9 +116,9 @@ MonoBehaviour:
   enemyModel: {fileID: 0}
   defense: 0
   maxSpeed: 0
-  hqDamage: 0
   expDrop: 0
   goldDrop: 0
+  hqDamage: 0
   agent: {fileID: 264498729499873607}
   health: 0
   maxHealth: 0
@@ -135,7 +135,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
