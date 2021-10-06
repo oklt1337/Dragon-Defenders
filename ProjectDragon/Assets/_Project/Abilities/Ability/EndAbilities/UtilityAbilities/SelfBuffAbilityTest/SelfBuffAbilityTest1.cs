@@ -1,13 +1,14 @@
 ﻿using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
+using _Project.Units.Unit.BaseUnits;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability
+namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.SelfBuffAbilityTest
 {
     public class SelfBuffAbilityTest1 : SelfBuffAbility
     {
         
         //private Commander Commander 
-        private Unit.Unit _unit;
+        private Unit _unit;
         
         public override void Cast()
         {
@@ -31,10 +32,10 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability
 
         private void GetTarget()
         {
-          _unit = GetComponentInParent<Unit.Unit>();
+          _unit = GetComponentInParent<Unit>();
         }
 
-        private void CastEffect(Unit.Unit target)
+        private void CastEffect(Unit target)
         {
             target.GainExp(BuffValue);
         }

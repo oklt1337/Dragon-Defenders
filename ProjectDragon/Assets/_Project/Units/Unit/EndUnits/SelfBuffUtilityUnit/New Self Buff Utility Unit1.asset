@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: New Self Buff Utility Unit1
   m_EditorClassIdentifier: 
   unitName: SelfBufferExPGiver
+  description: 
+  unitModel: {fileID: 0}
   faction: 2
   unitClass: 2
   rank: 2
   cost: 50
-  TestTest: 0
+  skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
+  abilityGameObjectGameObject: {fileID: 5639494828729860009, guid: 9e33a73b30819254c84fe8eefc8589e1,
+    type: 3}
+  animationHandler: {fileID: 0}
+  soundHandler: {fileID: 0}

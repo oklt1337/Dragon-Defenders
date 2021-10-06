@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using Photon.Pun;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace _Project.UI.Managers.Scripts
 {
     public class CanvasManager : MonoBehaviour, ICanvas
     {
+
         public static CanvasManager Instance;
 
         #region SerialzeFields

@@ -52,7 +52,7 @@ public class UnitEditor : OdinMenuEditorWindow
         public CreateNewCombatUnitData()
         {
             CombatUnitData = ScriptableObject.CreateInstance<CombatUnitDataBase>();
-            CombatUnitData.unitName = "New Unit";
+            CombatUnitData.UnitName = "New Unit";
             
         }
         
@@ -62,12 +62,12 @@ public class UnitEditor : OdinMenuEditorWindow
         [Button("Add new Combat Unit SO")]
         private void CreateNewData()
         {
-            AssetDatabase.CreateAsset(CombatUnitData, "Assets/_Project/ScriptableObjects/Units/"+ CombatUnitData.unitName  + ".asset");
+            AssetDatabase.CreateAsset(CombatUnitData, "Assets/_Project/ScriptableObjects/Units/"+ CombatUnitData.UnitName  + ".asset");
             AssetDatabase.SaveAssets();
             
             //create new Instance of the SO
             CombatUnitData = ScriptableObject.CreateInstance<CombatUnitDataBase>();
-            CombatUnitData.unitName = "New Combat Unit";
+            CombatUnitData.UnitName = "New Combat Unit";
         }
     }
     
@@ -76,7 +76,7 @@ public class UnitEditor : OdinMenuEditorWindow
         public CreateNewUtilityUnitData()
         {
             UtilityUnitData = ScriptableObject.CreateInstance<UtilityUnitDatabase>();
-            UtilityUnitData.unitName = "New Unit";
+            UtilityUnitData.UnitName = "New Unit";
             
         }
         
@@ -86,12 +86,12 @@ public class UnitEditor : OdinMenuEditorWindow
         [Button("Add new Combat Unit SO")]
         private void CreateNewData()
         {
-            AssetDatabase.CreateAsset(UtilityUnitData, "Assets/_Project/ScriptableObjects/Units/"+ UtilityUnitData.unitName  + ".asset");
+            AssetDatabase.CreateAsset(UtilityUnitData, "Assets/_Project/ScriptableObjects/Units/"+ UtilityUnitData.UnitName  + ".asset");
             AssetDatabase.SaveAssets();
             
             //create new Instance of the SO
             UtilityUnitData = ScriptableObject.CreateInstance<UtilityUnitDatabase>();
-            UtilityUnitData.unitName = "New Utility Unit";
+            UtilityUnitData.UnitName = "New Utility Unit";
         }
     }
 }

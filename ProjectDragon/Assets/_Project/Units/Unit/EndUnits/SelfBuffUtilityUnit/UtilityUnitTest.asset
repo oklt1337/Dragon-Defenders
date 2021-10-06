@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: UtilityUnitTest
   m_EditorClassIdentifier: 
   unitName: 
+  description: 
+  unitModel: {fileID: 0}
   faction: 0
   unitClass: 0
   rank: 10
   cost: 0
-  TestTest: 0
+  skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
+  abilityGameObjectGameObject: {fileID: 5639494828729860009, guid: 9e33a73b30819254c84fe8eefc8589e1,
+    type: 3}
+  animationHandler: {fileID: 0}
+  soundHandler: {fileID: 0}

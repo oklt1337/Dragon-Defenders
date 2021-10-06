@@ -1,33 +1,30 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Scripts.Gameplay.Projectiles;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using Photon.Pun;
-using Unity.Mathematics;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.EndAbilities.CombatAbilities
+namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.DamageRuneCall
 {
     public class DamageRuneCall : AoeDamageAbility
     {
-        [SerializeField] private GameObject castObject;
         public override void Cast(Transform spawnPosition)
         {
             //check if cast can be casted
             if (!isCastable) return;
-            
-            
-            GameObject rune = Instantiate(castObject, 
+            /*GameObject rune = Instantiate(castObject, 
                 spawnPosition.transform.position, 
                 Quaternion.identity,
                 spawnPosition.transform);
             rune.transform.localScale *= maxDistance;
+            */
             
-            /*
             GameObject rune = PhotonNetwork.Instantiate(
-                "Projectiles/" + castObject.name,
+                string.Concat(projectilepath, damageProjectile.name),
                 spawnPosition.position,
                 Quaternion.identity
             );
-            */
+            /**/
             
             
             
@@ -40,12 +37,12 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.EndAbilities.CombatAbili
             ResetCoolDown();
         }
       
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
         }
 
-        protected override void Start()
+        public override void Start()
         {
             base.Start();
         }

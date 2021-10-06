@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109bf4a2792ba1048bd6e3583d4c6043, type: 3}
   m_Name: CombatUnitTest
   m_EditorClassIdentifier: 
-  unitName: 
+  unitName: Heinz Beans
+  description: Beans
+  unitModel: {fileID: 0}
   faction: 0
   unitClass: 0
-  rank: 1
-  cost: 1
-  TestTest: 1
-  attackDamageModifier: 1
+  rank: 10
+  cost: 10
+  skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
+  abilityGameObjectGameObject: {fileID: 8480157964907209828, guid: 3ba89ca7796c1624fab5b379b0d45758,
+    type: 3}
+  animationHandler: {fileID: 0}
+  soundHandler: {fileID: 0}
+  attackDamageModifier: 10
   attackRange: 10

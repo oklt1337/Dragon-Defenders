@@ -1,13 +1,42 @@
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
     public abstract class UtilityAbility: Ability
     {
-        [SerializeField] protected float duration;
-        [SerializeField] protected float buffValue;
+        #region Singleton
 
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+        [ShowInInspector] protected float duration;
+        [ShowInInspector] protected float buffValue;
+
+    
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
         public float Duration
         {
             get => duration;
@@ -19,17 +48,53 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
             get => buffValue;
             set => buffValue = value;
         }
+    
 
-        protected override void Start()
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+        public override void Start()
         {
             base.Start();
             duration = ((UtilityAbilityDatabase) abilityDatabase).Duration;
             buffValue = ((UtilityAbilityDatabase) abilityDatabase).BuffValue;
         }
 
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
         }
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+
+    
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
     }
 }

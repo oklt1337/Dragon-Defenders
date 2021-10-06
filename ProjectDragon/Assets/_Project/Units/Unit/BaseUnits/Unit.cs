@@ -1,9 +1,18 @@
+using System;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.GamePlay.GameManager.Scripts;
 using _Project.GamePlay.Player.AnimationHandler.Scripts;
 using _Project.GamePlay.Player.SoundHandler.Scripts;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using _Project.Scripts.Gameplay.Unit.UnitDatabases;
+using _Project.SkillSystem.BaseSkills;
+using _Project.SkillSystem.SkillTree;
+using _Project.Units.Unit.BaseUnitDatabases;
+using Photon.Pun;
+using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace _Project.Units.Unit.BaseUnits
@@ -11,21 +20,26 @@ namespace _Project.Units.Unit.BaseUnits
     public abstract class Unit : MonoBehaviour
     {   
         [SerializeField] protected BaseUnitDataBase baseUnitDataBase;
-        [SerializeField] protected string unitName; 
-        [SerializeField] protected GameObject unitModel;
-        [SerializeField] protected Factions.Faction faction;
-        [SerializeField] protected Factions.Class unitClass;
-        [SerializeField] protected byte rank;
-        [SerializeField] protected int cost;
+        [ShowInInspector] protected string unitName; 
+        [ShowInInspector] protected string description;
+        [ShowInInspector] protected GameObject unitModel;
+        [ShowInInspector] protected Factions.Faction faction;
+        [ShowInInspector] protected Factions.Class unitClass;
+        [ShowInInspector] protected byte rank;
+        [ShowInInspector] protected int cost;
         
-        [SerializeField] protected float cooldown;
-        [SerializeField] protected SkillTree skillTree;
-        [SerializeField] protected Ability ability;
-        [SerializeField] protected AnimationHandler animationHandler;
-        [SerializeField] protected SoundHandler soundHandler;
+        [ShowInInspector] protected SkillTree skillTree;
+        [ShowInInspector] protected Ability ability;
+        [ShowInInspector] protected AnimationHandler animationHandler;
+        [ShowInInspector] protected SoundHandler soundHandler;
 
-        [SerializeField] protected byte level;
-        [SerializeField] protected float experience;
+        [ShowInInspector] protected byte level;
+        [ShowInInspector] protected float experience;
+        [ShowInInspector] protected float cooldown;
+        private float coolDownModifier;
+        private string currentSkillString;
+        private string abilityPath = "Resources/Abilities/";
+        
         public byte Level
         {
             get => level;
@@ -37,26 +51,57 @@ namespace _Project.Units.Unit.BaseUnits
             get => experience;
             set => experience = value;
         }
-
-        
         
         protected virtual void LoadDataFromScriptableObject()
         {
-            unitName = baseUnitDataBase.name;
-            faction = baseUnitDataBase.faction;
-            unitClass = baseUnitDataBase.unitClass;
-            rank = baseUnitDataBase.rank;
-            cost = baseUnitDataBase.cost;
+            unitName = baseUnitDataBase.UnitName;
+            description = baseUnitDataBase.Description;
+            unitModel = baseUnitDataBase.UnitModel;
+            faction = baseUnitDataBase.Faction;
+            unitClass = baseUnitDataBase.UnitClass;
+            rank = baseUnitDataBase.Rank;
+            cost = baseUnitDataBase.Cost;
+
+            skillTree = baseUnitDataBase.SkillTree;
+            animationHandler = baseUnitDataBase.AnimationHandler;
+            soundHandler = baseUnitDataBase.SoundHandler;
+
+
+            
+            if(ability != null)cooldown = ability.Cooldown;
         }
 
-        protected virtual void SetSkillTree()
+        protected virtual void InstantiateAbility(GameObject abilityPrefab, bool resetCoolDownModifier = false)
         {
-            skillTree = GetComponentInChildren<SkillTree>();
+            GameObject tempAbilityGameObject = PhotonNetwork.InstantiateRoomObject(string.Concat(abilityPath,baseUnitDataBase.AbilityGameObject.name),Vector3.zero, quaternion.identity);
+            tempAbilityGameObject.transform.SetParent(transform);
+            ability = tempAbilityGameObject.GetComponent<Ability>();
+            ability.Start();
+            if (resetCoolDownModifier)
+            {
+                float startModifier = 1;
+                coolDownModifier = startModifier;
+                cooldown = ability.Cooldown;
+            }
+            else
+            {
+                cooldown = ability.Cooldown * coolDownModifier;
+            }
+            
+        }
+        protected virtual void InitiateSkillTree()
+        {
+            foreach (var skill in skillTree.tree)
+            {
+                skill.Value.Init();
+            }
+            
+            //skillTree = GetComponentInChildren<SkillTree>();
             //ability = skillTree.allPossibleSkillTree[0];
             //think About This
             
             //offline way also parent again in photon
-            ability = Instantiate(skillTree.AllPossibleSkillTree[0],transform);
+            //ability = Instantiate(skillTree.AllPossibleSkillTree[0],transform);
             
             //Photon way
             /*
@@ -65,87 +110,88 @@ namespace _Project.Units.Unit.BaseUnits
             GameObject abilityObject = PhotonNetwork.Instantiate(loadResourceAbility,transform.position,Quaternion.identity);
             ability = abilityObject.GetComponent<Ability>();
             */
-            cooldown = ability.Cooldown;
+            
+            
             
             //
             //
             //PhotonNetwork.Instantiate
         }
-        
-        private void Dismantle()
+
+        public void SetNewAbility(GameObject abilityPrefab)
         {
-            //When it is ready;
-            //GameManager.Instance.PlayerModel.AddMoney(cost/2);
+            /*
+            Destroy(GetComponentInChildren<Ability>().gameObject);
+            GameObject tempAbilityGameObject = Instantiate(baseUnitDataBase.AbilityGameObject,transform);
+            ability = tempAbilityGameObject.GetComponent<Ability>();
+            cooldown = ability.Cooldown * coolDownModifier;
+            */
+            
+            PhotonNetwork.Destroy(GetComponentInChildren<Ability>().gameObject);
+            GameObject tempAbilityGameObject = PhotonNetwork.Instantiate(string.Concat(abilityPath,baseUnitDataBase.AbilityGameObject.name),Vector3.zero, quaternion.identity);
+            tempAbilityGameObject.transform.SetParent(transform);
+            
+            ability = tempAbilityGameObject.GetComponent<Ability>();
+            cooldown = ability.Cooldown * coolDownModifier;
+        }
+        
+        [Button]
+        public void Dismantle()
+        {
+            float dividerValue = 0.5f;
+            GameManager.Instance.PlayerModel.AddMoney((int)(cost*dividerValue));
             Destroy(this);
         }
 
         public virtual void Start()
         {
             LoadDataFromScriptableObject();
-            SetSkillTree();
+            InitiateSkillTree();
+            InstantiateAbility(baseUnitDataBase.AbilityGameObject,true);
         }
 
         public void GainExp(float gainedExp)
         {
             experience += gainedExp;
-            if (experience >= 100)
-            {
-                LevelUp();
-                experience %= 100;
-            }
         }
 
-        protected virtual void LevelUp()
+        public virtual void LevelUp()
         {
             level++;
             
-            //skilltree new increase
-            UpgradeSkill();
+            //increase Stats
             
-            //cooldown gets smaller 
-            cooldown *= 0.95f;
+            //thinking on setting is learnable here
             
-            //apply new modifiers
             ApplyModifiers();
 
         }
-
-        public void UpgradeSkill()
+        [Button]
+        public void UpgradeSkill(bool isLeftSkill = false)
         {
-            int temp = 0;
-            //bruh change when the skill tree is implemented
-            if (skillTree.AllPossibleSkillTree.Count != skillTree.AllPossibleSkillTree.IndexOf(ability)+1)
-            {
-                temp = skillTree.AllPossibleSkillTree.IndexOf(ability) + 1;
-                //Destroy(ability.gameObject);
-                //PhotonNetwork.Destroy(ability.gameObject);
-                
-                //
-                Destroy(ability.gameObject);
-                ability = Instantiate(skillTree.AllPossibleSkillTree[temp],transform);
-                //
-
-                /*
-                string loadResourceAbility = "Abilities/" + skillTree.AllPossibleSkillTree[temp].gameObject.name;
-                GameObject abilityObject = PhotonNetwork.Instantiate(loadResourceAbility,transform.position,Quaternion.identity);
-                ability = abilityObject.GetComponent<Ability>();
-                */
-            }
-             
+            if (currentSkillString.Length >= skillTree.maxLayers) return;
+            
+            String pathTaken =(isLeftSkill) ? "L" : "R" ;
+            String.Concat(currentSkillString, pathTaken);
+            Skill currentSkill = skillTree.tree[currentSkillString];
+            currentSkill.IsLearnable = true;
+            currentSkill.EnableSkill();
         }
-
+        
         protected virtual void ApplyModifiers()
         {
-            ability.Cooldown = cooldown;
+            //still things to add;
+            ability.Cooldown = cooldown * coolDownModifier;
         }
-        
-        
         
         protected void Cast()
         {
             ability.Cast();
         }
         
-        
+        protected virtual void Update()
+        {
+            ability.Update();
+        }
     }
 }

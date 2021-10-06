@@ -3,7 +3,7 @@ using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using _Project.Scripts.Gameplay.Unit.UnitDatabases;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Unit.BaseUnits
+namespace _Project.Units.Unit.BaseUnits
 {
     public abstract class Combat : Unit
     {
@@ -70,18 +70,18 @@ namespace _Project.Scripts.Gameplay.Unit.BaseUnits
             
         }
 
-        protected override void LevelUp()
+        public override void LevelUp()
         {
             level++;
             
             //skilltree new increase
-            UpgradeSkill();
+            //UpgradeSkill();
             
             //cooldown gets smaller 
-            cooldown *= 0.95f;
+            //cooldown *= 0.95f;
             
             //Modifierincreased
-            attackDamageModifier *= 1.1f;
+            //attackDamageModifier *= 1.1f;
             
             //apply new modifiers
             ApplyModifiers();
@@ -93,8 +93,9 @@ namespace _Project.Scripts.Gameplay.Unit.BaseUnits
             ability.Cooldown = cooldown;
         }
 
-        public virtual void Update()
+        protected override void Update()
         {
+            base.Update();
             if (!currentTarget) 
             {
                 SelectTarget();

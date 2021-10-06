@@ -1,26 +1,94 @@
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
-using Unity.VisualScripting;
+using Sirenix.OdinInspector;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
     public class SkillshotDamageAbility : SingleTargetDamageAbility
     {
-        public float maxDistance;
+        
+        
+
+        
+        
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+        [ShowInInspector] protected float maxDistance;
+    
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
         public float MAXDistance
         {
             get => maxDistance;
             set => maxDistance = value;
         }
+    
 
-        protected override void Start()
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+        public override void Start()
         {
             base.Start();
             maxDistance = ((SkillShotDamageAbilityDataBase)abilityDatabase).MAXDistance;
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
         }
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+
+    
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
     }
 }

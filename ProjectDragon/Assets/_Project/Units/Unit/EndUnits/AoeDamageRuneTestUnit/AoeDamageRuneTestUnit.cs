@@ -1,11 +1,11 @@
-using _Project.Scripts.Gameplay.Unit.BaseUnits;
+using _Project.Units.Unit.BaseUnits;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Unit.EndUnits
 { 
     public class AoeDamageRuneTestUnit : Combat
     {
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
             if (ability.IsCastable)

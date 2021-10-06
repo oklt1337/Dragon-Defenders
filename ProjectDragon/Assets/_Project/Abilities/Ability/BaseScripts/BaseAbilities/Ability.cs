@@ -1,18 +1,52 @@
-using System;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
     public abstract class Ability : MonoBehaviour
     {
+        
+        
+        
+
+        
+        
+        
+        
+        
+        #region Singleton
+        
+        #endregion
+    
+        #region SerializeFields
+        
         [SerializeField] protected AbilityDataBase abilityDatabase;
-        [SerializeField] protected float manaCost;
-        [SerializeField] protected float cooldown;
-        [SerializeField] protected AnimationClip animationClip;
-        [SerializeField] protected AudioClip audioClip;
-        private float _tempCooldown;
-        protected bool isCastable;
+        
+        #endregion
+    
+        #region Private Fields
+        #endregion
+    
+        #region protected Fields
+        
+        [ShowInInspector] protected float manaCost;
+        [ShowInInspector] protected float cooldown;
+        [ShowInInspector] protected AnimationClip animationClip;
+        [ShowInInspector] protected AudioClip audioClip;
+        [ShowInInspector] private float _tempCooldown;
+        [ShowInInspector] protected bool isCastable;
+        [ShowInInspector] protected string projectilepath = "Resources/Projectiles/";
+        
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
         public float ManaCost
         {
             get => manaCost;
@@ -35,7 +69,18 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
             get => isCastable;
             set => isCastable = value;
         }
-        protected virtual void Start()
+    
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+        public virtual void Start()
         {
             manaCost = abilityDatabase.ManaCost;
             cooldown = abilityDatabase.Cooldown;
@@ -43,7 +88,7 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
             isCastable = true;
         }
 
-        protected virtual void Update()
+        public virtual void Update()
         {
             _tempCooldown -= Time.deltaTime;
             if (_tempCooldown <= 0)
@@ -51,12 +96,25 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
                 isCastable = true;
             }
         }
+        #endregion
+    
+        #region Private Methods
 
+    
+
+        #endregion
+    
+        #region Protected Methods
         protected virtual void ResetCoolDown()
         {
             isCastable = false;
             _tempCooldown = cooldown;
         }
+    
+
+        #endregion
+    
+        #region Public Methods
 
         public virtual void Cast()
         {
@@ -71,5 +129,18 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
         {
             
         }
+        
+        public virtual void ResetCoolDown(float newCoolDown)
+        {
+            isCastable = false;
+            cooldown = newCoolDown;
+            _tempCooldown = newCoolDown;
+        }
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
     }
 }

@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaCost: 1
   cooldown: 1
+  animationClip: {fileID: 0}
+  audioClip: {fileID: 0}
   baseDamage: 10
+  damageProjectile: {fileID: 7722801085219574963, guid: a132946fd5768e14493bd6ff51249df1,
+    type: 3}
   speed: 1

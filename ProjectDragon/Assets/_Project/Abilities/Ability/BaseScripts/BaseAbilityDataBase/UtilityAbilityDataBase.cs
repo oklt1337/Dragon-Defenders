@@ -1,3 +1,4 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase

@@ -1,22 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using Unity.VisualScripting;
 using UnityEngine;
-using Unit = _Project.Scripts.Gameplay.Unit.Unit;
 
 public class AoeUtilityAbilityTest1 : AoeUtilityAbility
 {
-    private List<Unit> _possibleBeneficiaries;
+    private List<_Project.Units.Unit.BaseUnits.Unit> _possibleBeneficiaries;
     [SerializeField] private GameObject visibleEffect;
     private Vector3 _tempVector;
 
 
     public override void Cast()
     {
-        //Debug.Log(!isCastable);
         if (!isCastable ||_possibleBeneficiaries.Count == 0) return;
         
         CastEffect();
@@ -45,6 +44,7 @@ public class AoeUtilityAbilityTest1 : AoeUtilityAbility
             StartCoroutine(VisibleDisplay());
         }
         
+        
     }
 
     private IEnumerator VisibleDisplay()
@@ -61,7 +61,7 @@ public class AoeUtilityAbilityTest1 : AoeUtilityAbility
         GameObject[] allTowers = GameObject.FindGameObjectsWithTag("Unit/Tower");
         for (int i = 0;i < allTowers.Length;i++)
         {
-            _possibleBeneficiaries.Add(allTowers[i].GetComponent<Unit>());   
+            _possibleBeneficiaries.Add(allTowers[i].GetComponent<_Project.Units.Unit.BaseUnits.Unit>());   
         }
     }
 
@@ -70,10 +70,10 @@ public class AoeUtilityAbilityTest1 : AoeUtilityAbility
     }
     
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
-        _possibleBeneficiaries = new List<Unit>();
+        _possibleBeneficiaries = new List<_Project.Units.Unit.BaseUnits.Unit>();
         UpdateBeneficiaries();
     }
 }

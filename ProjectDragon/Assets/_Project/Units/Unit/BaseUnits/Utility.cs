@@ -1,4 +1,4 @@
-namespace _Project.Scripts.Gameplay.Unit.BaseUnits
+namespace _Project.Units.Unit.BaseUnits
 {
     public abstract class Utility : Unit
     {
@@ -7,7 +7,7 @@ namespace _Project.Scripts.Gameplay.Unit.BaseUnits
         {
             base.Start();
         }
-        protected virtual void Update()
+        protected override void Update()
         {
         }
 
@@ -16,15 +16,15 @@ namespace _Project.Scripts.Gameplay.Unit.BaseUnits
             base.LoadDataFromScriptableObject();
         }
         
-        protected override void LevelUp()
+        public override void LevelUp()
         {
             level++;
             
             //skilltree new increase
-            UpgradeSkill();
+            //UpgradeSkill();
             
             //cooldown gets smaller 
-            cooldown *= 0.90f;
+            //cooldown *= 0.90f;
             
             //apply new modifiers
             ApplyModifiers();

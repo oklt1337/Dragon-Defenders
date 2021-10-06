@@ -5,8 +5,8 @@ using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveManager.Scripts;
-using _Project.Scripts.Gameplay.Unit;
 using _Project.UI.In_Game.Scripts;
+using _Project.Units.Unitmanager;
 using UnityEngine;
 
 namespace _Project.GamePlay.GameManager.Scripts

@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: New  Buff Aoe Unit 1
   m_EditorClassIdentifier: 
   unitName: SelfBuffAoeUnit 1 EXP For All in Reach
+  description: 
+  unitModel: {fileID: 0}
   faction: 1
   unitClass: 1
   rank: 3
   cost: 500
-  TestTest: 0
+  skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
+  abilityGameObjectGameObject: {fileID: 8081837723333272338, guid: 81929284116b0a1419ee235d15ee0357,
+    type: 3}
+  animationHandler: {fileID: 0}
+  soundHandler: {fileID: 0}

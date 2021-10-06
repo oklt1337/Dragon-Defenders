@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: Aoe Damage Unit 1
   m_EditorClassIdentifier: 
   unitName: Aoe Damage Test 1
+  description: 
+  unitModel: {fileID: 0}
   faction: 1
   unitClass: 7
   rank: 78
   cost: 112
-  TestTest: 0
+  skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
+  abilityGameObjectGameObject: {fileID: 1887249969845562741, guid: 4270ccaee9fa3b24c83096152e1205a5,
+    type: 3}
+  animationHandler: {fileID: 0}
+  soundHandler: {fileID: 0}
   attackDamageModifier: 30
   attackRange: 10

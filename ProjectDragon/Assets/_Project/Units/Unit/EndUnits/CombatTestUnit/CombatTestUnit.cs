@@ -1,10 +1,10 @@
-using _Project.Scripts.Gameplay.Unit.BaseUnits;
+using _Project.Units.Unit.BaseUnits;
 
-namespace _Project.Scripts.Gameplay.Unit.EndUnits
+namespace _Project.Units.Unit.EndUnits.CombatTestUnit
 {
     public class CombatTestUnit : Combat
     {
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
             if (ability.IsCastable)

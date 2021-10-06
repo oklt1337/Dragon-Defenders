@@ -1,36 +1,29 @@
-using System;
-using System.Collections.Generic;
 using _Project.Scripts.Gameplay.Projectiles;
-using _Project.Scripts.Gameplay.Unit;
+using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using Photon.Pun;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability
+namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.FireBallHoming
 {
    public class FireBallHoming : PointAndClickDamageAbility
    {
-      [SerializeField] private GameObject castObject;
-
       public override void Cast(Transform spawnPosition, Transform enemy)
       {
          //check if cast can be casted
          if (!isCastable) return;
          
-         
-         GameObject tmpFireBall = Instantiate(castObject, 
+          /*GameObject tmpFireBall = Instantiate(castObject, 
             spawnPosition.transform.position, 
             quaternion.identity,
            spawnPosition.transform);
+        */
          
-         /*
          GameObject tmpFireBall = PhotonNetwork.Instantiate(
-            "Projectiles/" + castObject.name,
+            string.Concat(projectilepath, damageProjectile.name),
             spawnPosition.position,
             Quaternion.identity
          );
-         */
+         
          
          HomingProjectile projectile = tmpFireBall.GetComponent<HomingProjectile>();
          projectile.Target = enemy;
@@ -41,12 +34,12 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability
          ResetCoolDown();
       }
       
-      protected override void Update()
+      public override void Update()
       {
          base.Update();
       }
 
-      protected override void Start()
+      public override void Start()
       {
          base.Start();
       }
