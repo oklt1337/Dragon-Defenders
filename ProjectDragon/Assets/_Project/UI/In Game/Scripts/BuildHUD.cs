@@ -1,5 +1,6 @@
 using System;
 using _Project.GamePlay.GameManager.Scripts;
+using _Project.SkillSystem.SkillTree;
 using _Project.UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,14 @@ namespace _Project.UI.In_Game.Scripts
     public class BuildHUD : MonoBehaviour, ICanvas
     {
         [SerializeField] private Button startWaveButton;
+        [SerializeField] private UpgradePanel upgradePanel;
 
         public event Action<GameState> OnWaveStart;
 
         private void Awake()
         {
             GameManager.Instance.OnGameStateChanged += ChangeHUD;
+            GameManager.Instance.PlayerModel.OnTryUpgradeSkill += OpenUpgradePanel;
         }
 
         private void OnEnable()
@@ -62,6 +65,12 @@ namespace _Project.UI.In_Game.Scripts
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
+        }
+
+        private void OpenUpgradePanel(SkillTree skillTree)
+        {
+            upgradePanel.gameObject.SetActive(true);
+            upgradePanel.UpdateSkillTree(skillTree);
         }
     }
 }

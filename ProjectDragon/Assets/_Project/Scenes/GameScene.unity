@@ -840,6 +840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startWaveButton: {fileID: 614781421}
+  upgradePanel: {fileID: 7580660356812335101}
 --- !u!114 &282191433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,8 +2260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d864d0bd9e9e5c4c8be52b92ea0f947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hqObj: {fileID: 0}
-  health: 100
 --- !u!54 &812033522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5730,6 +5729,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 282191431}
     m_Modifications:
+    - target: {fileID: 2271638807523920591, guid: 56a6ae343641801419221f76f6cea0f9,
+        type: 3}
+      propertyPath: a
+      value: 
+      objectReference: {fileID: 21300000, guid: 77e37f7fe73c7db4d9a1702eb4ad411b,
+        type: 3}
     - target: {fileID: 7580660357326846197, guid: 56a6ae343641801419221f76f6cea0f9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5847,6 +5852,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56a6ae343641801419221f76f6cea0f9, type: 3}
+--- !u!114 &7580660356812335101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2271638807523920591, guid: 56a6ae343641801419221f76f6cea0f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7580660356812335099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d9a845a27623349b2aacecbd48a471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7886505557989607841
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,9 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 01bebc1e30034b743b8704de6454e38c, type: 2}
-    - {fileID: 11400000, guid: 6a3811c22ee7fa84f9b24e14cff67ffa, type: 2}
     - {fileID: 11400000, guid: fd0c6fe5771e17348b03e1d24d2cf380, type: 2}
+    - {fileID: 11400000, guid: 6a3811c22ee7fa84f9b24e14cff67ffa, type: 2}
     - {fileID: 11400000, guid: 8062f4514cf9a0a4db67e7aab71167a6, type: 2}
     - {fileID: 11400000, guid: 93918f2e147ccf24a865effbe60f4ca0, type: 2}
     - {fileID: 11400000, guid: a12036c0d0d9069419501062f03b4434, type: 2}
@@ -91,7 +90,7 @@ MonoBehaviour:
       Data: 4|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 2
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -109,7 +108,7 @@ MonoBehaviour:
       Data: 5|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 8
       Data: 
@@ -127,7 +126,7 @@ MonoBehaviour:
       Data: 6|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -145,7 +144,7 @@ MonoBehaviour:
       Data: 7|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 5
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -163,7 +162,7 @@ MonoBehaviour:
       Data: 8|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 6
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -181,7 +180,7 @@ MonoBehaviour:
       Data: 9|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 7
+      Data: 6
     - Name: 
       Entry: 8
       Data: 
@@ -199,7 +198,7 @@ MonoBehaviour:
       Data: 10|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
-      Data: 8
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
