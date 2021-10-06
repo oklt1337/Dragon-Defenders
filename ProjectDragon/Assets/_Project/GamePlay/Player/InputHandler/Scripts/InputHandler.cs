@@ -40,9 +40,6 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
 
         private void Update()
         {
-            if (GameManager.Scripts.GameManager.Instance.CurrentGameState != GameState.Wave)
-                return;
-
             if (!Input.GetMouseButtonDown(0))
                 return;
 
