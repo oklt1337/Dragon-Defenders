@@ -216,8 +216,6 @@ namespace _Project.Network.Photon.Scripts
             Debug.Log($"Joined Lobby: {PhotonNetwork.CurrentLobby}");
             OnPhotonJoinedLobby?.Invoke();
 
-            if (SceneManager.CurrentScene != Scene.Lobby)
-                return;
             CreateRoom();
         }
 
@@ -259,8 +257,11 @@ namespace _Project.Network.Photon.Scripts
         {
             Debug.Log($"Joined Room: {PhotonNetwork.CurrentRoom.Name}");
             OnPhotonJoinedRoom?.Invoke();
-            SceneManager.ChangeScene(Scene.MainMenu);
             
+            if (SceneManager.CurrentScene != Scene.Lobby)
+                return;
+            SceneManager.ChangeScene(Scene.MainMenu);
+
             // Make sure coroutine doesnt run twice.
             if (_pingCo != null)
                 StopCoroutine(_pingCo);
