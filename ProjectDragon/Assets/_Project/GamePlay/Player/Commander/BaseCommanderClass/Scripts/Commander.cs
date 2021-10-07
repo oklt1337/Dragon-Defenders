@@ -213,9 +213,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             _rank = commanderModel.rank;
             _level = commanderModel.level;
             _experience = commanderModel.experience;
-            _primaryAttack = commanderModel.primaryAttack;
             _skillTree = commanderModel.skillTree;
-            _abilities = commanderModel.abilities;
             _animatorController = commanderModel.animatorController;
             navMeshAgent.speed = _speed;
         }

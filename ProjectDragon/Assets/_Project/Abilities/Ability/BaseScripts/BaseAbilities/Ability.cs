@@ -82,10 +82,10 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #region Unity Methods
         public virtual void Start()
         {
-            manaCost = abilityDatabase.ManaCost;
+            /*manaCost = abilityDatabase.ManaCost;
             cooldown = abilityDatabase.Cooldown;
             _tempCooldown = 0;
-            isCastable = true;
+            isCastable = true;*/
         }
 
         public virtual void Update()
@@ -116,6 +116,15 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
     
         #region Public Methods
 
+        //Von Chris
+        public virtual void Init(AbilityDataBase dataBase)
+        {
+            manaCost = dataBase.ManaCost;
+            cooldown = dataBase.Cooldown;
+            _tempCooldown = 0;
+            isCastable = true;
+        }
+        
         public virtual void Cast()
         {
             

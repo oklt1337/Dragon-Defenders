@@ -1,3 +1,4 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using Sirenix.OdinInspector;
@@ -52,10 +53,18 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Unity Methods
+        
+        //Von Chris
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+            speed = ((SingleTargetDamageAbilityDataBase)dataBase).Speed;
+        }
+        
         public override void Start()
         {
             base.Start();
-            speed = ((SingleTargetDamageAbilityDataBase)abilityDatabase).Speed;
+            //speed = ((SingleTargetDamageAbilityDataBase)abilityDatabase).Speed;
         }
         public override void Update()
         {

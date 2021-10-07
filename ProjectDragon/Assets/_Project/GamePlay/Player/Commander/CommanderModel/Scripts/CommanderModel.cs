@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
@@ -26,8 +27,7 @@ namespace _Project.GamePlay.Player.Commander.CommanderModel.Scripts
         public byte level;
         public float experience;
         public SkillTree skillTree;
-        public PointAndClickDamageAbility primaryAttack;
-        public List<Ability> abilities;
+        public CommanderAbilityDataBase commanderAbilityDataBase;
         public AnimatorController animatorController;
     }
 }

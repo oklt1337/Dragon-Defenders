@@ -1,3 +1,4 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -58,11 +59,20 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
         #endregion
     
         #region Unity Methods
+
+        //Von Chris
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+            baseDamage = ((DamageAbilityDataBase)dataBase).BaseDamage;
+            damageProjectile = ((DamageAbilityDataBase)dataBase).DamageProjectile;
+        }
+
         public override void Start()
         {
             base.Start();
-            baseDamage = ((DamageAbilityDataBase)abilityDatabase).BaseDamage;
-            damageProjectile = ((DamageAbilityDataBase)abilityDatabase).DamageProjectile;
+            //baseDamage = ((DamageAbilityDataBase)abilityDatabase).BaseDamage;
+            //damageProjectile = ((DamageAbilityDataBase)abilityDatabase).DamageProjectile;
             
         }
         public override void Update()
