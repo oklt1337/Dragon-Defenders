@@ -1,6 +1,6 @@
 using _Project.Units.Unit.BaseUnits;
 
-namespace _Project.Scripts.Gameplay.Unit.EndUnits
+namespace _Project.Units.Unit.EndUnits.SkillShotDamageUnit
 {
     public class SkillShotDamageTestUnit : Combat
     {
@@ -10,7 +10,7 @@ namespace _Project.Scripts.Gameplay.Unit.EndUnits
             if (ability.IsCastable)
             {
                 //cast Check is inside the ability
-                if (!currentTarget.gameObject.activeSelf)
+                if (!currentTarget || !currentTarget.gameObject.activeSelf)
                 {
                     SelectTarget();
                 }

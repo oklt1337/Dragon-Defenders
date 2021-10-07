@@ -1,3 +1,4 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -60,7 +61,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         public override void Start()
         {
             base.Start();
-            maxDistance = ((AoeUtilityAbilityDataBase) abilityDatabase).MAXDistance;
+            //maxDistance = ((AoeUtilityAbilityDataBase) abilityDatabase).MAXDistance;
         }
         
         public override void Update()
@@ -83,7 +84,11 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Public Methods
-
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+            maxDistance = ((AoeUtilityAbilityDataBase) dataBase).MAXDistance;
+        }
     
 
         #endregion

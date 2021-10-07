@@ -1,4 +1,5 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 
 namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
 {
@@ -71,7 +72,10 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
         #endregion
     
         #region Public Methods
-
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+        }
     
 
         #endregion

@@ -6,22 +6,12 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
     public abstract class Ability : MonoBehaviour
     {
-        
-        
-        
-
-        
-        
-        
-        
-        
         #region Singleton
         
         #endregion
     
         #region SerializeFields
         
-        [SerializeField] protected AbilityDataBase abilityDatabase;
         
         #endregion
     
@@ -30,14 +20,15 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
     
         #region protected Fields
         
+        [ShowInInspector] protected AbilityDataBase abilityDatabase;
         [ShowInInspector] protected float manaCost;
         [ShowInInspector] protected float cooldown;
         [ShowInInspector] protected AnimationClip animationClip;
         [ShowInInspector] protected AudioClip audioClip;
         [ShowInInspector] private float _tempCooldown;
         [ShowInInspector] protected bool isCastable;
-        [ShowInInspector] protected string projectilepath = "Resources/Projectiles/";
-        
+        [ShowInInspector] protected string projectilepath = "Projectiles/";
+
         #endregion
     
         #region Public Fields
@@ -80,6 +71,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Unity Methods
+        //Not used anymore
         public virtual void Start()
         {
             /*manaCost = abilityDatabase.ManaCost;
@@ -90,6 +82,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 
         public virtual void Update()
         {
+
             _tempCooldown -= Time.deltaTime;
             if (_tempCooldown <= 0)
             {
@@ -115,10 +108,9 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Public Methods
-
-        //Von Chris
         public virtual void Init(AbilityDataBase dataBase)
         {
+            abilityDatabase = dataBase;
             manaCost = dataBase.ManaCost;
             cooldown = dataBase.Cooldown;
             _tempCooldown = 0;

@@ -30,6 +30,7 @@ namespace _Project.Units.Unit.BaseUnits
         
         [ShowInInspector] protected SkillTree skillTree;
         [ShowInInspector] protected Ability ability;
+        
         [ShowInInspector] protected AnimationHandler animationHandler;
         [ShowInInspector] protected SoundHandler soundHandler;
 
@@ -38,7 +39,7 @@ namespace _Project.Units.Unit.BaseUnits
         [ShowInInspector] protected float cooldown;
         private float coolDownModifier;
         private string currentSkillString;
-        private string abilityPath = "Resources/Abilities/";
+        private string abilityPath = "Abilities/";
         
         public byte Level
         {
@@ -67,16 +68,16 @@ namespace _Project.Units.Unit.BaseUnits
             soundHandler = baseUnitDataBase.SoundHandler;
 
 
-            
             if(ability != null)cooldown = ability.Cooldown;
         }
 
-        protected virtual void InstantiateAbility(GameObject abilityPrefab, bool resetCoolDownModifier = false)
+        protected virtual void InitiateAbility(bool resetCoolDownModifier = false)
         {
-            GameObject tempAbilityGameObject = PhotonNetwork.Instantiate(string.Concat(abilityPath,baseUnitDataBase.AbilityGameObject.name),Vector3.zero, quaternion.identity);
-            tempAbilityGameObject.transform.SetParent(transform);
-            ability = tempAbilityGameObject.GetComponent<Ability>();
-            ability.Start();
+            ability = (Ability) gameObject.AddComponent(baseUnitDataBase.UnitAbilityDataBase.UnitAbilitiesScript);
+            Debug.Log("DataBaseZuweisung here");
+            //Debug.Log(typeof(ability));
+            Debug.Log(baseUnitDataBase.UnitAbilityDataBase.unitAbilitiesDataBase);
+            ability.Init(baseUnitDataBase.UnitAbilityDataBase.unitAbilitiesDataBase);
             if (resetCoolDownModifier)
             {
                 float startModifier = 1;
@@ -117,23 +118,6 @@ namespace _Project.Units.Unit.BaseUnits
             //PhotonNetwork.Instantiate
         }
 
-        public void SetNewAbility(GameObject abilityPrefab)
-        {
-            /*
-            Destroy(GetComponentInChildren<Ability>().gameObject);
-            GameObject tempAbilityGameObject = Instantiate(baseUnitDataBase.AbilityGameObject,transform);
-            ability = tempAbilityGameObject.GetComponent<Ability>();
-            cooldown = ability.Cooldown * coolDownModifier;
-            */
-            
-            PhotonNetwork.Destroy(GetComponentInChildren<Ability>().gameObject);
-            GameObject tempAbilityGameObject = PhotonNetwork.Instantiate(string.Concat(abilityPath,baseUnitDataBase.AbilityGameObject.name),Vector3.zero, quaternion.identity);
-            tempAbilityGameObject.transform.SetParent(transform);
-            
-            ability = tempAbilityGameObject.GetComponent<Ability>();
-            cooldown = ability.Cooldown * coolDownModifier;
-        }
-        
         [Button]
         public void Dismantle()
         {
@@ -145,8 +129,8 @@ namespace _Project.Units.Unit.BaseUnits
         public virtual void Start()
         {
             LoadDataFromScriptableObject();
+            InitiateAbility(true);
             InitiateSkillTree();
-            InstantiateAbility(baseUnitDataBase.AbilityGameObject,true);
         }
 
         public void GainExp(float gainedExp)
@@ -190,7 +174,8 @@ namespace _Project.Units.Unit.BaseUnits
         
         protected virtual void Update()
         {
-            ability.Update();
+            //ability.Update = 
+            //ability.Update();
         }
     }
 }

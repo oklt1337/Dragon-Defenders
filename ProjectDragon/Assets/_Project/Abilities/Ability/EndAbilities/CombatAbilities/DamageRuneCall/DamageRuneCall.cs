@@ -1,5 +1,7 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Projectiles;
+using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using Photon.Pun;
 using UnityEngine;
@@ -45,6 +47,11 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.DamageRuneCall
         public override void Start()
         {
             base.Start();
+        }
+        
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
         }
     }
 }

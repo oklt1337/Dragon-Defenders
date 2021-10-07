@@ -19,9 +19,9 @@ MonoBehaviour:
   unitClass: 1
   rank: 6
   cost: 20
+  unitAbilityDataBase: {fileID: 11400000, guid: 14cdf271880464340a234b07f86ab1f2,
+    type: 2}
   skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
-  abilityGameObjectGameObject: {fileID: 1191874198909654142, guid: 64beff88b3f876b4394b3a9073d015c5,
-    type: 3}
   animationHandler: {fileID: 0}
   soundHandler: {fileID: 0}
   attackDamageModifier: 21

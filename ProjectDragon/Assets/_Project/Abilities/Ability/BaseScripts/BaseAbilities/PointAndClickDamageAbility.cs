@@ -1,11 +1,8 @@
-using System;
-using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.AI.Enemies.Scripts;
-using _Project.Enemies.Scripts;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
-using UnityEngine;
+using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
     public class PointAndClickDamageAbility : SingleTargetDamageAbility
     {
@@ -80,7 +77,10 @@ namespace _Project.Scripts.Gameplay.Skillsystem.Ability
         #endregion
     
         #region Public Methods
-
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+        }
     
 
         #endregion

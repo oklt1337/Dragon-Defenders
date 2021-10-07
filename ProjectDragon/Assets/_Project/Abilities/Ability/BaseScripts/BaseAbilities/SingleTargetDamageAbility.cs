@@ -54,12 +54,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
     
         #region Unity Methods
         
-        //Von Chris
-        public override void Init(AbilityDataBase dataBase)
-        {
-            base.Init(dataBase);
-            speed = ((SingleTargetDamageAbilityDataBase)dataBase).Speed;
-        }
+        
         
         public override void Start()
         {
@@ -87,8 +82,12 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Public Methods
-
-    
+        //Von Chris
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+            speed = ((SingleTargetDamageAbilityDataBase)dataBase).Speed;
+        }
 
         #endregion
     

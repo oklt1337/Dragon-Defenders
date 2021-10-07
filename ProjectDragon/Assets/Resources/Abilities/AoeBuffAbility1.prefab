@@ -45,13 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityDatabase: {fileID: 11400000, guid: 1d81ec7ba44b9d048afdcd388d0e2bbb, type: 2}
-  manaCost: 0
-  cooldown: 0
-  animationClip: {fileID: 0}
-  audioClip: {fileID: 0}
-  duration: 0
-  buffValue: 0
-  maxDistance: 0
   visibleEffect: {fileID: 0}
 --- !u!114 &-6428415507545362708
 MonoBehaviour:

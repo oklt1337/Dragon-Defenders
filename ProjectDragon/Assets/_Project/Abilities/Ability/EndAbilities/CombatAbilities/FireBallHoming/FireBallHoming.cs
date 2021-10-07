@@ -1,3 +1,5 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Projectiles;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using Photon.Pun;
@@ -12,19 +14,20 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.FireBallHoming
       {
          //check if cast can be casted
          if (!isCastable) return;
-         
-          GameObject tmpFireBall = Instantiate(damageProjectile, 
+
+         //if (!IsInitiated) return;
+          /*GameObject tmpFireBall = Instantiate(damageProjectile, 
             spawnPosition.transform.position, 
             Quaternion.identity,
            spawnPosition.transform);
-        
-         /*
+        */
+         Debug.Log(damageProjectile.name);
          GameObject tmpFireBall = PhotonNetwork.Instantiate(
             string.Concat(projectilepath, damageProjectile.name),
             spawnPosition.position,
             Quaternion.identity
          );
-         */
+         
          
          HomingProjectile projectile = tmpFireBall.GetComponent<HomingProjectile>();
          projectile.Target = enemy;
@@ -43,6 +46,10 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.FireBallHoming
       public override void Start()
       {
          base.Start();
+      }
+      public override void Init(AbilityDataBase dataBase)
+      {
+         base.Init(dataBase);
       }
    }
 }

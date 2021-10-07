@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
+﻿using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
+using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using _Project.Units.Unit.BaseUnits;
 using UnityEngine;
 
@@ -38,6 +39,11 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.SelfBuffAbili
         private void CastEffect(Unit target)
         {
             target.GainExp(BuffValue);
+        }
+        
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
         }
     }
 }

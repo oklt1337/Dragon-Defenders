@@ -1,15 +1,12 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
     public class SkillshotDamageAbility : SingleTargetDamageAbility
     {
-        
-        
-
-        
-        
         #region Singleton
 
         #endregion
@@ -58,7 +55,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         public override void Start()
         {
             base.Start();
-            maxDistance = ((SkillShotDamageAbilityDataBase)abilityDatabase).MAXDistance;
+            //maxDistance = ((SkillShotDamageAbilityDataBase)abilityDatabase).MAXDistance;
         }
         public override void Update()
         {
@@ -81,7 +78,11 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Public Methods
-
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+            maxDistance = ((SkillShotDamageAbilityDataBase) dataBase).MAXDistance;
+        }
     
 
         #endregion

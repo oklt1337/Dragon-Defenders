@@ -1,3 +1,4 @@
+using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
 using _Project.GamePlay.Player.AnimationHandler.Scripts;
 using _Project.GamePlay.Player.SoundHandler.Scripts;
 using _Project.Scripts.Gameplay.Faction;
@@ -16,11 +17,16 @@ namespace _Project.Units.Unit.BaseUnitDatabases
         [SerializeField] protected Factions.Class unitClass;
         [SerializeField] protected byte rank;
         [SerializeField] protected int cost;
-        [SerializeField] public SkillTree skillTree; 
-        [SerializeField] protected GameObject abilityGameObjectGameObject;
+        [SerializeField] protected UnitAbilityDataBase unitAbilityDataBase;
+        [SerializeField] public SkillTree skillTree;
         [SerializeField] protected AnimationHandler animationHandler;
         [SerializeField] protected SoundHandler soundHandler;
-
+        
+        public UnitAbilityDataBase UnitAbilityDataBase
+        {
+            get => unitAbilityDataBase;
+            set => unitAbilityDataBase = value;
+        }
         public string UnitName
         {
             get => unitName;
@@ -67,12 +73,6 @@ namespace _Project.Units.Unit.BaseUnitDatabases
         {
             get => skillTree;
             set => skillTree = value;
-        }
-
-        public GameObject AbilityGameObject
-        {
-            get => abilityGameObjectGameObject;
-            set => abilityGameObjectGameObject = value;
         }
 
         public AnimationHandler AnimationHandler

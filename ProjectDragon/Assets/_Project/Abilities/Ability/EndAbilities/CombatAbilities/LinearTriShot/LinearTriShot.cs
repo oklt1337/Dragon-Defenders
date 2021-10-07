@@ -1,6 +1,8 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Projectiles;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
+using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -52,6 +54,11 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
         public override void Start()
         {
             base.Start();
+        }
+        
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
         }
     }
 }

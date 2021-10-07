@@ -1,3 +1,4 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -62,8 +63,8 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         public override void Start()
         {
             base.Start();
-            duration = ((UtilityAbilityDatabase) abilityDatabase).Duration;
-            buffValue = ((UtilityAbilityDatabase) abilityDatabase).BuffValue;
+            //duration = ((UtilityAbilityDatabase) abilityDatabase).Duration;
+            //buffValue = ((UtilityAbilityDatabase) abilityDatabase).BuffValue;
         }
 
         public override void Update()
@@ -75,7 +76,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Private Methods
-
+        
     
 
         #endregion
@@ -87,7 +88,12 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region Public Methods
-
+        public override void Init(AbilityDataBase dataBase)
+        {
+            base.Init(dataBase);
+            duration = ((UtilityAbilityDatabase) dataBase).Duration;
+            buffValue = ((UtilityAbilityDatabase) dataBase).BuffValue;
+        }
     
 
         #endregion

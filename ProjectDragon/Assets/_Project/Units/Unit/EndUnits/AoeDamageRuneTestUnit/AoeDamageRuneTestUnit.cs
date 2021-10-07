@@ -11,7 +11,7 @@ namespace _Project.Scripts.Gameplay.Unit.EndUnits
             if (ability.IsCastable)
             {
                 //cast Check is inside the ability
-                if (!currentTarget.gameObject.activeSelf)
+                if (!currentTarget || !currentTarget.gameObject.activeSelf)
                 {
                     SelectTarget();
                 }
