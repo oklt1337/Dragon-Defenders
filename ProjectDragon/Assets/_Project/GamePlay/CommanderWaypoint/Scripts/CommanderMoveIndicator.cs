@@ -1,4 +1,5 @@
 using System;
+using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.CommanderWaypoint.Scripts
@@ -7,6 +8,11 @@ namespace _Project.GamePlay.CommanderWaypoint.Scripts
     {
         [SerializeField] private GameObject prefab;
         private GameObject _initializedObj;
+        
+        private void Awake()
+        {
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += DeletePoint;
+        }
 
         private void DeletePoint()
         {
@@ -14,6 +20,14 @@ namespace _Project.GamePlay.CommanderWaypoint.Scripts
             {
                 Destroy(_initializedObj);
             }
+        }
+        
+        private void DeletePoint(GameState state)
+        {
+            if (state == GameState.Wave)
+                return;
+            
+            DeletePoint();
         }
 
         public void InitializeMovePoint(Vector3 position)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.AI.Enemies.Scripts;
+using _Project.GamePlay.GameManager.Scripts;
 using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
@@ -21,14 +22,14 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         Idle,
         Move
     }
-    
+
     public class Commander : MonoBehaviour
     {
         #region SerializeFields
-        
+
         [SerializeField] private NavMeshAgent navMeshAgent;
         [SerializeField] private Animator animator;
-        
+
         #endregion
 
         #region Private Fields
@@ -48,7 +49,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private byte _level;
         private float _experience;
         private SkillTree _skillTree;
-        private List<Ability> _abilities  = new List<Ability>();
+        private List<Ability> _abilities = new List<Ability>();
         private AnimatorController _animatorController;
         private const float MINDamage = 10f;
         private Vector3 _destination;
@@ -60,13 +61,9 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Protected Fields
 
-        
-
         #endregion
-        
-        #region Public Fields
 
-        
+        #region Public Fields
 
         #endregion
 
@@ -95,7 +92,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             get => _commanderClass;
             private set => _commanderClass = value;
         }
-        
+
         public float MAXHealth
         {
             get => _maxHealth;
@@ -112,7 +109,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 {
                     OnDeath?.Invoke();
                 }
-            } 
+            }
         }
 
         public float Mana
@@ -188,12 +185,13 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void Awake()
         {
             _currentState = State.Idle;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
         }
 
         #endregion
 
         #region Private Methods
-        
+
         private void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
         {
             _commanderName = commanderModel.commanderName;
@@ -212,16 +210,40 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             _animatorController = commanderModel.animatorController;
             navMeshAgent.speed = _speed;
 
-            foreach (Ability ability in commanderModel.commanderAbilityDataBase.CommanderAbilitiesScripts.Select(type => (Ability) gameObject.AddComponent(type)))
+            foreach (Ability ability in commanderModel.commanderAbilityDataBase.CommanderAbilitiesScripts.Select(type =>
+                (Ability)gameObject.AddComponent(type)))
             {
                 _abilities.Add(ability);
             }
-            
+
             for (int i = 0; i < commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases.Count; i++)
             {
                 _abilities[i].Init(commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases[i]);
             }
         }
+
+        private void StopMovement(GameState state)
+        {
+            navMeshAgent.isStopped = state switch
+            {
+                GameState.Build => true,
+                GameState.Wave => false,
+                _ => navMeshAgent.isStopped
+            };
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        internal void InitializeCommander(CommanderModel.Scripts.CommanderModel commanderModel)
+        {
+            SetStats(commanderModel);
+        }
+
+        #endregion
+
+        #region Public Methods
 
         public void Move(Vector3 moveTo)
         {
@@ -240,21 +262,8 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         public void Attack(Component target)
         {
             Debug.Log(target.name);
-            _abilities[0].Cast( transform,target.transform);
+            _abilities[0].Cast(transform, target.transform);
         }
-        
-        #endregion
-
-        #region Protected Methods
-
-        internal void InitializeCommander(CommanderModel.Scripts.CommanderModel commanderModel)
-        {
-            SetStats(commanderModel);
-        }
-
-        #endregion
-
-        #region Public Methods
 
         public void TakeDamage(float damage)
         {
@@ -271,9 +280,9 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 _dyingBreath = false;
             }
 
-            if (!(_health <= 0) || _dyingBreath) 
+            if (!(_health <= 0) || _dyingBreath)
                 return;
-            
+
             _health = 0;
             OnDeath?.Invoke();
         }

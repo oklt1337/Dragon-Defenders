@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1876736512538414467}
   - component: {fileID: 1876736512538414466}
   - component: {fileID: 1876736512538414465}
-  - component: {fileID: 1876736512538414464}
   - component: {fileID: 290059423846922596}
   - component: {fileID: 264498729499873607}
   - component: {fileID: 1104297664621222579}
+  - component: {fileID: 8103288161834981906}
   m_Layer: 0
   m_Name: Test Mover
   m_TagString: Enemy
@@ -86,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1876736512538414464
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876736512538414471}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &290059423846922596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +149,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8103288161834981906
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876736512538414471}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
