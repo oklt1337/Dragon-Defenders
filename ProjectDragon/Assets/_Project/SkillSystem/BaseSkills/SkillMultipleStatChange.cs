@@ -19,6 +19,7 @@ namespace _Project.SkillSystem.BaseSkills
             }
 
             IsSkillActive = true;
+            IsLearnable = false;
             return true;
         }
 
