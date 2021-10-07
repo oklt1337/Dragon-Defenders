@@ -25,6 +25,6 @@ MonoBehaviour:
   level: 1
   experience: 1
   skillTree: {fileID: 11400000, guid: 71e61ecc7624c714ea88a140a6e80027, type: 2}
-  primaryAttack: {fileID: 0}
-  abilities: []
+  commanderAbilityDataBase: {fileID: 11400000, guid: 1a43950a7a304b34a9751d6fb3fdb599,
+    type: 2}
   animatorController: {fileID: 0}
