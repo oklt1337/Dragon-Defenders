@@ -20,13 +20,14 @@ namespace _Project.UI.In_Game.Scripts
         public void UpdateSkillTree(SkillTree skillTree)
         {
             _skillTree = skillTree;
+            
             UpdateImages();
         }
 
         /// <summary>
         /// Upgrades the skill if possible.
         /// </summary>
-        /// <param name="btn"></param>
+        /// <param name="btn"> The Button that was pressed. </param>
         public void OnClick(Button btn)
         {
             string buttonName = btn.gameObject.name;
@@ -63,7 +64,9 @@ namespace _Project.UI.In_Game.Scripts
                 skillImages[i].sprite = _skillTree.tree[key].Sprite;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
-                if (!_skillTree.tree[key].IsLearnable || !_skillTree.tree[key].IsSkillActive)
+                if (_skillTree.tree[key].IsLearnable || _skillTree.tree[key].IsSkillActive)
+                    skillImages[i].color = Color.white;
+                else
                     skillImages[i].color = Color.gray;
             }
         }
