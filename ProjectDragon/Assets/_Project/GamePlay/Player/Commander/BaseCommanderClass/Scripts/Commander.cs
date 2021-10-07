@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.AI.Enemies.Scripts;
 using _Project.Scripts.Gameplay.Faction;
@@ -8,6 +9,7 @@ using _Project.Scripts.Gameplay.Skillsystem;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using _Project.SkillSystem.SkillTree;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
@@ -45,9 +47,8 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private byte _rank;
         private byte _level;
         private float _experience;
-        private PointAndClickDamageAbility _primaryAttack;
         private SkillTree _skillTree;
-        private List<Ability> _abilities;
+        private List<Ability> _abilities  = new List<Ability>();
         private AnimatorController _animatorController;
         private const float MINDamage = 10f;
         private Vector3 _destination;
@@ -156,12 +157,6 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             private set => _experience = value;
         }
 
-        public PointAndClickDamageAbility PrimaryAttack
-        {
-            get => _primaryAttack;
-            private set => _primaryAttack = value;
-        }
-
         public SkillTree SkillTree
         {
             get => _skillTree;
@@ -198,7 +193,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #endregion
 
         #region Private Methods
-
+        
         private void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
         {
             _commanderName = commanderModel.commanderName;
@@ -216,6 +211,16 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             _skillTree = commanderModel.skillTree;
             _animatorController = commanderModel.animatorController;
             navMeshAgent.speed = _speed;
+
+            foreach (Ability ability in commanderModel.commanderAbilityDataBase.CommanderAbilitiesScripts.Select(type => (Ability) gameObject.AddComponent(type)))
+            {
+                _abilities.Add(ability);
+            }
+            
+            for (int i = 0; i < commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases.Count; i++)
+            {
+                _abilities[i].Init(commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases[i]);
+            }
         }
 
         public void Move(Vector3 moveTo)
@@ -235,7 +240,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         public void Attack(Component target)
         {
             Debug.Log(target.name);
-            _primaryAttack.Cast( transform,target.transform);
+            _abilities[0].Cast( transform,target.transform);
         }
         
         #endregion

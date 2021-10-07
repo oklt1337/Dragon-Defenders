@@ -50,8 +50,11 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
         {
             killedEnemies++;
 
-            if (KilledEnemies >= waveSize)
-                OnWaveSuccess?.Invoke(GameState.Build);
+            if (KilledEnemies < waveSize) 
+                return;
+            
+            OnWaveSuccess?.Invoke(GameState.Build);
+            killedEnemies = 0;
         }
 
         /// <summary>
@@ -77,7 +80,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
             
             if (_coroutineIsRunning)
                 return;
-
+            
             StartCoroutine(SpawnEnemies());
         }
 
@@ -89,7 +92,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
         {
             _coroutineIsRunning = true;
 
-            foreach (var enemy in _enemies)
+            foreach (GameObject enemy in _enemies)
             {
                 Instantiate(enemy, transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(enemySpawnDelay);
