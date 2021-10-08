@@ -35,6 +35,8 @@ namespace _Project.UI.In_Game.Scripts
             if(!_skillTree.tree[buttonName].IsLearnable)
                 return;
             
+            //TODO: Money Check and using that money.
+            
             _skillTree.tree[buttonName].EnableSkill();
             UpdateImages();
         }
