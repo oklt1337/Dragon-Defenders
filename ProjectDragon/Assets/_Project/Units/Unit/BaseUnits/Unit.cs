@@ -52,7 +52,13 @@ namespace _Project.Units.Unit.BaseUnits
             get => experience;
             set => experience = value;
         }
-        
+
+        public int Cost
+        {
+            get => cost;
+            set => cost = value;
+        }
+
         protected virtual void LoadDataFromScriptableObject()
         {
             unitName = baseUnitDataBase.UnitName;

@@ -16,7 +16,7 @@ namespace _Project.Units.Unitmanager
             set => units = value;
         }
 
-        private void PlaceUnit(Unit.BaseUnits.Unit unit, Vector3 spawnPoint)
+        public void PlaceUnit(Unit.BaseUnits.Unit unit, Vector3 spawnPoint)
         {
             PhotonNetwork.Instantiate(String.Concat(unitPath, unit.name), spawnPoint, Quaternion.identity);
         }
