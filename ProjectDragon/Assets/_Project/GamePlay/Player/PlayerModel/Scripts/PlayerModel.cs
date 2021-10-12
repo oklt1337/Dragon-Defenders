@@ -33,8 +33,6 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         #region Private Fields
 
-        private int _money;
-
         #endregion
 
         #region Protected Fields
@@ -48,6 +46,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         #region Public Properties
 
         public Commander.BaseCommanderClass.Scripts.Commander Commander => commander;
+        public int Money { get; private set; }
 
         #endregion
 
@@ -149,16 +148,16 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         public void Build(int cost)
         {
-            if (_money <= cost)
+            if (Money <= cost)
                 return;
-            _money -= cost;
+            Money -= cost;
             
             //Build stuff
         }
         
         public void AddMoney(int amount)
         {
-            _money += amount;
+            Money += amount;
         }
         
         #endregion
