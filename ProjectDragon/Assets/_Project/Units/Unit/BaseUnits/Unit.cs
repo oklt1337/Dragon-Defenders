@@ -39,8 +39,13 @@ namespace _Project.Units.Unit.BaseUnits
         [ShowInInspector] protected float cooldown;
         private float coolDownModifier;
         private string currentSkillString;
+        private string unitPathName = "Units/";
         private string abilityPath = "Abilities/";
-        
+        public string UnitPathName
+        {
+            get => unitPathName;
+            set => unitPathName = value;
+        }
         public byte Level
         {
             get => level;

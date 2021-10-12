@@ -33,6 +33,8 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         #region Private Fields
 
+        private int _money;
+        
         #endregion
 
         #region Protected Fields
@@ -46,7 +48,19 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         #region Public Properties
 
         public Commander.BaseCommanderClass.Scripts.Commander Commander => commander;
-        public int Money { get; private set; }
+        public int Money
+        {
+            get => _money;
+            private set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+                
+                _money = value;
+            } 
+        }
 
         #endregion
 
