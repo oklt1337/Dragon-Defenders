@@ -2261,8 +2261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d864d0bd9e9e5c4c8be52b92ea0f947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hqObj: {fileID: 0}
-  health: 0
 --- !u!54 &812033522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6074,6 +6072,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -229
       objectReference: {fileID: 0}
+    - target: {fileID: 8798834824323092875, guid: ba66ad2c496c14a40aacd3620ae8c93c,
+        type: 3}
+      propertyPath: buildCam
+      value: 
+      objectReference: {fileID: 761725025}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba66ad2c496c14a40aacd3620ae8c93c, type: 3}
 --- !u!1001 &8024811190775043420
