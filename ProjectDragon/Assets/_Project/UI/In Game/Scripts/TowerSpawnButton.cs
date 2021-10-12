@@ -44,7 +44,7 @@ namespace _Project.UI.In_Game.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            PhotonNetwork.Instantiate(string.Concat("Units/", unit.name), hit.point, Quaternion.identity);
+            PhotonNetwork.Instantiate(string.Concat(unit.UnitPathName, unit.name), hit.point, Quaternion.identity);
             GameManager.Instance.PlayerModel.AddMoney(-unit.Cost);
         }
 
