@@ -9,7 +9,7 @@ namespace _Project.Units.Unitmanager
     public class UnitManager : MonoBehaviour
     {
         [SerializeField] private List<Unit.BaseUnits.Unit> units;
-        private String unitPath = "Resources/Units/";
+        private string unitPath = "Resources/Units/";
         public List<Unit.BaseUnits.Unit> Units
         {
             get => units;
