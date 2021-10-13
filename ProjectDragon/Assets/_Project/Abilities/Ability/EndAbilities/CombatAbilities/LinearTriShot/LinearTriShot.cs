@@ -9,23 +9,86 @@ using UnityEngine;
 
 namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class LinearTriShot : SkillshotDamageAbility
     {
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
         private static int bulletsPerCast = 3;
+        private int angleOffset = 45;
+
+        #endregion
+    
+        #region protected Fields
+
+        
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
+
+        
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+        public override void Update()
+        {
+            base.Update();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+        }
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+        
         public override void Cast(Transform spawnPosition, Transform enemy)
         {
             //check if cast can be casted
             if (!isCastable) return;
             for(int i = 0; i < bulletsPerCast ;i++)
             {
-                /*GameObject tempTriShot = Instantiate(castObject, 
-                    spawnPosition.transform.position, 
-                    quaternion.identity,
-                    spawnPosition.transform);
-                tempTriShot.transform.rotation = Quaternion.LookRotation(enemy.position - tempTriShot.transform.position);
-                tempTriShot.transform.Rotate(0,-45 + (i * 45),0);
-                */
-                
                 
                 GameObject tempTriShot = PhotonNetwork.Instantiate(
                     string.Concat(projectilepath, damageProjectile.name),
@@ -33,7 +96,7 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
                     Quaternion.identity
                 );
                 tempTriShot.transform.rotation = Quaternion.LookRotation(enemy.position - tempTriShot.transform.position);
-                tempTriShot.transform.Rotate(0,-45 + (i * 45),0);
+                tempTriShot.transform.Rotate(0,-angleOffset + (i * angleOffset),0);
                 /**/
                 
                 LinearProjectiles projectile = tempTriShot.GetComponent<LinearProjectiles>();
@@ -45,20 +108,21 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
             //at the end of cast the cooldown has to be reset
             ResetCoolDown();
         }
-      
-        public override void Update()
-        {
-            base.Update();
-        }
 
-        public override void Start()
-        {
-            base.Start();
-        }
-        
         public override void Init(AbilityDataBase dataBase)
         {
             base.Init(dataBase);
         }
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
+        
+        
+      
+        
     }
 }

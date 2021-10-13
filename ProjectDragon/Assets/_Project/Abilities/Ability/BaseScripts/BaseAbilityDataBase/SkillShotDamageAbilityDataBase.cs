@@ -1,16 +1,88 @@
-using UnityEngine;
+using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
+using Sirenix.OdinInspector;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
-    //[CreateAssetMenu(menuName="Tools/Ability/SkillShotDamageAbilityDataBase")]
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class SkillShotDamageAbilityDataBase : SingleTargetDamageAbilityDataBase
     {
-        [SerializeField] protected float maxDistance;
+        
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+        
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+
+        [ShowInInspector] protected float maxDistance;
+
+        #endregion
+    
+        #region Public Fields
+
+        
+
+        #endregion
+    
+        #region Public Properties
 
         public float MAXDistance
         {
             get => maxDistance;
             set => maxDistance = value;
         }
+
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+
+    
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
     }
+    
+    
 }

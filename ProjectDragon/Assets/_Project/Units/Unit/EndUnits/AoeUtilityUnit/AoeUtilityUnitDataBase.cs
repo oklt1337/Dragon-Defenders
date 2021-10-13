@@ -1,8 +1,11 @@
-using _Project.Scripts.Gameplay.Unit.UnitDatabases;
+using _Project.Units.Unit.BaseUnitDatabases;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Unit.EndUnitDataBases
+namespace _Project.Units.Unit.EndUnits.AoeUtilityUnit
 {
+    /// <summary>
+    ///     Author: Peter Luu
+    /// </summary>
     [CreateAssetMenu(menuName="Tools/Units/EndUnitDataBases/AoeUtilityUnitDataBase")]
     public class AoeUtilityUnitDataBase : UtilityUnitDatabase
     {

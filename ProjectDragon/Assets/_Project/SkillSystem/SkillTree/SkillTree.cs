@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace _Project.SkillSystem.SkillTree
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     [CreateAssetMenu(menuName="Tools/SkillTree")]
     public class SkillTree : SerializedScriptableObject
     {

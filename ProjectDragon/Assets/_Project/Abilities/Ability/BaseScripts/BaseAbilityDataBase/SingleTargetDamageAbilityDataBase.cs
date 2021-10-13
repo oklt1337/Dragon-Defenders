@@ -1,8 +1,11 @@
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase
 {
-    //[CreateAssetMenu(menuName="Tools/Ability/SingleTargetDamageAbilityDataBase")]
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class SingleTargetDamageAbilityDataBase : DamageAbilityDataBase
     {
         [SerializeField] protected float speed;

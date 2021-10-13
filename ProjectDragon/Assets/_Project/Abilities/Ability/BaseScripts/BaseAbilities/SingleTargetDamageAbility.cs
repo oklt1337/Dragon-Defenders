@@ -1,11 +1,13 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class SingleTargetDamageAbility : DamageAbility
     {
         #region Singleton

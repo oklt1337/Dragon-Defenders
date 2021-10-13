@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class SkillshotDamageAbility : SingleTargetDamageAbility
     {
         #region Singleton

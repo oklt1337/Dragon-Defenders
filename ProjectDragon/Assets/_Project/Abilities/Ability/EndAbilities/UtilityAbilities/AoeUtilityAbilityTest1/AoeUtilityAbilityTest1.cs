@@ -8,21 +8,60 @@ using UnityEngine;
 
 namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbilityTest1
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class AoeUtilityAbilityTest1 : AoeUtilityAbility
     {
-        private List<_Project.Units.Unit.BaseUnits.Unit> _possibleBeneficiaries;
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
         [SerializeField] private GameObject visibleEffect;
+
+        #endregion
+    
+        #region Private Fields
+
+        private List<_Project.Units.Unit.BaseUnits.Unit> _possibleBeneficiaries;
+        
         private Vector3 _tempVector;
 
+        #endregion
+    
+        #region protected Fields
 
-        public override void Cast()
-        {
-            if (!isCastable ||_possibleBeneficiaries.Count == 0) return;
+    
+
+        #endregion
+    
+        #region Public Fields
+
         
-            CastEffect();
 
-            ResetCoolDown();
-        }
+        #endregion
+    
+        #region Public Properties
+
+    
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+    
+
+        #endregion
+    
+        #region Private Methods
 
         private void CastEffect()
         {
@@ -44,10 +83,8 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
             {
                 StartCoroutine(VisibleDisplay());
             }
-        
-        
         }
-
+        
         private IEnumerator VisibleDisplay()
         {
             visibleEffect.SetActive(true);
@@ -69,8 +106,26 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
         private void AddBeneficiaries(Unit newUnit)
         {
         }
+
+        #endregion
+    
+        #region Protected Methods
+
     
 
+        #endregion
+    
+        #region Public Methods
+
+        public override void Cast()
+        {
+            if (!isCastable ||_possibleBeneficiaries.Count == 0) return;
+        
+            CastEffect();
+
+            ResetCoolDown();
+        }
+        
         public override void Start()
         {
             base.Start();
@@ -84,5 +139,12 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
             _possibleBeneficiaries = new List<_Project.Units.Unit.BaseUnits.Unit>();
             UpdateBeneficiaries();
         }
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
     }
 }

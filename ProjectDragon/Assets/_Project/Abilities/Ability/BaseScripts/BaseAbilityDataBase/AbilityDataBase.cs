@@ -2,13 +2,45 @@ using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
-    //[CreateAssetMenu(menuName="Tools/Ability/AbilityDataBase")]
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class AbilityDataBase : ScriptableObject
     {
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+        
         [SerializeField] protected float manaCost;
         [SerializeField] protected float cooldown;
         [SerializeField] protected AnimationClip animationClip;
         [SerializeField] protected AudioClip audioClip;
+    
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
+
         public float ManaCost
         {
             get => manaCost;
@@ -32,5 +64,44 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
             get => cooldown;
             private set => cooldown = value;
         }
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+
+    
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
+        
+        
     }
 }

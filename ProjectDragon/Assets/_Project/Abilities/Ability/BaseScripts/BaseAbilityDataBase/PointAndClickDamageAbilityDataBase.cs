@@ -1,9 +1,79 @@
-using UnityEngine;
+using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
-    //[CreateAssetMenu(menuName="Tools/Ability/PointAndClickDamageAbilityDataBase")]
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class PointAndClickDamageAbilityDataBase : SingleTargetDamageAbilityDataBase
     {
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+
+    
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
+
+    
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+
+    
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
     }
 }

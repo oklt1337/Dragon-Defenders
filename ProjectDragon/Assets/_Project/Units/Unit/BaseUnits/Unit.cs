@@ -1,12 +1,10 @@
 using System;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Faction;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.GamePlay.Player.AnimationHandler.Scripts;
 using _Project.GamePlay.Player.SoundHandler.Scripts;
-using _Project.Scripts.Gameplay.Faction;
 using _Project.Scripts.Gameplay.Skillsystem;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
-using _Project.Scripts.Gameplay.Unit.UnitDatabases;
 using _Project.SkillSystem.BaseSkills;
 using _Project.SkillSystem.SkillTree;
 using _Project.Units.Unit.BaseUnitDatabases;
@@ -19,7 +17,27 @@ namespace _Project.Units.Unit.BaseUnits
 {
     public abstract class Unit : MonoBehaviour
     {   
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
         [SerializeField] protected BaseUnitDataBase baseUnitDataBase;
+
+        #endregion
+    
+        #region Private Fields
+
+        private float coolDownModifier;
+        private string currentSkillString;
+        private string unitPathName = "Units/";
+        private string abilityPath = "Abilities/";
+
+        #endregion
+    
+        #region protected Fields
+
         [ShowInInspector] protected string unitName; 
         [ShowInInspector] protected string description;
         [ShowInInspector] protected GameObject unitModel;
@@ -37,10 +55,17 @@ namespace _Project.Units.Unit.BaseUnits
         [ShowInInspector] protected byte level;
         [ShowInInspector] protected float experience;
         [ShowInInspector] protected float cooldown;
-        private float coolDownModifier;
-        private string currentSkillString;
-        private string unitPathName = "Units/";
-        private string abilityPath = "Abilities/";
+        
+        #endregion
+    
+        #region Public Fields
+
+        
+
+        #endregion
+    
+        #region Public Properties
+        
         public string UnitPathName
         {
             get => unitPathName;
@@ -63,6 +88,34 @@ namespace _Project.Units.Unit.BaseUnits
             get => cost;
             set => cost = value;
         }
+    
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+        public virtual void Start()
+        {
+            LoadDataFromScriptableObject();
+            InitiateAbility(true);
+            InitiateSkillTree();
+        }
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
 
         protected virtual void LoadDataFromScriptableObject()
         {
@@ -81,13 +134,10 @@ namespace _Project.Units.Unit.BaseUnits
 
             if(ability != null)cooldown = ability.Cooldown;
         }
-
+        
         protected virtual void InitiateAbility(bool resetCoolDownModifier = false)
         {
             ability = (Ability) gameObject.AddComponent(baseUnitDataBase.UnitAbilityDataBase.UnitAbilitiesScript);
-            Debug.Log("DataBaseZuweisung here");
-            //Debug.Log(typeof(ability));
-            Debug.Log(baseUnitDataBase.UnitAbilityDataBase.unitAbilitiesDataBase);
             ability.Init(baseUnitDataBase.UnitAbilityDataBase.unitAbilitiesDataBase);
             if (resetCoolDownModifier)
             {
@@ -106,72 +156,8 @@ namespace _Project.Units.Unit.BaseUnits
             {
                 skill.Value.Init();
             }
-            
-            //skillTree = GetComponentInChildren<SkillTree>();
-            //ability = skillTree.allPossibleSkillTree[0];
-            //think About This
-            
-            //offline way also parent again in photon
-            //ability = Instantiate(skillTree.AllPossibleSkillTree[0],transform);
-            
-            //Photon way
-            /*
-            string loadResourceAbility = "Abilities/" + skillTree.AllPossibleSkillTree[0].gameObject.name;
-            //Debug.Log(loadResourceAbility);
-            GameObject abilityObject = PhotonNetwork.Instantiate(loadResourceAbility,transform.position,Quaternion.identity);
-            ability = abilityObject.GetComponent<Ability>();
-            */
-            
-            
-            
-            //
-            //
-            //PhotonNetwork.Instantiate
         }
 
-        [Button]
-        public void Dismantle()
-        {
-            float dividerValue = 0.5f;
-            GameManager.Instance.PlayerModel.AddMoney((int)(cost*dividerValue));
-            Destroy(this);
-        }
-
-        public virtual void Start()
-        {
-            LoadDataFromScriptableObject();
-            InitiateAbility(true);
-            InitiateSkillTree();
-        }
-
-        public void GainExp(float gainedExp)
-        {
-            experience += gainedExp;
-        }
-
-        public virtual void LevelUp()
-        {
-            level++;
-            
-            //increase Stats
-            
-            //thinking on setting is learnable here
-            
-            ApplyModifiers();
-
-        }
-        [Button]
-        public void UpgradeSkill(bool isLeftSkill = false)
-        {
-            if (currentSkillString.Length >= skillTree.maxLayers) return;
-            
-            String pathTaken =(isLeftSkill) ? "L" : "R" ;
-            String.Concat(currentSkillString, pathTaken);
-            Skill currentSkill = skillTree.tree[currentSkillString];
-            currentSkill.IsLearnable = true;
-            currentSkill.EnableSkill();
-        }
-        
         protected virtual void ApplyModifiers()
         {
             //still things to add;
@@ -188,5 +174,67 @@ namespace _Project.Units.Unit.BaseUnits
             //ability.Update = 
             //ability.Update();
         }
+        
+        #endregion
+    
+        #region Public Methods
+
+        [Button]
+        public void Dismantle()
+        {
+            float dividerValue = 0.5f;
+            GameManager.Instance.PlayerModel.AddMoney((int)(cost*dividerValue));
+            Destroy(this);
+        }
+        
+        public void GainExp(float gainedExp)
+        {
+            experience += gainedExp;
+        }
+        
+        public virtual void LevelUp()
+        {
+            level++;
+            
+            //increase Stats
+            
+            //thinking on setting is learnable here
+            
+            ApplyModifiers();
+
+        }
+        [Button]
+        public void UpgradeSkill(bool isLeftSkill = false)
+        {
+            //outdated must be renewed based on the new skillsystem
+            if (currentSkillString.Length >= skillTree.MAXLayers) return;
+            
+            String pathTaken =(isLeftSkill) ? "L" : "R" ;
+            String.Concat(currentSkillString, pathTaken);
+            Skill currentSkill = skillTree.tree[currentSkillString];
+            currentSkill.IsLearnable = true;
+            currentSkill.EnableSkill();
+        }
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
+        
+        
+
+        
+        
+       
+
+        
+
+        
+
+        
+        
+        
     }
 }

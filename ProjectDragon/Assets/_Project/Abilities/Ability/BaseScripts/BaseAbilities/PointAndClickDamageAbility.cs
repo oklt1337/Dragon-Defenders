@@ -4,6 +4,9 @@ using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbility
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class PointAndClickDamageAbility : SingleTargetDamageAbility
     {
         #region Singleton

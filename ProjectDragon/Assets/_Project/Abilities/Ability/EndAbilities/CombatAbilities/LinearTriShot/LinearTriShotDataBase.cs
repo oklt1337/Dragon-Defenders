@@ -1,8 +1,11 @@
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
+using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.EndAbilityDataBase.CombatDataBases
+namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     [CreateAssetMenu(menuName="Tools/Ability/EndAbilities/LinearTriShotDataBase")]
     public class LinearTriShotDataBase : SkillShotDamageAbilityDataBase{
         

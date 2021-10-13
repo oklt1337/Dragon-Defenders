@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace _Project.SkillSystem.BaseSkills
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class SkillMultipleStatChange : Skill
     {
         protected List<SkillHolder> SkillHolderList; 

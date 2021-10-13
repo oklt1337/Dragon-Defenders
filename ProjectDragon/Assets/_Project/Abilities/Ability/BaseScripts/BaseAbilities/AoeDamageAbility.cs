@@ -1,10 +1,12 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
 using Sirenix.OdinInspector;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class AoeDamageAbility : DamageAbility
     {
         #region Singleton

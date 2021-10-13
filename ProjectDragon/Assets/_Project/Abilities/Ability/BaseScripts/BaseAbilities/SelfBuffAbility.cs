@@ -1,8 +1,10 @@
-using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class SelfBuffAbility : UtilityAbility
     {
         

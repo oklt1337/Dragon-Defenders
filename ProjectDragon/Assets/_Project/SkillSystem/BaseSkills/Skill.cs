@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace _Project.SkillSystem.BaseSkills
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     [System.Serializable]
     public abstract class Skill
     {
@@ -15,9 +18,6 @@ namespace _Project.SkillSystem.BaseSkills
         #region SerializeFields
 
         [SerializeField] protected SkillDataBase skillDataBase;
-        [ShowInInspector] protected string skillName;
-        [ShowInInspector][TextArea] protected string description;
-        [ShowInInspector] protected Sprite sprite;
         
         
 
@@ -33,7 +33,10 @@ namespace _Project.SkillSystem.BaseSkills
         #endregion
 
         #region protected Fields
-
+        
+        [ShowInInspector] protected string skillName;
+        [ShowInInspector][TextArea] protected string description;
+        [ShowInInspector] protected Sprite sprite;
 
         #endregion
 

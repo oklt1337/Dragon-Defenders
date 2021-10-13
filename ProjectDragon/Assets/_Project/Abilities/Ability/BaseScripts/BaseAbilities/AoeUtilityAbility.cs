@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public class AoeUtilityAbility : UtilityAbility
     {
-        
-        
-
         
         #region Singleton
 

@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using _Project.Scripts.Gameplay.Unit.UnitDatabases;
+using _Project.Units.Unit.BaseUnitDatabases;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;

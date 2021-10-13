@@ -1,4 +1,4 @@
-namespace _Project.Scripts.Gameplay.Faction
+namespace _Project.Faction
 {
     public class Factions
     {

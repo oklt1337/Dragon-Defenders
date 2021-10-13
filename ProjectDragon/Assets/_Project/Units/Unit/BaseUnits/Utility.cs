@@ -1,21 +1,77 @@
 namespace _Project.Units.Unit.BaseUnits
-{
+{   /// <summary>
+    ///     Author: Peter Luu
+    /// </summary>
     public abstract class Utility : Unit
     {
-        
-        public override void Start()
-        {
-            base.Start();
-        }
-        protected override void Update()
-        {
-        }
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+
+    
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
+
+    
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
 
         protected override void LoadDataFromScriptableObject()
         {
             base.LoadDataFromScriptableObject();
         }
         
+        protected override void ApplyModifiers()
+        {
+            ability.Cooldown = cooldown;
+        }
+
+        #endregion
+    
+        #region Public Methods
+
         public override void LevelUp()
         {
             level++;
@@ -28,12 +84,24 @@ namespace _Project.Units.Unit.BaseUnits
             
             //apply new modifiers
             ApplyModifiers();
-
         }
         
-        protected override void ApplyModifiers()
+        public override void Start()
         {
-            ability.Cooldown = cooldown;
+            base.Start();
         }
+        protected override void Update()
+        {
+        }
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
+        
+
+        
     }
 }

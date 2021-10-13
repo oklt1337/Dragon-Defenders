@@ -1,12 +1,27 @@
-using _Project.Units.Unit.BaseUnitDatabases;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Unit.UnitDatabases
+namespace _Project.Units.Unit.BaseUnitDatabases
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     [CreateAssetMenu(menuName="Tools/Units/CombatUnitDataBase")]
     public class CombatUnitDataBase : BaseUnitDataBase
     {
-        public float attackDamageModifier;
-        public float attackRange;
+        
+
+        [SerializeField] protected float attackDamageModifier;
+        [SerializeField] protected float attackRange;
+        public float AttackDamageModifier
+        {
+            get => attackDamageModifier;
+            set => attackDamageModifier = value;
+        }
+                                 
+        public float AttackRange
+        {
+            get => attackRange;
+            set => attackRange = value;
+        }
     }
 }

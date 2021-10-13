@@ -1,46 +1,104 @@
 using System.Collections.Generic;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.BaseAbilities;
-using _Project.Scripts.Gameplay.Unit.UnitDatabases;
+using _Project.Units.Unit.BaseUnitDatabases;
 using UnityEngine;
 
 namespace _Project.Units.Unit.BaseUnits
 {
     public abstract class Combat : Unit
     {
-        public float attackDamageModifier;
-        public float attackRange;
         
-        public Transform currentTarget;
-        public List<Transform> targets;
 
-        protected override void LoadDataFromScriptableObject()
-        {
-            base.LoadDataFromScriptableObject();
-            CombatUnitDataBase tmpDataBase = ((CombatUnitDataBase) baseUnitDataBase);
-            attackDamageModifier = tmpDataBase.attackDamageModifier;
-            attackRange = tmpDataBase.attackRange;
-        }
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
+    
+
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
         
-        protected void SelectTarget()
+        protected float attackDamageModifier;
+        protected float attackRange;
+        
+        protected Transform currentTarget;
+        protected List<Transform> targets;
+        
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
+
+        public float AttackDamageModifier
         {
-            if (targets.Count == 0)
+            get => attackDamageModifier;
+            set => attackDamageModifier = value;
+        }
+
+        public float AttackRange
+        {
+            get => attackRange;
+            set => attackRange = value;
+        }
+
+        public Transform CurrentTarget
+        {
+            get => currentTarget;
+            set => currentTarget = value;
+        }
+
+        public List<Transform> Targets
+        {
+            get => targets;
+            set => targets = value;
+        }
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+        protected override void Update()
+        {
+            base.Update();
+            if (!currentTarget) 
             {
-                currentTarget = null;
+                SelectTarget();
                 return;
-            } 
-            float smallestDistance  = float.MaxValue;
-            foreach (Transform enemyTransform in targets)
-            {
-                if (smallestDistance >= (transform.position - enemyTransform.position).sqrMagnitude)
-                {
-                    smallestDistance = (transform.position - enemyTransform.position).sqrMagnitude;
-                    currentTarget = enemyTransform;
-                    
-                }
             }
-        }
+            transform.rotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
+            //transform.rotation = Quaternion.Euler(transform.rotation.x,transform.rotation.y, transform.rotation.z);
 
+            /*if (!currentTarget.gameObject.activeSelf)
+            {
+                SelectTarget();
+            }
+            else
+            {
+                ability.Cast(transform,currentTarget);
+            }
+            */
+        }
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
@@ -71,6 +129,53 @@ namespace _Project.Units.Unit.BaseUnits
             
         }
 
+        #endregion
+    
+        #region Private Methods
+
+        
+
+        #endregion
+    
+        #region Protected Methods
+
+        protected override void LoadDataFromScriptableObject()
+        {
+            base.LoadDataFromScriptableObject();
+            CombatUnitDataBase tmpDataBase = ((CombatUnitDataBase) baseUnitDataBase);
+            attackDamageModifier = tmpDataBase.AttackDamageModifier;
+            attackRange = tmpDataBase.AttackRange;
+        }
+        
+        protected override void ApplyModifiers()
+        {
+            ((DamageAbility)ability).BaseDamage *= attackDamageModifier;
+            ability.Cooldown = cooldown;
+        }
+        
+        protected void SelectTarget()
+        {
+            if (targets.Count == 0)
+            {
+                currentTarget = null;
+                return;
+            } 
+            float smallestDistance  = float.MaxValue;
+            foreach (Transform enemyTransform in targets)
+            {
+                if (smallestDistance >= (transform.position - enemyTransform.position).sqrMagnitude)
+                {
+                    smallestDistance = (transform.position - enemyTransform.position).sqrMagnitude;
+                    currentTarget = enemyTransform;
+                    
+                }
+            }
+        }
+
+        #endregion
+    
+        #region Public Methods
+
         public override void LevelUp()
         {
             level++;
@@ -87,33 +192,12 @@ namespace _Project.Units.Unit.BaseUnits
             //apply new modifiers
             ApplyModifiers();
         }
-        
-        protected override void ApplyModifiers()
-        {
-            ((DamageAbility)ability).BaseDamage *= attackDamageModifier;
-            ability.Cooldown = cooldown;
-        }
 
-        protected override void Update()
-        {
-            base.Update();
-            if (!currentTarget) 
-            {
-                SelectTarget();
-                return;
-            }
-            transform.rotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
-            //transform.rotation = Quaternion.Euler(transform.rotation.x,transform.rotation.y, transform.rotation.z);
+        #endregion
+    
+        #region CallBacks
 
-            /*if (!currentTarget.gameObject.activeSelf)
-            {
-                SelectTarget();
-            }
-            else
-            {
-                ability.Cast(transform,currentTarget);
-            }
-            */
-        }
+
+        #endregion
     }
 }

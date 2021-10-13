@@ -1,8 +1,10 @@
-using _Project.Units.Unit.BaseUnitDatabases;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Unit.UnitDatabases
+namespace _Project.Units.Unit.BaseUnitDatabases
 {
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     [CreateAssetMenu(menuName="Tools/Units/UtilityUnitDataBase")]
     public class UtilityUnitDatabase : BaseUnitDataBase
     {

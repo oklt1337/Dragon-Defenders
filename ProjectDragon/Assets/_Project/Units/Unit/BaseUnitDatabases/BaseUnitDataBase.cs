@@ -1,15 +1,23 @@
 using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
+using _Project.Faction;
 using _Project.GamePlay.Player.AnimationHandler.Scripts;
 using _Project.GamePlay.Player.SoundHandler.Scripts;
-using _Project.Scripts.Gameplay.Faction;
 using _Project.SkillSystem.SkillTree;
 using UnityEngine;
 
 namespace _Project.Units.Unit.BaseUnitDatabases
 {
-    //[CreateAssetMenu(menuName="Tools/Units/BaseUnitDataBase")]
+    /// <summary>
+    /// Author: Peter Luu
+    /// </summary>
     public abstract class BaseUnitDataBase : ScriptableObject
     {
+        #region Singleton
+
+        #endregion
+    
+        #region SerializeFields
+
         [SerializeField] protected string unitName;
         [SerializeField][TextArea] protected string description;
         [SerializeField] protected GameObject unitModel;
@@ -22,6 +30,28 @@ namespace _Project.Units.Unit.BaseUnitDatabases
         [SerializeField] protected AnimationHandler animationHandler;
         [SerializeField] protected SoundHandler soundHandler;
         
+        #endregion
+    
+        #region Private Fields
+
+    
+
+        #endregion
+    
+        #region protected Fields
+
+    
+
+        #endregion
+    
+        #region Public Fields
+
+    
+
+        #endregion
+    
+        #region Public Properties
+
         public UnitAbilityDataBase UnitAbilityDataBase
         {
             get => unitAbilityDataBase;
@@ -86,5 +116,44 @@ namespace _Project.Units.Unit.BaseUnitDatabases
             get => soundHandler;
             set => soundHandler = value;
         }
+
+        #endregion
+    
+        #region Events
+
+    
+
+        #endregion
+    
+        #region Unity Methods
+
+    
+
+        #endregion
+    
+        #region Private Methods
+
+    
+
+        #endregion
+    
+        #region Protected Methods
+
+    
+
+        #endregion
+    
+        #region Public Methods
+
+    
+
+        #endregion
+    
+        #region CallBacks
+
+
+        #endregion
+        
+        
     }
 }
