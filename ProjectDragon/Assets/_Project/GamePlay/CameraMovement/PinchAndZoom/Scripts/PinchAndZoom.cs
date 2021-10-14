@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
@@ -42,8 +43,26 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
 
             if (scroll == 0)
                 return;
-
-            Zoom(-scroll, mouseZoomSpeed);
+            
+            switch (GameManager.Scripts.GameManager.Instance.CurrentGameState)
+            {
+                case GameState.Wave:
+                    Zoom(-scroll, mouseZoomSpeed);
+                    break;
+                case GameState.Build:
+                {
+                    Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+                    Vector3 desiredPosition = Physics.Raycast(ray , out RaycastHit hit) ? hit.point : transform.position;
+                    Zoom(-scroll, mouseZoomSpeed, desiredPosition);
+                    break;
+                }
+                case GameState.Prepare:
+                    break;
+                case GameState.End:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -66,7 +85,26 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
 
             // get offset value
             float deltaDistance = oldTouchDistance - currentTouchDistance;
-            Zoom(deltaDistance, touchZoomSpeed);
+            
+            switch (GameManager.Scripts.GameManager.Instance.CurrentGameState)
+            {
+                case GameState.Wave:
+                    Zoom(deltaDistance, touchZoomSpeed);
+                    break;
+                case GameState.Build:
+                {
+                    Vector3 desiredPosition = 0.5f * (tZero.position + tOne.position);
+                    
+                    Zoom(deltaDistance, touchZoomSpeed, desiredPosition);
+                    break;
+                }
+                case GameState.Prepare:
+                    break;
+                case GameState.End:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -80,6 +118,28 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
             orthographicSize += deltaMagnitudeDiff * speed;
             // set min and max value of Clamp function upon your requirement
             _cam.orthographicSize = Mathf.Clamp(orthographicSize, _zoomMinBound, _zoomMaxBound);
+        }
+
+        /// <summary>
+        /// Camera Zoom in or out towards touches.
+        /// </summary>
+        /// <param name="deltaMagnitudeDiff">float</param>
+        /// <param name="speed">float</param>
+        /// <param name="desiredPosition">Vector3</param>
+        private void Zoom(float deltaMagnitudeDiff, float speed, Vector3 desiredPosition)
+        {
+            float orthographicSize = _cam.orthographicSize;
+            orthographicSize += deltaMagnitudeDiff * speed;
+            // set min and max value of Clamp function upon your requirement
+            _cam.orthographicSize = Mathf.Clamp(orthographicSize, _zoomMinBound, _zoomMaxBound);
+            
+            Vector3 camPosition = _cam.transform.position;
+            desiredPosition = new Vector3(desiredPosition.x, camPosition.y, desiredPosition.z);
+            float distance = Vector3.Distance(desiredPosition , camPosition);
+            Vector3 direction = Vector3.Normalize( desiredPosition - camPosition) * (distance / speed);
+            
+            camPosition += direction;
+            _cam.transform.position = camPosition;
         }
 
         /// <summary>
