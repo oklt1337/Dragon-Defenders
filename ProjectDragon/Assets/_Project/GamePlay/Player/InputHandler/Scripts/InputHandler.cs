@@ -37,7 +37,6 @@ namespace _Project.GamePlay.Player.InputHandler.Scripts
         #endregion
 
         #region Unity Methods
-
         private void Update()
         {
             if (!Input.GetMouseButtonDown(0))
