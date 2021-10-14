@@ -46,6 +46,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         #region Public Properties
 
         public Commander.BaseCommanderClass.Scripts.Commander Commander => commander;
+        public InputHandler.Scripts.InputHandler InputHandler => inputHandler;
         public int Money
         {
             get => _money;

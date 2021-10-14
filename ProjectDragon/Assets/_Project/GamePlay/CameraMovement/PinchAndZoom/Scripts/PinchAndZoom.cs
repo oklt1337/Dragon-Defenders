@@ -1,6 +1,5 @@
+using System.Collections.Generic;
 using _Project.GamePlay.GameManager.Scripts;
-using _Project.Network.PlayFab.Scripts;
-using UnityEditor;
 using UnityEngine;
 
 namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
@@ -9,14 +8,12 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
     {
         [SerializeField] private float mouseZoomSpeed = 15.0f;
         [SerializeField] private float touchZoomSpeed = 0.1f;
-        
-        [Header("Build")]
-        [SerializeField] private Camera buildCam;
+
+        [Header("Build")] [SerializeField] private Camera buildCam;
         [SerializeField] private float buildZoomMinBound = 10f;
         [SerializeField] private float buildZoomMaxBound = 32f;
-        
-        [Header("Commander")]
-        [SerializeField] private Camera commanderCam;
+
+        [Header("Commander")] [SerializeField] private Camera commanderCam;
         [SerializeField] private float commanderZoomMinBound = 5f;
         [SerializeField] private float commanderZoomMaxBound = 12f;
 
@@ -28,63 +25,39 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
         {
             _cam = Camera.current;
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += SelectCamera;
+            GameManager.Scripts.GameManager.Instance.PlayerModel.InputHandler.OnMultiTouch += PinchDetection;
         }
 
         private void Update()
         {
-            PinchDetection();
-            CorrectMinAndMaxBound();
-        }
-
-        private void PinchDetection()
-        {
             if (Input.touchSupported)
-            {
-                Debug.Log("Touch support On");
+                return;
+            
+            //Vector3 mousePos = MouseCursor.
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-                // Pinch to zoom
-                if (Input.touchCount != 2) 
-                    return;
-                
-                // get current touch positions
-                Touch tZero = Input.GetTouch(0);
-                Touch tOne = Input.GetTouch(1);
+            if (scroll == 0)
+                return;
 
-                // get touch position from the previous frame
-                Vector2 tZeroPrevious = tZero.position - tZero.deltaPosition;
-                Vector2 tOnePrevious = tOne.position - tOne.deltaPosition;
-                    
-                float oldTouchDistance = Vector2.Distance (tZeroPrevious, tOnePrevious);
-                float currentTouchDistance = Vector2.Distance (tZero.position, tOne.position);
-                    
-                // get offset value
-                float deltaDistance = oldTouchDistance - currentTouchDistance;
-                Zoom (deltaDistance, touchZoomSpeed);
-            }
-            else
-            {
-                Debug.Log("Touch support Off");
-                
-                //Vector3 mousePos = MouseCursor.
-                float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-                if (scroll == 0)
-                    return;
-                
-                Zoom(-scroll, mouseZoomSpeed);
-            }
+            Zoom(-scroll, mouseZoomSpeed);
         }
 
-        private void CorrectMinAndMaxBound()
+        private void PinchDetection(List<Touch> touches)
         {
-            if(_cam.orthographicSize < _zoomMinBound) 
-            {
-                _cam.fieldOfView = 10f;
-            }
-            else if(_cam.orthographicSize > _zoomMaxBound ) 
-            {
-                _cam.fieldOfView = 32f;
-            }
+            // get current touch positions
+            Touch tZero = touches[0];
+            Touch tOne = touches[1];
+
+            // get touch position from the previous frame
+            Vector2 tZeroPrevious = tZero.position - tZero.deltaPosition;
+            Vector2 tOnePrevious = tOne.position - tOne.deltaPosition;
+
+            float oldTouchDistance = Vector2.Distance(tZeroPrevious, tOnePrevious);
+            float currentTouchDistance = Vector2.Distance(tZero.position, tOne.position);
+
+            // get offset value
+            float deltaDistance = oldTouchDistance - currentTouchDistance;
+            Zoom(deltaDistance, touchZoomSpeed);
         }
 
         private void Zoom(float deltaMagnitudeDiff, float speed)
