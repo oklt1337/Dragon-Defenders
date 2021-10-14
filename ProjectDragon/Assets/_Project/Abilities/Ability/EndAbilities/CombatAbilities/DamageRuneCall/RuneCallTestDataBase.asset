@@ -19,3 +19,4 @@ MonoBehaviour:
   baseDamage: 10
   damageProjectile: {fileID: 8858291433802410109, guid: a34f2c39d1a5a1f4a8d6f53ebc310ee6,
     type: 3}
+  maxDistance: 10

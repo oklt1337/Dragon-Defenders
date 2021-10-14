@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
@@ -24,7 +25,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
         #endregion
     
         #region protected Fields
-        [ShowInInspector] protected float maxDistance;
+        [SerializeField] protected float maxDistance;
     
 
         #endregion
