@@ -26,8 +26,8 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     
         #region protected Fields
 
-        [ShowInInspector] protected float baseDamage;
-        [ShowInInspector] protected GameObject damageProjectile;
+        [SerializeField] protected float baseDamage;
+        [SerializeField] protected GameObject damageProjectile;
 
         #endregion
     

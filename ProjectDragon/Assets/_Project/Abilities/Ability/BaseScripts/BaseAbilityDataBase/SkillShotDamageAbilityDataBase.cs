@@ -1,5 +1,6 @@
 using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
@@ -27,7 +28,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     
         #region protected Fields
 
-        [ShowInInspector] protected float maxDistance;
+        [SerializeField] protected float maxDistance;
 
         #endregion
     

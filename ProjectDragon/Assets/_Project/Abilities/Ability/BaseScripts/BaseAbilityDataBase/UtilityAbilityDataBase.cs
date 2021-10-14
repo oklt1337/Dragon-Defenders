@@ -26,8 +26,8 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     
         #region protected Fields
 
-        [ShowInInspector] protected float duration;
-        [ShowInInspector] protected float buffValue;
+        [SerializeField] protected float duration;
+        [SerializeField] protected float buffValue;
 
         #endregion
     
