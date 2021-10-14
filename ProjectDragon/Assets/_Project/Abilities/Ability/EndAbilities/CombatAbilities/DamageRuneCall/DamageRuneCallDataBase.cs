@@ -1,8 +1,7 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.EndAbilityDataBase.CombatDataBases
+namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.DamageRuneCall
 {
     [CreateAssetMenu(menuName="Tools/Ability/EndAbilities/DamageRuneCallDataBase")]
     public class DamageRuneCallDataBase : AoeDamageAbilityDataBase

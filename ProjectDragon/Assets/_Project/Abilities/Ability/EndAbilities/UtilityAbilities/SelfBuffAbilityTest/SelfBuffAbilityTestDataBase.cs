@@ -1,8 +1,7 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.EndAbilityDataBase.UtilityDataBases
+namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.SelfBuffAbilityTest
 {
     [CreateAssetMenu(menuName="Tools/Ability/EndAbilities/SelfBuffAbilityTestDataBase")]
     public class SelfBuffAbilityTestDataBase : SelfBuffAbilityDataBase

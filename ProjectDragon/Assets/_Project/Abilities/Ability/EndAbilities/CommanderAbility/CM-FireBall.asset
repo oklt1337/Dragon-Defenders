@@ -17,5 +17,6 @@ MonoBehaviour:
   animationClip: {fileID: 0}
   audioClip: {fileID: 0}
   baseDamage: 20
-  damageProjectile: {fileID: 0}
+  damageProjectile: {fileID: 7722801085219574963, guid: a132946fd5768e14493bd6ff51249df1,
+    type: 3}
   speed: 10

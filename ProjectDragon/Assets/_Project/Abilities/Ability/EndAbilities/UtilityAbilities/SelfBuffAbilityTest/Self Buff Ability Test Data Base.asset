@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaCost: 10
   cooldown: 5
-  duration: 0
+  animationClip: {fileID: 0}
+  audioClip: {fileID: 0}
+  duration: 2
   buffValue: 10
