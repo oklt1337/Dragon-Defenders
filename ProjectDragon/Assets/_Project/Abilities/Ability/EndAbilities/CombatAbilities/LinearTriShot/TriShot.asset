@@ -16,4 +16,8 @@ MonoBehaviour:
   cooldown: 3
   animationClip: {fileID: 0}
   audioClip: {fileID: 0}
+  baseDamage: 100
+  damageProjectile: {fileID: 105267857184730917, guid: 1fddb09e43972704aa665cf91017fd10,
+    type: 3}
   speed: 2
+  maxDistance: 30
