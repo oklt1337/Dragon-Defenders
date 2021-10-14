@@ -198,7 +198,7 @@ namespace _Project.Units.Unit.BaseUnits
         public void Dismantle()
         {
             float dividerValue = 0.5f;
-            GameManager.Instance.PlayerModel.AddMoney((int)(cost*dividerValue));
+            GameManager.Instance.PlayerModel.ModifyMoney((int)(cost*dividerValue));
             Destroy(this);
         }
         

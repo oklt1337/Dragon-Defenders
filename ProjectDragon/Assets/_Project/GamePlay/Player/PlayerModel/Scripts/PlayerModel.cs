@@ -163,18 +163,20 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         #region Public Methods
 
-        public void Build(int cost)
+        /// <summary>
+        /// Amount will be added onto Money
+        /// </summary>
+        /// <param name="amount">int</param>
+        /// <returns>true if money is more then 0 after modification</returns>
+        public bool ModifyMoney(int amount)
         {
-            if (Money <= cost)
-                return;
-            Money -= cost;
+            if (Money + amount < 0)
+            {
+                return false;
+            }
             
-            //TODO: Build
-        }
-        
-        public void AddMoney(int amount)
-        {
             Money += amount;
+            return true;
         }
         
         #endregion

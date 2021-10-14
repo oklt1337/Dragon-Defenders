@@ -44,8 +44,12 @@ namespace _Project.UI.In_Game.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            PhotonNetwork.Instantiate(string.Concat(unit.UnitPathName, unit.name), hit.point, Quaternion.identity);
-            GameManager.Instance.PlayerModel.AddMoney(-unit.Cost);
+            GameObject tower = PhotonNetwork.Instantiate(string.Concat(unit.UnitPathName, unit.name), hit.point, Quaternion.identity);
+
+            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.Cost))
+            {
+                Destroy(tower);
+            }
         }
 
         #endregion

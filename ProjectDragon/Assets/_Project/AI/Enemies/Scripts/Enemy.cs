@@ -51,7 +51,7 @@ namespace _Project.AI.Enemies.Scripts
         private void Death()
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
-            Instance.PlayerModel.AddMoney(goldDrop);
+            Instance.PlayerModel.ModifyMoney(goldDrop);
             Destroy(gameObject);
         }
     }

@@ -47,7 +47,7 @@ namespace _Project.SkillSystem.BaseSkills
                     Debug.Log("Experience was private set last time i checked");
                     break;
                 case SkillEnum.Gold:
-                    GameManager.Instance.PlayerModel.AddMoney((int)skillHolder.SkillIncreaseValue);
+                    GameManager.Instance.PlayerModel.ModifyMoney((int)skillHolder.SkillIncreaseValue);
                     break;
                 default:
                     break;
