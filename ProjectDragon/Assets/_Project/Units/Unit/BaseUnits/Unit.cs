@@ -47,8 +47,12 @@ namespace _Project.Units.Unit.BaseUnits
         [ShowInInspector] protected int cost;
         
         [ShowInInspector] protected SkillTree skillTree;
-        [ShowInInspector] protected Ability ability;
+
         
+        [ShowInInspector] protected Ability ability;
+
+        
+
         [ShowInInspector] protected AnimationHandler animationHandler;
         [ShowInInspector] protected SoundHandler soundHandler;
 
@@ -88,7 +92,18 @@ namespace _Project.Units.Unit.BaseUnits
             get => cost;
             set => cost = value;
         }
-    
+        
+        public SkillTree SkillTree
+        {
+            get => skillTree;
+            set => skillTree = value;
+        }
+
+        public Ability Ability
+        {
+            get => ability;
+            set => ability = value;
+        }
 
         #endregion
     
@@ -204,9 +219,10 @@ namespace _Project.Units.Unit.BaseUnits
 
         }
         [Button]
+        //outdated must be renewed based on the new skillsystem
         public void UpgradeSkill(bool isLeftSkill = false)
         {
-            //outdated must be renewed based on the new skillsystem
+            
             if (currentSkillString.Length >= skillTree.MAXLayers) return;
             
             String pathTaken =(isLeftSkill) ? "L" : "R" ;
