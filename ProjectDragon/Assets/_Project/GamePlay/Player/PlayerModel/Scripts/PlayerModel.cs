@@ -25,6 +25,8 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
         [SerializeField] private SoundHandler.Scripts.SoundHandler soundHandler;
         [SerializeField] private InputHandler.Scripts.InputHandler inputHandler;
+        
+        //TODO: ColliderHandler adden
         //[SerializeField] private CollisionHandler CollisionHandler;
 
         #endregion
@@ -106,7 +108,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                 Units.Unit.BaseUnits.Unit unit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.Unit>();
                 if (unit != null)
                 {
-                    //OnTryUpgradeSkill?.Invoke(unit);
+                    OnTryUpgradeSkill?.Invoke(unit.SkillTree);
                 }
             }
             else if (hit.collider.CompareTag("Player") && GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
@@ -117,6 +119,8 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         private void Initialize()
         {
+            //TODO: Get Info from HashTable
+            
             /*Hashtable hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
             if (!hashTable.ContainsKey("Commander"))
                 return;*/
@@ -165,7 +169,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                 return;
             Money -= cost;
             
-            //Build stuff
+            //TODO: Build
         }
         
         public void AddMoney(int amount)

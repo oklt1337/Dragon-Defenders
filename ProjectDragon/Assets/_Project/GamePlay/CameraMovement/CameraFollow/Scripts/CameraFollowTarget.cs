@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace _Project.GamePlay.CameraMovement.CameraFollow.Scripts
 {
+    /// <summary>
+    /// Author: Christopher Zelch
+    /// </summary>
     public class CameraFollowTarget : MonoBehaviour
     {
         [SerializeField] private Transform target;
@@ -18,6 +21,9 @@ namespace _Project.GamePlay.CameraMovement.CameraFollow.Scripts
             OnTargetMoved();
         }
 
+        /// <summary>
+        /// Camera follows target.
+        /// </summary>
         private void OnTargetMoved()
         {
             Transform cameraTransform = transform;

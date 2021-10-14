@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
 {
+    /// <summary>
+    /// Author: Christopher Zelch
+    /// </summary>
     public class PinchAndZoom : MonoBehaviour
     {
         [SerializeField] private float mouseZoomSpeed = 15.0f;
@@ -30,10 +33,11 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
 
         private void Update()
         {
+            
+            // This is for Beta Testing should be removed in Build
             if (Input.touchSupported)
                 return;
             
-            //Vector3 mousePos = MouseCursor.
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
             if (scroll == 0)
@@ -42,6 +46,11 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
             Zoom(-scroll, mouseZoomSpeed);
         }
 
+        /// <summary>
+        /// Calculate old finger distance and new and compares them.
+        /// And will Zoom in or out.
+        /// </summary>
+        /// <param name="touches">List of Touches</param>
         private void PinchDetection(List<Touch> touches)
         {
             // get current touch positions
@@ -60,6 +69,11 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
             Zoom(deltaDistance, touchZoomSpeed);
         }
 
+        /// <summary>
+        /// Camera Zoom in or out.
+        /// </summary>
+        /// <param name="deltaMagnitudeDiff">float</param>
+        /// <param name="speed">float</param>
         private void Zoom(float deltaMagnitudeDiff, float speed)
         {
             float orthographicSize = _cam.orthographicSize;
@@ -68,6 +82,10 @@ namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
             _cam.orthographicSize = Mathf.Clamp(orthographicSize, _zoomMinBound, _zoomMaxBound);
         }
 
+        /// <summary>
+        /// Set active Camera and Bounds
+        /// </summary>
+        /// <param name="state">GameState</param>
         private void SelectCamera(GameState state)
         {
             switch (state)
