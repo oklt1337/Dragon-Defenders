@@ -1,8 +1,6 @@
-using System;
 using _Project.Network.PlayFab.Scripts;
 using _Project.UI.Managers.Scripts;
 using PlayFab.ClientModels;
-using PlayFab.PfEditor.EditorModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,16 +12,25 @@ namespace _Project.UI.Authorize.Scripts
     {
         #region SerialzeFields
 
+        [Header("Login")]
         [SerializeField] private TMP_InputField userName;
         [SerializeField] private TMP_InputField password;
-        [SerializeField] private TMP_InputField confirmPassword;
         [SerializeField] private Button loginButton;
+
+        [Header("Register")]
+        [SerializeField] private TMP_InputField confirmPassword;
         [SerializeField] private Button registerButton;
         [SerializeField] private Button cancelRegisterButton;
+
+        [Header("Socials")] 
         [SerializeField] private Button loginFacebookButton;
         [SerializeField] private Button loginGoogleButton;
+
+        [Header("LowerPanel")] 
         [SerializeField] private Toggle rememberMe;
-        
+        [SerializeField] private Button optionsButton;
+
+        [Header("Panels")]
         [SerializeField] private GameObject registerPanel;
         [SerializeField] private GameObject panel;
 
@@ -32,7 +39,7 @@ namespace _Project.UI.Authorize.Scripts
         #endregion
 
         #region Private Fields
-        
+
         private bool _clearPlayerPrefs;
         private readonly PlayFabAuthService _authService = PlayFabAuthService.Instance;
 
@@ -40,25 +47,17 @@ namespace _Project.UI.Authorize.Scripts
 
         #region Protected Fields
 
-        
-
         #endregion
 
         #region Public Fields
-
-        
 
         #endregion
 
         #region Public Properties
 
-        
-
         #endregion
 
         #region Events
-
-        public static Action<string, string, bool> OnTryLogin;
 
         #endregion
 
@@ -66,6 +65,7 @@ namespace _Project.UI.Authorize.Scripts
 
         private void Awake()
         {
+            //Clear PlayerPrefs and Unlink Silent Auth.
             if (_clearPlayerPrefs)
             {
                 _authService.UnlinkSilentAuth();
@@ -76,10 +76,9 @@ namespace _Project.UI.Authorize.Scripts
             //Set our remember me button to our remembered state.
             rememberMe.isOn = _authService.RememberMe;
         }
-        
+
         public void Start()
         {
-
             //Hide all our panels until we know what UI to display
             panel.SetActive(false);
             registerPanel.SetActive(false);
@@ -93,11 +92,11 @@ namespace _Project.UI.Authorize.Scripts
             rememberMe.onValueChanged.AddListener((arg0 => _authService.RememberMe = arg0));
 
             //Bind to UI buttons to perform actions when user interacts with the UI.
-            loginButton.onClick.AddListener(OnLoginClicked);
-            loginFacebookButton.onClick.AddListener(OnLoginWithFacebookClicked);
-            loginGoogleButton.onClick.AddListener(OnLoginWithGoogleClicked);
-            registerButton.onClick.AddListener(OnRegisterButtonClicked);
-            cancelRegisterButton.onClick.AddListener(OnCancelRegisterButtonClicked);
+            loginButton.onClick.AddListener(OnClickLogin);
+            loginFacebookButton.onClick.AddListener(OnClickLoginWithFacebook);
+            loginGoogleButton.onClick.AddListener(OnClickLoginWithGoogle);
+            registerButton.onClick.AddListener(OnClickRegister);
+            cancelRegisterButton.onClick.AddListener(OnClickCancelRegister);
 
             //Set the data we want at login from what we chose in our meta data.
             _authService.InfoRequestParams = infoRequestParams;
@@ -117,110 +116,107 @@ namespace _Project.UI.Authorize.Scripts
         }
 
         #endregion
-        
+
         #region Private Methods
-        
+
         /// <summary>
-    /// Login Successfully - Goes to next screen.
-    /// </summary>
-    /// <param name="result"></param>
-    private void OnLoginSuccess(PlayFab.ClientModels.LoginResult result)
-    {
-        Debug.LogFormat("Logged In as: {0}", result.PlayFabId);
-        
-        //Show our next screen if we logged in successfully.
-        panel.SetActive(false);
-    }
-
-    /// <summary>
-    /// Error handling for when Login returns errors.
-    /// </summary>
-    /// <param name="error"></param>
-    private void OnPlayFabError(PlayFab.PlayFabError error)
-    {
-        //There are more cases which can be caught, below are some
-        //of the basic ones.
-        if (error.Error is PlayFabErrorCode.AccountNotFound)
+        /// Login Successfully
+        /// </summary>
+        /// <param name="result"></param>
+        private void OnLoginSuccess(PlayFab.ClientModels.LoginResult result)
         {
-            registerPanel.SetActive(true);
-            return;
+            Debug.LogFormat("Logged In as: {0}", result.PlayFabId);
+
+            //Deactivate our screen if we logged in successfully.
+            panel.SetActive(false);
         }
 
-        //Also report to debug console, this is optional.
-        Debug.Log(error.Error);
-        Debug.LogError(error.GenerateErrorReport());
-    }
-
-    /// <summary>
-    /// Choose to display the Auth UI or any other action.
-    /// </summary>
-    private void OnDisplayAuthentication()
-    {
-        //Here we have chooses what to do when AuthType is None.
-        panel.SetActive(true);
-    }
-
-    /// <summary>
-    /// Login Button means they've selected to submit a username (email) / password combo
-    /// Note: in this flow if no account is found, it will ask them to register.
-    /// </summary>
-    private void OnLoginClicked()
-    {
-        Debug.Log("Click Login");
-        _authService.Email = userName.text;
-        _authService.Password = password.text;
-        _authService.Authenticate(AuthTypes.EmailAndPassword);
-    }
-
-    /// <summary>
-    /// No account was found, and they have selected to register a username (email) / password combo.
-    /// </summary>
-    private void OnRegisterButtonClicked()
-    {
-        if (password.text != confirmPassword.text)
+        /// <summary>
+        /// Error handling for when Login returns errors.
+        /// </summary>
+        /// <param name="error">PlayFabError</param>
+        private void OnPlayFabError(PlayFab.PlayFabError error)
         {
-            Debug.Log("Passwords do not Match.");
-            return;
+            // if we didnt find the account we try to register him.
+            if (error.Error is PlayFabErrorCode.AccountNotFound)
+            {
+                registerPanel.SetActive(true);
+                return;
+            }
+            
+            Debug.Log(error.Error);
+            Debug.LogError(error.GenerateErrorReport());
         }
 
-        _authService.Email = userName.text;
-        _authService.Password = password.text;
-        _authService.Authenticate(AuthTypes.RegisterPlayFabAccount);
-    }
+        /// <summary>
+        /// Choose to display the Auth UI or any other action.
+        /// </summary>
+        private void OnDisplayAuthentication()
+        {
+            //Here we have chooses what to do when AuthType is None.
+            panel.SetActive(true);
+        }
 
-    /// <summary>
-    /// They have opted to cancel the Registration process.
-    /// Possibly they typed the email address incorrectly.
-    /// </summary>
-    private void OnCancelRegisterButtonClicked()
-    {
-        //Reset all forms
-        userName.text = string.Empty;
-        password.text = string.Empty;
-        confirmPassword.text = string.Empty;
-        //Show panels
-        registerPanel.SetActive(false);
-    }
+        /// <summary>
+        /// Login with email / password combo
+        /// Note: in this flow if no account is found, it will ask them to register.
+        /// </summary>
+        private void OnClickLogin()
+        {
+            Debug.Log("Click Login");
+            _authService.Email = userName.text;
+            _authService.Password = password.text;
+            _authService.Authenticate(AuthTypes.EmailAndPassword);
+        }
+
+        /// <summary>
+        /// Register new user with email /  password combo.
+        /// </summary>
+        private void OnClickRegister()
+        {
+            if (password.text != confirmPassword.text)
+            {
+                Debug.Log("Passwords do not Match.");
+                return;
+            }
+
+            _authService.Email = userName.text;
+            _authService.Password = password.text;
+            _authService.Authenticate(AuthTypes.RegisterPlayFabAccount);
+        }
+
+        /// <summary>
+        /// Cancel the Registration process.
+        /// </summary>
+        private void OnClickCancelRegister()
+        {
+            //Reset all forms
+            userName.text = string.Empty;
+            password.text = string.Empty;
+            confirmPassword.text = string.Empty;
+            //Show panels
+            registerPanel.SetActive(false);
+        }
 
 
-    /// <summary>
-    /// Login with a facebook account.  This kicks off the request to facebook
-    /// </summary>
-    private void OnLoginWithFacebookClicked()
-    {
-        Debug.Log("Logging In to Facebook..");
-    }
+        /// <summary>
+        /// Login with a facebook account.  This kicks off the request to facebook
+        /// </summary>
+        private void OnClickLoginWithFacebook()
+        {
+            Debug.Log("Logging In to Facebook..");
+        }
 
 
-    /// <summary>
-    /// Login with a google account.  This kicks off the request to google play games.
-    /// </summary>
-    private void OnLoginWithGoogleClicked()
-    {
-        Debug.Log("Logging In to Google..");
-    }
+        /// <summary>
+        /// Login with a google account.  This kicks off the request to google play games.
+        /// </summary>
+        private void OnClickLoginWithGoogle()
+        {
+            Debug.Log("Logging In to Google..");
+        }
 
-    #endregion
+        #endregion
 
         #region Public Methods
 
@@ -228,16 +224,17 @@ namespace _Project.UI.Authorize.Scripts
         {
             userName.interactable = status;
             password.interactable = status;
-            rememberMe.interactable = status;
             loginButton.interactable = status;
-        }
-        
-        public void OnClickLogin()
-        {
-            if (string.IsNullOrEmpty(userName.text) || string.IsNullOrEmpty(password.text))
-                return;
-            
-            OnTryLogin?.Invoke(userName.text, password.text, rememberMe.isOn);
+
+            confirmPassword.interactable = status;
+            registerButton.interactable = status;
+            cancelRegisterButton.interactable = status;
+
+            loginFacebookButton.interactable = status;
+            loginGoogleButton.interactable = status;
+
+            rememberMe.interactable = status;
+            optionsButton.interactable = status;
         }
 
         #endregion
