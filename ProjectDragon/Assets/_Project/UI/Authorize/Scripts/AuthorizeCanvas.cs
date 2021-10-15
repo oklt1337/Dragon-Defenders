@@ -31,8 +31,9 @@ namespace _Project.UI.Authorize.Scripts
         [SerializeField] private Button optionsButton;
 
         [Header("Panels")]
+        [SerializeField] private GameObject loginPanel;
         [SerializeField] private GameObject registerPanel;
-        [SerializeField] private GameObject panel;
+        [SerializeField] private GameObject optionsPanel;
 
         [SerializeField] private GetPlayerCombinedInfoRequestParams infoRequestParams;
 
@@ -80,7 +81,7 @@ namespace _Project.UI.Authorize.Scripts
         public void Start()
         {
             //Hide all our panels until we know what UI to display
-            panel.SetActive(false);
+            loginPanel.SetActive(false);
             registerPanel.SetActive(false);
 
             //Subscribe to events that happen after we authenticate
@@ -97,6 +98,7 @@ namespace _Project.UI.Authorize.Scripts
             loginGoogleButton.onClick.AddListener(OnClickLoginWithGoogle);
             registerButton.onClick.AddListener(OnClickRegister);
             cancelRegisterButton.onClick.AddListener(OnClickCancelRegister);
+            optionsButton.onClick.AddListener(OnClickOptions);
 
             //Set the data we want at login from what we chose in our meta data.
             _authService.InfoRequestParams = infoRequestParams;
@@ -128,7 +130,7 @@ namespace _Project.UI.Authorize.Scripts
             Debug.LogFormat("Logged In as: {0}", result.PlayFabId);
 
             //Deactivate our screen if we logged in successfully.
-            panel.SetActive(false);
+            loginPanel.SetActive(false);
         }
 
         /// <summary>
@@ -141,6 +143,7 @@ namespace _Project.UI.Authorize.Scripts
             if (error.Error is PlayFabErrorCode.AccountNotFound)
             {
                 registerPanel.SetActive(true);
+                ChangeInteractableStatusForRegisterPanel(false);
                 return;
             }
             
@@ -154,7 +157,7 @@ namespace _Project.UI.Authorize.Scripts
         private void OnDisplayAuthentication()
         {
             //Here we have chooses what to do when AuthType is None.
-            panel.SetActive(true);
+            loginPanel.SetActive(true);
         }
 
         /// <summary>
@@ -196,8 +199,8 @@ namespace _Project.UI.Authorize.Scripts
             confirmPassword.text = string.Empty;
             //Show panels
             registerPanel.SetActive(false);
+            ChangeInteractableStatusForRegisterPanel(true);
         }
-
 
         /// <summary>
         /// Login with a facebook account.  This kicks off the request to facebook
@@ -207,13 +210,37 @@ namespace _Project.UI.Authorize.Scripts
             Debug.Log("Logging In to Facebook..");
         }
 
-
         /// <summary>
         /// Login with a google account.  This kicks off the request to google play games.
         /// </summary>
         private void OnClickLoginWithGoogle()
         {
             Debug.Log("Logging In to Google..");
+        }
+
+        /// <summary>
+        /// Activate Option panel.
+        /// </summary>
+        private void OnClickOptions()
+        {
+            optionsPanel.SetActive(true);
+        }
+
+        /// <summary>
+        /// Sets interactable status of buttons of the loginPanel.
+        /// </summary>
+        /// <param name="status">bool</param>
+        private void ChangeInteractableStatusForRegisterPanel(bool status)
+        {
+            userName.interactable = status;
+            password.interactable = status;
+            loginButton.interactable = status;
+
+            loginFacebookButton.interactable = status;
+            loginGoogleButton.interactable = status;
+            
+            rememberMe.interactable = status;
+            optionsButton.interactable = status;
         }
 
         #endregion
