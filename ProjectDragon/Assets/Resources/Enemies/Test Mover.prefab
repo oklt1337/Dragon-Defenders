@@ -98,13 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57d100a7275ef74da6b07e5f2e29f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: 
-  enemyModel: {fileID: 0}
+  enemyName: Test Mover
+  enemyPath: Enemies/
   defense: 0
   maxSpeed: 0
   expDrop: 0
   goldDrop: 0
   hqDamage: 0
+  enemyModel: {fileID: 0}
   agent: {fileID: 264498729499873607}
   health: 0
   maxHealth: 0

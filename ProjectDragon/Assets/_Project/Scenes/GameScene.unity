@@ -1227,7 +1227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &439175913
 GameObject:
@@ -1295,7 +1295,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &440852306
 MonoBehaviour:
@@ -1634,7 +1634,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &608313359 stripped
 RectTransform:
@@ -1826,7 +1826,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761725022
 GameObject:
@@ -2084,7 +2084,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &806328840
 GameObject:
@@ -2095,9 +2095,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806328841}
-  - component: {fileID: 806328842}
   m_Layer: 0
-  m_Name: Enemy Spawner
+  m_Name: Enemy Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2118,21 +2117,6 @@ Transform:
   m_Father: {fileID: 1497920248}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &806328842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 806328840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7712a2e7928211e46935bf28dd144b60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waveSize: 0
-  killedEnemies: 0
-  enemySpawnDelay: 1.5
 --- !u!1 &809287805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2665,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1240333282}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1298276597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1298276598}
+  - component: {fileID: 1298276599}
+  m_Layer: 0
+  m_Name: 'Enemy Spawner '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1298276598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298276597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1713089046}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1298276599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298276597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7712a2e7928211e46935bf28dd144b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveSize: 0
+  killedEnemies: 0
+  enemySpawnDelay: 1.5
+  spawnPositions:
+  - {fileID: 806328841}
 --- !u!1 &1348657100
 GameObject:
   m_ObjectHideFlags: 0
@@ -3979,13 +4011,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6287fd758ebcc439f3b0f170ae1a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commanderLibrary: {fileID: 11400000, guid: 939f5c0a9f19f9e47ac57e716c60ac0d, type: 2}
-  enemySpawner: {fileID: 806328842}
-  waveManager: {fileID: 705666259}
   player: {fileID: 2036250212}
+  commanderLibrary: {fileID: 11400000, guid: 939f5c0a9f19f9e47ac57e716c60ac0d, type: 2}
+  commanderMoveIndicator: {fileID: 576650401}
+  enemySpawner: {fileID: 1298276599}
+  waveManager: {fileID: 705666259}
   unitManager: {fileID: 783883374}
   hqManager: {fileID: 407553236}
-  commanderMoveIndicator: {fileID: 576650401}
   cameraTrackingShot: {fileID: 809287807}
   hud: {fileID: 1380770227}
   commanderHUD: {fileID: 1544868725}
@@ -4001,6 +4033,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1298276598}
   - {fileID: 576650402}
   - {fileID: 407553237}
   - {fileID: 705666260}
