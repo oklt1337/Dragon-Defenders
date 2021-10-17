@@ -24,20 +24,7 @@ namespace _Project.Utility.DeveloperConsole.Scripts
         #region Private Fields
 
         private float _pausedTimeScale;
-
         private DeveloperConsole _developerConsole;
-
-        #endregion
-
-        #region Protected Fields
-
-        
-
-        #endregion
-
-        #region Public Fields
-
-        
 
         #endregion
 
@@ -53,12 +40,6 @@ namespace _Project.Utility.DeveloperConsole.Scripts
                 return _developerConsole = new DeveloperConsole(prefix, commands);
             }
         }
-
-        #endregion
-
-        #region Events
-
-        
 
         #endregion
         
@@ -87,6 +68,9 @@ namespace _Project.Utility.DeveloperConsole.Scripts
         
         #region Private Methods
 
+        /// <summary>
+        /// Toggle console on and off
+        /// </summary>
         private void Toggle()
         {
             if (console.activeSelf)
@@ -107,6 +91,10 @@ namespace _Project.Utility.DeveloperConsole.Scripts
 
         #region Public Methods
 
+        /// <summary>
+        /// Process Input of player and pars it to console.
+        /// </summary>
+        /// <param name="inputText">string</param>
         public void ProcessCommand(string inputText)
         {
             if (string.IsNullOrEmpty(inputText))

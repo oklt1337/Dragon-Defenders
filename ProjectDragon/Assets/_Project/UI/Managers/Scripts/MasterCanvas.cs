@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Project.Network.Photon.Scripts;
 using TMPro;
@@ -21,27 +22,10 @@ namespace _Project.UI.Managers.Scripts
 
         #endregion
 
-        #region Protected Fields
+        #region Event
 
-        
-
-        #endregion
-
-        #region Public Fields
-
-        
-
-        #endregion
-
-        #region Public Properties
-
-        
-
-        #endregion
-
-        #region Events
-
-        
+        public event Action OnConnectionLost;
+        public event Action OnReconnected;
 
         #endregion
 
@@ -63,6 +47,12 @@ namespace _Project.UI.Managers.Scripts
 
         #region Private Methods
 
+        /// <summary>
+        /// Changes interactable status of GameObjects.
+        /// Displays error Message.
+        /// </summary>
+        /// <param name="error"></param>
+        /// <returns></returns>
         private IEnumerator LostConnectionCo(string error)
         {
             lostConnectionImage.SetActive(true);
@@ -80,27 +70,28 @@ namespace _Project.UI.Managers.Scripts
 
         /// <summary>
         /// Start Coroutine that shows lost connection.
+        /// Invokes OnConnectionLost Event
         /// </summary>
         /// <param name="errorMessage"></param>
         private void LostConnection(string errorMessage)
         {
+            OnConnectionLost?.Invoke();
             if (_lostConnectionCo != null)
                 StopCoroutine(_lostConnectionCo);
             
             _lostConnectionCo = StartCoroutine(LostConnectionCo(errorMessage));
         }
 
+        /// <summary>
+        /// Stops Lost connection coroutine
+        /// Invokes OnReconnected Event
+        /// </summary>
         private void Reconnected()
         {
+            OnReconnected?.Invoke();
             if (_lostConnectionCo != null)
                 StopCoroutine(_lostConnectionCo);
         }
-
-        #endregion
-
-        #region Public Methods
-
-        
 
         #endregion
     }

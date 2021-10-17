@@ -26,15 +26,23 @@ namespace _Project.GamePlay.GameManager.Scripts
 
         #region SerializedFields
 
-        [SerializeField] private CommanderLibrary commanderLibrary;
+        [Header("Player")]
+        [SerializeField] private PlayerModel player;
         
+        [Header("Commander")]
+        [SerializeField] private CommanderLibrary commanderLibrary;
+        [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
+        
+        [Header("Managers")]
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
-        [SerializeField] private PlayerModel player;
         [SerializeField] private UnitManager unitManager;
         [SerializeField] private HqManager hqManager;
-        [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
+        
+        [Header("Camera")]
         [SerializeField] private Camera cameraTrackingShot;
+        
+        [Header("HUDs")]
         [SerializeField] private HUD hud;
         [SerializeField] private CommanderHUD commanderHUD;
         [SerializeField] private BuildHUD buildHUD;
@@ -44,18 +52,6 @@ namespace _Project.GamePlay.GameManager.Scripts
         #region Private Fields
 
         private GameState _currentGameState;
-
-        #endregion
-
-        #region Protected Fields
-
-        
-
-        #endregion
-
-        #region Public Fields
-
-        
 
         #endregion
 
@@ -116,24 +112,25 @@ namespace _Project.GamePlay.GameManager.Scripts
         }
 
         #endregion
-
+        
         #region Private Methods
 
-        
-
-        #endregion
-
-        #region Protected Methods
-
-        
-
-        #endregion
-
-        #region Public Methods
-
+        /// <summary>
+        /// Changes the game state.
+        /// </summary>
+        /// <param name="state">GameState</param>
         private void ChangeState(GameState state)
         {
             CurrentGameState = state;
+        }
+
+        /// <summary>
+        /// Ends the game and shows Final screen.
+        /// </summary>
+        private void EndMatch()
+        {
+            ChangeState(GameState.End);
+            //TODO: Show score and so on.
         }
 
         #endregion

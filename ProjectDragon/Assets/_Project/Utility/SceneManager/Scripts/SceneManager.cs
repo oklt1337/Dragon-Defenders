@@ -29,27 +29,9 @@ namespace _Project.Utility.SceneManager.Scripts
 
         #endregion
 
-        #region Protected Fields
-
-        
-
-        #endregion
-
-        #region Public Fields
-
-        
-
-        #endregion
-
         #region Public Properties
 
         public static Scene CurrentScene => GetCurrentScene();
-
-        #endregion
-
-        #region Events
-
-        
 
         #endregion
 

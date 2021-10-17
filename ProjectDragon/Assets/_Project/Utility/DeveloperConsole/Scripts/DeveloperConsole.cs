@@ -14,30 +14,6 @@ namespace _Project.Utility.DeveloperConsole.Scripts
 
         #endregion
 
-        #region Protected Fields
-
-        
-
-        #endregion
-
-        #region Public Fields
-
-        
-
-        #endregion
-
-        #region Properties
-
-        
-
-        #endregion
-
-        #region Events
-
-        
-
-        #endregion
-
         #region Constructor
 
         public DeveloperConsole(string prefix, IEnumerable<IConsoleCommand> commands)
@@ -50,6 +26,11 @@ namespace _Project.Utility.DeveloperConsole.Scripts
 
         #region Private Methdos
 
+        /// <summary>
+        /// Process input and try to execute command
+        /// </summary>
+        /// <param name="commandInput">commandInput</param>
+        /// <param name="args">args</param>
         private void ProcessCommand(string commandInput, string[] args)
         {
             foreach (IConsoleCommand command in _commands)
@@ -70,6 +51,10 @@ namespace _Project.Utility.DeveloperConsole.Scripts
 
         #region Public Methods
 
+        /// <summary>
+        /// Process input and try to execute command
+        /// </summary>
+        /// <param name="inputValue">string</param>
         public void ProcessCommand(string inputValue)
         {
             if (!inputValue.StartsWith(_prefix))

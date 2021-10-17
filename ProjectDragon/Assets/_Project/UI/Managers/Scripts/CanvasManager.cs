@@ -7,42 +7,11 @@ namespace _Project.UI.Managers.Scripts
 {
     public class CanvasManager : MonoBehaviour, ICanvas
     {
-
         public static CanvasManager Instance;
-
-        #region SerialzeFields
-
-        
-
-        #endregion
-
-        #region Private Fields
-
-        
-
-        #endregion
-
-        #region Protected Fields
-
-        
-
-        #endregion
 
         #region Public Fields
 
         public readonly List<ICanvas> SceneCanvases = new List<ICanvas>();
-
-        #endregion
-
-        #region Public Properties
-
-        
-
-        #endregion
-
-        #region Events
-
-        
 
         #endregion
 
@@ -62,14 +31,12 @@ namespace _Project.UI.Managers.Scripts
 
         #endregion
 
-        #region Private Methods
-
-        
-
-        #endregion
-
         #region Public Methods
         
+        /// <summary>
+        /// Changes the interactable status of canvas objects
+        /// </summary>
+        /// <param name="status">bool</param>
         public void ChangeInteractableStatus(bool status)
         {
             foreach (ICanvas canvas in SceneCanvases)
@@ -78,6 +45,10 @@ namespace _Project.UI.Managers.Scripts
             }
         }
 
+        /// <summary>
+        /// Subscribes to list of ICanvas.
+        /// </summary>
+        /// <param name="canvas">ICanvas</param>
         public void Subscribe(ICanvas canvas)
         {
             if (SceneCanvases.Contains(canvas))
@@ -86,6 +57,10 @@ namespace _Project.UI.Managers.Scripts
             SceneCanvases.Add(canvas);
         }
         
+        /// <summary>
+        /// Unsubscribes of List of ICanvas
+        /// </summary>
+        /// <param name="canvas">ICanvas</param>
         public void Unsubscribe(ICanvas canvas)
         {
             if (!SceneCanvases.Contains(canvas))
