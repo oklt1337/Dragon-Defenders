@@ -33,6 +33,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StartSpawning;
+            GameManager.Scripts.GameManager.Instance.WaveManager.OnUpdateWave += UpdateNextEnemies;
         }
 
         private void Update()
@@ -65,21 +66,21 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
             OnWaveSuccess?.Invoke(GameState.Build);
             killedEnemies = 0;
         }
+        
+        #endregion
+
+        #region Private Methods
 
         /// <summary>
         /// Updates the List of enemies.
         /// </summary>
         /// <param name="nextEnemies"> The new List of new enemies </param>
-        public void UpdateNextEnemies(List<GameObject> nextEnemies)
+        private void UpdateNextEnemies(List<GameObject> nextEnemies)
         {
             _enemies = nextEnemies;
             waveSize = nextEnemies.Count;
         }
-
-        #endregion
-
-        #region Private Methods
-
+        
         /// <summary>
         /// Starts spawning the currently saved enemies.
         /// </summary>

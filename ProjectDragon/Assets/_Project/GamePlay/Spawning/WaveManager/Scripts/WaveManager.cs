@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
     {
         [SerializeField] private List<Wave.Scripts.Wave> waves = new List<Wave.Scripts.Wave>();
         [SerializeField] private int currentWave;
+
+        public event Action<List<GameObject>> OnUpdateWave;
 
         private void Awake()
         {
@@ -29,8 +32,8 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
             
             currentWave++;
             // For the Alpha we only use one wave.
-            //GameManager.Scripts.GameManager.Instance.EnemySpawner.UpdateNextEnemies(waves[currentWave].Enemies);
-            GameManager.Scripts.GameManager.Instance.EnemySpawner.UpdateNextEnemies(waves[0].Enemies);
+            // OnUpdateWave?.Invoke(waves[currentWave].Enemies);
+            OnUpdateWave?.Invoke(waves[0].Enemies);
         }
     }
 }
