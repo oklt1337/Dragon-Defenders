@@ -32,8 +32,7 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
             
             currentWave++;
             // For the Alpha we only use one wave.
-            // OnUpdateWave?.Invoke(waves[currentWave].Enemies);
-            OnUpdateWave?.Invoke(waves[0].Enemies);
+            OnUpdateWave?.Invoke(waves[currentWave] == null ? waves[0].Enemies : waves[currentWave].Enemies);
         }
     }
 }
