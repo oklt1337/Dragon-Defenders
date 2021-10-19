@@ -5,7 +5,9 @@ using _Project.Network.PlayFab.Scripts;
 using _Project.Utility.SceneManager.Scripts;
 using Photon.Pun;
 using Photon.Realtime;
+using PlayFab.ClientModels;
 using UnityEngine;
+using FriendInfo = Photon.Realtime.FriendInfo;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace _Project.Network.Photon.Scripts
@@ -65,35 +67,35 @@ namespace _Project.Network.Photon.Scripts
         public override void OnEnable()
         {
             base.OnEnable();
-            PlayFabLogin.OnLoginSuccess += ConnectToPhoton;
+            PlayFabAuthService.OnLoginSuccess += ConnectToPhoton;
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            PlayFabLogin.OnLoginSuccess -= ConnectToPhoton;
+            PlayFabAuthService.OnLoginSuccess -= ConnectToPhoton;
         }
 
         #endregion
 
         #region Private Methods
 
-        private void ConnectToPhoton(string displayName, string id)
+        private void ConnectToPhoton(LoginResult loginRequest)
         {
-            Debug.Log($"Connect to Photon as {displayName}");
+            Debug.Log($"Connect to Photon as {loginRequest.InfoResultPayload.PlayerProfile.DisplayName}");
 
             // Set AppVersion.
             PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = AppVersion;
 
             // Set GameVersion.
             PhotonNetwork.GameVersion = GameVersion;
-            
+
             // Creating AuthValues
             AuthenticationValues authValues = new AuthenticationValues
             {
-                UserId = id
+                UserId = loginRequest.PlayFabId
             };
-            
+
             // Setting AuthValues
             PhotonNetwork.AuthValues = authValues;
 
@@ -107,7 +109,7 @@ namespace _Project.Network.Photon.Scripts
             PhotonNetwork.LocalPlayer.CustomProperties = new Hashtable();
 
             // Setting nickname
-            PhotonNetwork.NickName = displayName;
+            PhotonNetwork.NickName = loginRequest.InfoResultPayload.PlayerProfile.DisplayName;
 
 
             // Setting AuthValues
@@ -257,7 +259,7 @@ namespace _Project.Network.Photon.Scripts
         {
             Debug.Log($"Joined Room: {PhotonNetwork.CurrentRoom.Name}");
             OnPhotonJoinedRoom?.Invoke();
-            
+
             if (SceneManager.CurrentScene != Scene.Lobby)
                 return;
             SceneManager.ChangeScene(Scene.MainMenu);

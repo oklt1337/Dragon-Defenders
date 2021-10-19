@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Project.Network.NetworkManager.Scripts;
+using _Project.Network.PlayFab.Scripts;
 using Photon.Pun;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace _Project.Utility.SceneManager.Scripts
     public enum Scene
     {
         Intro,
-        Login,
+        Authorize,
         MainMenu,
         Lobby,
         GameScene
@@ -19,13 +20,13 @@ namespace _Project.Utility.SceneManager.Scripts
     {
         #region SerialzeFields
 
-        [SerializeField] private float loadingLoginSceneDelay = 3f;
+        [SerializeField] private float loadingAuthorizeSceneDelay = 3f;
 
         #endregion
 
         #region Private Fields
 
-        private Coroutine _loadingLoginSceneCo;
+        private Coroutine _loadingAuthorizeSceneCo;
 
         #endregion
 
@@ -39,22 +40,26 @@ namespace _Project.Utility.SceneManager.Scripts
 
         private void Start()
         {
-            if (NetworkManager.Instance.PlayFabManager.PlayFabLogin.AutoLogin)
-                return;
+            PlayFabAuthService.OnLoginSuccess += success => ChangeScene(Scene.MainMenu); 
             
-            LoadLoginScene();
+            LoadAuthorizeScene();
         }
 
         #endregion
 
         #region Private Methods
 
+        /// <summary>
+        /// Get Current Scene.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
         private static Scene GetCurrentScene()
         {
             return UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex switch
             {
                 0 => Scene.Intro,
-                1 => Scene.Login,
+                1 => Scene.Authorize,
                 2 => Scene.MainMenu,
                 3 => Scene.Lobby,
                 4 => Scene.GameScene,
@@ -62,18 +67,25 @@ namespace _Project.Utility.SceneManager.Scripts
             };
         }
 
-        private void LoadLoginScene()
+        /// <summary>
+        /// Loads the Authorize Scene.
+        /// </summary>
+        private void LoadAuthorizeScene()
         {
-            if (_loadingLoginSceneCo != null)
-                StopCoroutine(_loadingLoginSceneCo);
+            if (_loadingAuthorizeSceneCo != null)
+                StopCoroutine(_loadingAuthorizeSceneCo);
 
-            _loadingLoginSceneCo = StartCoroutine(LoadLoginSceneCo());
+            _loadingAuthorizeSceneCo = StartCoroutine(LoadAuthorizeSceneCo());
         }
 
-        private IEnumerator LoadLoginSceneCo()
+        /// <summary>
+        /// Coroutine for loading Authorize Scene.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator LoadAuthorizeSceneCo()
         {
-            yield return new WaitForSeconds(loadingLoginSceneDelay);
-            ChangeScene(Scene.Login);
+            yield return new WaitForSeconds(loadingAuthorizeSceneDelay);
+            ChangeScene(Scene.Authorize);
         }
 
         #endregion

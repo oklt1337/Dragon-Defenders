@@ -7,12 +7,6 @@ namespace _Project.Network.PlayFab.Scripts
         #region Private Fields
 
         [SerializeField] 
-        private PlayFabLogin playFabLogin;
-        
-        [SerializeField] 
-        private PlayFabRegister playFabRegister;
-        
-        [SerializeField] 
         private PlayFabFriendsHandler playFabFriendsHandler;
         
         [SerializeField] 
@@ -33,9 +27,7 @@ namespace _Project.Network.PlayFab.Scripts
         #endregion
 
         #region public Properies
-
-        public PlayFabLogin PlayFabLogin => playFabLogin;
-        public PlayFabRegister PlayFabRegister => playFabRegister;
+        
         public PlayFabFriendsHandler PlayFabFriendsHandler => playFabFriendsHandler;
         public PlayFabLootboxHandler PlayFabLootBoxHandler => playFabLootBoxHandler;
         public PlayFabProfileHandler PlayFabProfileHandler => playFabProfileHandler;

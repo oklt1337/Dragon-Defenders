@@ -326,7 +326,7 @@ MonoBehaviour:
   infoRequestParams:
     GetCharacterInventories: 0
     GetCharacterList: 0
-    GetPlayerProfile: 0
+    GetPlayerProfile: 1
     GetPlayerStatistics: 0
     GetTitleData: 0
     GetUserAccountInfo: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
       ShowCampaignAttributions: 0
       ShowContactEmailAddresses: 0
       ShowCreated: 0
-      ShowDisplayName: 0
+      ShowDisplayName: 1
       ShowExperimentVariants: 0
       ShowLastLogin: 0
       ShowLinkedAccounts: 0
