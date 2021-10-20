@@ -4,7 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace _Project.UI.In_Game.Scripts
+namespace _Project.UI.In_Game.Building.Scripts
 {
     public class TowerSpawnButton : MonoBehaviourPun, IPointerClickHandler, IBeginDragHandler, IDragHandler,
         IEndDragHandler

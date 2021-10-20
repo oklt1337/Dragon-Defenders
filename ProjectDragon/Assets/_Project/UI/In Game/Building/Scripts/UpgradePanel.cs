@@ -2,7 +2,7 @@ using _Project.SkillSystem.SkillTree;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.In_Game.Scripts
+namespace _Project.UI.In_Game.Building.Scripts
 {
     public class UpgradePanel : MonoBehaviour
     {
@@ -42,8 +42,7 @@ namespace _Project.UI.In_Game.Scripts
         }
 
         #endregion
-
-
+        
         #region Private Methods
 
         /// <summary>
