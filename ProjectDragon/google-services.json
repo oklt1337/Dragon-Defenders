@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "135561818168",
+    "project_id": "project-dragon-2038e",
+    "storage_bucket": "project-dragon-2038e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135561818168:android:f12b2ad53cda20384bf6cd",
+        "android_client_info": {
+          "package_name": "com.OLAStudios.ProjectDragon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135561818168-jivnp0mtettf1ktij7l06mjh7dkpa7l8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOfg5iKxmVkU3wQgZkHwjYif37hA_zbnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135561818168-jivnp0mtettf1ktij7l06mjh7dkpa7l8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
