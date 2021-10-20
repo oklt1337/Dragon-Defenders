@@ -42,7 +42,7 @@ namespace _Project.UI.In_Game.Scripts
 
         public void OnClickStartWave()
         {
-            OnWaveStart?.Invoke(GameState.Wave);
+            OnWaveStart?.Invoke(GameState.Prepare);
             Debug.Log("Start");
         }
 

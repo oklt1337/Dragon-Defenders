@@ -1,4 +1,5 @@
 using System;
+using _Project.GamePlay.CameraMovement.TrackingShot;
 using _Project.GamePlay.CommanderWaypoint.Scripts;
 using _Project.GamePlay.HQManager.Scripts;
 using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
@@ -40,7 +41,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         [SerializeField] private HqManager hqManager;
         
         [Header("Camera")]
-        [SerializeField] private Camera cameraTrackingShot;
+        [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
         
         [Header("HUDs")]
         [SerializeField] private HUD hud;
@@ -75,7 +76,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         public UnitManager UnitManager => unitManager;
         public HqManager Hq => hqManager;
         public CommanderMoveIndicator CommanderMoveIndicator => commanderMoveIndicator;
-
+        public TrackingShotBuildToWave CameraTrackingShotBuildToWave => cameraTrackingShotBuildToWave;
         public HUD HUD => hud;
         public CommanderHUD CommanderHUD => commanderHUD;
         public BuildHUD BuildHUD => buildHUD;
@@ -103,11 +104,11 @@ namespace _Project.GamePlay.GameManager.Scripts
 
             BuildHUD.OnWaveStart += ChangeState;
             enemySpawner.OnWaveSuccess += ChangeState;
+            CameraTrackingShotBuildToWave.OnTrackingShotEnd += ChangeState;
         }
 
         private void Start()
         {
-            cameraTrackingShot.gameObject.SetActive(false);
             CurrentGameState = GameState.Build;
         }
 

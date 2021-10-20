@@ -42,6 +42,11 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
             {
                 StartSpawning(GameState.Wave);
             }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                OnWaveSuccess?.Invoke(GameState.Prepare);
+            }
         }
 
         private void OnDestroy()
@@ -63,7 +68,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
             if (KilledEnemies < waveSize)
                 return;
 
-            OnWaveSuccess?.Invoke(GameState.Build);
+            OnWaveSuccess?.Invoke(GameState.Prepare);
             killedEnemies = 0;
         }
         

@@ -11,11 +11,6 @@ namespace _Project.GamePlay.CameraMovement.CameraFollow.Scripts
 
         private const float ZOffset = -3.5f;
 
-        private void Start()
-        {
-            target = GameManager.Scripts.GameManager.Instance.PlayerModel.transform;
-        }
-
         private void Update()
         {
             OnTargetMoved();
