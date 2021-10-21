@@ -7,9 +7,9 @@ namespace _Project.UI.In_Game.Building.Scripts
     public class UpgradePanel : MonoBehaviour
     {
         [SerializeField] private Image[] skillImages;
-        [SerializeField] private Sprite a;
+        [SerializeField] private Sprite missingSprite;
 
-        private SkillTree _skillTree;
+        private SkillTree skillTree;
 
         #region Public Methods
 
@@ -19,7 +19,7 @@ namespace _Project.UI.In_Game.Building.Scripts
         /// <param name="skillTree"></param>
         public void UpdateSkillTree(SkillTree skillTree)
         {
-            _skillTree = skillTree;
+            this.skillTree = skillTree;
             
             UpdateImages();
         }
@@ -32,12 +32,12 @@ namespace _Project.UI.In_Game.Building.Scripts
         {
             string buttonName = btn.gameObject.name;
             
-            if(!_skillTree.tree[buttonName].IsLearnable)
+            if(!skillTree.tree[buttonName].IsLearnable)
                 return;
             
             //TODO: Money Check and using that money.
             
-            _skillTree.tree[buttonName].EnableSkill();
+            skillTree.tree[buttonName].EnableSkill();
             UpdateImages();
         }
 
@@ -55,17 +55,17 @@ namespace _Project.UI.In_Game.Building.Scripts
                 string key = (i + 1).ToString();
 
                 // Fail check.
-                if (_skillTree.tree[key].Sprite == null)
+                if (skillTree.tree[key].Sprite == null)
                 {
-                    skillImages[i].sprite = a;
+                    skillImages[i].sprite = missingSprite;
                     continue;
                 }
 
                 // Update the sprite.
-                skillImages[i].sprite = _skillTree.tree[key].Sprite;
+                skillImages[i].sprite = skillTree.tree[key].Sprite;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
-                if (_skillTree.tree[key].IsLearnable || _skillTree.tree[key].IsSkillActive)
+                if (skillTree.tree[key].IsLearnable || skillTree.tree[key].IsSkillActive)
                     skillImages[i].color = Color.white;
                 else
                     skillImages[i].color = Color.gray;
