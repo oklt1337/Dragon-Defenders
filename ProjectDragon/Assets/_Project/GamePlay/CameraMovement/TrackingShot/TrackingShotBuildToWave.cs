@@ -2,7 +2,6 @@ using System;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Project.GamePlay.CameraMovement.TrackingShot
@@ -23,25 +22,25 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         [SerializeField] private float startOrtho;
         [SerializeField] private float endOrtho;
 
-        private bool _startTrackingShot;
-        private bool _isBuildToWave = true;
-        private float _speed;
-        private float _modSpeed;
-        private PlayerModel _playerModel;
+        private bool startTrackingShot;
+        private bool isBuildToWave = true;
+        private float speed;
+        private float modSpeed;
+        private PlayerModel playerModel;
 
         public event Action<GameState> OnTrackingShotEnd;
 
         private void Start()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += EnableTrackingShot;
-            _playerModel = GameManager.Scripts.GameManager.Instance.PlayerModel;
-            _speed = dollyCart.m_Speed;
-            _modSpeed = _speed * speedModifier;
+            playerModel = GameManager.Scripts.GameManager.Instance.PlayerModel;
+            speed = dollyCart.m_Speed;
+            modSpeed = speed * speedModifier;
         }
 
         private void Update()
         {
-            if (!_startTrackingShot)
+            if (!startTrackingShot)
                 return;
 
             StartTrackingShot();
@@ -71,15 +70,15 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         private void EndTrackingShot()
         {
             dollyCart.gameObject.SetActive(false);
-            _speed += _modSpeed;
+            speed += modSpeed;
 
             if (!(Math.Abs(virtualCamera.m_Lens.OrthographicSize - endOrtho) < 0.05f)) 
                 return;
             
-            _startTrackingShot = false;
-            _speed = dollyCart.m_Speed;
+            startTrackingShot = false;
+            speed = dollyCart.m_Speed;
             virtualCamera.gameObject.SetActive(false);
-            OnTrackingShotEnd?.Invoke(_isBuildToWave ? GameState.Wave : GameState.Build);
+            OnTrackingShotEnd?.Invoke(isBuildToWave ? GameState.Wave : GameState.Build);
         }
 
         /// <summary>
@@ -87,8 +86,8 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         /// </summary>
         private void LerpRotation()
         {
-            Quaternion currentRotation = virtualCamera.transform.rotation;
-            Quaternion rotation = Quaternion.Lerp(currentRotation, endRotation, _speed * Time.deltaTime);
+            var currentRotation = virtualCamera.transform.rotation;
+            var rotation = Quaternion.Lerp(currentRotation, endRotation, speed * Time.deltaTime);
             virtualCamera.transform.rotation = rotation;
         }
 
@@ -97,8 +96,8 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         /// </summary>
         private void LerpOrtho()
         {
-            float currentOrtho = virtualCamera.m_Lens.OrthographicSize;
-            float orthographicSize = Mathf.Lerp(currentOrtho, endOrtho, _speed * Time.deltaTime);
+            var currentOrtho = virtualCamera.m_Lens.OrthographicSize;
+            var orthographicSize = Mathf.Lerp(currentOrtho, endOrtho, speed * Time.deltaTime);
             virtualCamera.m_Lens.OrthographicSize = orthographicSize;
         }
 
@@ -117,13 +116,13 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
                     ModRotation();
 
                     dollyCart.m_Position = 0;
-                    _startTrackingShot = true;
+                    startTrackingShot = true;
                     break;
                 case GameState.Build:
-                    _isBuildToWave = true;
+                    isBuildToWave = true;
                     break;
                 case GameState.Wave:
-                    _isBuildToWave = false;
+                    isBuildToWave = false;
                     break;
                 case GameState.End:
                     break;
@@ -137,15 +136,15 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         /// </summary>
         private void ModWayPoints()
         {
-            switch (_isBuildToWave)
+            switch (isBuildToWave)
             {
                 case true:
-                    path.m_Waypoints[0].position = _playerModel.BuildCamera.transform.position;
-                    path.m_Waypoints[1].position = _playerModel.CommanderCamera.transform.position;
+                    path.m_Waypoints[0].position = playerModel.BuildCamera.transform.position;
+                    path.m_Waypoints[1].position = playerModel.CommanderCamera.transform.position;
                     break;
                 case false:
-                    path.m_Waypoints[0].position = _playerModel.CommanderCamera.transform.position;
-                    path.m_Waypoints[1].position = _playerModel.BuildCamera.transform.position;
+                    path.m_Waypoints[0].position = playerModel.CommanderCamera.transform.position;
+                    path.m_Waypoints[1].position = playerModel.BuildCamera.transform.position;
                     break;
             }
         }
@@ -155,15 +154,15 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         /// </summary>
         private void ModOrtho()
         {
-            switch (_isBuildToWave)
+            switch (isBuildToWave)
             {
                 case true:
-                    startOrtho = _playerModel.BuildCamera.orthographicSize;
-                    endOrtho = _playerModel.CommanderCamera.orthographicSize;
+                    startOrtho = playerModel.BuildCamera.orthographicSize;
+                    endOrtho = playerModel.CommanderCamera.orthographicSize;
                     break;
                 case false:
-                    startOrtho = _playerModel.CommanderCamera.orthographicSize;
-                    endOrtho = _playerModel.BuildCamera.orthographicSize;
+                    startOrtho = playerModel.CommanderCamera.orthographicSize;
+                    endOrtho = playerModel.BuildCamera.orthographicSize;
                     break;
             }
             virtualCamera.m_Lens.OrthographicSize = startOrtho;
@@ -174,15 +173,15 @@ namespace _Project.GamePlay.CameraMovement.TrackingShot
         /// </summary>
         private void ModRotation()
         {
-            switch (_isBuildToWave)
+            switch (isBuildToWave)
             {
                 case true:
-                    startRotation = _playerModel.BuildCamera.transform.rotation;
-                    endRotation = _playerModel.CommanderCamera.transform.rotation;
+                    startRotation = playerModel.BuildCamera.transform.rotation;
+                    endRotation = playerModel.CommanderCamera.transform.rotation;
                     break;
                 case false:
-                    startRotation = _playerModel.CommanderCamera.transform.rotation;
-                    endRotation = _playerModel.BuildCamera.transform.rotation;
+                    startRotation = playerModel.CommanderCamera.transform.rotation;
+                    endRotation = playerModel.BuildCamera.transform.rotation;
                     break;
             }
             virtualCamera.transform.rotation = startRotation;
