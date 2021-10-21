@@ -58,14 +58,6 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #endregion
 
-        #region Protected Fields
-
-        #endregion
-
-        #region Public Fields
-
-        #endregion
-
         #region Public Properties
 
         public string CommanderName

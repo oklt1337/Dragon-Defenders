@@ -13,76 +13,12 @@ namespace _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts
     [CreateAssetMenu (menuName = "Tools/CommanderAbilityDataBase", fileName = "CommanderAbilityDataBase")] 
     public class CommanderAbilityDataBase : SerializedScriptableObject
     {
-        #region Singleton
-
-        #endregion
-    
-        #region SerializeFields
-
-    
-
-        #endregion
-    
-        #region Private Fields
-
-    
-
-        #endregion
-    
-        #region protected Fields
-
-    
-
-        #endregion
-    
         #region Public Fields
 
         [OdinSerialize] public List<Type> CommanderAbilitiesScripts = new List<Type>();
         public List<AbilityDataBase> commanderAbilitiesDataBases = new List<AbilityDataBase>();
 
         #endregion
-    
-        #region Public Properties
-
-    
-
-        #endregion
-    
-        #region Events
-
-    
-
-        #endregion
-    
-        #region Unity Methods
-
-    
-
-        #endregion
-    
-        #region Private Methods
-
-    
-
-        #endregion
-    
-        #region Protected Methods
-
-    
-
-        #endregion
-    
-        #region Public Methods
-
-    
-
-        #endregion
-    
-        #region CallBacks
-
-
-        #endregion
-        
     }
 }
 
