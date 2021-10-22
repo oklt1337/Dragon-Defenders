@@ -1,3 +1,4 @@
+using _Project.UI.MainMenu.Manager.Scripts;
 using _Project.UI.Managers.Scripts;
 using _Project.Utility.SceneManager.Scripts;
 using TMPro;
@@ -44,6 +45,12 @@ namespace _Project.UI.MainMenu.Home_Screen.Scripts
         public void OnClickLobby()
         {
             SceneManager.ChangeScene(Scene.Lobby);
+        }
+
+        public void OnClickSettings()
+        {
+            MainMenuCanvasManager.Instance.MainMenuSettingsScreen.gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

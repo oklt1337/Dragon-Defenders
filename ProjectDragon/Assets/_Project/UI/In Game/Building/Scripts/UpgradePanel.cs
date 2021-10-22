@@ -1,18 +1,38 @@
 using System.Collections.Generic;
 using _Project.SkillSystem.SkillTree;
+using _Project.UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.UI.In_Game.Building.Scripts
 {
-    public class UpgradePanel : MonoBehaviour
+    public class UpgradePanel : MonoBehaviour, ICanvas
     {
         [SerializeField] private List<Image> skillImages = new List<Image>();
         [SerializeField] private Sprite missingSprite;
 
         private SkillTree skillTree;
 
+        #region Unity Methods
+
+        private void OnEnable()
+        {
+            CanvasManager.Instance.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            CanvasManager.Instance.Unsubscribe(this);
+        }
+
+        #endregion
+        
         #region Public Methods
+        
+        public void ChangeInteractableStatus(bool status)
+        {
+            throw new System.NotImplementedException();
+        }
 
         /// <summary>
         /// Upgrades the skill tree.
@@ -74,5 +94,6 @@ namespace _Project.UI.In_Game.Building.Scripts
         }
 
         #endregion
+
     }
 }

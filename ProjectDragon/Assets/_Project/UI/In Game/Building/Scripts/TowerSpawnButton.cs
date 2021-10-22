@@ -1,4 +1,5 @@
 using _Project.GamePlay.GameManager.Scripts;
+using _Project.UI.Managers.Scripts;
 using _Project.Units.Unit.BaseUnits;
 using Photon.Pun;
 using UnityEngine;
@@ -7,11 +8,25 @@ using UnityEngine.EventSystems;
 namespace _Project.UI.In_Game.Building.Scripts
 {
     public class TowerSpawnButton : MonoBehaviourPun, IPointerClickHandler, IBeginDragHandler, IDragHandler,
-        IEndDragHandler
+        IEndDragHandler, ICanvas
     {
         [SerializeField] private Unit unit;
         [SerializeField] private Camera buildCam;
+        
+        #region Unity Methods
 
+        private void OnEnable()
+        {
+            CanvasManager.Instance.Subscribe(this);
+        }
+
+        private void OnDisable()
+        {
+            CanvasManager.Instance.Unsubscribe(this);
+        }
+
+        #endregion
+        
         #region Interface Methods
 
         public void OnPointerClick(PointerEventData eventData)
@@ -53,6 +68,11 @@ namespace _Project.UI.In_Game.Building.Scripts
         }
 
         #endregion
+
+        public void ChangeInteractableStatus(bool status)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public void UpdateUnitName(Unit newUnit)
         {
