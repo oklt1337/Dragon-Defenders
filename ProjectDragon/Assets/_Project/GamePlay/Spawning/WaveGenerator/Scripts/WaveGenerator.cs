@@ -126,6 +126,11 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
             return false;
         }
 
+        /// <summary>
+        /// Sets Min enemies of wave.
+        /// </summary>
+        /// <param name="waveCombatScore">int</param>
+        /// <returns>int minEnemies</returns>
         private int SetMinEnemiesCount(int waveCombatScore)
         {
             var minEnemies = waveCombatScore / minWaveCountModifier;
@@ -139,6 +144,11 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
             return minEnemies;
         }
         
+        /// <summary>
+        /// Sets Max enemies of wave.
+        /// </summary>
+        /// <param name="waveCombatScore">int</param>
+        /// <returns>int maxEnemies</returns>
         private int SetMaxEnemiesCount(int waveCombatScore)
         {
             var maxEnemies = waveCombatScore / maxWaveCountModifier;
