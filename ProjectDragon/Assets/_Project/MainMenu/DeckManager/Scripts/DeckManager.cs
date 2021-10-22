@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using _Project.Deck_Cards.Decks.Scripts;
 using UnityEditor;
@@ -12,21 +11,21 @@ namespace _Project.MainMenu.DeckManager.Scripts
 
         #region Private Fields
 
-        [SerializeField] private List<Deck> _decks = new List<Deck>();
-        private Deck _currentDeck;
+        [SerializeField] private List<Deck> decks = new List<Deck>();
+        private Deck currentDeck;
 
         #endregion
 
         #region Private Fields
 
-        private string _currentDeckPath;
+        private string currentDeckPath;
 
         #endregion
 
         #region Public Properties
 
-        public List<Deck> Decks => _decks;
-        public Deck CurrentDeck => _currentDeck;
+        public List<Deck> Decks => decks;
+        public Deck CurrentDeck => currentDeck;
 
         #endregion
         
@@ -70,25 +69,25 @@ namespace _Project.MainMenu.DeckManager.Scripts
                 //Set deckName to generic name
                 deckName = newDeckName;
                 
-                Debug.Log(_decks.Count);
-                if (_decks.Count > 0)
+                Debug.Log(decks.Count);
+                if (decks.Count > 0)
                 {
                     int deckNameIndex = 0;
-                    int index = _decks.FindIndex(deck => deck.DeckName == deckName);
+                    int index = decks.FindIndex(deck => deck.DeckName == deckName);
                     // if generic Name is already taken search increase Number at end until deckName is not taken
                     while (index != -1 && deckNameIndex < 100)
                     {
                         Debug.Log($"DeckIndex {index}");
                         deckNameIndex++;
                         deckName = newDeckName + deckNameIndex;
-                        index = _decks.FindIndex(deck => deck.DeckName == deckName);
+                        index = decks.FindIndex(deck => deck.DeckName == deckName);
                     }
                 }
             }
             
-            _currentDeck = ScriptableObject.CreateInstance<Deck>();
-            _currentDeck.DeckName = deckName;
-            _currentDeckPath = $"Assets/_Project/RuntimeAssets/{deckName}.asset";
+            currentDeck = ScriptableObject.CreateInstance<Deck>();
+            currentDeck.DeckName = deckName;
+            currentDeckPath = $"Assets/_Project/RuntimeAssets/{deckName}.asset";
         }
 
         /// <summary>
@@ -98,24 +97,24 @@ namespace _Project.MainMenu.DeckManager.Scripts
         /// <returns>bool = true if deckName could be found in deckList.</returns>
         public bool DeleteDeck(string deckName)
         {
-            int index = _decks.FindIndex(deck => deck.DeckName == deckName);
+            int index = decks.FindIndex(deck => deck.DeckName == deckName);
 
             if (index == -1)
                 return false;
             
-            _decks.RemoveAt(index);
+            decks.RemoveAt(index);
             return true;
         }
 
         public void SaveDeck()
         {
-            _decks.Add(_currentDeck);
+            decks.Add(currentDeck);
 
-            AssetDatabase.CreateAsset(_currentDeck, _currentDeckPath);
+            AssetDatabase.CreateAsset(currentDeck, currentDeckPath);
             AssetDatabase.SaveAssets();
 
-            _currentDeck = null;
-            _currentDeckPath = string.Empty;
+            currentDeck = null;
+            currentDeckPath = string.Empty;
         }
 
         #endregion
@@ -127,7 +126,7 @@ namespace _Project.MainMenu.DeckManager.Scripts
         /// </summary>
         private void DeleteDeckAsset()
         {
-            AssetDatabase.DeleteAsset(_currentDeckPath);
+            AssetDatabase.DeleteAsset(currentDeckPath);
         }
 
         #endregion
