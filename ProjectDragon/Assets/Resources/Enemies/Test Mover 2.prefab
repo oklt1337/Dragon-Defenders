@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 264498729499873607}
   - component: {fileID: 1104297664621222579}
   - component: {fileID: 8103288161834981906}
-  - component: {fileID: 1476523661301853660}
+  - component: {fileID: -8498200286745074403}
   m_Layer: 0
-  m_Name: Test Mover
+  m_Name: Test Mover 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,14 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57d100a7275ef74da6b07e5f2e29f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Test Mover
+  enemyName: Test Mover 2
   enemyPath: Enemies/
   defense: 0
   maxSpeed: 0
   expDrop: 0
   goldDrop: 0
   hqDamage: 0
-  enemyCombatScore: 8
+  enemyCombatScore: 100
   enemyModel: {fileID: 0}
   agent: {fileID: 264498729499873607}
   health: 0
@@ -165,7 +165,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1476523661301853660
+--- !u!114 &-8498200286745074403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

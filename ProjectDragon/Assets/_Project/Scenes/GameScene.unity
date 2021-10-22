@@ -2050,7 +2050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ceaa6c5ee7eef04489ec45724e26d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseWave: {fileID: 0}
+  baseWave: {fileID: 11400000, guid: 407ed2432967f144e8f76dd1c2b4f905, type: 2}
   currentWave: {fileID: 0}
   currentWaveIndex: 0
 --- !u!4 &705666260
@@ -2368,8 +2368,8 @@ GameObject:
   - component: {fileID: 812033520}
   - component: {fileID: 812033519}
   - component: {fileID: 812033518}
-  - component: {fileID: 812033521}
   - component: {fileID: 812033522}
+  - component: {fileID: 812033521}
   m_Layer: 0
   m_Name: HQ
   m_TagString: HQ
@@ -2467,8 +2467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d864d0bd9e9e5c4c8be52b92ea0f947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hqObj: {fileID: 0}
-  health: 0
+  hqObj: {fileID: 812033516}
+  health: 1000
 --- !u!54 &812033522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2904,12 +2904,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b40f03e9f28624c8e1e26f702defe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allEnemies: []
-  waveDifficultlyModifier: 0
-  scoreDecreaseValue: 0
-  strengthsThreshold: 0
-  minWaveCountModifier: 0
-  maxWaveCountModifier: 0
+  allEnemies:
+  - {fileID: 290059423846922596, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
+  - {fileID: 290059423846922596, guid: cb22f766a252e9f41a5cd914446e4ffc, type: 3}
+  - {fileID: 290059423846922596, guid: 5bcc10a78f3ebc34c9bf197873a0c300, type: 3}
+  - {fileID: 290059423846922596, guid: 73a119279e878444fa7d89c77fa1ba1c, type: 3}
+  waveDifficultlyModifier: 3
+  strengthsThreshold: 200
+  minWaveCountModifier: 10
+  maxWaveCountModifier: 15
+  startCombatScore: 100
 --- !u!4 &1275092367
 Transform:
   m_ObjectHideFlags: 0

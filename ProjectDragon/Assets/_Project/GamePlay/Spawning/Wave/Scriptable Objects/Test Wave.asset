@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Test Wave
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1876736512538414471, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
-  - {fileID: 1876736512538414471, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
-  - {fileID: 1876736512538414471, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
-  - {fileID: 1876736512538414471, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
-  - {fileID: 1876736512538414471, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
-  - {fileID: 1876736512538414471, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
+  - {fileID: 290059423846922596, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
+  - {fileID: 290059423846922596, guid: b348dbbf0fe550946969260cf1cae783, type: 3}
+  - {fileID: 290059423846922596, guid: cb22f766a252e9f41a5cd914446e4ffc, type: 3}
+  - {fileID: 290059423846922596, guid: cb22f766a252e9f41a5cd914446e4ffc, type: 3}
+  - {fileID: 290059423846922596, guid: 5bcc10a78f3ebc34c9bf197873a0c300, type: 3}
+  - {fileID: 290059423846922596, guid: 73a119279e878444fa7d89c77fa1ba1c, type: 3}

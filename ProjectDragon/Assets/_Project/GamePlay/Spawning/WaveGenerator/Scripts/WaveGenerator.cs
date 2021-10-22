@@ -16,6 +16,7 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         [SerializeField] private int strengthsThreshold;
         [SerializeField] private int minWaveCountModifier;
         [SerializeField] private int maxWaveCountModifier;
+        [SerializeField] private int startCombatScore;
 
         #endregion
 
@@ -61,6 +62,7 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         public Wave.Scripts.Wave GetNextWave(Wave.Scripts.Wave lastWave)
         {
             combatScore = lastWave.WaveCombatScore * waveDifficultlyModifier;
+            
             var allowedEnemiesInWave = (from enemy in allowedEnemies where enemy.Value select enemy.Key).ToList();
 
             return GenerateWave(allowedEnemiesInWave);
@@ -84,7 +86,7 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
             var wave = ScriptableObject.CreateInstance<Wave.Scripts.Wave>();
             var enemiesWithinCombatScore = enemies.Where(enemy => enemy.EnemyCombatScore <= combatScore).ToList();
 
-            var averageOfAllEnemies = (float) enemyCount / combatScore;
+            var averageOfAllEnemies = (float)  combatScore / enemyCount;
             
             var lowerAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore <= averageOfAllEnemies).ToList();
             var higherAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore > averageOfAllEnemies).ToList();
