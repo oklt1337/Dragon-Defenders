@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Project.AI.Enemies.Scripts;
 using _Project.GamePlay.GameManager.Scripts;
 using UnityEngine;
 
@@ -7,16 +8,22 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private List<Wave.Scripts.Wave> waves = new List<Wave.Scripts.Wave>();
-        [SerializeField] private int currentWave;
+        [SerializeField] private Wave.Scripts.Wave baseWave;
+        [SerializeField] private Wave.Scripts.Wave currentWave;
+        [SerializeField] private int currentWaveIndex;
 
-        public event Action<List<GameObject>> OnUpdateWave;
+        public event Action<List<Enemy>> OnUpdateWave;
 
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
         }
-        
+
+        private void Start()
+        {
+            currentWave = baseWave;
+        }
+
         private void OnDestroy()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
@@ -30,10 +37,17 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
             if(state != GameState.Build)
                 return;
             
-            currentWave++;
-            // For the Alpha we only use one wave.
-            OnUpdateWave?.Invoke(waves[0].Enemies);
-            //OnUpdateWave?.Invoke(waves[currentWave - 1] == null ? waves[0].Enemies : waves[currentWave - 1].Enemies);
+            currentWaveIndex++;
+            SetNewWave();
+            OnUpdateWave?.Invoke(currentWave.Enemies);
+        }
+
+        /// <summary>
+        /// Get new wave from WaveGenerator or set one manually
+        /// </summary>
+        private void SetNewWave()
+        {
+            currentWave = GameManager.Scripts.GameManager.Instance.WaveGenerator.GetNextWave(currentWave);
         }
     }
 }

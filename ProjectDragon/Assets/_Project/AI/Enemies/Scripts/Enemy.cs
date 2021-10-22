@@ -15,6 +15,7 @@ namespace _Project.AI.Enemies.Scripts
         [SerializeField] private float expDrop;
         [SerializeField] private int goldDrop;
         [SerializeField] private int hqDamage;
+        [SerializeField] private int enemyCombatScore;
 
         [SerializeField] private GameObject enemyModel;
         #endregion
@@ -37,6 +38,7 @@ namespace _Project.AI.Enemies.Scripts
         }
 
         public string EnemyPath => enemyPath;
+        public int EnemyCombatScore => enemyCombatScore;
 
         #endregion
 

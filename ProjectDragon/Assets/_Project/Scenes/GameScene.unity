@@ -1416,7 +1416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &440852306
 MonoBehaviour:
@@ -2050,9 +2050,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ceaa6c5ee7eef04489ec45724e26d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waves:
-  - {fileID: 11400000, guid: 407ed2432967f144e8f76dd1c2b4f905, type: 2}
-  currentWave: 0
+  baseWave: {fileID: 0}
+  currentWave: {fileID: 0}
+  currentWaveIndex: 0
 --- !u!4 &705666260
 Transform:
   m_ObjectHideFlags: 0
@@ -2065,7 +2065,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761725022
 GameObject:
@@ -2323,7 +2323,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &806328840
 GameObject:
@@ -2875,6 +2875,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1240333282}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1275092365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1275092367}
+  - component: {fileID: 1275092366}
+  m_Layer: 0
+  m_Name: WaveGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1275092366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275092365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1b40f03e9f28624c8e1e26f702defe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allEnemies: []
+  waveDifficultlyModifier: 0
+  scoreDecreaseValue: 0
+  strengthsThreshold: 0
+  minWaveCountModifier: 0
+  maxWaveCountModifier: 0
+--- !u!4 &1275092367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275092365}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1713089046}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1298276597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4280,6 +4329,7 @@ MonoBehaviour:
   commanderMoveIndicator: {fileID: 576650401}
   enemySpawner: {fileID: 1298276599}
   waveManager: {fileID: 705666259}
+  waveGenerator: {fileID: 1275092366}
   unitManager: {fileID: 783883374}
   hqManager: {fileID: 407553236}
   cameraTrackingShotBuildToWave: {fileID: 1155049007}
@@ -4300,6 +4350,7 @@ Transform:
   - {fileID: 1298276598}
   - {fileID: 576650402}
   - {fileID: 407553237}
+  - {fileID: 1275092367}
   - {fileID: 705666260}
   - {fileID: 783883375}
   - {fileID: 440852305}

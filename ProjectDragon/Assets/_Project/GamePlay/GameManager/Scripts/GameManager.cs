@@ -5,6 +5,7 @@ using _Project.GamePlay.HQManager.Scripts;
 using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
+using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
 using _Project.GamePlay.Spawning.WaveManager.Scripts;
 using _Project.UI.In_Game.Base_UI.Scripts;
 using _Project.UI.In_Game.Building.Scripts;
@@ -39,6 +40,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         [Header("Managers")]
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
+        [SerializeField] private WaveGenerator waveGenerator;
         [SerializeField] private UnitManager unitManager;
         [SerializeField] private HqManager hqManager;
         
@@ -74,6 +76,7 @@ namespace _Project.GamePlay.GameManager.Scripts
         
         public EnemySpawner EnemySpawner => enemySpawner;
         public WaveManager WaveManager => waveManager;
+        public WaveGenerator WaveGenerator => waveGenerator;
         public PlayerModel PlayerModel => player;
         public UnitManager UnitManager => unitManager;
         public HqManager Hq => hqManager;

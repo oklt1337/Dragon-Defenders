@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using _Project.AI.Enemies.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.Spawning.Wave.Scripts
@@ -6,8 +8,16 @@ namespace _Project.GamePlay.Spawning.Wave.Scripts
     [CreateAssetMenu(menuName = "Tools/Wave")]
     public class Wave : ScriptableObject
     {
-       [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+       [SerializeField] private List<Enemy> enemies = new List<Enemy>();
 
-       public List<GameObject> Enemies => enemies;
+       public List<Enemy> Enemies => enemies;
+
+       public int WaveCombatScore
+       {
+           get
+           {
+               return Enemies.Sum(enemy => enemy.EnemyCombatScore);
+           }
+       }
     }
 }

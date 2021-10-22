@@ -10,13 +10,13 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
 {
     public class EnemySpawner : MonoBehaviourPun
     {
-        [Header("Enemy Related Stuff")] [SerializeField]
-        private int waveSize;
+        [Header("Enemy Related Stuff")] 
+        [SerializeField] private int waveSize;
 
         [SerializeField] private int killedEnemies;
         [SerializeField] private float enemySpawnDelay;
 
-        private List<GameObject> enemies;
+        private List<Enemy> enemies;
 
         [Header("Object Related Stuff")] 
         [SerializeField] private List<Transform> spawnPositions;
@@ -71,7 +71,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
             OnWaveSuccess?.Invoke(GameState.Prepare);
             killedEnemies = 0;
         }
-        
+
         #endregion
 
         #region Private Methods
@@ -80,12 +80,12 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
         /// Updates the List of enemies.
         /// </summary>
         /// <param name="nextEnemies"> The new List of new enemies </param>
-        private void UpdateNextEnemies(List<GameObject> nextEnemies)
+        private void UpdateNextEnemies(List<Enemy> nextEnemies)
         {
             enemies = nextEnemies;
             waveSize = nextEnemies.Count;
         }
-        
+
         /// <summary>
         /// Starts spawning the currently saved enemies.
         /// </summary>
@@ -105,11 +105,11 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
         /// </summary>
         private void UpdateSpawnPoints()
         {
-            if(spawnPositions.Count < 2)
+            if (spawnPositions.Count < 2)
                 return;
 
             currentSpawnPosition++;
-            
+
             if (currentSpawnPosition >= spawnPositions.Count)
                 currentSpawnPosition = 0;
         }
@@ -122,12 +122,11 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
         {
             coroutineIsRunning = true;
 
-            foreach (GameObject enemy in enemies)
+            foreach (var enemy in enemies)
             {
                 UpdateSpawnPoints();
-                var en = enemy.GetComponent<Enemy>();
-                PhotonNetwork.Instantiate
-                    (string.Concat(en.EnemyPath, en.EnemyName), spawnPositions[currentSpawnPosition].position, Quaternion.identity);
+                PhotonNetwork.Instantiate(string.Concat(enemy.EnemyPath, enemy.EnemyName),
+                    spawnPositions[currentSpawnPosition].position, Quaternion.identity);
                 yield return new WaitForSeconds(enemySpawnDelay);
             }
 
