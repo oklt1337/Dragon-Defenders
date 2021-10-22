@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _Project.SkillSystem.SkillTree;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ namespace _Project.UI.In_Game.Building.Scripts
 {
     public class UpgradePanel : MonoBehaviour
     {
-        [SerializeField] private Image[] skillImages;
+        [SerializeField] private List<Image> skillImages = new List<Image>();
         [SerializeField] private Sprite missingSprite;
 
         private SkillTree skillTree;
@@ -50,7 +51,7 @@ namespace _Project.UI.In_Game.Building.Scripts
         /// </summary>
         private void UpdateImages()
         {
-            for (int i = 0; i < skillImages.Length; i++)
+            for (int i = 0; i < skillImages.Count; i++)
             {
                 string key = (i + 1).ToString();
 
