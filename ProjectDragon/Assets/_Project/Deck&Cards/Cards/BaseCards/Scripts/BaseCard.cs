@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
 {
@@ -14,8 +15,12 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
     {
         [SerializeField] private Sprite displayImage;
         [SerializeField] private Rarity rarity;
+        [SerializeField] private int cost;
+        [SerializeField] private VideoClip videoClip;
 
         public Sprite DisplayImage => displayImage;
         public Rarity Rarity => rarity;
+        public int Cost => cost;
+        public VideoClip VideoClip => videoClip;
     }
 }

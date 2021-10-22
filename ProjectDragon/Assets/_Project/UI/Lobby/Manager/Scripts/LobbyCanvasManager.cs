@@ -16,7 +16,14 @@ namespace _Project.UI.Lobby.Manager.Scripts
         
         private void Awake()
         {
-            Instance = this;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
         }
     }
 }

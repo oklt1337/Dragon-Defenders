@@ -40,17 +40,16 @@ using Facebook.Unity;
         public GetPlayerCombinedInfoRequestParams InfoRequestParams;
 
         //this is a force link flag for custom ids for demoing
-        public bool ForceLink = false;
+        public readonly bool ForceLink = false;
 
         //Accessibility for PlayFab ID & Session Tickets
-        public static string PlayFabId => _playFabId;
-        private static string _playFabId;
-        public static string SessionTicket => _sessionTicket;
-        private static string _sessionTicket;
+        public static string PlayFabId { get; private set; }
 
-        private const string _LoginRememberKey = "PlayFabLoginRemember";
-        private const string _PlayFabRememberMeIdKey = "PlayFabIdPassGuid";
-        private const string _PlayFabAuthTypeKey = "PlayFabAuthType";
+        public static string SessionTicket { get; private set; }
+
+        private const string LoginRememberKey = "PlayFabLoginRemember";
+        private const string PlayFabRememberMeIdKey = "PlayFabIdPassGuid";
+        private const string PlayFabAuthTypeKey = "PlayFabAuthType";
 
         public static PlayFabAuthService Instance => _instance ??= new PlayFabAuthService();
         private static PlayFabAuthService _instance;
@@ -65,43 +64,43 @@ using Facebook.Unity;
         /// Remember the user next time they log in
         /// This is used for Auto-Login purpose.
         /// </summary>
-        public bool RememberMe
+        public static bool RememberMe
         {
-            get => PlayerPrefs.GetInt(_LoginRememberKey, 0) != 0;
-            set => PlayerPrefs.SetInt(_LoginRememberKey, value ? 1 : 0);
+            get => PlayerPrefs.GetInt(LoginRememberKey, 0) != 0;
+            set => PlayerPrefs.SetInt(LoginRememberKey, value ? 1 : 0);
         }
 
         /// <summary>
         /// Remember the type of authenticate for the user
         /// </summary>
-        public AuthTypes AuthType
+        public static AuthTypes AuthType
         {
-            get => (AuthTypes)PlayerPrefs.GetInt(_PlayFabAuthTypeKey, 0);
-            set => PlayerPrefs.SetInt(_PlayFabAuthTypeKey, (int)value);
+            get => (AuthTypes)PlayerPrefs.GetInt(PlayFabAuthTypeKey, 0);
+            set => PlayerPrefs.SetInt(PlayFabAuthTypeKey, (int)value);
         }
 
         /// <summary>
         /// Generated Remember Me ID
         /// Pass Null for a value to have one auto-generated.
         /// </summary>
-        private string RememberMeId
+        private static string RememberMeId
         {
-            get => PlayerPrefs.GetString(_PlayFabRememberMeIdKey, "");
+            get => PlayerPrefs.GetString(PlayFabRememberMeIdKey, "");
             set
             {
-                string guid = string.IsNullOrEmpty(value) ? Guid.NewGuid().ToString() : value;
-                PlayerPrefs.SetString(_PlayFabRememberMeIdKey, guid);
+                var guid = string.IsNullOrEmpty(value) ? Guid.NewGuid().ToString() : value;
+                PlayerPrefs.SetString(PlayFabRememberMeIdKey, guid);
             }
         }
 
-        public void ClearRememberMe()
+        public static void ClearRememberMe()
         {
-            PlayerPrefs.DeleteKey(_LoginRememberKey);
-            PlayerPrefs.DeleteKey(_PlayFabRememberMeIdKey);
+            PlayerPrefs.DeleteKey(LoginRememberKey);
+            PlayerPrefs.DeleteKey(PlayFabRememberMeIdKey);
         }
 
         /// <summary>
-        /// Kick off the authentication process by specific authtype.
+        /// Kick off the authentication process by specific authType.
         /// </summary>
         /// <param name="authType"></param>
         public void Authenticate(AuthTypes authType)
@@ -111,11 +110,22 @@ using Facebook.Unity;
         }
 
         /// <summary>
+        /// ForgetsAllCredentials, UnlinksSilentAuth and ClearsRememberMe
+        /// </summary>
+        public void Logout()
+        {
+            PlayFabClientAPI.ForgetAllCredentials();
+            UnlinkSilentAuth();
+            ClearRememberMe();
+            AuthType = AuthTypes.None;
+        }
+
+        /// <summary>
         /// Authenticate the user by the Auth Type that was defined.
         /// </summary>
         public void Authenticate()
         {
-            AuthTypes authType = AuthType;
+            var authType = AuthType;
             Debug.Log(authType);
             switch (authType)
             {
@@ -158,8 +168,8 @@ using Facebook.Unity;
                 }, (result) =>
                 {
                     //Store identity and session
-                    _playFabId = result.PlayFabId;
-                    _sessionTicket = result.SessionTicket;
+                    PlayFabId = result.PlayFabId;
+                    SessionTicket = result.SessionTicket;
 
                     //report login result back to subscriber
                     OnLoginSuccess?.Invoke(result);
@@ -188,8 +198,8 @@ using Facebook.Unity;
             }, (result) =>
             {
                 //store identity and session
-                _playFabId = result.PlayFabId;
-                _sessionTicket = result.SessionTicket;
+                PlayFabId = result.PlayFabId;
+                SessionTicket = result.SessionTicket;
 
                 //Note: At this point, they already have an account with PlayFab using a Username (email) & Password
                 //If RememberMe is checked, then generate a new Guid for Login with CustomId.
@@ -216,7 +226,6 @@ using Facebook.Unity;
 
         /// <summary>
         /// Register a user with an Email & Password
-        /// Note: We are not using the RegisterPlayFab API
         /// </summary>
         private void AddAccountAndPassword()
         {
@@ -234,17 +243,11 @@ using Facebook.Unity;
                     });
                 }
 
-                //Note: If silent auth is success, which is should always be and the following 
-                //below code fails because of some error returned by the server ( like invalid email or bad password )
-                //this is okay, because the next attempt will still use the same silent account that was already created.
-
                 //Now add our username & password.
                 if (result != null)
                     PlayFabClientAPI.AddUsernamePassword(new AddUsernamePasswordRequest()
                     {
-                        Username = !string.IsNullOrEmpty(UserName)
-                            ? UserName
-                            : result.PlayFabId, //Because it is required & Unique and not supplied by User.
+                        Username = !string.IsNullOrEmpty(UserName) ? UserName : result.PlayFabId, //Because it is required & Unique and not supplied by User.
                         Email = Email,
                         Password = Password,
                     }, (addResult) =>
@@ -252,8 +255,8 @@ using Facebook.Unity;
                         if (OnLoginSuccess == null)
                             return;
                         //Store identity and session
-                        _playFabId = result.PlayFabId;
-                        _sessionTicket = result.SessionTicket;
+                        PlayFabId = result.PlayFabId;
+                        SessionTicket = result.SessionTicket;
 
                         //If they opted to be remembered on next login.
                         if (RememberMe)
@@ -374,8 +377,8 @@ using Facebook.Unity;
             }, (result) =>
             {
                 //Store Identity and session
-                _playFabId = result.PlayFabId;
-                _sessionTicket = result.SessionTicket;
+                PlayFabId = result.PlayFabId;
+                SessionTicket = result.SessionTicket;
 
                 //check if we want to get this callback directly or send to event subscribers.
                 if (callback == null && OnLoginSuccess != null)

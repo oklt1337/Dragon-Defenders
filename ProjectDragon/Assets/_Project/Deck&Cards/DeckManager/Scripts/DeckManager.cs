@@ -3,7 +3,7 @@ using _Project.Deck_Cards.Decks.Scripts;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.MainMenu.DeckManager.Scripts
+namespace _Project.Deck_Cards.DeckManager.Scripts
 {
     public class DeckManager : MonoBehaviour
     {
@@ -13,12 +13,6 @@ namespace _Project.MainMenu.DeckManager.Scripts
 
         [SerializeField] private List<Deck> decks = new List<Deck>();
         private Deck currentDeck;
-
-        #endregion
-
-        #region Private Fields
-
-        private string currentDeckPath;
 
         #endregion
 
@@ -72,8 +66,8 @@ namespace _Project.MainMenu.DeckManager.Scripts
                 Debug.Log(decks.Count);
                 if (decks.Count > 0)
                 {
-                    int deckNameIndex = 0;
-                    int index = decks.FindIndex(deck => deck.DeckName == deckName);
+                    var deckNameIndex = 0;
+                    var index = decks.FindIndex(deck => deck.DeckName == deckName);
                     // if generic Name is already taken search increase Number at end until deckName is not taken
                     while (index != -1 && deckNameIndex < 100)
                     {
@@ -84,10 +78,9 @@ namespace _Project.MainMenu.DeckManager.Scripts
                     }
                 }
             }
-            
+
             currentDeck = ScriptableObject.CreateInstance<Deck>();
             currentDeck.DeckName = deckName;
-            currentDeckPath = $"Assets/_Project/RuntimeAssets/{deckName}.asset";
         }
 
         /// <summary>
@@ -97,7 +90,7 @@ namespace _Project.MainMenu.DeckManager.Scripts
         /// <returns>bool = true if deckName could be found in deckList.</returns>
         public bool DeleteDeck(string deckName)
         {
-            int index = decks.FindIndex(deck => deck.DeckName == deckName);
+            var index = decks.FindIndex(deck => deck.DeckName == deckName);
 
             if (index == -1)
                 return false;
@@ -106,27 +99,28 @@ namespace _Project.MainMenu.DeckManager.Scripts
             return true;
         }
 
+        /// <summary>
+        /// Saves the deck in the List.
+        /// </summary>
         public void SaveDeck()
         {
             decks.Add(currentDeck);
-
-            AssetDatabase.CreateAsset(currentDeck, currentDeckPath);
-            AssetDatabase.SaveAssets();
-
             currentDeck = null;
-            currentDeckPath = string.Empty;
         }
 
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
-        /// Deletes the Asset at last saved asset path.
+        /// Will set deckName to new Given deckName.
         /// </summary>
-        private void DeleteDeckAsset()
+        /// <param name="index">int deckIndex</param>
+        /// <param name="newDeckName">string</param>
+        /// <returns></returns>
+        public bool EditDeckName(int index, string newDeckName)
         {
-            AssetDatabase.DeleteAsset(currentDeckPath);
+            if (decks[index] == null)
+                return false;
+            
+            decks[index].DeckName = newDeckName;
+            return true;
         }
 
         #endregion

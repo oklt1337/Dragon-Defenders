@@ -41,8 +41,8 @@ namespace _Project.UI.Authorize.Scripts
 
         #region Private Fields
 
-        private bool _clearPlayerPrefs;
-        private readonly PlayFabAuthService _authService = PlayFabAuthService.Instance;
+        private bool clearPlayerPrefs;
+        private readonly PlayFabAuthService authService = PlayFabAuthService.Instance;
 
         #endregion
 
@@ -67,15 +67,15 @@ namespace _Project.UI.Authorize.Scripts
         private void Awake()
         {
             //Clear PlayerPrefs and Unlink Silent Auth.
-            if (_clearPlayerPrefs)
+            if (clearPlayerPrefs)
             {
-                _authService.UnlinkSilentAuth();
-                _authService.ClearRememberMe();
-                _authService.AuthType = AuthTypes.None;
+                authService.UnlinkSilentAuth();
+                PlayFabAuthService.ClearRememberMe();
+                PlayFabAuthService.AuthType = AuthTypes.None;
             }
 
             //Set our remember me button to our remembered state.
-            rememberMe.isOn = _authService.RememberMe;
+            rememberMe.isOn = PlayFabAuthService.RememberMe;
         }
 
         public void Start()
@@ -90,7 +90,7 @@ namespace _Project.UI.Authorize.Scripts
             PlayFabAuthService.OnPlayFabError += OnPlayFabError;
 
             //Bind auth remember me status to toggle.
-            rememberMe.onValueChanged.AddListener((arg0 => _authService.RememberMe = arg0));
+            rememberMe.onValueChanged.AddListener((arg0 => PlayFabAuthService.RememberMe = arg0));
 
             //Bind to UI buttons to perform actions when user interacts with the UI.
             loginButton.onClick.AddListener(OnClickLogin);
@@ -101,15 +101,15 @@ namespace _Project.UI.Authorize.Scripts
             optionsButton.onClick.AddListener(OnClickOptions);
 
             //Set the data we want at login from what we chose in our meta data.
-            _authService.InfoRequestParams = infoRequestParams;
+            authService.InfoRequestParams = infoRequestParams;
 
             //Start the authentication process.
-            _authService.Authenticate();
+            authService.Authenticate();
         }
 
         private void OnEnable()
         {
-            //CanvasManager.Instance.Subscribe(this);
+            CanvasManager.Instance.Subscribe(this);
         }
 
         private void OnDisable()
@@ -125,7 +125,7 @@ namespace _Project.UI.Authorize.Scripts
         /// Login Successfully
         /// </summary>
         /// <param name="result"></param>
-        private void OnLoginSuccess(PlayFab.ClientModels.LoginResult result)
+        private void OnLoginSuccess(LoginResult result)
         {
             Debug.LogFormat("Logged In as: {0}", result.PlayFabId);
 
@@ -167,9 +167,9 @@ namespace _Project.UI.Authorize.Scripts
         private void OnClickLogin()
         {
             Debug.Log("Click Login");
-            _authService.Email = userName.text;
-            _authService.Password = password.text;
-            _authService.Authenticate(AuthTypes.EmailAndPassword);
+            authService.Email = userName.text;
+            authService.Password = password.text;
+            authService.Authenticate(AuthTypes.EmailAndPassword);
         }
 
         /// <summary>
@@ -183,9 +183,9 @@ namespace _Project.UI.Authorize.Scripts
                 return;
             }
 
-            _authService.Email = userName.text;
-            _authService.Password = password.text;
-            _authService.Authenticate(AuthTypes.RegisterPlayFabAccount);
+            authService.Email = userName.text;
+            authService.Password = password.text;
+            authService.Authenticate(AuthTypes.RegisterPlayFabAccount);
         }
 
         /// <summary>

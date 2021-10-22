@@ -42,7 +42,14 @@ namespace _Project.UI.MainMenu.Manager.Scripts
 
         private void Awake()
         {
-            Instance = this;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
         }
     }
 }

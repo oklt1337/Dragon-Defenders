@@ -15,7 +15,7 @@ namespace _Project.Deck_Cards.Decks.Scripts
         [SerializeField] private string deckName;
         [SerializeField] private Factions.Faction faction;
         [SerializeField] private CommanderCard commanderCard;
-        [SerializeField] private List<UnitCard> unitCards;
+        [SerializeField] private List<UnitCard> unitCards = new List<UnitCard>();
 
         #endregion
 
@@ -67,9 +67,12 @@ namespace _Project.Deck_Cards.Decks.Scripts
             if (card.GetType() != typeof(UnitCard)) 
                 return false;
             
+            if (unitCards.Contains((UnitCard) card))
+                return false;
+            
             if (unitCards.Count == MaxCards)
                 return false;
-                
+
             unitCards.Add((UnitCard) card);
             return true;
         }
