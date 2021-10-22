@@ -13,16 +13,17 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         [SerializeField] private List<Enemy> allEnemies = new List<Enemy>();
         [OdinSerialize] private Dictionary<Enemy, bool> allowedEnemies = new Dictionary<Enemy, bool>();
         [SerializeField] private int waveDifficultlyModifier;
-        [SerializeField] private int scoreDecreaseValue;
         [SerializeField] private int strengthsThreshold;
         [SerializeField] private int minWaveCountModifier;
         [SerializeField] private int maxWaveCountModifier;
 
         #endregion
 
-        #region MyRegion
+        #region Private Fields
 
         private int combatScore;
+        private int minEnemies;
+        private int maxEnemies;
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         {
             foreach (var enemy in allEnemies)
             {
-                allowedEnemies.Add(enemy, enemy.EnemyCombatScore > strengthsThreshold);
+                allowedEnemies.Add(enemy, enemy.EnemyCombatScore < strengthsThreshold);
             }
         }
 
@@ -51,7 +52,7 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
                 allowedEnemies[enemy] = true;
             }
         }
-        
+
         /// <summary>
         /// Returns Next Wave
         /// </summary>
@@ -74,56 +75,44 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// </summary>
         /// <param name="enemies">List Enemy</param>
         /// <returns>Wave</returns>
-        private Wave.Scripts.Wave GenerateWave(List<Enemy> enemies)
+        private Wave.Scripts.Wave GenerateWave(IEnumerable<Enemy> enemies)
         {
-            var wavesValidated = 0;
+            minEnemies = SetMinEnemiesCount(combatScore);
+            maxEnemies = SetMaxEnemiesCount(combatScore);
+            var enemyCount = Random.Range(minEnemies, maxEnemies);
+            
             var wave = ScriptableObject.CreateInstance<Wave.Scripts.Wave>();
+            var enemiesWithinCombatScore = enemies.Where(enemy => enemy.EnemyCombatScore <= combatScore).ToList();
+
+            var averageOfAllEnemies = (float) enemyCount / combatScore;
             
-            while (!ValidateWave(wave, wavesValidated))
+            var lowerAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore <= averageOfAllEnemies).ToList();
+            var higherAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore > averageOfAllEnemies).ToList();
+            
+            var averageOfCurrentEnemy = 0;
+            var totalCurrentEnemyScore = 0;
+
+            //Generate new Wave 
+            for (var i = 0; i < enemyCount; i++)
             {
-                //Generate new Wave
-                wavesValidated++;
+                int index;
+                if (averageOfCurrentEnemy >= averageOfAllEnemies)
+                { 
+                    index = Random.Range(0, lowerAverage.Count);
+                    wave.Enemies.Add(lowerAverage[index]);
+                    totalCurrentEnemyScore += lowerAverage[index].EnemyCombatScore;
+                }
+                else
+                {
+                    index = Random.Range(0, higherAverage.Count);
+                    wave.Enemies.Add(higherAverage[index]);
+                    totalCurrentEnemyScore += higherAverage[index].EnemyCombatScore;
+                }
+                
+                averageOfCurrentEnemy = totalCurrentEnemyScore / wave.Enemies.Count;
             }
+            
             return wave;
-        }
-
-        /// <summary>
-        /// Validates a wave.
-        /// </summary>
-        /// <param name="wave">Wave</param>
-        /// <param name="wavesValidated">int</param>
-        /// <returns>bool = true if wave is valid.</returns>
-        private bool ValidateWave(Wave.Scripts.Wave wave, int wavesValidated)
-        {
-            var minEnemies = SetMinEnemiesCount(wave.WaveCombatScore);
-            var maxEnemies = SetMaxEnemiesCount(wave.WaveCombatScore);
-            const int maxValidations = 100;
-
-            if (wave == null)
-                return false;
-
-            if (wavesValidated >= maxValidations)
-            {
-                Debug.Log("Max iterations reached.");
-                return true;
-            }
-
-            //Wave Rules
-            //Wave must contain min X enemies
-            //Wave cant contain more then X enemies
-            if (wave.Enemies.Count > maxEnemies)
-            {
-                // decrease combatScore
-                combatScore -= scoreDecreaseValue;
-                return false;
-            }
-
-            if (wave.Enemies.Count >= minEnemies) 
-                return true;
-            
-            // increase combatScore
-            combatScore += scoreDecreaseValue;
-            return false;
         }
 
         /// <summary>
@@ -133,17 +122,17 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>int minEnemies</returns>
         private int SetMinEnemiesCount(int waveCombatScore)
         {
-            var minEnemies = waveCombatScore / minWaveCountModifier;
+            var newMinEnemies = waveCombatScore / minWaveCountModifier;
             const int min = 10;
-            
-            if (minEnemies <= min)
+
+            if (newMinEnemies <= min)
             {
-                minEnemies = min;
+                newMinEnemies = min;
             }
 
-            return minEnemies;
+            return newMinEnemies;
         }
-        
+
         /// <summary>
         /// Sets Max enemies of wave.
         /// </summary>
@@ -151,15 +140,15 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>int maxEnemies</returns>
         private int SetMaxEnemiesCount(int waveCombatScore)
         {
-            var maxEnemies = waveCombatScore / maxWaveCountModifier;
+            var newMaxEnemies = waveCombatScore / maxWaveCountModifier;
             const int max = 100;
-            
-            if (maxEnemies <= max)
+
+            if (newMaxEnemies <= max)
             {
-                maxEnemies = max;
+                newMaxEnemies = max;
             }
 
-            return maxEnemies;
+            return newMaxEnemies;
         }
 
         #endregion
