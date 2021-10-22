@@ -76,12 +76,13 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>Wave</returns>
         private Wave.Scripts.Wave GenerateWave(List<Enemy> enemies)
         {
+            var wavesValidated = 0;
             var wave = ScriptableObject.CreateInstance<Wave.Scripts.Wave>();
             
-            while (!ValidateWave(wave))
+            while (!ValidateWave(wave, wavesValidated))
             {
                 //Generate new Wave
-
+                wavesValidated++;
             }
             return wave;
         }
@@ -90,14 +91,22 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// Validates a wave.
         /// </summary>
         /// <param name="wave">Wave</param>
+        /// <param name="wavesValidated">int</param>
         /// <returns>bool = true if wave is valid.</returns>
-        private bool ValidateWave(Wave.Scripts.Wave wave)
+        private bool ValidateWave(Wave.Scripts.Wave wave, int wavesValidated)
         {
             var minEnemies = SetMinEnemiesCount(wave.WaveCombatScore);
             var maxEnemies = SetMaxEnemiesCount(wave.WaveCombatScore);
+            const int maxValidations = 100;
 
             if (wave == null)
                 return false;
+
+            if (wavesValidated >= maxValidations)
+            {
+                Debug.Log("Max iterations reached.");
+                return true;
+            }
 
             //Wave Rules
             //Wave must contain min X enemies
