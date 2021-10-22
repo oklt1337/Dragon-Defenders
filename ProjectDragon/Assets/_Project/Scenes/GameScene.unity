@@ -2050,8 +2050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ceaa6c5ee7eef04489ec45724e26d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseWave: {fileID: 11400000, guid: 407ed2432967f144e8f76dd1c2b4f905, type: 2}
-  currentWave: {fileID: 0}
+  currentWave: {fileID: 11400000, guid: 407ed2432967f144e8f76dd1c2b4f905, type: 2}
   currentWaveIndex: 0
 --- !u!4 &705666260
 Transform:

@@ -8,7 +8,6 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private Wave.Scripts.Wave baseWave;
         [SerializeField] private Wave.Scripts.Wave currentWave;
         [SerializeField] private int currentWaveIndex;
 
@@ -17,11 +16,6 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
-        }
-
-        private void Start()
-        {
-            currentWave = baseWave;
         }
 
         private void OnDestroy()
