@@ -2256,8 +2256,6 @@ namespace PlayFab
 
             PlayFabHttp.MakeApiCall("/Client/WriteTitleEvent", request, AuthType.LoginSession, resultCallback, errorCallback, customData, extraHeaders, context, callSettings);
         }
-
-
     }
 }
 

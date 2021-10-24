@@ -184,6 +184,76 @@ using Facebook.Unity;
             });
         }
 
+        private void AuthenticateFacebook()
+        {
+            PlayFabClientAPI.LoginWithFacebook(new LoginWithFacebookRequest()
+            {
+                TitleId = PlayFabSettings.TitleId,
+                InfoRequestParameters = InfoRequestParams
+            }, (result) =>
+            {
+                //store identity and session
+                PlayFabId = result.PlayFabId;
+                SessionTicket = result.SessionTicket;
+
+                //Note: At this point, they already have an account with PlayFab using a Username (email) & Password
+                //If RememberMe is checked, then generate a new Guid for Login with CustomId.
+                if (RememberMe)
+                {
+                    RememberMeId = Guid.NewGuid().ToString();
+                    AuthType = AuthTypes.EmailAndPassword;
+                    //Fire and forget, but link a custom ID to this PlayFab Account.
+                    PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest()
+                    {
+                        CustomId = RememberMeId,
+                        ForceLink = ForceLink
+                    }, null, null);
+                }
+
+                //report login result back to subscriber
+                OnLoginSuccess?.Invoke(result);
+            }, (error) =>
+            {
+                //Report error back to subscriber
+                OnPlayFabError?.Invoke(error);
+            });
+        }
+        
+        private void AuthenticateGoogle()
+        {
+            PlayFabClientAPI.LoginWithGoogleAccount(new LoginWithGoogleAccountRequest()
+            {
+                TitleId = PlayFabSettings.TitleId,
+                InfoRequestParameters = InfoRequestParams
+            }, (result) =>
+            {
+                //store identity and session
+                PlayFabId = result.PlayFabId;
+                SessionTicket = result.SessionTicket;
+
+                //Note: At this point, they already have an account with PlayFab using a Username (email) & Password
+                //If RememberMe is checked, then generate a new Guid for Login with CustomId.
+                if (RememberMe)
+                {
+                    RememberMeId = Guid.NewGuid().ToString();
+                    AuthType = AuthTypes.EmailAndPassword;
+                    //Fire and forget, but link a custom ID to this PlayFab Account.
+                    PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest()
+                    {
+                        CustomId = RememberMeId,
+                        ForceLink = ForceLink
+                    }, null, null);
+                }
+
+                //report login result back to subscriber
+                OnLoginSuccess?.Invoke(result);
+            }, (error) =>
+            {
+                //Report error back to subscriber
+                OnPlayFabError?.Invoke(error);
+            });
+        }
+
         /// <summary>
         /// Register a user with an Email & Password
         /// </summary>
@@ -243,7 +313,6 @@ using Facebook.Unity;
                     });
             });
         }
-
 
         private void SilentlyAuthenticate(Action<LoginResult> callback = null)
         {
