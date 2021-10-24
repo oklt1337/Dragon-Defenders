@@ -1,7 +1,6 @@
 using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
 using _Project.Faction;
 using _Project.SkillSystem.SkillTree;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace _Project.GamePlay.Player.Commander.CommanderModel.Scripts
@@ -23,6 +22,5 @@ namespace _Project.GamePlay.Player.Commander.CommanderModel.Scripts
         public float experience;
         public SkillTree skillTree;
         public CommanderAbilityDataBase commanderAbilityDataBase;
-        public AnimatorController animatorController;
     }
 }

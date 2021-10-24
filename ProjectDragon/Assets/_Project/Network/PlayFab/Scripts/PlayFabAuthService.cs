@@ -335,8 +335,8 @@ using Facebook.Unity;
         }, (result) => {
             
             //Store Identity and session
-            _playFabId = result.PlayFabId;
-            _sessionTicket = result.SessionTicket;
+            PlayFabId = result.PlayFabId;
+            SessionTicket = result.SessionTicket;
 
             //check if we want to get this callback directly or send to event subscribers.
             if (callback == null && OnLoginSuccess != null)

@@ -5,7 +5,6 @@ using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Faction;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.SkillSystem.SkillTree;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,28 +27,27 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Fields
 
-        private string _commanderName;
-        private GameObject _commanderObj;
-        private Factions.Faction _faction;
-        private Factions.Class _commanderClass;
-        private float _health;
-        private float _maxHealth;
-        private float _mana;
-        private float _attackDamageModifier;
-        private float _defense;
-        private float _speed;
-        private bool _dyingBreath;
-        private byte _rank;
-        private byte _level;
-        private float _experience;
-        private SkillTree _skillTree;
-        private List<Ability> _abilities = new List<Ability>();
-        private AnimatorController _animatorController;
+        private string commanderName;
+        private GameObject commanderObj;
+        private Factions.Faction faction;
+        private Factions.Class commanderClass;
+        private float health;
+        private float maxHealth;
+        private float mana;
+        private float attackDamageModifier;
+        private float defense;
+        private float speed;
+        private bool dyingBreath;
+        private byte rank;
+        private byte level;
+        private float experience;
+        private SkillTree skillTree;
+        private List<Ability> abilities = new List<Ability>();
         private const float MINDamage = 10f;
-        private Vector3 _destination;
-        private State _currentState;
+        private Vector3 destination;
+        private State currentState;
 
-        private Coroutine _movementCo;
+        private Coroutine movementCo;
 
         #endregion
 
@@ -57,41 +55,41 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         public string CommanderName
         {
-            get => _commanderName;
-            private set => _commanderName = value;
+            get => commanderName;
+            private set => commanderName = value;
         }
 
         public GameObject CommanderObj
         {
-            get => _commanderObj;
-            private set => _commanderObj = value;
+            get => commanderObj;
+            private set => commanderObj = value;
         }
 
         public Factions.Faction Faction
         {
-            get => _faction;
-            private set => _faction = value;
+            get => faction;
+            private set => faction = value;
         }
 
         public Factions.Class CommanderClass
         {
-            get => _commanderClass;
-            private set => _commanderClass = value;
+            get => commanderClass;
+            private set => commanderClass = value;
         }
 
         public float MAXHealth
         {
-            get => _maxHealth;
-            internal set => _maxHealth = value;
+            get => maxHealth;
+            internal set => maxHealth = value;
         }
 
         public float Health
         {
-            get => _health;
+            get => health;
             private set
             {
-                _health = value;
-                if (_health <= 0)
+                health = value;
+                if (health <= 0)
                 {
                     OnDeath?.Invoke();
                 }
@@ -100,56 +98,56 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         public float Mana
         {
-            get => _mana;
-            internal set => _mana = value;
+            get => mana;
+            internal set => mana = value;
         }
 
         public float AttackDamageModifier
         {
-            get => _attackDamageModifier;
-            internal set => _attackDamageModifier = value;
+            get => attackDamageModifier;
+            internal set => attackDamageModifier = value;
         }
 
         public float Defense
         {
-            get => _defense;
-            internal set => _defense = value;
+            get => defense;
+            internal set => defense = value;
         }
 
         public float Speed
         {
-            get => _speed;
-            internal set => _speed = value;
+            get => speed;
+            internal set => speed = value;
         }
 
         public byte Rank
         {
-            get => _rank;
-            private set => _rank = value;
+            get => rank;
+            private set => rank = value;
         }
 
         public byte Level
         {
-            get => _level;
-            private set => _level = value;
+            get => level;
+            private set => level = value;
         }
 
         public float Experience
         {
-            get => _experience;
-            private set => _experience = value;
+            get => experience;
+            private set => experience = value;
         }
 
         public SkillTree SkillTree
         {
-            get => _skillTree;
-            private set => _skillTree = value;
+            get => skillTree;
+            private set => skillTree = value;
         }
 
         public List<Ability> Abilities
         {
-            get => _abilities;
-            internal set => _abilities = value;
+            get => abilities;
+            internal set => abilities = value;
         }
 
         public Animator Animator
@@ -170,7 +168,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         private void Awake()
         {
-            _currentState = State.Idle;
+            currentState = State.Idle;
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
         }
 
@@ -180,31 +178,30 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         private void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
         {
-            _commanderName = commanderModel.commanderName;
-            _commanderObj = commanderModel.commanderObj;
-            _faction = commanderModel.faction;
-            _commanderClass = commanderModel.commanderClass;
-            _health = commanderModel.health;
-            _mana = commanderModel.mana;
-            _attackDamageModifier = commanderModel.attackDamageModifier;
-            _defense = commanderModel.defense;
-            _speed = commanderModel.speed;
-            _rank = commanderModel.rank;
-            _level = commanderModel.level;
-            _experience = commanderModel.experience;
-            _skillTree = commanderModel.skillTree;
-            _animatorController = commanderModel.animatorController;
-            navMeshAgent.speed = _speed;
+            commanderName = commanderModel.commanderName;
+            commanderObj = commanderModel.commanderObj;
+            faction = commanderModel.faction;
+            commanderClass = commanderModel.commanderClass;
+            health = commanderModel.health;
+            mana = commanderModel.mana;
+            attackDamageModifier = commanderModel.attackDamageModifier;
+            defense = commanderModel.defense;
+            speed = commanderModel.speed;
+            rank = commanderModel.rank;
+            level = commanderModel.level;
+            experience = commanderModel.experience;
+            skillTree = commanderModel.skillTree;
+            navMeshAgent.speed = speed;
 
             foreach (Ability ability in commanderModel.commanderAbilityDataBase.CommanderAbilitiesScripts.Select(type =>
                 (Ability)gameObject.AddComponent(type)))
             {
-                _abilities.Add(ability);
+                abilities.Add(ability);
             }
 
             for (int i = 0; i < commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases.Count; i++)
             {
-                _abilities[i].Init(commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases[i]);
+                abilities[i].Init(commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases[i]);
             }
         }
 
@@ -235,41 +232,41 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             if (navMeshAgent.SetDestination(moveTo))
             {
-                _destination = moveTo;
-                GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(_destination);
-                _currentState = State.Move;
+                destination = moveTo;
+                GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(destination);
+                currentState = State.Move;
             }
             else
             {
-                _destination = Vector3.zero;
+                destination = Vector3.zero;
             }
         }
 
         public void Attack(Component target)
         {
             Debug.Log(target.name);
-            _abilities[0].Cast(transform, target.transform);
+            abilities[0].Cast(transform, target.transform);
         }
 
         public void TakeDamage(float damage)
         {
-            damage = Mathf.Clamp((damage * _health / _maxHealth), MINDamage, damage) / _defense;
+            damage = Mathf.Clamp((damage * health / maxHealth), MINDamage, damage) / defense;
 
-            if (_health - damage <= 0 && !_dyingBreath)
+            if (health - damage <= 0 && !dyingBreath)
             {
-                _health = 1f;
-                _dyingBreath = true;
+                health = 1f;
+                dyingBreath = true;
             }
             else
             {
-                _health -= damage;
-                _dyingBreath = false;
+                health -= damage;
+                dyingBreath = false;
             }
 
-            if (!(_health <= 0) || _dyingBreath)
+            if (!(health <= 0) || dyingBreath)
                 return;
 
-            _health = 0;
+            health = 0;
             OnDeath?.Invoke();
         }
 
