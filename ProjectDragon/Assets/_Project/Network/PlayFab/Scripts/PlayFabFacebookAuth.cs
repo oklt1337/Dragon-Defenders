@@ -74,9 +74,11 @@ namespace _Project.Network.PlayFab.Scripts
 
         public void OnGUI()
         {
+#if UNITY_EDITOR
             var style = new GUIStyle { fontSize = 40, normal = new GUIStyleState { textColor = Color.white }, alignment = TextAnchor.MiddleCenter, wordWrap = true };
             var area = new Rect(0,0,Screen.width,Screen.height);
             GUI.Label(area, message,style);
+#endif
         }
     }
 }
