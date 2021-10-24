@@ -1,32 +1,24 @@
+using System;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 namespace _Project.Network.PlayFab.Scripts
 {
     public class PlayFabManager : MonoBehaviour
     {
-        #region Private Fields
+        #region Serialize Field
 
-        [SerializeField] 
-        private PlayFabFriendsHandler playFabFriendsHandler;
-        
-        [SerializeField] 
-        private PlayFabLootboxHandler playFabLootBoxHandler;
-        
-        [SerializeField] 
-        private PlayFabProfileHandler playFabProfileHandler;
-        
-        [SerializeField] 
-        private PlayFabSpecialEventsHandler playFabSpecialEventsHandler;
-        
-        [SerializeField] 
-        private PlayFabMonetizationHandler playFabMonetizationHandler;
-        
-        [SerializeField] 
-        private PlayFabBadWordsFilter playFabBadWordsFilter;
+        [SerializeField] private PlayFabFriendsHandler playFabFriendsHandler;
+        [SerializeField] private PlayFabLootboxHandler playFabLootBoxHandler;
+        [SerializeField] private PlayFabProfileHandler playFabProfileHandler;
+        [SerializeField] private PlayFabSpecialEventsHandler playFabSpecialEventsHandler;
+        [SerializeField] private PlayFabMonetizationHandler playFabMonetizationHandler;
+        [SerializeField] private PlayFabBadWordsFilter playFabBadWordsFilter;
+        [SerializeField] private PlayFabAuthManager playFabAuthManager;
 
         #endregion
 
-        #region public Properies
+        #region Public Properies
         
         public PlayFabFriendsHandler PlayFabFriendsHandler => playFabFriendsHandler;
         public PlayFabLootboxHandler PlayFabLootBoxHandler => playFabLootBoxHandler;
@@ -34,6 +26,7 @@ namespace _Project.Network.PlayFab.Scripts
         public PlayFabSpecialEventsHandler PlayFabSpecialEventsHandler => playFabSpecialEventsHandler;
         public PlayFabMonetizationHandler PlayFabMonetizationHandler => playFabMonetizationHandler;
         public PlayFabBadWordsFilter PlayFabBadWordsFilter => playFabBadWordsFilter;
+        public PlayFabAuthManager PlayFabAuthManager => playFabAuthManager;
 
         #endregion
     }

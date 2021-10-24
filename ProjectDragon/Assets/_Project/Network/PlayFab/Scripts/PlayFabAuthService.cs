@@ -19,20 +19,28 @@ using Facebook.Unity;
 
     public class PlayFabAuthService
     {
-        //Events to subscribe to for this service
-        public delegate void DisplayAuthenticationEvent();
+        public static PlayFabAuthService Instance => instance ??= new PlayFabAuthService();
+        private static PlayFabAuthService instance;
+        
+        #region Constuctor
 
-        public static event DisplayAuthenticationEvent OnDisplayAuthentication;
+        private PlayFabAuthService()
+        {
+            instance = this;
+        }
 
-        public delegate void LoginSuccessEvent(LoginResult success);
+        #endregion
+        
+        #region Private Fields
 
-        public static event LoginSuccessEvent OnLoginSuccess;
+        private const string LoginRememberKey = "PlayFabLoginRemember";
+        private const string PlayFabRememberMeIdKey = "PlayFabIdPassGuid";
+        private const string PlayFabAuthTypeKey = "PlayFabAuthType";
 
-        public delegate void PlayFabErrorEvent(PlayFabError error);
+        #endregion
 
-        public static event PlayFabErrorEvent OnPlayFabError;
-
-        //These are fields that we set when we are using the service.
+        #region Public Fields
+        
         public string Email;
         public string UserName;
         public string Password;
@@ -42,24 +50,15 @@ using Facebook.Unity;
         //this is a force link flag for custom ids for demoing
         public readonly bool ForceLink = false;
 
+        #endregion
+        
+        #region Public Properties
+
         //Accessibility for PlayFab ID & Session Tickets
         public static string PlayFabId { get; private set; }
 
         public static string SessionTicket { get; private set; }
-
-        private const string LoginRememberKey = "PlayFabLoginRemember";
-        private const string PlayFabRememberMeIdKey = "PlayFabIdPassGuid";
-        private const string PlayFabAuthTypeKey = "PlayFabAuthType";
-
-        public static PlayFabAuthService Instance => _instance ??= new PlayFabAuthService();
-        private static PlayFabAuthService _instance;
-
-        public PlayFabAuthService()
-        {
-            _instance = this;
-        }
-
-
+        
         /// <summary>
         /// Remember the user next time they log in
         /// This is used for Auto-Login purpose.
@@ -76,7 +75,7 @@ using Facebook.Unity;
         public static AuthTypes AuthType
         {
             get => (AuthTypes)PlayerPrefs.GetInt(PlayFabAuthTypeKey, 0);
-            set => PlayerPrefs.SetInt(PlayFabAuthTypeKey, (int)value);
+            internal set => PlayerPrefs.SetInt(PlayFabAuthTypeKey, (int)value);
         }
 
         /// <summary>
@@ -93,58 +92,19 @@ using Facebook.Unity;
             }
         }
 
-        public static void ClearRememberMe()
-        {
-            PlayerPrefs.DeleteKey(LoginRememberKey);
-            PlayerPrefs.DeleteKey(PlayFabRememberMeIdKey);
-        }
+        #endregion
 
-        /// <summary>
-        /// Kick off the authentication process by specific authType.
-        /// </summary>
-        /// <param name="authType"></param>
-        public void Authenticate(AuthTypes authType)
-        {
-            AuthType = authType;
-            Authenticate();
-        }
+        #region Events
 
-        /// <summary>
-        /// ForgetsAllCredentials, UnlinksSilentAuth and ClearsRememberMe
-        /// </summary>
-        public void Logout()
-        {
-            PlayFabClientAPI.ForgetAllCredentials();
-            UnlinkSilentAuth();
-            ClearRememberMe();
-            AuthType = AuthTypes.None;
-        }
+        public static event Action OnDisplayAuthentication;
+        
+        public static event Action<LoginResult> OnLoginSuccess;
 
-        /// <summary>
-        /// Authenticate the user by the Auth Type that was defined.
-        /// </summary>
-        public void Authenticate()
-        {
-            var authType = AuthType;
-            Debug.Log(authType);
-            switch (authType)
-            {
-                case AuthTypes.None:
-                    OnDisplayAuthentication?.Invoke();
-                    break;
-                case AuthTypes.Silent:
-                    SilentlyAuthenticate();
-                    break;
-                case AuthTypes.EmailAndPassword:
-                    AuthenticateEmailPassword();
-                    break;
-                case AuthTypes.RegisterPlayFabAccount:
-                    AddAccountAndPassword();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+        public static event Action<PlayFabError> OnPlayFabError;
+
+        #endregion
+
+        #region Private Methods
 
         /// <summary>
         /// Authenticate a user in PlayFab using an Email & Password combo
@@ -409,7 +369,51 @@ using Facebook.Unity;
 #endif
         }
 
-        public void UnlinkSilentAuth()
+        #endregion
+
+        #region Public Methods
+
+        internal static void ClearRememberMe()
+        {
+            PlayerPrefs.DeleteKey(LoginRememberKey);
+            PlayerPrefs.DeleteKey(PlayFabRememberMeIdKey);
+        }
+
+        /// <summary>
+        /// Kick off the authentication process by specific authType.
+        /// </summary>
+        /// <param name="authType"></param>
+        internal void Authenticate(AuthTypes authType)
+        {
+            AuthType = authType;
+            Authenticate();
+        }
+
+        /// <summary>
+        /// Authenticate the user by the Auth Type that was defined.
+        /// </summary>
+        internal void Authenticate()
+        {
+            switch (AuthType)
+            {
+                case AuthTypes.None:
+                    OnDisplayAuthentication?.Invoke();
+                    break;
+                case AuthTypes.Silent:
+                    SilentlyAuthenticate();
+                    break;
+                case AuthTypes.EmailAndPassword:
+                    AuthenticateEmailPassword();
+                    break;
+                case AuthTypes.RegisterPlayFabAccount:
+                    AddAccountAndPassword();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        internal void UnlinkSilentAuth()
         {
             SilentlyAuthenticate((result) =>
             {
@@ -439,5 +443,7 @@ using Facebook.Unity;
 #endif
             });
         }
+
+        #endregion
     }
 }

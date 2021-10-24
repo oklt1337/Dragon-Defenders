@@ -1,10 +1,11 @@
+using System;
+using _Project.Network.NetworkManager.Scripts;
 using _Project.Network.PlayFab.Scripts;
 using _Project.UI.Managers.Scripts;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using PlayFabErrorCode = PlayFab.PlayFabErrorCode;
 
 namespace _Project.UI.Authorize.Scripts
 {
@@ -31,64 +32,27 @@ namespace _Project.UI.Authorize.Scripts
         [SerializeField] private Button optionsButton;
 
         [Header("Panels")]
-        [SerializeField] private GameObject loginPanel;
         [SerializeField] private GameObject registerPanel;
         [SerializeField] private GameObject optionsPanel;
-
-        [SerializeField] private GetPlayerCombinedInfoRequestParams infoRequestParams;
-
-        #endregion
-
-        #region Private Fields
-
-        private bool clearPlayerPrefs;
-        private readonly PlayFabAuthService authService = PlayFabAuthService.Instance;
-
-        #endregion
-
-        #region Protected Fields
-
-        #endregion
-
-        #region Public Fields
-
-        #endregion
-
-        #region Public Properties
 
         #endregion
 
         #region Events
 
+        public static event Action<string, string, AuthTypes> OnLogin;
+        public static event Action<string, string, AuthTypes> OnRegister;
+        
         #endregion
 
         #region Unity Methods
 
         private void Awake()
         {
-            //Clear PlayerPrefs and Unlink Silent Auth.
-            if (clearPlayerPrefs)
-            {
-                authService.UnlinkSilentAuth();
-                PlayFabAuthService.ClearRememberMe();
-                PlayFabAuthService.AuthType = AuthTypes.None;
-            }
-
-            //Set our remember me button to our remembered state.
-            rememberMe.isOn = PlayFabAuthService.RememberMe;
+            NetworkManager.Instance.PlayFabManager.PlayFabAuthManager.OnAccountNotFound += OpenRegisterPanel;
         }
 
         public void Start()
         {
-            //Hide all our panels until we know what UI to display
-            loginPanel.SetActive(false);
-            registerPanel.SetActive(false);
-
-            //Subscribe to events that happen after we authenticate
-            PlayFabAuthService.OnDisplayAuthentication += OnDisplayAuthentication;
-            PlayFabAuthService.OnLoginSuccess += OnLoginSuccess;
-            PlayFabAuthService.OnPlayFabError += OnPlayFabError;
-
             //Bind auth remember me status to toggle.
             rememberMe.onValueChanged.AddListener((arg0 => PlayFabAuthService.RememberMe = arg0));
 
@@ -99,12 +63,6 @@ namespace _Project.UI.Authorize.Scripts
             registerButton.onClick.AddListener(OnClickRegister);
             cancelRegisterButton.onClick.AddListener(OnClickCancelRegister);
             optionsButton.onClick.AddListener(OnClickOptions);
-
-            //Set the data we want at login from what we chose in our meta data.
-            authService.InfoRequestParams = infoRequestParams;
-
-            //Start the authentication process.
-            authService.Authenticate();
         }
 
         private void OnEnable()
@@ -117,59 +75,30 @@ namespace _Project.UI.Authorize.Scripts
             CanvasManager.Instance.Unsubscribe(this);
         }
 
+        private void OnDestroy()
+        {
+            NetworkManager.Instance.PlayFabManager.PlayFabAuthManager.OnAccountNotFound -= OpenRegisterPanel;
+        }
+
         #endregion
 
         #region Private Methods
 
         /// <summary>
-        /// Login Successfully
+        /// Opening Register Panel.
         /// </summary>
-        /// <param name="result"></param>
-        private void OnLoginSuccess(LoginResult result)
+        private void OpenRegisterPanel()
         {
-            Debug.LogFormat("Logged In as: {0}", result.PlayFabId);
-
-            //Deactivate our screen if we logged in successfully.
-            loginPanel.SetActive(false);
-        }
-
-        /// <summary>
-        /// Error handling for when Login returns errors.
-        /// </summary>
-        /// <param name="error">PlayFabError</param>
-        private void OnPlayFabError(PlayFab.PlayFabError error)
-        {
-            // if we didnt find the account we try to register him.
-            if (error.Error is PlayFabErrorCode.AccountNotFound)
-            {
-                registerPanel.SetActive(true);
-                ChangeInteractableStatusForRegisterPanel(false);
-                return;
-            }
-            
-            Debug.Log(error.Error);
-            Debug.LogError(error.GenerateErrorReport());
-        }
-
-        /// <summary>
-        /// Choose to display the Auth UI or any other action.
-        /// </summary>
-        private void OnDisplayAuthentication()
-        {
-            //Here we have chooses what to do when AuthType is None.
-            loginPanel.SetActive(true);
+            registerPanel.SetActive(true);
+            ChangeInteractableStatusForRegisterPanel(false);
         }
 
         /// <summary>
         /// Login with email / password combo
-        /// Note: in this flow if no account is found, it will ask them to register.
         /// </summary>
         private void OnClickLogin()
         {
-            Debug.Log("Click Login");
-            authService.Email = userName.text;
-            authService.Password = password.text;
-            authService.Authenticate(AuthTypes.EmailAndPassword);
+            OnLogin?.Invoke(userName.text, password.text, AuthTypes.EmailAndPassword);
         }
 
         /// <summary>
@@ -182,10 +111,8 @@ namespace _Project.UI.Authorize.Scripts
                 Debug.Log("Passwords do not Match.");
                 return;
             }
-
-            authService.Email = userName.text;
-            authService.Password = password.text;
-            authService.Authenticate(AuthTypes.RegisterPlayFabAccount);
+            
+            OnRegister?.Invoke(userName.text, password.text, AuthTypes.RegisterPlayFabAccount);
         }
 
         /// <summary>

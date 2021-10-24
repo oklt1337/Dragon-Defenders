@@ -24,26 +24,9 @@ namespace _Project.Utility.SceneManager.Scripts
 
         #endregion
 
-        #region Private Fields
-
-        private Coroutine _loadingAuthorizeSceneCo;
-
-        #endregion
-
         #region Public Properties
 
         public static Scene CurrentScene => GetCurrentScene();
-
-        #endregion
-
-        #region Unity Methods
-
-        private void Start()
-        {
-            PlayFabAuthService.OnLoginSuccess += success => ChangeScene(Scene.MainMenu); 
-            
-            LoadAuthorizeScene();
-        }
 
         #endregion
 
@@ -65,27 +48,6 @@ namespace _Project.Utility.SceneManager.Scripts
                 4 => Scene.GameScene,
                 _ => throw new IndexOutOfRangeException()
             };
-        }
-
-        /// <summary>
-        /// Loads the Authorize Scene.
-        /// </summary>
-        private void LoadAuthorizeScene()
-        {
-            if (_loadingAuthorizeSceneCo != null)
-                StopCoroutine(_loadingAuthorizeSceneCo);
-
-            _loadingAuthorizeSceneCo = StartCoroutine(LoadAuthorizeSceneCo());
-        }
-
-        /// <summary>
-        /// Coroutine for loading Authorize Scene.
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerator LoadAuthorizeSceneCo()
-        {
-            yield return new WaitForSeconds(loadingAuthorizeSceneDelay);
-            ChangeScene(Scene.Authorize);
         }
 
         #endregion

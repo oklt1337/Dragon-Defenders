@@ -1,7 +1,9 @@
 using System;
+using _Project.Network.PlayFab.Scripts;
 using ExitGames.Client.Photon;
 using Photon.Chat;
 using Photon.Pun;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 namespace _Project.Network.Photon.Scripts
@@ -14,7 +16,7 @@ namespace _Project.Network.Photon.Scripts
 
         #region Private Fields
 
-        private ChatClient _chatClient;
+        private ChatClient chatClient;
 
         #endregion
 
@@ -43,22 +45,24 @@ namespace _Project.Network.Photon.Scripts
         private void OnEnable()
         {
             PhotonConnector.OnPhotonConnected += ConnectToPhotonChat;
+            PlayFabAuthService.OnLoginSuccess += SetConnectionData;
         }
 
         private void Start()
         {
-            _chatClient = new ChatClient(this);
+            chatClient = new ChatClient(this);
         }
 
         private void Update()
         {
             // make sure we receive massages and being connected.
-            _chatClient.Service();
+            chatClient.Service();
         }
 
         private void OnDisable()
         {
             PhotonConnector.OnPhotonConnected -= ConnectToPhotonChat;
+            PlayFabAuthService.OnLoginSuccess -= SetConnectionData;
         }
 
         #endregion
@@ -72,13 +76,28 @@ namespace _Project.Network.Photon.Scripts
         {
             Debug.Log("Connecting to Photon Chat.");
             
-            AuthenticationValues authValues = new AuthenticationValues
+            var authValues = new AuthenticationValues
             {
                 UserId = PhotonNetwork.LocalPlayer.UserId
             };
-            _chatClient.AuthValues = authValues;
+            chatClient.AuthValues = authValues;
 
-            _chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion, _chatClient.AuthValues);
+            chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion, chatClient.AuthValues);
+        }
+        
+        /// <summary>
+        /// Setting PhotonChatData on Login to PlayFab.
+        /// </summary>
+        /// <param name="loginResult">LoginResult</param>
+        private void SetConnectionData(LoginResult loginResult)
+        {
+            Debug.Log($"Photon Data set from {loginResult.InfoResultPayload.PlayerProfile.DisplayName}");
+            
+            var authValues = new AuthenticationValues
+            {
+                UserId = PhotonNetwork.LocalPlayer.UserId
+            };
+            chatClient.AuthValues = authValues;
         }
 
         #endregion
@@ -92,7 +111,7 @@ namespace _Project.Network.Photon.Scripts
         /// <param name="message">string</param>
         public void SendDirectMessage(string recipient, string message)
         {
-            _chatClient.SendPrivateMessage(recipient, message);
+            chatClient.SendPrivateMessage(recipient, message);
         }
         
         #endregion

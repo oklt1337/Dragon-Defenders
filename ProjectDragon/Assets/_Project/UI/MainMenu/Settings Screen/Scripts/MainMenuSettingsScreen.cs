@@ -1,3 +1,4 @@
+using System;
 using _Project.Network.PlayFab.Scripts;
 using _Project.UI.MainMenu.Manager.Scripts;
 using _Project.UI.Managers.Scripts;
@@ -12,6 +13,12 @@ namespace _Project.UI.MainMenu.Settings_Screen.Scripts
     {
         [SerializeField] private Button logOutButton;
         [SerializeField] private Button homeScreenButton;
+
+        #region Events
+
+        public static event Action OnLogout;
+
+        #endregion
         
         #region Unity Methods
 
@@ -29,8 +36,7 @@ namespace _Project.UI.MainMenu.Settings_Screen.Scripts
         
         public void OnClickLogOut()
         {
-            PlayFabAuthService.Instance.Logout();
-            SceneManager.ChangeScene(Scene.Authorize);
+            OnLogout?.Invoke();
         }
 
         public void OnClickHomeScreen()

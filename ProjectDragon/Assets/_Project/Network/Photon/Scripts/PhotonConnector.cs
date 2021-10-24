@@ -6,9 +6,11 @@ using _Project.Utility.SceneManager.Scripts;
 using Photon.Pun;
 using Photon.Realtime;
 using PlayFab.ClientModels;
+using Unity.VisualScripting;
 using UnityEngine;
 using FriendInfo = Photon.Realtime.FriendInfo;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Random = UnityEngine.Random;
 
 namespace _Project.Network.Photon.Scripts
 {
@@ -29,11 +31,7 @@ namespace _Project.Network.Photon.Scripts
         /// <summary>
         /// Coroutine for setting the ping.
         /// </summary>
-        private Coroutine _pingCo;
-
-        #endregion
-
-        #region Public Fields
+        private Coroutine pingCo;
 
         #endregion
 
@@ -63,26 +61,36 @@ namespace _Project.Network.Photon.Scripts
         #endregion
 
         #region Unity Methods
-
+        
         public override void OnEnable()
         {
             base.OnEnable();
-            PlayFabAuthService.OnLoginSuccess += ConnectToPhoton;
+            PlayFabAuthService.OnLoginSuccess += SetConnectionData;
         }
 
         public override void OnDisable()
         {
             base.OnDisable();
-            PlayFabAuthService.OnLoginSuccess -= ConnectToPhoton;
+            PlayFabAuthService.OnLoginSuccess -= SetConnectionData;
+        }
+        
+        private void Awake()
+        {
+            ConnectToPhoton();
         }
 
         #endregion
 
         #region Private Methods
 
-        private void ConnectToPhoton(LoginResult loginRequest)
+        /// <summary>
+        /// Connecting to Photon.
+        /// </summary>
+        private static void ConnectToPhoton()
         {
-            Debug.Log($"Connect to Photon as {loginRequest.InfoResultPayload.PlayerProfile.DisplayName}");
+            var tempUserName = $"User{Random.Range(1000, 9999)}";
+            
+            Debug.Log($"Connect to Photon as {tempUserName}");
 
             // Set AppVersion.
             PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = AppVersion;
@@ -91,9 +99,9 @@ namespace _Project.Network.Photon.Scripts
             PhotonNetwork.GameVersion = GameVersion;
 
             // Creating AuthValues
-            AuthenticationValues authValues = new AuthenticationValues
+            var authValues = new AuthenticationValues
             {
-                UserId = loginRequest.PlayFabId
+                UserId = tempUserName
             };
 
             // Setting AuthValues
@@ -109,23 +117,7 @@ namespace _Project.Network.Photon.Scripts
             PhotonNetwork.LocalPlayer.CustomProperties = new Hashtable();
 
             // Setting nickname
-            PhotonNetwork.NickName = loginRequest.InfoResultPayload.PlayerProfile.DisplayName;
-
-
-            // Setting AuthValues
-            PhotonNetwork.AuthValues = authValues;
-        }
-
-        private void CreatePhotonRoom()
-        {
-            RoomOptions option = new RoomOptions
-            {
-                MaxPlayers = 1,
-                IsOpen = false,
-                IsVisible = false
-            };
-
-            PhotonNetwork.CreateRoom("", option, TypedLobby.Default);
+            PhotonNetwork.NickName = tempUserName;
         }
 
         /// <summary>
@@ -154,13 +146,30 @@ namespace _Project.Network.Photon.Scripts
             }
         }
 
+        /// <summary>
+        /// Setting PhotonData on Login to PlayFab.
+        /// </summary>
+        /// <param name="loginResult">LoginResult</param>
+        private void SetConnectionData(LoginResult loginResult)
+        {
+            Debug.Log($"Photon Data set from {loginResult.InfoResultPayload.PlayerProfile.DisplayName}");
+            
+            PhotonNetwork.AuthValues = new AuthenticationValues
+            {
+                UserId = loginResult.PlayFabId
+            };
+            
+            // Setting nickname
+            PhotonNetwork.NickName = loginResult.InfoResultPayload.PlayerProfile.DisplayName;
+        }
+
         #endregion
 
         #region Public Methods
 
-        public void CreateRoom()
+        public static void CreateRoom()
         {
-            RoomOptions options = new RoomOptions
+            var options = new RoomOptions
             {
                 IsVisible = false,
                 IsOpen = false,
@@ -187,8 +196,8 @@ namespace _Project.Network.Photon.Scripts
             OnPhotonDisconnected?.Invoke(cause.ToString());
 
             // Make sure coroutine doesnt run twice.
-            if (_pingCo != null)
-                StopCoroutine(_pingCo);
+            if (pingCo != null)
+                StopCoroutine(pingCo);
         }
 
         public override void OnConnectedToMaster()
@@ -265,10 +274,10 @@ namespace _Project.Network.Photon.Scripts
             SceneManager.ChangeScene(Scene.MainMenu);
 
             // Make sure coroutine doesnt run twice.
-            if (_pingCo != null)
-                StopCoroutine(_pingCo);
+            if (pingCo != null)
+                StopCoroutine(pingCo);
 
-            _pingCo = StartCoroutine(SetPingCo());
+            pingCo = StartCoroutine(SetPingCo());
         }
 
         public override void OnJoinRoomFailed(short returnCode, string message)
