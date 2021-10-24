@@ -63,6 +63,10 @@ namespace _Project.UI.Authorize.Scripts
             registerButton.onClick.AddListener(OnClickRegister);
             cancelRegisterButton.onClick.AddListener(OnClickCancelRegister);
             optionsButton.onClick.AddListener(OnClickOptions);
+
+            //Default is true
+            rememberMe.isOn = true;
+            PlayFabAuthService.RememberMe = rememberMe.isOn;
         }
 
         private void OnEnable()
