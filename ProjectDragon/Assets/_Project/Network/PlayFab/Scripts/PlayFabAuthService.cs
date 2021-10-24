@@ -1,7 +1,9 @@
 ﻿using System;
+using Facebook.Unity;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
+using LoginResult = PlayFab.ClientModels.LoginResult;
 
 namespace _Project.Network.PlayFab.Scripts
 {
@@ -15,13 +17,14 @@ using Facebook.Unity;
         Silent,
         EmailAndPassword,
         RegisterPlayFabAccount,
+        Facebook
     }
 
     public class PlayFabAuthService
     {
         public static PlayFabAuthService Instance => instance ??= new PlayFabAuthService();
         private static PlayFabAuthService instance;
-        
+
         #region Constuctor
 
         private PlayFabAuthService()
@@ -30,7 +33,7 @@ using Facebook.Unity;
         }
 
         #endregion
-        
+
         #region Private Fields
 
         private const string LoginRememberKey = "PlayFabLoginRemember";
@@ -40,7 +43,7 @@ using Facebook.Unity;
         #endregion
 
         #region Public Fields
-        
+
         public string Email;
         public string UserName;
         public string Password;
@@ -51,14 +54,14 @@ using Facebook.Unity;
         public readonly bool ForceLink = false;
 
         #endregion
-        
+
         #region Public Properties
 
         //Accessibility for PlayFab ID & Session Tickets
         public static string PlayFabId { get; private set; }
 
         public static string SessionTicket { get; private set; }
-        
+
         /// <summary>
         /// Remember the user next time they log in
         /// This is used for Auto-Login purpose.
@@ -74,8 +77,8 @@ using Facebook.Unity;
         /// </summary>
         public static AuthTypes AuthType
         {
-            get => (AuthTypes)PlayerPrefs.GetInt(PlayFabAuthTypeKey, 0);
-            internal set => PlayerPrefs.SetInt(PlayFabAuthTypeKey, (int)value);
+            get => (AuthTypes) PlayerPrefs.GetInt(PlayFabAuthTypeKey, 0);
+            internal set => PlayerPrefs.SetInt(PlayFabAuthTypeKey, (int) value);
         }
 
         /// <summary>
@@ -97,7 +100,7 @@ using Facebook.Unity;
         #region Events
 
         public static event Action OnDisplayAuthentication;
-        
+
         public static event Action<LoginResult> OnLoginSuccess;
 
         public static event Action<PlayFabError> OnPlayFabError;
@@ -113,7 +116,7 @@ using Facebook.Unity;
         {
             Debug.Log(RememberMe);
             Debug.Log(RememberMeId);
-            
+
             //Check if the users has opted to be remembered.
             if (RememberMe && !string.IsNullOrEmpty(RememberMeId))
             {
@@ -186,39 +189,19 @@ using Facebook.Unity;
 
         private void AuthenticateFacebook()
         {
-            PlayFabClientAPI.LoginWithFacebook(new LoginWithFacebookRequest()
-            {
-                TitleId = PlayFabSettings.TitleId,
-                InfoRequestParameters = InfoRequestParams
-            }, (result) =>
-            {
-                //store identity and session
-                PlayFabId = result.PlayFabId;
-                SessionTicket = result.SessionTicket;
+            Debug.Log("Facebook Auth Complete! Access Token: " + AccessToken.CurrentAccessToken.TokenString +
+                      "\nLogging into PlayFab...");
 
-                //Note: At this point, they already have an account with PlayFab using a Username (email) & Password
-                //If RememberMe is checked, then generate a new Guid for Login with CustomId.
-                if (RememberMe)
-                {
-                    RememberMeId = Guid.NewGuid().ToString();
-                    AuthType = AuthTypes.EmailAndPassword;
-                    //Fire and forget, but link a custom ID to this PlayFab Account.
-                    PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest()
-                    {
-                        CustomId = RememberMeId,
-                        ForceLink = ForceLink
-                    }, null, null);
-                }
-
-                //report login result back to subscriber
-                OnLoginSuccess?.Invoke(result);
-            }, (error) =>
-            {
-                //Report error back to subscriber
-                OnPlayFabError?.Invoke(error);
-            });
+            /*
+            * We proceed with making a call to PlayFab API. We pass in current Facebook AccessToken and let it create
+            * and account using CreateAccount flag set to true. We also pass the callback for Success and Failure results
+            */
+            PlayFabClientAPI.LoginWithFacebook(
+                new LoginWithFacebookRequest
+                    {CreateAccount = true, AccessToken = AccessToken.CurrentAccessToken.TokenString},
+                OnPlayFabFacebookAuthComplete, OnPlayFabFacebookAuthFailed);
         }
-        
+
         private void AuthenticateGoogle()
         {
             PlayFabClientAPI.LoginWithGoogleAccount(new LoginWithGoogleAccountRequest()
@@ -277,7 +260,9 @@ using Facebook.Unity;
                 if (result != null)
                     PlayFabClientAPI.AddUsernamePassword(new AddUsernamePasswordRequest()
                     {
-                        Username = !string.IsNullOrEmpty(UserName) ? UserName : result.PlayFabId, //Because it is required & Unique and not supplied by User.
+                        Username = !string.IsNullOrEmpty(UserName)
+                            ? UserName
+                            : result.PlayFabId, //Because it is required & Unique and not supplied by User.
                         Email = Email,
                         Password = Password,
                     }, (addResult) =>
@@ -438,6 +423,17 @@ using Facebook.Unity;
 #endif
         }
 
+        // When processing both results, we just set the message, explaining what's going on.
+        private static void OnPlayFabFacebookAuthComplete(LoginResult loginResult)
+        {
+            Debug.Log("PlayFab Facebook Auth Complete. Session ticket: " + loginResult.SessionTicket);
+        }
+
+        private static void OnPlayFabFacebookAuthFailed(PlayFabError error)
+        {
+            Debug.LogFormat("PlayFab Facebook Auth Failed: " + error.GenerateErrorReport(), true);
+        }
+
         #endregion
 
         #region Public Methods
@@ -476,6 +472,8 @@ using Facebook.Unity;
                     break;
                 case AuthTypes.RegisterPlayFabAccount:
                     AddAccountAndPassword();
+                    break;
+                case AuthTypes.Facebook:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

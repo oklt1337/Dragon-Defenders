@@ -1,11 +1,9 @@
 using System;
 using _Project.UI.Authorize.Scripts;
-using _Project.UI.MainMenu.Manager.Scripts;
 using _Project.UI.MainMenu.Settings_Screen.Scripts;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Scene = _Project.Utility.SceneManager.Scripts.Scene;
 using SceneManager = _Project.Utility.SceneManager.Scripts.SceneManager;
 
@@ -15,13 +13,15 @@ namespace _Project.Network.PlayFab.Scripts
     {
         
         #region Private Serializable Fields
-        
+
+        [SerializeField] private PlayFabFacebookAuth playFabFacebookAuth;
         [SerializeField] private GetPlayerCombinedInfoRequestParams infoRequestParams;
 
         #endregion
 
         #region Public Properties
         
+        public PlayFabFacebookAuth PlayFabFacebookAuth => playFabFacebookAuth;
         public GetPlayerCombinedInfoRequestParams InfoRequestParams => infoRequestParams;
         public PlayFabAuthService AuthService { get; } = PlayFabAuthService.Instance;
 
@@ -42,6 +42,7 @@ namespace _Project.Network.PlayFab.Scripts
             PlayFabAuthService.OnDisplayAuthentication += DisplayAuthScene;
             AuthorizeCanvas.OnLogin += Authenticate;
             AuthorizeCanvas.OnRegister += Authenticate;
+            PlayFabFacebookAuth.OnFacebookInitializedDone += Authenticate;
             MainMenuSettingsScreen.OnLogout += Logout;
             NetworkManager.Scripts.NetworkManager.Instance.OnAllServicesConnected += StartAuthenticationsProcess;
         }
@@ -52,6 +53,7 @@ namespace _Project.Network.PlayFab.Scripts
             PlayFabAuthService.OnDisplayAuthentication -= DisplayAuthScene;
             AuthorizeCanvas.OnLogin -= Authenticate;
             AuthorizeCanvas.OnRegister -= Authenticate;
+            PlayFabFacebookAuth.OnFacebookInitializedDone -= Authenticate;
             MainMenuSettingsScreen.OnLogout -= Logout;
         }
 
@@ -86,11 +88,23 @@ namespace _Project.Network.PlayFab.Scripts
                     AuthService.Password = password;
                     AuthService.Authenticate(authTypes);
                     break;
+                case AuthTypes.Facebook:
+                    // If result has no errors, it means we have authenticated in Facebook successfully
+                    if (PlayFabFacebookAuth.LoginResult == null || string.IsNullOrEmpty(PlayFabFacebookAuth.LoginResult.Error))
+                    {
+                        AuthService.Authenticate(authTypes);
+                    }
+                    else
+                    {
+                        // If Facebook authentication failed, we stop the cycle with the message
+                        Debug.LogFormat("Facebook Auth Failed: " + PlayFabFacebookAuth.LoginResult.Error + "\n" + PlayFabFacebookAuth.LoginResult.RawResult, true);
+                    }
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(authTypes), authTypes, null);
             }
         }
-        
+
         /// <summary>
         /// ForgetsAllCredentials, UnlinksSilentAuth and ClearsRememberMe
         /// </summary>
@@ -131,6 +145,12 @@ namespace _Project.Network.PlayFab.Scripts
             
             Debug.Log(error.Error);
             Debug.LogError(error.GenerateErrorReport());
+            
+            //Clear all save data
+            PlayFabClientAPI.ForgetAllCredentials();
+            AuthService.UnlinkSilentAuth();
+            PlayFabAuthService.ClearRememberMe();
+            PlayFabAuthService.AuthType = AuthTypes.None;
         }
 
         #endregion

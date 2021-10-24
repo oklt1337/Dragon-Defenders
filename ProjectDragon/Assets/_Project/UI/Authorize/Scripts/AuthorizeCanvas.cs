@@ -136,9 +136,9 @@ namespace _Project.UI.Authorize.Scripts
         /// <summary>
         /// Login with a facebook account.  This kicks off the request to facebook
         /// </summary>
-        private void OnClickLoginWithFacebook()
+        private static void OnClickLoginWithFacebook()
         {
-            Debug.Log("Logging In to Facebook..");
+            NetworkManager.Instance.PlayFabManager.PlayFabAuthManager.PlayFabFacebookAuth.ConnectWithFacebook();
         }
 
         /// <summary>

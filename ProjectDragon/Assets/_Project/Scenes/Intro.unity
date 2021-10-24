@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a91a46e2ed23fd43a8f284b0db473a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playFabFacebookAuth: {fileID: 54199434}
   infoRequestParams:
     GetCharacterInventories: 0
     GetCharacterList: 0
