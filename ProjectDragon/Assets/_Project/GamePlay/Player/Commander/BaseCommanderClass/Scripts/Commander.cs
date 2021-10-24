@@ -1,29 +1,24 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
-using _Project.AI.Enemies.Scripts;
 using _Project.Faction;
 using _Project.GamePlay.GameManager.Scripts;
-using _Project.Scripts.Gameplay.Skillsystem;
-using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.SkillSystem.SkillTree;
-using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
-    public enum State
-    {
-        Idle,
-        Move
-    }
-
     public class Commander : MonoBehaviour
     {
+        public enum State
+        {
+            Idle,
+            Move
+        }
+        
         #region SerializeFields
 
         [SerializeField] private NavMeshAgent navMeshAgent;

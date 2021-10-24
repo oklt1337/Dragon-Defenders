@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
 using _Project.Faction;
-using _Project.Scripts.Gameplay.Skillsystem;
-using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using _Project.SkillSystem.SkillTree;
 using UnityEditor.Animations;
 using UnityEngine;
