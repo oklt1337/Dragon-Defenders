@@ -150,9 +150,12 @@ namespace _Project.Network.PlayFab.Scripts
                 OnAccountNotFound?.Invoke();
                 return;
             }
-            
-            Debug.Log(error.Error);
-            Debug.LogError(error.GenerateErrorReport());
+            else
+            {
+                Debug.Log(error.Error);
+                Debug.LogError(error.GenerateErrorReport());
+                ClearAuthorizeProcess();
+            }
         }
 
         #endregion
