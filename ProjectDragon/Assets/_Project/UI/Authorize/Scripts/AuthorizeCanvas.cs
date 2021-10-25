@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using _Project.Network.NetworkManager.Scripts;
 using _Project.Network.PlayFab.Scripts;
 using _Project.UI.Managers.Scripts;
@@ -131,6 +132,8 @@ namespace _Project.UI.Authorize.Scripts
             //Show panels
             registerPanel.SetActive(false);
             ChangeInteractableStatusForRegisterPanel(true);
+            
+            NetworkManager.Instance.PlayFabManager.PlayFabAuthManager.ClearAuthorizeProcess();
         }
 
         /// <summary>

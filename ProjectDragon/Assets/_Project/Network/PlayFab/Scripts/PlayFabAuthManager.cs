@@ -110,11 +110,7 @@ namespace _Project.Network.PlayFab.Scripts
         /// </summary>
         private void Logout()
         {
-            PlayFabClientAPI.ForgetAllCredentials();
-            AuthService.UnlinkSilentAuth();
-            PlayFabAuthService.ClearRememberMe();
-            PlayFabAuthService.AuthType = AuthTypes.None;
-            
+            ClearAuthorizeProcess();
             DisplayAuthScene();
         }
 
@@ -124,6 +120,18 @@ namespace _Project.Network.PlayFab.Scripts
         private static void DisplayAuthScene()
         {
             SceneManager.ChangeScene(Scene.Authorize);
+        }
+
+        #endregion
+
+        #region MyRegion
+
+        public void ClearAuthorizeProcess()
+        {
+            PlayFabClientAPI.ForgetAllCredentials();
+            AuthService.UnlinkSilentAuth();
+            PlayFabAuthService.ClearRememberMe();
+            PlayFabAuthService.AuthType = AuthTypes.None;
         }
 
         #endregion
@@ -145,12 +153,6 @@ namespace _Project.Network.PlayFab.Scripts
             
             Debug.Log(error.Error);
             Debug.LogError(error.GenerateErrorReport());
-            
-            //Clear all save data
-            PlayFabClientAPI.ForgetAllCredentials();
-            AuthService.UnlinkSilentAuth();
-            PlayFabAuthService.ClearRememberMe();
-            PlayFabAuthService.AuthType = AuthTypes.None;
         }
 
         #endregion
