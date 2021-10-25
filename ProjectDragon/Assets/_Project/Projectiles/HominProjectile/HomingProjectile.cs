@@ -1,18 +1,14 @@
-﻿using System;
-using _Project.AI.Enemies.Scripts;
-using _Project.Enemies.Scripts;
-using Photon.Pun;
-using Unity.Mathematics;
+﻿using _Project.AI.Enemies.Scripts;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Projectiles
+namespace _Project.Projectiles.HominProjectile
 {
     public class HomingProjectile : Projectile
     {  
         [SerializeField] private Transform target;
 
-        private Vector3 _spawnPosition;
-        private float _lerpValue = 0;
+        private Vector3 spawnPosition;
+        private float lerpValue = 0;
         
         public Transform Target
         {
@@ -23,7 +19,8 @@ namespace _Project.Scripts.Gameplay.Projectiles
 
         protected void Start()
         {
-            _spawnPosition = transform.position;
+            spawnPosition = transform.position;
+            lerpValue = 0;
         }
 
         protected void Update()
@@ -35,13 +32,13 @@ namespace _Project.Scripts.Gameplay.Projectiles
 
         protected override void Move()
         {
-            if(!target) DeSpawn();
+            if(!target|| !target.gameObject.activeSelf ) DeSpawn();
             
             transform.rotation = Quaternion.LookRotation(target.transform.position);
-            transform.position = Vector3.Lerp(_spawnPosition,
+            transform.position = Vector3.Lerp(spawnPosition,
                 target.position,
-                _lerpValue +(speed * Time.deltaTime));
-            _lerpValue += speed * Time.deltaTime;
+                lerpValue +(speed * Time.deltaTime));
+            lerpValue += speed * Time.deltaTime;
         }
 
         protected void CheckPosition()

@@ -28,7 +28,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         [ShowInInspector] protected float cooldown;
         [ShowInInspector] protected AnimationClip animationClip;
         [ShowInInspector] protected AudioClip audioClip;
-        [ShowInInspector] private float _tempCooldown;
+        [ShowInInspector] private float tempCooldown;
         [ShowInInspector] protected bool isCastable;
         [ShowInInspector] protected string projectilepath = "Projectiles/";
 
@@ -54,8 +54,8 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         }
         public float TempCooldown
         {
-            get => _tempCooldown;
-            set => _tempCooldown = value;
+            get => tempCooldown;
+            set => tempCooldown = value;
         }
          
         public bool IsCastable
@@ -86,8 +86,8 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         public virtual void Update()
         {
 
-            _tempCooldown -= Time.deltaTime;
-            if (_tempCooldown <= 0)
+            tempCooldown -= Time.deltaTime;
+            if (tempCooldown <= 0)
             {
                 isCastable = true;
             }
@@ -104,7 +104,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         protected virtual void ResetCoolDown()
         {
             isCastable = false;
-            _tempCooldown = cooldown;
+            tempCooldown = cooldown;
         }
     
 
@@ -116,7 +116,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
             abilityDatabase = dataBase;
             manaCost = dataBase.ManaCost;
             cooldown = dataBase.Cooldown;
-            _tempCooldown = 0;
+            tempCooldown = 0;
             isCastable = true;
         }
         
@@ -138,7 +138,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         {
             isCastable = false;
             cooldown = newCoolDown;
-            _tempCooldown = newCoolDown;
+            tempCooldown = newCoolDown;
         }
         #endregion
     

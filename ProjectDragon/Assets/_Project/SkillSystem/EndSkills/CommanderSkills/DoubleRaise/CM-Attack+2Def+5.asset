@@ -16,7 +16,7 @@ MonoBehaviour:
   skillName: 
   description: 
   skillHolderList:
-  - skillEnum: 2
+  - skillEnum: 8
     skillIncreaseValue: 2
-  - skillEnum: 3
+  - skillEnum: 10
     skillIncreaseValue: 5

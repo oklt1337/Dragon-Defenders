@@ -117,9 +117,15 @@ namespace _Project.Units.Unit.BaseUnits
 
         public virtual void Start()
         {
+            GameManager.Instance.UnitManager.SubscribeUnit(this);
             LoadDataFromScriptableObject();
             InitiateAbility(true);
             InitiateSkillTree();
+        }
+        
+        public virtual void OnDestroy()
+        {
+            GameManager.Instance.UnitManager.UnsubscribeUnit(this);
         }
 
         #endregion
@@ -231,6 +237,7 @@ namespace _Project.Units.Unit.BaseUnits
             currentSkill.IsLearnable = true;
             currentSkill.EnableSkill();
         }
+        
 
         #endregion
     

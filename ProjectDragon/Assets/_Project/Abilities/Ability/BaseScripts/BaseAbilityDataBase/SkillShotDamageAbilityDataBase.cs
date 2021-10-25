@@ -1,4 +1,3 @@
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     /// <summary>
     /// Author: Peter Luu
     /// </summary>
+    [CreateAssetMenu(menuName="Tools/Ability/BaseAbility/SkillShotDamageAbilityDataBase")]
     public class SkillShotDamageAbilityDataBase : SingleTargetDamageAbilityDataBase
     {
         
@@ -28,7 +28,9 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     
         #region protected Fields
 
-        [SerializeField] protected float maxDistance;
+        [SerializeField] protected float maxProjectileRange;
+        [SerializeField] protected int bulletsPerCast;
+        [SerializeField] protected float angleOffset;
 
         #endregion
     
@@ -40,13 +42,23 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     
         #region Public Properties
 
-        public float MAXDistance
+        public float MaxProjectileRange
         {
-            get => maxDistance;
-            set => maxDistance = value;
+            get => maxProjectileRange;
+            set => maxProjectileRange = value;
         }
 
+        public int BulletsPerCast
+        {
+            get => bulletsPerCast;
+            set => bulletsPerCast = value;
+        }
 
+        public float AngleOffset
+        {
+            get => angleOffset;
+            set => angleOffset = value;
+        }
         #endregion
     
         #region Events

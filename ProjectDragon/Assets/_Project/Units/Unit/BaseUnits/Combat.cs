@@ -1,14 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Units.Unit.BaseUnitDatabases;
+using Photon.Realtime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Project.Units.Unit.BaseUnits
 {
-    public abstract class Combat : Unit
+    public class Combat : Unit
     {
-        
-
         #region Singleton
 
         #endregion
@@ -86,18 +87,10 @@ namespace _Project.Units.Unit.BaseUnits
                 return;
             }
             transform.rotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
-            //transform.rotation = Quaternion.Euler(transform.rotation.x,transform.rotation.y, transform.rotation.z);
-
-            /*if (!currentTarget.gameObject.activeSelf)
-            {
-                SelectTarget();
-            }
-            else
-            {
-                ability.Cast(transform,currentTarget);
-            }
-            */
+            CastAbilityIfPossible();
         }
+
+        
         
         private void OnTriggerEnter(Collider other)
         {
@@ -126,7 +119,6 @@ namespace _Project.Units.Unit.BaseUnits
             targets = new List<Transform>();
             LoadDataFromScriptableObject();
             GetComponent<SphereCollider>().radius = attackRange;
-            
         }
 
         #endregion
@@ -171,6 +163,22 @@ namespace _Project.Units.Unit.BaseUnits
                 }
             }
         }
+        
+        protected virtual void CastAbilityIfPossible()
+        {
+            if (!ability.IsCastable)
+                return;
+            //cast Check is inside the ability
+            if (!currentTarget || !currentTarget.gameObject.activeSelf)
+            {
+                SelectTarget();
+            }
+            else
+            {
+                ability.Cast(transform,currentTarget);
+            }
+            
+        }
 
         #endregion
     
@@ -193,6 +201,37 @@ namespace _Project.Units.Unit.BaseUnits
             ApplyModifiers();
         }
 
+        #region SpecialSkills
+
+        /*public bool BlessingOfTheTrees(float waitSeconds, float activeSeconds, float increaseValue)
+        {
+            StartCoroutine(BlessingOfTheTreesCoroutine(waitSeconds,activeSeconds,increaseValue));
+            return true;
+        }
+
+        private IEnumerator BlessingOfTheTreesCoroutine(float waitSeconds, float activeSeconds, float increaseValue )
+        {
+            float originalValueSpeed = ((SingleTargetDamageAbility)ability).Speed;
+            float originalValueCooldown = ((SingleTargetDamageAbility)ability).Speed;
+            float modifiedValueSpeed = originalValueSpeed * increaseValue;
+            float modifiedValueCooldown = originalValueSpeed * increaseValue;
+            
+            while(true)
+            {
+                ((SingleTargetDamageAbility) ability).Speed = originalValueSpeed;
+                ((SingleTargetDamageAbility) ability).Cooldown = originalValueCooldown;
+                
+                yield return new WaitForSeconds(waitSeconds);
+                
+                ((SingleTargetDamageAbility) ability).Speed = modifiedValueSpeed;
+                ((SingleTargetDamageAbility) ability).Speed = modifiedValueCooldown;
+                
+                yield return new WaitForSeconds(activeSeconds);
+            }
+        }
+        */
+
+        #endregion
         #endregion
     
         #region CallBacks

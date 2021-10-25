@@ -4,7 +4,7 @@ using Photon.Pun;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace _Project.Units.Unitmanager
+namespace _Project.Units.UnitManager
 {
     /// <summary>
     /// Author: Peter Luu
@@ -46,6 +46,8 @@ namespace _Project.Units.Unitmanager
             get => units;
             set => units = value;
         }
+        
+        public List<Unit.BaseUnits.Unit> ActiveUnits { get; set; }
 
         #endregion
     
@@ -57,7 +59,16 @@ namespace _Project.Units.Unitmanager
     
         #region Unity Methods
 
-    
+        private void Start()
+        {
+            if (units == null)
+            {
+                units = new List<Unit.BaseUnits.Unit>();
+            }
+            ActiveUnits = new List<Unit.BaseUnits.Unit>();
+        }
+        
+        
 
         #endregion
     
@@ -69,7 +80,15 @@ namespace _Project.Units.Unitmanager
     
         #region Protected Methods
 
-    
+        public void SubscribeUnit(Unit.BaseUnits.Unit unit)
+        {
+            ActiveUnits.Add(unit);
+        }
+        
+        public void UnsubscribeUnit(Unit.BaseUnits.Unit unit)
+        {
+            ActiveUnits.Remove(unit);
+        }
 
         #endregion
     

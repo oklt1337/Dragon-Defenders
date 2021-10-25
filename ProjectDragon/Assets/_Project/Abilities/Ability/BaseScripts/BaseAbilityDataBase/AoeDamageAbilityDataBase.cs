@@ -6,6 +6,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     /// <summary>
     /// Author: Peter Luu
     /// </summary>
+    [CreateAssetMenu(menuName="Tools/Ability/BaseAbility/AoeDamageAbilityDataBase")]
     public class AoeDamageAbilityDataBase : DamageAbilityDataBase
     {
         #region Singleton

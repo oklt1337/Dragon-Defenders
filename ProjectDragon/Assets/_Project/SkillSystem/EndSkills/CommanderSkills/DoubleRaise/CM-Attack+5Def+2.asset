@@ -16,7 +16,7 @@ MonoBehaviour:
   skillName: Attack+5, Defense+2
   description: 
   skillHolderList:
-  - skillEnum: 2
+  - skillEnum: 8
     skillIncreaseValue: 5
-  - skillEnum: 3
+  - skillEnum: 10
     skillIncreaseValue: 2

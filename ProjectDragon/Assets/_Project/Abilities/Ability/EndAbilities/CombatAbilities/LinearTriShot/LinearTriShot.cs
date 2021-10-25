@@ -2,7 +2,6 @@ using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.Scripts.Gameplay.Projectiles;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine;
@@ -103,7 +102,7 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
                 projectile.Speed = Speed;
                 projectile.Damage = baseDamage;
                 //calculate how far it will go with that speed;
-                projectile.SetLifeTime(maxDistance);
+                projectile.SetLifeTime(maxProjectileRange);
             }
             //at the end of cast the cooldown has to be reset
             ResetCoolDown();

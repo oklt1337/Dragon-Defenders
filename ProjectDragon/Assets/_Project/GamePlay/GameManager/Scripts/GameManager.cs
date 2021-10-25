@@ -10,7 +10,7 @@ using _Project.GamePlay.Spawning.WaveManager.Scripts;
 using _Project.UI.In_Game.Base_UI.Scripts;
 using _Project.UI.In_Game.Building.Scripts;
 using _Project.UI.In_Game.Commander.Scripts;
-using _Project.Units.Unitmanager;
+using _Project.Units.UnitManager;
 using UnityEngine;
 
 namespace _Project.GamePlay.GameManager.Scripts

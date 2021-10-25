@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Project.SkillSystem.SkillDataBases;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -127,12 +128,32 @@ namespace _Project.SkillSystem.BaseSkills
     public enum SkillEnum
     {
         None,
-        Health,
-        Attack,
-        Defense,
-        Experience,
-        Gold,
+        SpecialSkill,
+        CoolDown,
+        BaseDamage,
+        DamageModifier,
+        AttackRange,
+        Speed,
+        Duration,
+        BuffValue,
+        MaxDistance,
+        MaxProjectileRange,
+        CommanderHealth,
+        CommanderAttack,
+        CommanderManaCost,
+        CommanderCoolDown,
+        CommanderDefense,
+        CommanderExperience,
+        CommanderGold,
     }
+
+    public enum SkillEnumSpecial
+    {
+        None,
+        BlessingOfTheTrees,
+        TrippleArrows,
+    }
+
     [System.Serializable]
     public class SkillHolder
     {
@@ -143,5 +164,15 @@ namespace _Project.SkillSystem.BaseSkills
         public float SkillIncreaseValue => skillIncreaseValue;
         
         
+    }
+    
+    [System.Serializable]
+    public class SkillHolderSpecial
+    {
+        [SerializeField]private SkillEnumSpecial skillEnumSpecial;
+        [SerializeField]private float[] skillIncreaseValues;
+        public SkillEnumSpecial SkillEnumSpecial => skillEnumSpecial;
+
+        public float[] SkillIncreaseValues => skillIncreaseValues;
     }
 }

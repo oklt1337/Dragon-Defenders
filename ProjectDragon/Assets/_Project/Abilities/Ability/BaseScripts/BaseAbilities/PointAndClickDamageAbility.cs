@@ -1,6 +1,5 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using _Project.AI.Enemies.Scripts;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 {

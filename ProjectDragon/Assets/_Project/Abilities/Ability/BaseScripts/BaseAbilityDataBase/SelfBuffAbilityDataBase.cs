@@ -1,5 +1,3 @@
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
-
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
     /// <summary>

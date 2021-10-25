@@ -1,5 +1,4 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities

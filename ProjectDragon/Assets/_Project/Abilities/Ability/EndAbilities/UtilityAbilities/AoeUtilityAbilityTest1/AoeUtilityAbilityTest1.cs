@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
 using Unity.VisualScripting;
 using UnityEngine;
 

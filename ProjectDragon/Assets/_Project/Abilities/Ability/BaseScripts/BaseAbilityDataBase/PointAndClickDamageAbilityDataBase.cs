@@ -1,10 +1,11 @@
-using _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase;
+using UnityEngine;
 
 namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
     /// <summary>
     /// Author: Peter Luu
     /// </summary>
+    [CreateAssetMenu(menuName="Tools/Ability/BaseAbility/PointAndClickDamageAbilityDataBase")]
     public class PointAndClickDamageAbilityDataBase : SingleTargetDamageAbilityDataBase
     {
         #region Singleton
@@ -75,5 +76,10 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 
 
         #endregion
+
+        protected void Update()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

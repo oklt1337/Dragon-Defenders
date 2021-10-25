@@ -2,9 +2,6 @@ using _Project.Units.Unit.BaseUnits;
 
 namespace _Project.Units.Unit.EndUnits.CombatTestUnit
 {
-    /// <summary>
-    /// Author: Peter Luu
-    /// </summary>
     public class CombatTestUnit : Combat
     {
         #region Singleton
@@ -90,6 +87,5 @@ namespace _Project.Units.Unit.EndUnits.CombatTestUnit
 
 
         #endregion
-        
     }
 }

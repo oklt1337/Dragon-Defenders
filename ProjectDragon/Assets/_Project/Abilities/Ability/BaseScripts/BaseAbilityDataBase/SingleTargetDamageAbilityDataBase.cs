@@ -1,7 +1,6 @@
-using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Skillsystem.Ability.AbilityDataBases.BaseAbilityDataBase
+namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
 {
     /// <summary>
     /// Author: Peter Luu
