@@ -155,6 +155,7 @@ namespace _Project.Network.PlayFab.Scripts
                 Debug.Log(error.Error);
                 Debug.LogError(error.GenerateErrorReport());
                 ClearAuthorizeProcess();
+                AuthService.Authenticate();
             }
         }
 
