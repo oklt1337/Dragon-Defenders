@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 
 namespace _Project.PlayerProfile.Profile.Scripts
 {
-    [Serializable]
     public class Profile
     {
         public static Profile Instance => instance ??= new Profile();

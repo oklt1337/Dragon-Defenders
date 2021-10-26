@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PlayFab.ClientModels;
+using Sirenix.Serialization;
 using UnityEngine;
 using Profile = _Project.PlayerProfile.Profile.Scripts.Profile;
 

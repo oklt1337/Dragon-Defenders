@@ -196,9 +196,12 @@ using Facebook.Unity;
             * We proceed with making a call to PlayFab API. We pass in current Facebook AccessToken and let it create
             * and account using CreateAccount flag set to true. We also pass the callback for Success and Failure results
             */
-            PlayFabClientAPI.LoginWithFacebook(
-                new LoginWithFacebookRequest
-                    {CreateAccount = true, AccessToken = AccessToken.CurrentAccessToken.TokenString},
+            PlayFabClientAPI.LoginWithFacebook(new LoginWithFacebookRequest
+                    {
+                        CreateAccount = true, 
+                        AccessToken = AccessToken.CurrentAccessToken.TokenString
+                        
+                    },
                 OnPlayFabFacebookAuthComplete, OnPlayFabFacebookAuthFailed);
         }
 

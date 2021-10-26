@@ -123,49 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &54199432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 54199433}
-  - component: {fileID: 54199434}
-  m_Layer: 0
-  m_Name: FacebookAuth
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &54199433
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54199432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1901017792}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &54199434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54199432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95da3d29ad049d14291af3c933f32dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &54685372
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +195,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1901017792}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &61974166
 MonoBehaviour:
@@ -520,13 +477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a91a46e2ed23fd43a8f284b0db473a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playFabFacebookAuth: {fileID: 54199434}
   infoRequestParams:
-    GetCharacterInventories: 0
-    GetCharacterList: 0
+    GetCharacterInventories: 1
+    GetCharacterList: 1
     GetPlayerProfile: 1
-    GetPlayerStatistics: 0
-    GetTitleData: 0
+    GetPlayerStatistics: 1
+    GetTitleData: 1
     GetUserAccountInfo: 0
     GetUserData: 0
     GetUserInventory: 0
@@ -547,8 +503,8 @@ MonoBehaviour:
       ShowMemberships: 0
       ShowOrigination: 0
       ShowPushNotificationRegistrations: 0
-      ShowStatistics: 0
-      ShowTags: 0
+      ShowStatistics: 1
+      ShowTags: 1
       ShowTotalValueToDateInUsd: 0
       ShowValuesToDate: 0
     TitleDataKeys: []
@@ -684,7 +640,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1901017792}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &488099803
 MonoBehaviour:
@@ -962,7 +918,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1901017792}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &749455225
 MonoBehaviour:
@@ -1005,7 +961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1901017792}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &789121658
 MonoBehaviour:
@@ -1516,7 +1472,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1901017792}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1566234972
 MonoBehaviour:
@@ -1603,7 +1559,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401678525}
-  - {fileID: 54199433}
   - {fileID: 789121657}
   - {fileID: 2014922859}
   - {fileID: 488099802}
@@ -1661,7 +1616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1901017792}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2014922860
 MonoBehaviour:

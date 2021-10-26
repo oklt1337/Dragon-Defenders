@@ -111,6 +111,7 @@ namespace _Project.Network.PlayFab.Scripts
         private void Logout()
         {
             ClearAuthorizeProcess();
+            AuthService.UnlinkSilentAuth();
             DisplayAuthScene();
         }
 
@@ -129,7 +130,6 @@ namespace _Project.Network.PlayFab.Scripts
         public void ClearAuthorizeProcess()
         {
             PlayFabClientAPI.ForgetAllCredentials();
-            AuthService.UnlinkSilentAuth();
             PlayFabAuthService.ClearRememberMe();
             PlayFabAuthService.AuthType = AuthTypes.None;
         }

@@ -11,7 +11,8 @@ namespace _Project.Deck_Cards.Decks.Scripts
     public class Deck : ScriptableObject
     {
         #region Serialze Fields
-
+        
+        [SerializeField] private int deckId;
         [SerializeField] private string deckName;
         [SerializeField] private Factions.Faction faction;
         [SerializeField] private CommanderCard commanderCard;
@@ -26,6 +27,8 @@ namespace _Project.Deck_Cards.Decks.Scripts
         #endregion
         
         #region Public Properties
+
+        public int DeckId => deckId;
 
         public string DeckName
         {

@@ -50,9 +50,9 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         /// Creates a deck and saves it in deck list.
         /// </summary>
         /// <param name="deckName"></param>
-        public void CreateDeck(string deckName)
+        public bool CreateDeck(string deckName)
         {
-            deckBuilder.CreateDeck(deckName);
+            return deckBuilder.CreateDeck(deckName);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
 
             if (index == -1)
                 return false;
-            
+
             decks.RemoveAt(index);
             return true;
         }
@@ -76,7 +76,7 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         /// </summary>
         /// <param name="index">int deckIndex</param>
         /// <param name="newDeckName">string</param>
-        /// <returns></returns>
+        /// <returns>bool if edit worked</returns>
         public bool EditDeckName(int index, string newDeckName)
         {
             if (decks[index] == null)
@@ -91,7 +91,7 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         /// </summary>
         /// <param name="deck">Deck deck to edit</param>
         /// <param name="newDeckName">string</param>
-        /// <returns></returns>
+        /// <returns>bool if edit worked</returns>
         public bool EditDeckName(Deck deck, string newDeckName)
         {
             if (!decks.Contains(deck))
@@ -121,6 +121,8 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         {
             decks.Add(deckBuilder.Save());
         }
+        
+        //ToDo: Deck on edit edit 2nd instance on save override main instance and have bool for isSaved.
 
         #endregion
     }

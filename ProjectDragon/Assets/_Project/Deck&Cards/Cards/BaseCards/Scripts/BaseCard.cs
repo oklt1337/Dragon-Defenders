@@ -13,14 +13,16 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
     }
     public abstract class BaseCards : ScriptableObject
     {
+        [SerializeField] private int cardID;
+        [SerializeField] private int cost;
         [SerializeField] private Sprite displayImage;
         [SerializeField] private Rarity rarity;
-        [SerializeField] private int cost;
         [SerializeField] private VideoClip videoClip;
 
+        public int CardID => cardID;
+        public int Cost => cost;
         public Sprite DisplayImage => displayImage;
         public Rarity Rarity => rarity;
-        public int Cost => cost;
         public VideoClip VideoClip => videoClip;
     }
 }
