@@ -174,6 +174,7 @@ namespace _Project.SkillSystem.BaseSkills
                         {
                             Debug.Log(unit.Ability.GetType().ToString());
                             ((SkillShotDamageAbility)(unit.Ability)).BulletsPerCast = (int)skillHolder.SkillIncreaseValue;
+                            
                         }
                     }
                     break;
