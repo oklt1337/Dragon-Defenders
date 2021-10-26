@@ -211,7 +211,7 @@ namespace _Project.Units.Unit.BaseUnits
         {
             float dividerValue = 0.5f;
             GameManager.Instance.PlayerModel.ModifyMoney((int)(cost*dividerValue));
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         
         public void GainExp(float gainedExp)

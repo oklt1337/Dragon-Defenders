@@ -9,7 +9,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
     /// <summary>
     /// Author: Peter Luu
     /// </summary>
-    public class SkillshotDamageAbility : SingleTargetDamageAbility
+    public class SkillShotDamageAbility : SingleTargetDamageAbility
     {
         #region Singleton
 

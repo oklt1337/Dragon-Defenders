@@ -87,6 +87,7 @@ namespace _Project.Units.Unit.BaseUnits
                 return;
             }
             transform.rotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
+            //transform.rotation = Quaternion.Euler(new Vector3(0,transform.rotation.y,0));
             CastAbilityIfPossible();
         }
 
@@ -153,14 +154,23 @@ namespace _Project.Units.Unit.BaseUnits
                 return;
             } 
             float smallestDistance  = float.MaxValue;
+            for(var i = targets.Count - 1; i > -1; i--)
+            {
+                if (targets[i] == null)
+                    targets.RemoveAt(i);
+            }
             foreach (Transform enemyTransform in targets)
             {
-                if (smallestDistance >= (transform.position - enemyTransform.position).sqrMagnitude)
+                if (enemyTransform.gameObject.activeSelf)
                 {
-                    smallestDistance = (transform.position - enemyTransform.position).sqrMagnitude;
-                    currentTarget = enemyTransform;
-                    
+                    if (smallestDistance >= (transform.position - enemyTransform.position).sqrMagnitude)
+                    {
+                        smallestDistance = (transform.position - enemyTransform.position).sqrMagnitude;
+                        currentTarget = enemyTransform;
+                                        
+                    }
                 }
+                
             }
         }
         
@@ -169,6 +179,8 @@ namespace _Project.Units.Unit.BaseUnits
             if (!ability.IsCastable)
                 return;
             //cast Check is inside the ability
+            //Debug.Log("Ability is castable Targets:");
+            //Debug.Log(Targets.Count);
             if (!currentTarget || !currentTarget.gameObject.activeSelf)
             {
                 SelectTarget();
@@ -177,7 +189,6 @@ namespace _Project.Units.Unit.BaseUnits
             {
                 ability.Cast(transform,currentTarget);
             }
-            
         }
 
         #endregion
@@ -232,6 +243,7 @@ namespace _Project.Units.Unit.BaseUnits
         */
 
         #endregion
+        
         #endregion
     
         #region CallBacks

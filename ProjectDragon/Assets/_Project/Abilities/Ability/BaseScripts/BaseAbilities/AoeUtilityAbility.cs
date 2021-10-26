@@ -1,3 +1,4 @@
+using System;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -66,6 +67,11 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         public override void Update()
         {
             base.Update();
+        }
+
+        public void OnDrawGizmos()
+        {
+            
         }
 
         #endregion

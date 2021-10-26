@@ -28,8 +28,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: tree
       Entry: 7
-      Data: 0|Unity.Cloud.Collaborate.Common.SerializableDictionary`2[[System.String,
-        mscorlib],[_Project.SkillSystem.BaseSkills.Skill, Assembly-CSharp]], Unity.CollabProxy.Editor
+      Data: 0|Unity.VisualScripting.FlexibleDictionary`2[[System.String, mscorlib],[_Project.SkillSystem.BaseSkills.Skill,
+        Assembly-CSharp]], Unity.VisualScripting.Core
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,

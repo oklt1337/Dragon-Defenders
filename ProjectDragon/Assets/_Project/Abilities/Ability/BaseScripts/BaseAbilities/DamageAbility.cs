@@ -7,7 +7,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
     /// <summary>
     /// Author: Peter Luu
     /// </summary>
-    public abstract class DamageAbility : Abilities.Ability.BaseScripts.BaseAbilities.Ability
+    public abstract class DamageAbility : Ability
     {
         #region Singleton
 

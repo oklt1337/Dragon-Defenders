@@ -22,7 +22,7 @@ namespace _Project.SkillSystem.BaseSkills
         public override bool EnableSkill()
         {
             if (!IsLearnable || IsSkillActive) return false;
-            if (GameManager.Instance.PlayerModel.ModifyMoney(cost)) return false;
+            //if (GameManager.Instance.PlayerModel.ModifyMoney(cost)) return false;
             
             foreach (var skillHolder in SkillHolderList)
             {
@@ -153,7 +153,7 @@ namespace _Project.SkillSystem.BaseSkills
                     {
                         if (unit.SkillTree.tree.ContainsValue(this))
                         {
-                            ((SkillshotDamageAbility)unit.Ability).MaxProjectileRange *= skillHolder.SkillIncreaseValue;
+                            ((SkillShotDamageAbility)unit.Ability).MaxProjectileRange *= skillHolder.SkillIncreaseValue;
                         }
                     }
                     break;
@@ -172,7 +172,8 @@ namespace _Project.SkillSystem.BaseSkills
                     {
                         if (unit.SkillTree.tree.ContainsValue(this))
                         {
-                            ((SkillshotDamageAbility)unit.Ability).BulletsPerCast = (int)skillHolder.SkillIncreaseValue;
+                            Debug.Log(unit.Ability.GetType().ToString());
+                            ((SkillShotDamageAbility)(unit.Ability)).BulletsPerCast = (int)skillHolder.SkillIncreaseValue;
                         }
                     }
                     break;
@@ -181,7 +182,8 @@ namespace _Project.SkillSystem.BaseSkills
                     {
                         if (unit.SkillTree.tree.ContainsValue(this))
                         {
-                            ((SkillshotDamageAbility)unit.Ability).AngleOffset = skillHolder.SkillIncreaseValue;
+                            
+                            ((SkillShotDamageAbility)unit.Ability).AngleOffset = skillHolder.SkillIncreaseValue;
                         }
                     }
                     break;

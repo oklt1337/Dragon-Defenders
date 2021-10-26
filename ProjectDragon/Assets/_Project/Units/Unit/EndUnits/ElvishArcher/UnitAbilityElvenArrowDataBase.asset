@@ -26,10 +26,10 @@ MonoBehaviour:
       Data: 0|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: _Project.Abilities.Ability.BaseScripts.BaseAbilities.PointAndClickDamageAbility,
+      Data: _Project.Abilities.Ability.BaseScripts.BaseAbilities.SkillShotDamageAbility,
         Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
-  unitAbilitiesDataBase: {fileID: 11400000, guid: 4a18d42a7ff95464abe92d2117ae4ac2,
+  unitAbilitiesDataBase: {fileID: 11400000, guid: ed53930bd8ca21643a8e57ce8a95a578,
     type: 2}

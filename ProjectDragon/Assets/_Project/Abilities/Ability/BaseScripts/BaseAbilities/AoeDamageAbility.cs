@@ -52,8 +52,8 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #region Public Properties
         public float LifeTime
         {
-            get => LifeTime;
-            set => LifeTime = value;
+            get => lifeTime;
+            set => lifeTime = value;
         }
     
 
@@ -99,7 +99,12 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
             isSpawnProjectileOnEnemyPosition = ((AoeDamageAbilityDataBase) dataBase).IsSpawnProjectileOnEnemyPosition;
             
         }
-    
+
+        public override void Cast(Transform spawnPosition, Transform enemyPosition)
+        {
+            Cast(spawnPosition);
+        }
+        
         public override void Cast(Transform spawnPosition)
         {
             //check if cast can be casted
@@ -115,6 +120,9 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
                 rune =  SpawnProjectileInFrontOfUnit();
             }
 
+            float vectorMultiplier = 10000;
+            rune.transform.rotation = Quaternion.LookRotation(spawnPosition.transform.position + (transform.forward * vectorMultiplier));
+
             if (isScreamOftheWildActive)
             {
                 screamOfTheWildCounter %= executeScreamWhenReached;
@@ -128,11 +136,14 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
                         tempScale.z * screamOfTheWildCounterScaler
                         );
                 }
+                screamOfTheWildCounter++;
             }
 
             //at the end of cast the cooldown has to be reset
             ResetCoolDown();
         }
+        
+        
 
         protected virtual GameObject SpawnProjectileInFrontOfUnit()
         {

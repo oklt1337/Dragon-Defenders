@@ -14,7 +14,7 @@ namespace _Project.SkillSystem.BaseSkills
         public override bool EnableSkill()
         {
             if (!IsLearnable || IsSkillActive) return false;
-            if (GameManager.Instance.PlayerModel.Money <= cost) return false;
+            //if (GameManager.Instance.PlayerModel.Money <= cost) return false;
             
             foreach (var skillHolderSpecial in SkillHolderSpecialList)
             {
@@ -69,8 +69,8 @@ namespace _Project.SkillSystem.BaseSkills
                                 continue;
                             
                             float numberOfAttacksNeeded = skillHolderSpecial.SkillIncreaseValues[0];
-                            float upTime = skillHolderSpecial.SkillIncreaseValues[1];
-                            ((AoeDamageAbility)unit.Ability).UnlockScreamOfTheWild((int)numberOfAttacksNeeded, upTime);
+                            float scale = skillHolderSpecial.SkillIncreaseValues[1];
+                            ((AoeDamageAbility)unit.Ability).UnlockScreamOfTheWild((int)numberOfAttacksNeeded, scale);
                         }
                     } 
                     break;

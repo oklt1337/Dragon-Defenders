@@ -24,6 +24,7 @@ namespace _Project.SkillSystem.SkillTree
             foreach (var skill in tree)
             {
                 skill.Value.Init();
+                skill.Value.IsLearnable = true;
                 if (skill.Key == "0"|| skill.Key == "1")
                 {
                     skill.Value.IsLearnable = true;
@@ -34,20 +35,49 @@ namespace _Project.SkillSystem.SkillTree
         }
         
         //leave it for now because it could  change anytime
-        public bool EnableSkillThroughSkillTree(String skillTreeKey)
+        public bool EnableSkillThroughSkillTree(string skillTreeKey)
         {
+            if(!tree.ContainsKey(skillTreeKey))
+            {
+                Debug.Log(tree.Keys);
+                return false;
+            }
             if (!tree[skillTreeKey].EnableSkill()) return false;
 
+            /*
             if (skillTreeKey == "0")
             {
                 tree["2"].IsLearnable = true;
                 tree["3"].IsLearnable = true;
+                tree["1"].IsLearnable = false;
+                return true;
             }
             if (skillTreeKey == "1")
             {
+                tree["0"].IsLearnable = false;   
                 tree["3"].IsLearnable = true;   
-                tree["4"].IsLearnable = true;  
+                tree["4"].IsLearnable = true;
+                return true;
             }
+            if (skillTreeKey == "2")
+            {
+                tree["3"].IsLearnable = false;   
+                tree["4"].IsLearnable = false;
+                return true;
+            }
+            if (skillTreeKey == "3")
+            {
+                tree["2"].IsLearnable = false;   
+                tree["4"].IsLearnable = false;
+                return true;
+            }
+            if (skillTreeKey == "4")
+            {
+                tree["2"].IsLearnable = false;   
+                tree["3"].IsLearnable = false;
+                return true;
+            }
+            */
             return true;
         }
     }

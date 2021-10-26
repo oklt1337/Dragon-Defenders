@@ -11,7 +11,7 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
     /// <summary>
     /// Author: Peter Luu
     /// </summary>
-    public class LinearTriShot : SkillshotDamageAbility
+    public class LinearTriShot : SkillShotDamageAbility
     {
         #region Singleton
 
