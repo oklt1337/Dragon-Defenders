@@ -4,8 +4,20 @@ using UnityEngine;
 
 namespace _Project.Network.PlayFab.Scripts
 {
-    public class PlayFabFacebookAuth : MonoBehaviour
+    public class PlayFabFacebookAuth
     {
+        public static PlayFabFacebookAuth Instance => instance ??= new PlayFabFacebookAuth();
+        private static PlayFabFacebookAuth instance;
+
+        #region Constructor
+
+        private PlayFabFacebookAuth()
+        {
+            
+        }
+
+        #endregion
+
         #region Public Properties
 
         public static ILoginResult LoginResult { get; private set; }

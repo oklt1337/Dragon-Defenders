@@ -13,15 +13,15 @@ namespace _Project.Network.PlayFab.Scripts
     {
         
         #region Private Serializable Fields
-
-        [SerializeField] private PlayFabFacebookAuth playFabFacebookAuth;
+        
         [SerializeField] private GetPlayerCombinedInfoRequestParams infoRequestParams;
 
         #endregion
 
         #region Public Properties
         
-        public PlayFabFacebookAuth PlayFabFacebookAuth => playFabFacebookAuth;
+        public PlayFabFacebookAuth PlayFabFacebookAuth { get; } = PlayFabFacebookAuth.Instance;
+
         public GetPlayerCombinedInfoRequestParams InfoRequestParams => infoRequestParams;
         public PlayFabAuthService AuthService { get; } = PlayFabAuthService.Instance;
 
@@ -148,7 +148,6 @@ namespace _Project.Network.PlayFab.Scripts
             if (error.Error == PlayFabErrorCode.AccountNotFound)
             {
                 OnAccountNotFound?.Invoke();
-                return;
             }
             else
             {

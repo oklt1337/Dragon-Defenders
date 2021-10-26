@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Project.Deck_Cards.Decks.Scripts;
+using PlayFab.ClientModels;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,14 +13,18 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         #region Private Fields
 
         [SerializeField] private List<Deck> decks = new List<Deck>();
-        private Deck currentDeck;
+
+        #endregion
+
+        #region Private Region
+
+        private readonly DeckBuilder.Scripts.DeckBuilder deckBuilder = DeckBuilder.Scripts.DeckBuilder.Instance;
 
         #endregion
 
         #region Public Properties
 
         public List<Deck> Decks => decks;
-        public Deck CurrentDeck => currentDeck;
 
         #endregion
         
@@ -37,50 +42,17 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                CreateDeck(null);
-            }
-            
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                SaveDeck();
-            }
-        }
-
         #endregion
 
         #region Public Methods
-        
+
+        /// <summary>
+        /// Creates a deck and saves it in deck list.
+        /// </summary>
+        /// <param name="deckName"></param>
         public void CreateDeck(string deckName)
         {
-            if (string.IsNullOrEmpty(deckName))
-            {
-                const string newDeckName = "newDeck";
-                
-                //Set deckName to generic name
-                deckName = newDeckName;
-                
-                Debug.Log(decks.Count);
-                if (decks.Count > 0)
-                {
-                    var deckNameIndex = 0;
-                    var index = decks.FindIndex(deck => deck.DeckName == deckName);
-                    // if generic Name is already taken search increase Number at end until deckName is not taken
-                    while (index != -1 && deckNameIndex < 100)
-                    {
-                        Debug.Log($"DeckIndex {index}");
-                        deckNameIndex++;
-                        deckName = newDeckName + deckNameIndex;
-                        index = decks.FindIndex(deck => deck.DeckName == deckName);
-                    }
-                }
-            }
-
-            currentDeck = ScriptableObject.CreateInstance<Deck>();
-            currentDeck.DeckName = deckName;
+            deckBuilder.CreateDeck(deckName);
         }
 
         /// <summary>
@@ -100,15 +72,6 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         }
 
         /// <summary>
-        /// Saves the deck in the List.
-        /// </summary>
-        public void SaveDeck()
-        {
-            decks.Add(currentDeck);
-            currentDeck = null;
-        }
-
-        /// <summary>
         /// Will set deckName to new Given deckName.
         /// </summary>
         /// <param name="index">int deckIndex</param>
@@ -121,6 +84,42 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
             
             decks[index].DeckName = newDeckName;
             return true;
+        }
+
+        /// <summary>
+        /// Will set deckName to new Given deckName.
+        /// </summary>
+        /// <param name="deck">Deck deck to edit</param>
+        /// <param name="newDeckName">string</param>
+        /// <returns></returns>
+        public bool EditDeckName(Deck deck, string newDeckName)
+        {
+            if (!decks.Contains(deck))
+                return false;
+
+            var index = decks.FindIndex(d => d == deck);
+            if (index == -1) 
+                return false;
+            
+            decks[index].DeckName = newDeckName;
+            return true;
+        }
+
+        /// <summary>
+        /// Saves a deck
+        /// </summary>
+        /// <param name="deck">deck to save</param>
+        public void SaveDeck(Deck deck)
+        {
+            decks.Add(deck);
+        }
+
+        /// <summary>
+        /// Saves Last Created Deck.
+        /// </summary>
+        public void SaveDeck()
+        {
+            decks.Add(deckBuilder.Save());
         }
 
         #endregion
