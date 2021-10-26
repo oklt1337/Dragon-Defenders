@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _Project.Faction;
 using _Project.SkillSystem.BaseSkills;
 using UnityEngine;
 
@@ -29,9 +30,9 @@ namespace _Project.SkillSystem.SkillDataBases
         #region protected Fields
 
         [SerializeField] protected List<SkillHolder> skillHolderList;
+        [SerializeField] protected Factions.Class newClass;
 
         
-
         #endregion
     
         #region Public Fields
@@ -49,6 +50,12 @@ namespace _Project.SkillSystem.SkillDataBases
         #region Events
 
         public List<SkillHolder> SkillHolderList => skillHolderList;
+
+        public Factions.Class NewClass
+        {
+            get => newClass;
+            set => newClass = value;
+        }
 
         #endregion
     

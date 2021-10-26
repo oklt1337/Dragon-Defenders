@@ -61,6 +61,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                 
                 _money = value;
             } 
+            
         }
         public Camera BuildCamera => buildCamera;
         public Camera CommanderCamera => commanderCamera;

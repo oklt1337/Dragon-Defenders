@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Faction;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.SkillSystem.SkillDataBases;
 using _Project.Units.Unit.BaseUnits;
@@ -14,16 +15,23 @@ namespace _Project.SkillSystem.BaseSkills
     /// </summary>
     public class SkillMultipleStatChange : Skill
     {
-        protected List<SkillHolder> SkillHolderList; 
+        protected List<SkillHolder> SkillHolderList;
+        private Factions.Class newClass;
+
+        
         public override bool EnableSkill()
         {
             if (!IsLearnable || IsSkillActive) return false;
+            if (GameManager.Instance.PlayerModel.ModifyMoney(cost)) return false;
             
             foreach (var skillHolder in SkillHolderList)
             {
                 ActivateSkill(skillHolder);
             }
-            
+
+            if (newClass != Factions.Class.None)
+                ChangeFaction();
+                
             IsSkillActive = true;
             IsLearnable = false;
             return true;
@@ -47,9 +55,8 @@ namespace _Project.SkillSystem.BaseSkills
                 case SkillEnum.CommanderManaCost:
                     foreach (var ability in  GameManager.Instance.PlayerModel.Commander.Abilities)
                     {
-                        ability.Cooldown *= skillHolder.SkillIncreaseValue;
+                        ability.ManaCost *= skillHolder.SkillIncreaseValue;
                     }
-                    Debug.Log("Experience was private set last time i checked");
                     break;
                 case SkillEnum.CommanderExperience:
                     //GameManager.Instance.PlayerModel.Commander.Experience += skillHolder.SkillIncreaseValue;
@@ -76,6 +83,8 @@ namespace _Project.SkillSystem.BaseSkills
             switch (skillHolder.SkillEnum)
             {
                 //Tower
+                
+                
                 case SkillEnum.CoolDown:
                     foreach (var unit in GameManager.Instance.UnitManager.ActiveUnits)
                     {
@@ -130,12 +139,12 @@ namespace _Project.SkillSystem.BaseSkills
                         }
                     }
                     break;
-                case SkillEnum.MaxDistance:
+                case SkillEnum.LifeTime:
                     foreach (var unit in GameManager.Instance.UnitManager.ActiveUnits)
                     {
                         if (unit.SkillTree.tree.ContainsValue(this))
                         {
-                            ((AoeDamageAbility)unit.Ability).MAXDistance *= skillHolder.SkillIncreaseValue;
+                            ((AoeDamageAbility)unit.Ability).LifeTime *= skillHolder.SkillIncreaseValue;
                         }
                     }
                     break;
@@ -158,17 +167,64 @@ namespace _Project.SkillSystem.BaseSkills
                         }
                     }
                     break;
+                case SkillEnum.BulletsPerCast:
+                    foreach (var unit in GameManager.Instance.UnitManager.ActiveUnits)
+                    {
+                        if (unit.SkillTree.tree.ContainsValue(this))
+                        {
+                            ((SkillshotDamageAbility)unit.Ability).BulletsPerCast = (int)skillHolder.SkillIncreaseValue;
+                        }
+                    }
+                    break;
+                case SkillEnum.AngleOffset:
+                    foreach (var unit in GameManager.Instance.UnitManager.ActiveUnits)
+                    {
+                        if (unit.SkillTree.tree.ContainsValue(this))
+                        {
+                            ((SkillshotDamageAbility)unit.Ability).AngleOffset = skillHolder.SkillIncreaseValue;
+                        }
+                    }
+                    break;
+                case SkillEnum.KnockBack:
+                    foreach (var unit in GameManager.Instance.UnitManager.ActiveUnits)
+                    {
+                        if (unit.SkillTree.tree.ContainsValue(this))
+                        {
+                            if (((DamageAbility)unit.Ability).Knockback == 0)
+                            {
+                                ((DamageAbility) unit.Ability).Knockback = 1;
+                            }
+                            ((DamageAbility)unit.Ability).Knockback *= skillHolder.SkillIncreaseValue;
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
         }
 
-
+        private  void ChangeFaction()
+        {
+            foreach (var unit in GameManager.Instance.UnitManager.ActiveUnits)
+            {
+                if (unit.SkillTree.tree.ContainsValue(this))
+                {
+                    unit.UnitClass = newClass;
+                }
+            }
+        }
 
         public override void Init()
         {
             base.Init();
             SkillHolderList = ((SkillMultipleStatChangeDataBase)skillDataBase).SkillHolderList;
+            newClass= ((SkillMultipleStatChangeDataBase)skillDataBase).NewClass;
+        }
+        
+        public Factions.Class NewClass
+        {
+            get => newClass;
+            set => newClass = value;
         }
     }
     

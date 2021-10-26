@@ -1,4 +1,5 @@
 using _Project.GamePlay.Map.Map_Objects.Base_Object.Scripts;
+using _Project.Projectiles.BaseProjectile;
 using UnityEngine;
 
 namespace _Project.GamePlay.Map.Map_Objects.Trees.Scripts

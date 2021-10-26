@@ -28,7 +28,9 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #region protected Fields
 
         [ShowInInspector] protected float baseDamage;
+        [ShowInInspector] protected float knockback;
         [ShowInInspector] protected GameObject damageProjectile;
+        
 
         #endregion
     
@@ -51,7 +53,12 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
             get => damageProjectile;
             set => damageProjectile = value;
         }
-
+        
+        public float Knockback
+        {
+            get => knockback;
+            set => knockback = value;
+        }
         #endregion
     
         #region Events
@@ -97,6 +104,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
             base.Init(dataBase);
             baseDamage = ((DamageAbilityDataBase)dataBase).BaseDamage;
             damageProjectile = ((DamageAbilityDataBase)dataBase).DamageProjectile;
+            knockback = ((DamageAbilityDataBase)dataBase).Knockback;
         }
     
 

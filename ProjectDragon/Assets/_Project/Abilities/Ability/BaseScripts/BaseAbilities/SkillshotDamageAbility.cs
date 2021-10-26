@@ -1,5 +1,5 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Projectiles;
+using _Project.Projectiles.LinearProjectiles;
 using Photon.Pun;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -31,6 +31,9 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         
         [ShowInInspector] protected float maxProjectileRange;
         [ShowInInspector] protected int bulletsPerCast;
+
+        
+
         [ShowInInspector] protected float angleOffset;
         
 
@@ -49,7 +52,17 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
             set => maxProjectileRange = value;
         }
     
+        public int BulletsPerCast
+        {
+            get => bulletsPerCast;
+            set => bulletsPerCast = value;
+        }
 
+        public float AngleOffset
+        {
+            get => angleOffset;
+            set => angleOffset = value;
+        }
         #endregion
     
         #region Events

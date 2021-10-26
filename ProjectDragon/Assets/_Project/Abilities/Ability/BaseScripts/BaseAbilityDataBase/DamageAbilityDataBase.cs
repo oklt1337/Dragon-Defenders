@@ -27,6 +27,10 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
         #region protected Fields
 
         [SerializeField] protected float baseDamage;
+        [SerializeField] protected float knockback;
+
+       
+
         [SerializeField] protected GameObject damageProjectile;
 
         #endregion
@@ -50,7 +54,13 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
             get => baseDamage;
             set => baseDamage = value;
         }
-
+        
+        public float Knockback
+        {
+            get => knockback;
+            set => knockback = value;
+        }
+        
         #endregion
     
         #region Events

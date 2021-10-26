@@ -1,4 +1,5 @@
 ﻿using _Project.AI.Enemies.Scripts;
+using _Project.Projectiles.BaseProjectile;
 using UnityEngine;
 
 namespace _Project.Projectiles.HominProjectile
@@ -57,11 +58,15 @@ namespace _Project.Projectiles.HominProjectile
         public void OnTriggerEnter(Collider other)
         {
             Enemy hit = other.GetComponent<Enemy>();
-            if (hit != null)
-            {
-                hit.TakeDamage(damage);
-                DeSpawn();
-            }
+            if (hit == null)
+                return;
+            
+            hit.TakeDamage(damage);
+            
+            if (knockBack > 0)
+                hit.GetComponent<Rigidbody>().AddForce(transform.forward * knockBack);
+            
+            DeSpawn();
         }
     }
 }

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: HawkEye
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
-  skillName: 
-  description: 
+  skillName: HawkEye
+  description: Double the Range.
+  cost: 200
   skillHolderList:
   - skillEnum: 4
     skillIncreaseValue: 2

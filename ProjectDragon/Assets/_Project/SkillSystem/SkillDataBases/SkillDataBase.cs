@@ -28,13 +28,11 @@ namespace _Project.SkillSystem.SkillDataBases
         [SerializeField]protected Sprite sprite;
         [SerializeField] protected string skillName;
         [SerializeField][TextArea] protected string description;
+        [SerializeField] protected int cost;
         
-
         #endregion
     
         #region Public Fields
-
-    
 
         #endregion
     
@@ -55,6 +53,12 @@ namespace _Project.SkillSystem.SkillDataBases
         {
             get => description;
             set => description = value;
+        }
+        
+        public int Cost
+        {
+            get => cost;
+            set => cost = value;
         }
 
         #endregion

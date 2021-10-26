@@ -43,6 +43,9 @@ namespace _Project.Units.Unit.BaseUnits
         [ShowInInspector] protected GameObject unitModel;
         [ShowInInspector] protected Factions.Faction faction;
         [ShowInInspector] protected Factions.Class unitClass;
+
+        
+
         [ShowInInspector] protected byte rank;
         [ShowInInspector] protected int cost;
         
@@ -103,6 +106,12 @@ namespace _Project.Units.Unit.BaseUnits
         {
             get => ability;
             set => ability = value;
+        }
+        
+        public Factions.Class UnitClass
+        {
+            get => unitClass;
+            set => unitClass = value;
         }
 
         #endregion
@@ -173,10 +182,7 @@ namespace _Project.Units.Unit.BaseUnits
         }
         protected virtual void InitiateSkillTree()
         {
-            foreach (var skill in skillTree.tree)
-            {
-                skill.Value.Init();
-            }
+            skillTree.InitSkillTreeSkills();
         }
 
         protected virtual void ApplyModifiers()
@@ -224,18 +230,10 @@ namespace _Project.Units.Unit.BaseUnits
             ApplyModifiers();
 
         }
-        [Button]
         //outdated must be renewed based on the new skillsystem
-        public void UpgradeSkill(bool isLeftSkill = false)
+        public void UpgradeSkill(string skillTreeKey)
         {
-            
-            if (currentSkillString.Length >= skillTree.MAXLayers) return;
-            
-            String pathTaken =(isLeftSkill) ? "L" : "R" ;
-            String.Concat(currentSkillString, pathTaken);
-            Skill currentSkill = skillTree.tree[currentSkillString];
-            currentSkill.IsLearnable = true;
-            currentSkill.EnableSkill();
+            SkillTree.EnableSkillThroughSkillTree(skillTreeKey);
         }
         
 

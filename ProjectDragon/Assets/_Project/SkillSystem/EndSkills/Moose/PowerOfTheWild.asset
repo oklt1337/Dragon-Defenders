@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a890e2a5c15cf408886627061aae96, type: 3}
-  m_Name: Blessing of the Trees
+  m_Script: {fileID: 11500000, guid: 1d0ae2f187dff104db95559835880bd8, type: 3}
+  m_Name: PowerOfTheWild
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 1f806a850e4ff264eafc4935f65793b8, type: 3}
-  skillName: Blessing Of The Trees
-  description: Shot Faster for x seconds every now and then.
-  cost: 200
-  skillHolderSpecialList:
-  - skillEnumSpecial: 1
-    skillIncreaseValues:
-    - 10
-    - 4
-    - 2
+  skillName: Power of the Wild
+  description: 'Cooldown Reduction. '
+  cost: 300
+  skillHolderList:
+  - skillEnum: 1
+    skillIncreaseValue: 0.75
+    newClass: 0
+  newClass: 0

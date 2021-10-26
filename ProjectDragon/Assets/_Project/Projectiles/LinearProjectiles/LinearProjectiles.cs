@@ -1,10 +1,9 @@
-using System;
 using _Project.AI.Enemies.Scripts;
-using _Project.Enemies.Scripts;
+using _Project.Projectiles;
+using _Project.Projectiles.BaseProjectile;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace _Project.Scripts.Gameplay.Projectiles
+namespace _Project.Projectiles.LinearProjectiles
 {
     public class LinearProjectiles : Projectile
     { 
@@ -39,11 +38,15 @@ namespace _Project.Scripts.Gameplay.Projectiles
         private void OnTriggerEnter(Collider other)
         {
             Enemy hit = other.GetComponent<Enemy>();
-            if (hit != null)
-            {
-                hit.TakeDamage(damage); 
-                DeSpawn();
-            }
+            if (hit == null)
+                return;
+            hit.TakeDamage(damage); 
+                
+            if (knockBack > 0)
+                hit.GetComponent<Rigidbody>().AddForce(transform.forward * knockBack);
+
+            DeSpawn();
+            
         }
 
         private void DeSpawn()

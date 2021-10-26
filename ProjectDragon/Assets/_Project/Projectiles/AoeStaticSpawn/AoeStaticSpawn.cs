@@ -1,30 +1,21 @@
 using _Project.AI.Enemies.Scripts;
-using _Project.Enemies.Scripts;
+using _Project.Projectiles.BaseProjectile;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Projectiles
+namespace _Project.Projectiles.AoeStaticSpawn
 {
-    public class AoeStaticSpawn : MonoBehaviour
+    public class AoeStaticSpawn : Projectile
     {
         //objects and  should know their own size and duration because of their animations
         //but for now this can help for testing
         [SerializeField]
         private float lifeTime = 1.2f;
-        [SerializeField]
-        private float damage = 20;
-
         public float LifeTime
         {
             get => lifeTime;
             set => lifeTime = value;
         }
         
-
-        public float Damage
-        {
-            get => damage;
-            set => damage = value;
-        }
 
         private void LifeTimeCountDown()
         {
@@ -36,17 +27,27 @@ namespace _Project.Scripts.Gameplay.Projectiles
         }
         private void Start()
         {
+            
+        }
+
+        protected override void Move()
+        {
+            
         }
 
         private void OnTriggerEnter(Collider other)
         {
             Enemy hit = other.GetComponent<Enemy>();
-            if (hit != null)
-            {
-                hit.TakeDamage(damage);
-            }
+            if (hit == null)
+                return;
+            
+            hit.TakeDamage(damage);
+            
+            if (knockBack <= 0) return;
+            
+            hit.GetComponent<Rigidbody>().AddForce(transform.forward * knockBack);
         }
-
+        
         private void DeSpawn()
         {
             Destroy(gameObject);

@@ -1,6 +1,6 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
-using _Project.Scripts.Gameplay.Projectiles;
+using _Project.Projectiles.LinearProjectiles;
 using _Project.Scripts.Gameplay.Skillsystem.Ability;
 using Photon.Pun;
 using Unity.Mathematics;
@@ -95,7 +95,16 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
                     Quaternion.identity
                 );
                 tempTriShot.transform.rotation = Quaternion.LookRotation(enemy.position - tempTriShot.transform.position);
+                
                 tempTriShot.transform.Rotate(0,-angleOffset + (i * angleOffset),0);
+                
+                //bulletsPerCast 
+                
+                tempTriShot.transform.Rotate(0,-angleOffset + (i * angleOffset),0);
+                
+                
+                
+                
                 /**/
                 
                 LinearProjectiles projectile = tempTriShot.GetComponent<LinearProjectiles>();

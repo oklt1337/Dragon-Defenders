@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
-  m_Name: ElvenArcherSkillTree
+  m_Name: MooseSkillTree
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 03427427321fe18439c75f6b98ce946b, type: 2}
-    - {fileID: 11400000, guid: 6f5454fdb7f0a8448bbd1bc2fc8cb85b, type: 2}
-    - {fileID: 11400000, guid: 69e5b4e0dcf8ffb49a02ac4bdecd672b, type: 2}
-    - {fileID: 11400000, guid: 905cb106f0623c148bb9721bd26e8ed7, type: 2}
-    - {fileID: 11400000, guid: fe36d528e2f24a74290e12d91bcc8d35, type: 2}
+    - {fileID: 11400000, guid: 962078209ef09ef4a950e10b0ec16835, type: 2}
+    - {fileID: 11400000, guid: 3a036f049b109d84b82a923a1ae6c2ff, type: 2}
+    - {fileID: 11400000, guid: 96ffa272ccb341e47bf920ae4a8fa054, type: 2}
+    - {fileID: 11400000, guid: cfc75980a834b8e49a9cb5896a1abe50, type: 2}
+    - {fileID: 11400000, guid: 9eec0779491d7b649b10974918aabf4b, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -84,7 +84,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 4|_Project.SkillSystem.BaseSkills.SkillSpecial, Assembly-CSharp
+      Data: 4|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
       Data: 2
@@ -102,7 +102,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 5|_Project.SkillSystem.BaseSkills.SkillMultipleStatChange, Assembly-CSharp
+      Data: 5|_Project.SkillSystem.BaseSkills.SkillSpecial, Assembly-CSharp
     - Name: skillDataBase
       Entry: 10
       Data: 3

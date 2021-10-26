@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Project.Faction;
 using _Project.SkillSystem.SkillDataBases;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -19,11 +20,6 @@ namespace _Project.SkillSystem.BaseSkills
         #region SerializeFields
 
         [SerializeField] protected SkillDataBase skillDataBase;
-        
-        
-
-        
-
         #endregion
     
         #region Private Fields
@@ -38,6 +34,7 @@ namespace _Project.SkillSystem.BaseSkills
         [ShowInInspector] protected string skillName;
         [ShowInInspector][TextArea] protected string description;
         [ShowInInspector] protected Sprite sprite;
+        [ShowInInspector] protected int cost;
 
         #endregion
 
@@ -115,6 +112,7 @@ namespace _Project.SkillSystem.BaseSkills
             sprite = skillDataBase.Sprite;
             skillName = skillDataBase.SkillName;
             description = skillDataBase.Description;
+            cost = skillDataBase.Cost;
         }
 
         #endregion
@@ -128,7 +126,6 @@ namespace _Project.SkillSystem.BaseSkills
     public enum SkillEnum
     {
         None,
-        SpecialSkill,
         CoolDown,
         BaseDamage,
         DamageModifier,
@@ -136,8 +133,11 @@ namespace _Project.SkillSystem.BaseSkills
         Speed,
         Duration,
         BuffValue,
-        MaxDistance,
+        LifeTime,
+        BulletsPerCast,
+        AngleOffset,
         MaxProjectileRange,
+        KnockBack,
         CommanderHealth,
         CommanderAttack,
         CommanderManaCost,
@@ -151,7 +151,7 @@ namespace _Project.SkillSystem.BaseSkills
     {
         None,
         BlessingOfTheTrees,
-        TrippleArrows,
+        ScreamOfTheWild
     }
 
     [System.Serializable]
@@ -159,11 +159,11 @@ namespace _Project.SkillSystem.BaseSkills
     {
         [SerializeField]private SkillEnum skillEnum;
         [SerializeField]private float skillIncreaseValue;
+        
+
         public SkillEnum SkillEnum => skillEnum;
 
         public float SkillIncreaseValue => skillIncreaseValue;
-        
-        
     }
     
     [System.Serializable]

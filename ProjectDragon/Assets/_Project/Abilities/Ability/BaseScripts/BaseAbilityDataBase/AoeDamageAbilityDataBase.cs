@@ -26,8 +26,9 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
         #endregion
     
         #region protected Fields
-        [SerializeField] protected float maxDistance;
-    
+        [SerializeField] protected bool isSpawnProjectileOnEnemyPosition;
+        [SerializeField] protected float lifeTime;
+
 
         #endregion
     
@@ -39,12 +40,17 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase
     
         #region Public Properties
 
-        public float MAXDistance
+        public float LifeTime
         {
-            get => maxDistance;
-            set => maxDistance = value;
+            get => lifeTime;
+            set => lifeTime = value;
         }
 
+        public bool IsSpawnProjectileOnEnemyPosition
+        {
+            get => isSpawnProjectileOnEnemyPosition;
+            set => isSpawnProjectileOnEnemyPosition = value;
+        }
         #endregion
     
         #region Events
