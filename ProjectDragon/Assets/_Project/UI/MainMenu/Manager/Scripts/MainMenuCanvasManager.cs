@@ -1,4 +1,4 @@
-using _Project.UI.MainMenu.Deck_Manager_Screen.Scripts;
+using _Project.UI.Deck_Manager_Screen.Scripts;
 using _Project.UI.MainMenu.Egg_Hatching_Screen.Scripts;
 using _Project.UI.MainMenu.Friend_List_Screen.Scripts;
 using _Project.UI.MainMenu.Home_Screen.Scripts;
@@ -6,6 +6,7 @@ using _Project.UI.MainMenu.Notification_Screen.Scripts;
 using _Project.UI.MainMenu.Profile_Screen.Scripts;
 using _Project.UI.MainMenu.Settings_Screen.Scripts;
 using _Project.UI.MainMenu.Shop_Screen.Scripts;
+using _Project.UI.New_Deck_Screen.Scripts;
 using UnityEngine;
 
 namespace _Project.UI.MainMenu.Manager.Scripts
@@ -23,7 +24,10 @@ namespace _Project.UI.MainMenu.Manager.Scripts
         [SerializeField] private NotificationScreen notificationScreen;
         [SerializeField] private FriendListScreen friendListScreen;
         [SerializeField] private EggHatchingScreen eggHatchingScreen;
+        
+        [Header("Decks and Cards related Screens")]
         [SerializeField] private DeckManagerScreen deckManagerScreen;
+        [SerializeField] private NewDeckScreen newDeckScreen;
 
         #endregion
 
@@ -37,6 +41,7 @@ namespace _Project.UI.MainMenu.Manager.Scripts
         public FriendListScreen FriendListScreen => friendListScreen;
         public EggHatchingScreen EggHatchingScreen => eggHatchingScreen;
         public DeckManagerScreen DeckManagerScreen => deckManagerScreen;
+        public NewDeckScreen NewDeckScreen => newDeckScreen;
 
         #endregion
 

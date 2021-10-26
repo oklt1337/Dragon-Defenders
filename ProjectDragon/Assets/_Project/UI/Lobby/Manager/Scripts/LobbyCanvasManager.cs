@@ -1,5 +1,6 @@
+using _Project.UI.Deck_Manager_Screen.Scripts;
 using _Project.UI.Lobby.Lobby_Screen.Scripts;
-using _Project.UI.MainMenu.Deck_Manager_Screen.Scripts;
+using _Project.UI.New_Deck_Screen.Scripts;
 using UnityEngine;
 
 namespace _Project.UI.Lobby.Manager.Scripts
@@ -9,10 +10,14 @@ namespace _Project.UI.Lobby.Manager.Scripts
         public static LobbyCanvasManager Instance;
 
         [SerializeField] private LobbyScreen lobbyScreen;
+        
+        [Header("Decks and Cards related Screens")]
         [SerializeField] private DeckManagerScreen deckManagerScreen;
+        [SerializeField] private NewDeckScreen newDeckScreen;
 
         public LobbyScreen LobbyScreen => lobbyScreen;
         public DeckManagerScreen DeckManagerScreen => deckManagerScreen;
+        public NewDeckScreen NewDeckScreen => newDeckScreen;
         
         private void Awake()
         {

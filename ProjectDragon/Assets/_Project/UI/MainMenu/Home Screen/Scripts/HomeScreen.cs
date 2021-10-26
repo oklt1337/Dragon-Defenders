@@ -52,5 +52,11 @@ namespace _Project.UI.MainMenu.Home_Screen.Scripts
             MainMenuCanvasManager.Instance.MainMenuSettingsScreen.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
+
+        public void OnClickCards()
+        {
+            MainMenuCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
 }

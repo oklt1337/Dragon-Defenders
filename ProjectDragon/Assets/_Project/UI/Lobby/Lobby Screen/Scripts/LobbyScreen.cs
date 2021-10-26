@@ -1,3 +1,4 @@
+using _Project.UI.Lobby.Manager.Scripts;
 using _Project.UI.Managers.Scripts;
 using _Project.Utility.SceneManager.Scripts;
 using UnityEngine;
@@ -22,6 +23,12 @@ namespace _Project.UI.Lobby.Lobby_Screen.Scripts
         public void OnBackClick()
         {
             SceneManager.ChangeScene(Scene.MainMenu);
+        }
+
+        public void OnDeckManagerClick()
+        {
+            LobbyCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }
