@@ -50,6 +50,7 @@ namespace _Project.Deck_Cards.DeckBuilder.Scripts
 
             CurrentSelection = ScriptableObject.CreateInstance<Deck>();
             CurrentSelection.DeckName = deckName;
+            CurrentSelection.name = string.Concat(deckName, "-Obj");
             return true;
         }
 
