@@ -23,13 +23,15 @@ namespace _Project.Utility.CardBuilder.Scripts
         private int toolBarIndex;
 
         [Header("Base Stats")] 
-        private string cName = "Enter Name";
         private int id;
+        private int cost;
+        private string cName;
         private Rarity rarity;
         private Sprite icon;
         private VideoClip demo;
 
-        [Header("Unit Stats")] private Unit unit;
+        [Header("Unit Stats")] 
+        private Unit unit;
 
         [Header("Commander Stats")] 
         private int selectedCommander;
@@ -105,6 +107,8 @@ namespace _Project.Utility.CardBuilder.Scripts
         {
             //CardId
             id = EditorGUILayout.IntField("ID", id);
+            //CardCost
+            cost = EditorGUILayout.IntField("Cost", cost);
             //CardName
             cName = EditorGUILayout.TextField("Card Name:", cName);
             //CardRarity
@@ -126,13 +130,13 @@ namespace _Project.Utility.CardBuilder.Scripts
             var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
 
             selectedCommander =
-                EditorGUILayout.Popup("Selected Card",selectedCommander, commanderCards.Select(c => c.name).ToArray());
+                EditorGUILayout.Popup("Selected Card", selectedCommander, commanderCards.Select(c => c.name).ToArray());
             SetStats(commanderCards[selectedCommander]);
             EditorGUILayout.Space(5);
-            
+
             //Drawing
             DrawBaseStats();
-            
+
             //CommanderObj
             //CommanderFaction
             var factions = Enum.GetValues(typeof(Factions.Faction)).Cast<Factions.Faction>().Select(v => v.ToString())
@@ -168,7 +172,13 @@ namespace _Project.Utility.CardBuilder.Scripts
                     var commanderCard = (CommanderCard) baseCard;
                     if (commanderCard.Commander != null)
                     {
+                        id = commanderCard.CardID;
+                        cost = commanderCard.Cost;
                         cName = commanderCard.Commander.commanderName;
+                        rarity = commanderCard.Rarity;
+                        icon = commanderCard.Icon;
+                        demo = commanderCard.Demo;
+                        commanderObj = commanderCard.Commander.commanderObj;
                         faction = commanderCard.Commander.faction;
                         commanderClass = commanderCard.Commander.commanderClass;
                         health = commanderCard.Commander.health;
@@ -176,6 +186,8 @@ namespace _Project.Utility.CardBuilder.Scripts
                         attackDamageModifier = commanderCard.Commander.attackDamageModifier;
                         defense = commanderCard.Commander.defense;
                         speed = commanderCard.Commander.speed;
+                        skillTree = commanderCard.Commander.skillTree;
+                        commanderAbilityDataBase = commanderCard.Commander.commanderAbilityDataBase;
                     }
                     else
                     {
@@ -202,8 +214,19 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         private void Save()
         {
-            //Create Card
-            Debug.Log("Saved");
+            switch (toolBarIndex)
+            {
+                case 0:
+                    // Commander Stats
+                    var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
+
+                    commanderCards[selectedCommander].Save(id, cost, rarity, icon, demo, commanderObj, faction,
+                        commanderClass, health, mana, attackDamageModifier, defense, speed, skillTree,
+                        commanderAbilityDataBase);
+                    break;
+                case 1:
+                    break;
+            }
         }
 
         #endregion

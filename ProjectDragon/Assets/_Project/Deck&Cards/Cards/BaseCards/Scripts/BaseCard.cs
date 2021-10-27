@@ -24,5 +24,14 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         public Rarity Rarity => rarity;
         public Sprite Icon => icon;
         public VideoClip Demo => demo;
+
+        public virtual void Save(int id, int cardCost, Rarity cardRarity, Sprite sprite, VideoClip clip)
+        {
+            cardID = id;
+            cost = cardCost;
+            rarity = cardRarity;
+            icon = sprite;
+            demo = clip;
+        }
     }
 }

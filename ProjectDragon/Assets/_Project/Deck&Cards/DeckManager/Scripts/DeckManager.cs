@@ -52,7 +52,13 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         /// <param name="deckName"></param>
         public bool CreateDeck(string deckName)
         {
-            return deckBuilder.CreateDeck(deckName);
+            var success = deckBuilder.CreateDeck(deckName);
+            if (success)
+            {
+                decks.Add(deckBuilder.Save());
+            }
+            
+            return success;
         }
 
         /// <summary>
@@ -114,14 +120,6 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
             decks.Add(deck);
         }
 
-        /// <summary>
-        /// Saves Last Created Deck.
-        /// </summary>
-        public void SaveDeck()
-        {
-            decks.Add(deckBuilder.Save());
-        }
-        
         //ToDo: Deck on edit edit 2nd instance on save override main instance and have bool for isSaved.
 
         #endregion
