@@ -72,7 +72,7 @@ namespace _Project.AI.Enemies.Scripts
 
         #region Private Methods
 
-        private void Death()
+        protected virtual void Death()
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
             Instance.PlayerModel.ModifyMoney(goldDrop);

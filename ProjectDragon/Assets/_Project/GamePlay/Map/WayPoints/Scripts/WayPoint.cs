@@ -1,7 +1,7 @@
 using _Project.AI.Enemies.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.Map.Scripts
+namespace _Project.GamePlay.Map.WayPoints.Scripts
 {
     public class WayPoint : MonoBehaviour
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Project.Projectiles.LinearProjectiles
 {
-    public class LinearProjectiles : Projectile
+    public class LinearProjectile : Projectile
     { 
         [SerializeField] private Rigidbody rb;
         [SerializeField] private float lifetime = 2;

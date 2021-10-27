@@ -1,3 +1,4 @@
+using System;
 using _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace _Project.AI.Enemies.Scripts
         [SerializeField] private float attackRange;
         [SerializeField] private float attackDamageModifier;
         // [SerializeField] private Attack attack;
-        [SerializeField] private Commander target;
+        [SerializeField] protected Commander target;
 
         public float AttackRange => attackRange;
 
@@ -25,6 +26,11 @@ namespace _Project.AI.Enemies.Scripts
         }
 
         public void Attack()
+        {
+            
+        }
+
+        private void Start()
         {
             
         }

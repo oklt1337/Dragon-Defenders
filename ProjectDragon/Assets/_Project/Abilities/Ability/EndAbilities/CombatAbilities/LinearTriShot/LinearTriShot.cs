@@ -107,7 +107,7 @@ namespace _Project.Abilities.Ability.EndAbilities.CombatAbilities.LinearTriShot
                 
                 /**/
                 
-                LinearProjectiles projectile = tempTriShot.GetComponent<LinearProjectiles>();
+                LinearProjectile projectile = tempTriShot.GetComponent<LinearProjectile>();
                 projectile.Speed = Speed;
                 projectile.Damage = baseDamage;
                 //calculate how far it will go with that speed;

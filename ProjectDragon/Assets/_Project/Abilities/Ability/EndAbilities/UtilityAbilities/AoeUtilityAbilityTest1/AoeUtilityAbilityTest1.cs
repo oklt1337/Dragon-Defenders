@@ -24,9 +24,9 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
     
         #region Private Fields
 
-        private List<_Project.Units.Unit.BaseUnits.Unit> _possibleBeneficiaries;
+        private List<_Project.Units.Unit.BaseUnits.Unit> possibleBeneficiaries;
         
-        private Vector3 _tempVector;
+        private Vector3 tempVector;
 
         #endregion
     
@@ -64,18 +64,18 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
 
         private void CastEffect()
         {
-            for (int i = 0; i < _possibleBeneficiaries.Count; i++)
+            for (int i = 0; i < possibleBeneficiaries.Count; i++)
             {
                 //set both y variables to zero to have a buff Cylinder
-                _tempVector = new Vector3(
-                    _possibleBeneficiaries[i].transform.position.x
+                tempVector = new Vector3(
+                    possibleBeneficiaries[i].transform.position.x
                     - transform.position.x,
                     0,
-                    _possibleBeneficiaries[i].transform.position.z -
+                    possibleBeneficiaries[i].transform.position.z -
                     transform.position.z
                 );
-                if(_tempVector.sqrMagnitude <= maxDistance*maxDistance)
-                    _possibleBeneficiaries[i].GainExp(BuffValue);
+                if(tempVector.sqrMagnitude <= maxDistance*maxDistance)
+                    possibleBeneficiaries[i].GainExp(BuffValue);
             }
 
             if (visibleEffect)
@@ -94,11 +94,11 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
 
         private void UpdateBeneficiaries()
         {
-            _possibleBeneficiaries.Clear();
+            possibleBeneficiaries.Clear();
             GameObject[] allTowers = GameObject.FindGameObjectsWithTag("Unit/Tower");
             for (int i = 0;i < allTowers.Length;i++)
             {
-                _possibleBeneficiaries.Add(allTowers[i].GetComponent<_Project.Units.Unit.BaseUnits.Unit>());   
+                possibleBeneficiaries.Add(allTowers[i].GetComponent<_Project.Units.Unit.BaseUnits.Unit>());   
             }
         }
 
@@ -118,7 +118,7 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
 
         public override void Cast()
         {
-            if (!isCastable ||_possibleBeneficiaries.Count == 0) return;
+            if (!isCastable ||possibleBeneficiaries.Count == 0) return;
         
             CastEffect();
 
@@ -135,7 +135,7 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
         public override void Init(AbilityDataBase dataBase)
         {
             base.Init(dataBase);
-            _possibleBeneficiaries = new List<_Project.Units.Unit.BaseUnits.Unit>();
+            possibleBeneficiaries = new List<_Project.Units.Unit.BaseUnits.Unit>();
             UpdateBeneficiaries();
         }
 

@@ -144,7 +144,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 
         protected void SetProjectileEssentials(GameObject projectile)
         {
-            LinearProjectiles projectileScript = projectile.GetComponent<LinearProjectiles>();
+            LinearProjectile projectileScript = projectile.GetComponent<LinearProjectile>();
             projectileScript.Speed = Speed;
             projectileScript.Damage = baseDamage;
             //calculate how far it will go with that speed;

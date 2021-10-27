@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 100
+  knockBack: 0
   target: {fileID: 0}
 --- !u!135 &7722801085219574960
 SphereCollider:

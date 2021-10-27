@@ -21,14 +21,18 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
     
         #region SerializeFields
         [ShowInInspector] protected float maxDistance;
+        
+        [ShowInInspector] protected bool isCaster;
+        [ShowInInspector] protected bool isPassiveBuffer;
+        
 
+        
         
 
         #endregion
     
         #region Private Fields
-        protected Vector3 tempVector;
-    
+
 
         #endregion
     
@@ -87,19 +91,46 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 
         private void CastEffect()
         {
-            for (int i = 0; i < possibleBeneficiariesUnits.Count; i++)
+            if (!isCaster) return;
+            
+            foreach (var unit in possibleBeneficiariesUnits)
             {
-                //set both y variables to zero to have a buff Cylinder
-                tempVector = new Vector3(
-                    possibleBeneficiariesUnits[i].transform.position.x
-                    - transform.position.x,
-                    0,
-                    possibleBeneficiariesUnits[i].transform.position.z -
-                    transform.position.z
-                );
-                if(tempVector.sqrMagnitude <= maxDistance*maxDistance)
-                    possibleBeneficiariesUnits[i].GainExp(BuffValue);
+                if(CheckRange(unit.transform.position))
+                    ActivateBuffUnit(unit);
             }
+            foreach (var commander in possibleBeneficiariesCommander)
+            {
+                if(CheckRange(commander.transform.position))
+                    ActivateBuffCommander(commander);
+            }
+
+        }
+        
+        private void ProvidePassiveEffect()
+        {
+            if (!isPassiveBuffer) return;
+            
+            foreach (var unit in possibleBeneficiariesUnits)
+            {
+                if(CheckRange(unit.transform.position))
+                    ActivateBuffUnit(unit);
+            }
+            foreach (var commander in possibleBeneficiariesCommander)
+            {
+                if(CheckRange(commander.transform.position))
+                    ActivateBuffCommander(commander);
+            }
+
+        }
+
+        private bool CheckRange(Vector3 otherPosition)
+        {
+            Vector3 tmpVector = new Vector3(
+                otherPosition.x - transform.position.x,
+                0,
+                otherPosition.z - transform.position.z);
+            return (tmpVector.sqrMagnitude <= maxDistance * maxDistance);
+
         }
 
         private void ActivateBuffUnit(Unit unit)
@@ -107,7 +138,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
             
         }
         
-        private void ActivateBuffCommander(Unit unit)
+        private void ActivateBuffCommander(Commander commander)
         {
             
         }
@@ -147,5 +178,12 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 
 
         #endregion
+        /*
+        ·         (400) Minor Buff: cooldown is reduced by 50%
+        ·         (400) Loud Cheer: Increases Range to 5
+        ·         (800) Super Buff: cooldown is reduced by 3/4
+        ·         (800) Dual Buffing: Spell helps 2 closest now
+        ·         (800) Heal ray: If Commander is in range he will get a health regeneration by .5% Max Health/seconds
+        */
     }
 }

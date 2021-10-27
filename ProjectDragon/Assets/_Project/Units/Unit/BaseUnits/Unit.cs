@@ -41,8 +41,8 @@ namespace _Project.Units.Unit.BaseUnits
         [ShowInInspector] protected string unitName; 
         [ShowInInspector] protected string description;
         [ShowInInspector] protected GameObject unitModel;
-        [ShowInInspector] protected Factions.Faction faction;
-        [ShowInInspector] protected Factions.Class unitClass;
+        [ShowInInspector] protected ClassAndFaction.Faction faction;
+        [ShowInInspector] protected ClassAndFaction.Class unitClass;
 
         
 
@@ -108,7 +108,7 @@ namespace _Project.Units.Unit.BaseUnits
             set => ability = value;
         }
         
-        public Factions.Class UnitClass
+        public ClassAndFaction.Class UnitClass
         {
             get => unitClass;
             set => unitClass = value;
