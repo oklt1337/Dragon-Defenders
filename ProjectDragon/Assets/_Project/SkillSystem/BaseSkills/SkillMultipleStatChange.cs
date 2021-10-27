@@ -16,7 +16,7 @@ namespace _Project.SkillSystem.BaseSkills
     public class SkillMultipleStatChange : Skill
     {
         protected List<SkillHolder> SkillHolderList;
-        private Factions.Class newClass;
+        private ClassAndFaction.Class newClass;
 
         
         public override bool EnableSkill()
@@ -29,7 +29,7 @@ namespace _Project.SkillSystem.BaseSkills
                 ActivateSkill(skillHolder);
             }
 
-            if (newClass != Factions.Class.None)
+            if (newClass != ClassAndFaction.Class.None)
                 ChangeFaction();
                 
             IsSkillActive = true;
@@ -224,7 +224,7 @@ namespace _Project.SkillSystem.BaseSkills
             newClass= ((SkillMultipleStatChangeDataBase)skillDataBase).NewClass;
         }
         
-        public Factions.Class NewClass
+        public ClassAndFaction.Class NewClass
         {
             get => newClass;
             set => newClass = value;

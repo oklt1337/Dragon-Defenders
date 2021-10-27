@@ -14,7 +14,7 @@ namespace _Project.Deck_Cards.Decks.Scripts
         
         [SerializeField] private int deckId;
         [SerializeField] private string deckName;
-        [SerializeField] private Factions.Faction faction;
+        [SerializeField] private ClassAndFaction.Faction faction;
         [SerializeField] private CommanderCard commanderCard;
         [SerializeField] private List<UnitCard> unitCards = new List<UnitCard>();
 
@@ -49,7 +49,7 @@ namespace _Project.Deck_Cards.Decks.Scripts
             }
         }
 
-        public Factions.Faction Faction
+        public ClassAndFaction.Faction Faction
         {
             get => faction;
             set => faction = value;

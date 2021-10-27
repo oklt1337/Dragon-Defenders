@@ -1,6 +1,6 @@
 namespace _Project.Faction
 {
-    public class Factions
+    public static class ClassAndFaction
     {
         public enum Class
         {

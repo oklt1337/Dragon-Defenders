@@ -21,8 +21,8 @@ namespace _Project.Units.Unit.BaseUnitDatabases
         [SerializeField] protected string unitName;
         [SerializeField][TextArea] protected string description;
         [SerializeField] protected GameObject unitModel;
-        [SerializeField] protected Factions.Faction faction;
-        [SerializeField] protected Factions.Class unitClass;
+        [SerializeField] protected ClassAndFaction.Faction faction;
+        [SerializeField] protected ClassAndFaction.Class unitClass;
         [SerializeField] protected byte rank;
         [SerializeField] protected int cost;
         [SerializeField] protected UnitAbilityDataBase unitAbilityDataBase;
@@ -75,13 +75,13 @@ namespace _Project.Units.Unit.BaseUnitDatabases
             set => unitModel = value;
         }
 
-        public Factions.Faction Faction
+        public ClassAndFaction.Faction Faction
         {
             get => faction;
             set => faction = value;
         }
 
-        public Factions.Class UnitClass
+        public ClassAndFaction.Class UnitClass
         {
             get => unitClass;
             set => unitClass = value;

@@ -29,8 +29,8 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         private string commanderName;
         private GameObject commanderObj;
-        private Factions.Faction faction;
-        private Factions.Class commanderClass;
+        private ClassAndFaction.Faction faction;
+        private ClassAndFaction.Class commanderClass;
         private float health;
         private float maxHealth;
         private float mana;
@@ -65,13 +65,13 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             private set => commanderObj = value;
         }
 
-        public Factions.Faction Faction
+        public ClassAndFaction.Faction Faction
         {
             get => faction;
             private set => faction = value;
         }
 
-        public Factions.Class CommanderClass
+        public ClassAndFaction.Class CommanderClass
         {
             get => commanderClass;
             private set => commanderClass = value;

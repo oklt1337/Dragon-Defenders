@@ -10,8 +10,8 @@ namespace _Project.GamePlay.Player.Commander.CommanderModel.Scripts
     {
         public string commanderName;
         public GameObject commanderObj;
-        public Factions.Faction faction;
-        public Factions.Class commanderClass;
+        public ClassAndFaction.Faction faction;
+        public ClassAndFaction.Class commanderClass;
         public float health;
         public float mana;
         public float attackDamageModifier;

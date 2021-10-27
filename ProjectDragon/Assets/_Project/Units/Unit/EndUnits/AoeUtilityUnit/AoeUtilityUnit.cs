@@ -3,7 +3,7 @@ namespace _Project.Units.Unit.EndUnits.AoeUtilityUnit
     /// <summary>
     ///     Author: Peter Luu
     /// </summary>
-    public class AoeUilityUnit : Units.Unit.BaseUnits.Utility
+    public class AoeUtilityUnit : Units.Unit.BaseUnits.Utility
     {
         #region Singleton
 

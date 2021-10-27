@@ -36,8 +36,8 @@ namespace _Project.Utility.CardBuilder.Scripts
         [Header("Commander Stats")] 
         private int selectedCommander;
         private GameObject commanderObj;
-        private Factions.Faction faction;
-        private Factions.Class commanderClass;
+        private ClassAndFaction.Faction faction;
+        private ClassAndFaction.Class commanderClass;
         private float health;
         private float mana;
         private float attackDamageModifier;
@@ -139,13 +139,13 @@ namespace _Project.Utility.CardBuilder.Scripts
 
             //CommanderObj
             //CommanderFaction
-            var factions = Enum.GetValues(typeof(Factions.Faction)).Cast<Factions.Faction>().Select(v => v.ToString())
+            var factions = Enum.GetValues(typeof(ClassAndFaction.Faction)).Cast<ClassAndFaction.Faction>().Select(v => v.ToString())
                 .ToArray();
-            faction = (Factions.Faction) EditorGUILayout.Popup("Faction", (int) faction, factions);
+            faction = (ClassAndFaction.Faction) EditorGUILayout.Popup("Faction", (int) faction, factions);
             //CommanderClass
-            var classes = Enum.GetValues(typeof(Factions.Class)).Cast<Factions.Class>().Select(v => v.ToString())
+            var classes = Enum.GetValues(typeof(ClassAndFaction.Class)).Cast<ClassAndFaction.Class>().Select(v => v.ToString())
                 .ToArray();
-            commanderClass = (Factions.Class) EditorGUILayout.Popup("Class", (int) commanderClass, classes);
+            commanderClass = (ClassAndFaction.Class) EditorGUILayout.Popup("Class", (int) commanderClass, classes);
             //CommanderHealth
             health = EditorGUILayout.FloatField("Health", health);
             //CommanderMana

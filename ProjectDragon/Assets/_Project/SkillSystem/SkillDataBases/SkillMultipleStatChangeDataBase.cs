@@ -30,7 +30,7 @@ namespace _Project.SkillSystem.SkillDataBases
         #region protected Fields
 
         [SerializeField] protected List<SkillHolder> skillHolderList;
-        [SerializeField] protected Factions.Class newClass;
+        [SerializeField] protected ClassAndFaction.Class newClass;
 
         
         #endregion
@@ -51,7 +51,7 @@ namespace _Project.SkillSystem.SkillDataBases
 
         public List<SkillHolder> SkillHolderList => skillHolderList;
 
-        public Factions.Class NewClass
+        public ClassAndFaction.Class NewClass
         {
             get => newClass;
             set => newClass = value;

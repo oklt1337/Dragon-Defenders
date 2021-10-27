@@ -20,7 +20,7 @@ namespace _Project.Deck_Cards.Cards.CommanderCard.Scripts
         }
 
         public void Save(int id, int cost, Rarity rarity, Sprite sprite, VideoClip clip, GameObject obj,
-            Factions.Faction faction, Factions.Class @class, float health, float mana,
+            ClassAndFaction.Faction faction, ClassAndFaction.Class @class, float health, float mana,
             float atk, float defense, float speed, SkillTree skillTree, CommanderAbilityDataBase abilities)
         {
             Save(id, cost, rarity, sprite, clip);

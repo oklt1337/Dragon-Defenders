@@ -2,7 +2,7 @@ namespace _Project.Units.Unit.BaseUnits
 {   /// <summary>
     ///     Author: Peter Luu
     /// </summary>
-    public abstract class Utility : Unit
+    public class Utility : Unit
     {
         #region Singleton
 
@@ -45,7 +45,7 @@ namespace _Project.Units.Unit.BaseUnits
         #endregion
     
         #region Unity Methods
-
+    
     
 
         #endregion
@@ -92,6 +92,8 @@ namespace _Project.Units.Unit.BaseUnits
         }
         protected override void Update()
         {
+            if (ability.IsCastable)
+                ability.Cast();
         }
 
         #endregion
