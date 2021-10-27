@@ -36,6 +36,19 @@ namespace _Project.Deck_Cards.Decks.Scripts
             set => deckName = value;
         }
 
+        public bool IsUseAble
+        {
+            get
+            {
+                if (unitCards.Count == MaxCards)
+                {
+                    return true;
+                }
+
+                return commanderCard != null;
+            }
+        }
+
         public Factions.Faction Faction
         {
             get => faction;
