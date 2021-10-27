@@ -60,7 +60,7 @@ namespace _Project.Deck_Cards.Decks.Scripts
         {
             if (card.GetType() == typeof(CommanderCard))
             {
-                if (commanderCard != null || ((CommanderCard) card).Commander.Faction != faction)
+                if (commanderCard != null || ((CommanderCard) card).Commander.faction != faction)
                     return false;
                 
                 commanderCard = (CommanderCard) card;

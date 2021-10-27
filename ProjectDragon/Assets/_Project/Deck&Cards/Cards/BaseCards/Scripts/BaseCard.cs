@@ -15,14 +15,14 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
     {
         [SerializeField] private int cardID;
         [SerializeField] private int cost;
-        [SerializeField] private Sprite displayImage;
         [SerializeField] private Rarity rarity;
-        [SerializeField] private VideoClip videoClip;
+        [SerializeField] private Sprite icon;
+        [SerializeField] private VideoClip demo;
 
         public int CardID => cardID;
         public int Cost => cost;
-        public Sprite DisplayImage => displayImage;
         public Rarity Rarity => rarity;
-        public VideoClip VideoClip => videoClip;
+        public Sprite Icon => icon;
+        public VideoClip Demo => demo;
     }
 }
