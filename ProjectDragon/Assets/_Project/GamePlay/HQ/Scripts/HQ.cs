@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Project.GamePlay.HQ.Scripts
 {
-    public class Hq : MonoBehaviour
+    public class HQ : MonoBehaviour
     {
         #region SerializeFields
 

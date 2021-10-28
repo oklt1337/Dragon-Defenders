@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
 using _Project.Deck_Cards.Cards.BaseCards.Scripts;
 using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.Deck_Cards.Cards.UnitCard.Scripts;
 using _Project.Faction;
-using _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using _Project.SkillSystem.SkillTree;
 using _Project.Units.Unit.BaseUnits;
 using UnityEditor;
@@ -21,6 +19,7 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         [Header("General")] 
         private int toolBarIndex;
+        private Vector2 scrollPos;
 
         [Header("Base Stats")] 
         private int id;
@@ -63,6 +62,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             toolBarIndex = GUILayout.Toolbar(toolBarIndex, new[] {new GUIContent("Commander"), new GUIContent("Unit")});
             EditorGUILayout.Space(1);
 
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
             switch (toolBarIndex)
             {
                 case 0:
@@ -74,6 +74,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             }
 
             DrawSave();
+            EditorGUILayout.EndScrollView();
         }
 
         #region Draw
@@ -110,12 +111,14 @@ namespace _Project.Utility.CardBuilder.Scripts
             //CardCost
             cost = EditorGUILayout.IntField("Cost", cost);
             //CardName
-            cName = EditorGUILayout.TextField("Card Name:", cName);
+            cName = EditorGUILayout.TextField("Name", cName);
             //CardRarity
             var rarities = Enum.GetValues(typeof(Rarity)).Cast<Rarity>().Select(v => v.ToString()).ToArray();
             rarity = (Rarity) EditorGUILayout.Popup("Rarity", (int) rarity, rarities);
             //CardIcon
+            icon = (Sprite) EditorGUILayout.ObjectField("Icon", icon, typeof(Sprite), false);
             //CardDemo
+            demo = (VideoClip) EditorGUILayout.ObjectField("Demo", demo, typeof(VideoClip), false);
         }
 
         private void DrawUnitStats()
@@ -129,15 +132,20 @@ namespace _Project.Utility.CardBuilder.Scripts
             // Commander Stats
             var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
 
+            EditorGUI.BeginChangeCheck();
             selectedCommander =
                 EditorGUILayout.Popup("Selected Card", selectedCommander, commanderCards.Select(c => c.name).ToArray());
-            SetStats(commanderCards[selectedCommander]);
+            if (EditorGUI.EndChangeCheck())
+            {
+                SetStats(commanderCards[selectedCommander]);
+            }
             EditorGUILayout.Space(5);
 
             //Drawing
             DrawBaseStats();
-
+            
             //CommanderObj
+            commanderObj = (GameObject) EditorGUILayout.ObjectField("GameObject", commanderObj, typeof(GameObject), false);
             //CommanderFaction
             var factions = Enum.GetValues(typeof(ClassAndFaction.Faction)).Cast<ClassAndFaction.Faction>().Select(v => v.ToString())
                 .ToArray();
@@ -157,7 +165,9 @@ namespace _Project.Utility.CardBuilder.Scripts
             //CommanderSpeed
             speed = EditorGUILayout.FloatField("Speed", speed);
             //CommanderSkillTree
+            skillTree = (SkillTree) EditorGUILayout.ObjectField("SkillTree", skillTree, typeof(SkillTree), false);
             //CommanderAbilities
+            commanderAbilityDataBase = (CommanderAbilityDataBase) EditorGUILayout.ObjectField("Abilities", commanderAbilityDataBase, typeof(CommanderAbilityDataBase), false);
         }
 
         #endregion

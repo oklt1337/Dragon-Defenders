@@ -8,7 +8,7 @@ namespace _Project.GamePlay.HQManager.Scripts
     {
         #region SerializeFields
 
-        [SerializeField] private HQ.Scripts.Hq hq;
+        [SerializeField] private HQ.Scripts.HQ hq;
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace _Project.GamePlay.HQManager.Scripts
 
         #region Public Properties
         
-        public Hq Hq => hq;
+        public HQ.Scripts.HQ Hq => hq;
 
         #endregion
 

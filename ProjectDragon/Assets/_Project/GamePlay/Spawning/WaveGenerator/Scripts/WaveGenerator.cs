@@ -16,7 +16,6 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         [SerializeField] private int strengthsThreshold;
         [SerializeField] private int minWaveCountModifier;
         [SerializeField] private int maxWaveCountModifier;
-        [SerializeField] private int startCombatScore;
 
         #endregion
 
