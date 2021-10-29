@@ -259,6 +259,7 @@ namespace _Project.Utility.CardBuilder.Scripts
                     if (index != -1)
                     {
                         selectedCommander = index;
+                        SetStats(commanderCards[index]);
                     }
                     break;
                 case 1:
