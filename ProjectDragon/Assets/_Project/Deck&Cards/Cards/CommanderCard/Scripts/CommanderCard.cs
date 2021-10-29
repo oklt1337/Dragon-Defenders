@@ -12,7 +12,11 @@ namespace _Project.Deck_Cards.Cards.CommanderCard.Scripts
     public class CommanderCard : BaseCards.Scripts.BaseCards
     {
         [SerializeField] private CommanderModel commander;
-        public CommanderModel Commander => commander;
+        public CommanderModel Commander
+        {
+            get => commander;
+            set => commander = value;
+        }
 
         public override void Save(int id, int cost, Rarity rarity, Sprite sprite, VideoClip clip)
         {

@@ -5,6 +5,7 @@ using _Project.Deck_Cards.Cards.BaseCards.Scripts;
 using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.Deck_Cards.Cards.UnitCard.Scripts;
 using _Project.Faction;
+using _Project.GamePlay.Player.Commander.CommanderModel.Scripts;
 using _Project.SkillSystem.SkillTree;
 using _Project.Units.Unit.BaseUnits;
 using UnityEditor;
@@ -18,8 +19,10 @@ namespace _Project.Utility.CardBuilder.Scripts
         private static CardBuilder Instance;
 
         [Header("General")] 
-        private int toolBarIndex;
+        private static int ToolBarIndex;
         private Vector2 scrollPos;
+        private CreateCardWindow newCardWindow;
+        private const string CommanderPath = "Assets/Resources/Cards/CommanderCards";
 
         [Header("Base Stats")] 
         private int id;
@@ -48,9 +51,6 @@ namespace _Project.Utility.CardBuilder.Scripts
         [MenuItem("Window/Card Builder")]
         public static void Init()
         {
-            if (Instance != null)
-                return;
-
             Instance = GetWindow<CardBuilder>("Card Builder");
             Instance.Show();
         }
@@ -59,11 +59,11 @@ namespace _Project.Utility.CardBuilder.Scripts
         {
             DrawToolBar();
 
-            toolBarIndex = GUILayout.Toolbar(toolBarIndex, new[] {new GUIContent("Commander"), new GUIContent("Unit")});
+            ToolBarIndex = GUILayout.Toolbar(ToolBarIndex, new[] {new GUIContent("Commander"), new GUIContent("Unit")});
             EditorGUILayout.Space(1);
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            switch (toolBarIndex)
+            switch (ToolBarIndex)
             {
                 case 0:
                     DrawCommanderStats();
@@ -82,9 +82,10 @@ namespace _Project.Utility.CardBuilder.Scripts
         private void DrawToolBar()
         {
             EditorGUILayout.BeginHorizontal("Toolbar");
-            if (GUILayout.Button(new GUIContent("Create"), EditorStyles.toolbarButton, GUILayout.Width(60)))
+            if (GUILayout.Button(new GUIContent("+","Create a new Card."), EditorStyles.toolbarButton, GUILayout.Width(20)))
             {
-                CreateCard();
+                newCardWindow = CreateCardWindow.Init(position);
+                newCardWindow.OnCreate += CreateCard;
             }
 
             GUILayout.FlexibleSpace();
@@ -106,12 +107,12 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         private void DrawBaseStats()
         {
+            EditorGUILayout.LabelField("Card Stats");
+            
             //CardId
             id = EditorGUILayout.IntField("ID", id);
             //CardCost
             cost = EditorGUILayout.IntField("Cost", cost);
-            //CardName
-            cName = EditorGUILayout.TextField("Name", cName);
             //CardRarity
             var rarities = Enum.GetValues(typeof(Rarity)).Cast<Rarity>().Select(v => v.ToString()).ToArray();
             rarity = (Rarity) EditorGUILayout.Popup("Rarity", (int) rarity, rarities);
@@ -144,6 +145,10 @@ namespace _Project.Utility.CardBuilder.Scripts
             //Drawing
             DrawBaseStats();
             
+            GUILayout.Space(15);
+            EditorGUILayout.LabelField("Commander Stats");
+            //CommanderName
+            cName = EditorGUILayout.TextField("Name", cName);
             //CommanderObj
             commanderObj = (GameObject) EditorGUILayout.ObjectField("GameObject", commanderObj, typeof(GameObject), false);
             //CommanderFaction
@@ -176,18 +181,21 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         private void SetStats(BaseCards baseCard)
         {
-            switch (toolBarIndex)
+            switch (ToolBarIndex)
             {
                 case 0:
                     var commanderCard = (CommanderCard) baseCard;
                     if (commanderCard.Commander != null)
                     {
+                        //BaseStats
                         id = commanderCard.CardID;
                         cost = commanderCard.Cost;
-                        cName = commanderCard.Commander.commanderName;
                         rarity = commanderCard.Rarity;
                         icon = commanderCard.Icon;
                         demo = commanderCard.Demo;
+                        
+                        //Commander Stats
+                        cName = commanderCard.Commander.commanderName;
                         commanderObj = commanderCard.Commander.commanderObj;
                         faction = commanderCard.Commander.faction;
                         commanderClass = commanderCard.Commander.commanderClass;
@@ -218,13 +226,52 @@ namespace _Project.Utility.CardBuilder.Scripts
             }
         }
 
-        private void CreateCard()
+        private void CreateCard(string cardName)
         {
+            newCardWindow.OnCreate -= CreateCard;
+            
+            // Create new Card Obj
+            string path;
+            switch (ToolBarIndex)
+            {
+                case 0:
+                    // Create Commander
+                    var guid = AssetDatabase.CreateFolder(CommanderPath, cardName);
+                    path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", cardName);
+                    
+                    var card = CreateInstance<CommanderCard>();
+                    card.Commander = CreateInstance<CommanderModel>();
+                    card.Commander.skillTree = CreateInstance<SkillTree>();
+                    card.Commander.commanderAbilityDataBase = CreateInstance<CommanderAbilityDataBase>();
+                    card.Commander.commanderName = cardName;
+
+                    AssetDatabase.CreateAsset (card,  string.Concat(path,"-Card", ".asset"));
+                    AssetDatabase.CreateAsset (card.Commander,  string.Concat(path,"-Commander", ".asset"));
+                    AssetDatabase.CreateAsset (card.Commander.skillTree,  string.Concat(path,"-CommanderSkillTree", ".asset"));
+                    AssetDatabase.CreateAsset (card.Commander.commanderAbilityDataBase,  string.Concat(path,"-CommanderAbilityDataBase", ".asset"));
+
+                    AssetDatabase.SaveAssets();
+                    
+                    // Set new Card as selected
+                    var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
+                    var index = commanderCards.ToList().FindIndex(c => c.Commander.commanderName == cardName);
+
+                    if (index != -1)
+                    {
+                        selectedCommander = index;
+                    }
+                    break;
+                case 1:
+                    // Create Unit
+
+                    break;
+            }
         }
+
 
         private void Save()
         {
-            switch (toolBarIndex)
+            switch (ToolBarIndex)
             {
                 case 0:
                     // Commander Stats
