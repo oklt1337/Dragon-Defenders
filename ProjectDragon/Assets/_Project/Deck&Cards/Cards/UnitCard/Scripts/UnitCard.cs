@@ -6,7 +6,7 @@ using UnityEngine.Video;
 namespace _Project.Deck_Cards.Cards.UnitCard.Scripts
 {
     [CreateAssetMenu(menuName = "Tool/Cards/UnitCard", fileName = "UnitCard")]
-    public abstract class UnitCard : BaseCards.Scripts.BaseCards
+    public class UnitCard : BaseCards.Scripts.BaseCards
     {
         [SerializeField] private BaseUnitDataBase unit;
         private BaseCards.Scripts.BaseCards baseCardsImplementation;

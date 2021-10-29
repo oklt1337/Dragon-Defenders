@@ -14,16 +14,20 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
     public abstract class BaseCards : ScriptableObject
     {
         [SerializeField] private int cardID;
+        [SerializeField] private string cardName;
+        [SerializeField] private string description;
         [SerializeField] private int cost;
         [SerializeField] private Rarity rarity;
-        [SerializeField] private Sprite icon;
         [SerializeField] private VideoClip demo;
+        [SerializeField] private Sprite icon;
 
         public int CardID => cardID;
+        public string CardName => cardName;
+        public string Description => description;
         public int Cost => cost;
         public Rarity Rarity => rarity;
-        public Sprite Icon => icon;
         public VideoClip Demo => demo;
+        public Sprite Icon => icon;
 
         public virtual void Save(int id, int cardCost, Rarity cardRarity, Sprite sprite, VideoClip clip)
         {
