@@ -2,7 +2,6 @@ using System;
 using _Project.GamePlay.CameraMovement.TrackingShot;
 using _Project.GamePlay.CommanderWaypoint.Scripts;
 using _Project.GamePlay.HQManager.Scripts;
-using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
 using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
@@ -34,7 +33,6 @@ namespace _Project.GamePlay.GameManager.Scripts
         [SerializeField] private PlayerModel player;
         
         [Header("Commander")]
-        [SerializeField] private CommanderLibrary commanderLibrary;
         [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
         
         [Header("Managers")]
@@ -72,8 +70,6 @@ namespace _Project.GamePlay.GameManager.Scripts
             }
         }
 
-        public CommanderLibrary CommanderLibrary => commanderLibrary;
-        
         public EnemySpawner EnemySpawner => enemySpawner;
         public WaveManager WaveManager => waveManager;
         public WaveGenerator WaveGenerator => waveGenerator;

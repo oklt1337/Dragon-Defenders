@@ -1,20 +1,32 @@
-using _Project.Deck_Cards.Cards.BaseCards.Scripts;
-using _Project.Units.Unit.BaseUnitDatabases;
+using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
 using UnityEngine;
-using UnityEngine.Video;
 
 namespace _Project.Deck_Cards.Cards.UnitCard.Scripts
 {
-    [CreateAssetMenu(menuName = "Tool/Cards/UnitCard", fileName = "UnitCard")]
-    public class UnitCard : BaseCards.Scripts.BaseCards
+    public enum UnitType
     {
-        [SerializeField] private BaseUnitDataBase unit;
-        private BaseCards.Scripts.BaseCards baseCardsImplementation;
+        Combat,
+        Utility
+    }
+    
+    public abstract class UnitCard : BaseCards.Scripts.BaseCard
+    {
+        [SerializeField] internal UnitType unitType;
+        [SerializeField] internal int goldCost;
+        [SerializeField] internal UnitAbilityDataBase unitAbilityDataBase;
 
-        public BaseUnitDataBase Unit => unit;
-        public override void Save(int id, int cost, Rarity rarity, Sprite sprite, VideoClip clip)
+        public UnitType UnitType
         {
-            
+            get => unitType;
+            set => unitType = value;
+        }
+
+        public int GoldCost => goldCost;
+
+        public UnitAbilityDataBase UnitAbilityDataBase
+        {
+            get => unitAbilityDataBase;
+            set => unitAbilityDataBase = value;
         }
     }
 }

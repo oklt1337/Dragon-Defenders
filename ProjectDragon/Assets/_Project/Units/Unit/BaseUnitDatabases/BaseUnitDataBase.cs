@@ -12,10 +12,6 @@ namespace _Project.Units.Unit.BaseUnitDatabases
     /// </summary>
     public abstract class BaseUnitDataBase : ScriptableObject
     {
-        #region Singleton
-
-        #endregion
-    
         #region SerializeFields
 
         [SerializeField] protected string unitName;
@@ -31,25 +27,7 @@ namespace _Project.Units.Unit.BaseUnitDatabases
         [SerializeField] protected SoundHandler soundHandler;
         
         #endregion
-    
-        #region Private Fields
-
-    
-
-        #endregion
-    
-        #region protected Fields
-
-    
-
-        #endregion
-    
-        #region Public Fields
-
-    
-
-        #endregion
-    
+        
         #region Public Properties
 
         public UnitAbilityDataBase UnitAbilityDataBase
@@ -118,42 +96,5 @@ namespace _Project.Units.Unit.BaseUnitDatabases
         }
 
         #endregion
-    
-        #region Events
-
-    
-
-        #endregion
-    
-        #region Unity Methods
-
-    
-
-        #endregion
-    
-        #region Private Methods
-
-    
-
-        #endregion
-    
-        #region Protected Methods
-
-    
-
-        #endregion
-    
-        #region Public Methods
-
-    
-
-        #endregion
-    
-        #region CallBacks
-
-
-        #endregion
-        
-        
     }
 }

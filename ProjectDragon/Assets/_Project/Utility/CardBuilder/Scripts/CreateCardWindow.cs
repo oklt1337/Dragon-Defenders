@@ -7,16 +7,15 @@ namespace _Project.Utility.CardBuilder.Scripts
     public class CreateCardWindow : EditorWindow
     {
         private static CreateCardWindow Instance;
-
         private string sName;
-
-        public event Action<string> OnCreate;
+        private bool isCombatUnit;
+        public event Action<string, bool> OnCreate;
 
         public static CreateCardWindow Init(Rect pos)
         {
             Instance = GetWindow<CreateCardWindow>(string.Empty);
-            Instance.maxSize =  new Vector2(300,50);
-            Instance.minSize =  new Vector2(300,50);
+            Instance.maxSize =  new Vector2(300,65);
+            Instance.minSize =  new Vector2(300,65);
             Instance.position = pos;
             Instance.Show();
 
@@ -35,6 +34,11 @@ namespace _Project.Utility.CardBuilder.Scripts
         {
             //CardName
             sName = EditorGUILayout.TextField("Name", sName);
+
+            if (CardBuilder.ToolBarIndex == 1)
+            {
+                isCombatUnit = EditorGUILayout.Toggle("Is a Combat Unit", isCombatUnit);
+            }
         }
 
         private void DrawButtons()
@@ -59,7 +63,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             if (string.IsNullOrEmpty(sName)) 
                 return;
             
-            OnCreate?.Invoke(sName);
+            OnCreate?.Invoke(sName, isCombatUnit);
             Cancel();
         }
         

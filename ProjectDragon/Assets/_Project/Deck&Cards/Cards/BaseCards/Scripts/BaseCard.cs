@@ -1,3 +1,5 @@
+using _Project.Faction;
+using _Project.SkillSystem.SkillTree;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -11,31 +13,57 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         Legendary,
         Mythical
     }
-    public abstract class BaseCards : ScriptableObject
+
+    public abstract class BaseCard : ScriptableObject
     {
-        [SerializeField] private int cardID;
-        [SerializeField] private string cardName;
-        [SerializeField] private string description;
-        [SerializeField] private int cost;
-        [SerializeField] private Rarity rarity;
-        [SerializeField] private VideoClip demo;
-        [SerializeField] private Sprite icon;
+        [Header("General")] 
+        [SerializeField] internal int cardID;
+        [SerializeField] internal string cardName;
+        [SerializeField] internal string description;
+        [SerializeField] internal int cost;
+
+        [Header("Specifications")] 
+        [SerializeField]
+        internal GameObject model;
+        [SerializeField] internal Rarity rarity;
+        [SerializeField] internal ClassAndFaction.Faction faction;
+        [SerializeField] internal ClassAndFaction.Class @class;
+        [SerializeField] internal SkillTree skillTree;
+
+        [Header("Visuals")]
+        [SerializeField]
+        internal VideoClip demo;
+        [SerializeField] internal Sprite icon;
 
         public int CardID => cardID;
-        public string CardName => cardName;
-        public string Description => description;
-        public int Cost => cost;
-        public Rarity Rarity => rarity;
-        public VideoClip Demo => demo;
-        public Sprite Icon => icon;
 
-        public virtual void Save(int id, int cardCost, Rarity cardRarity, Sprite sprite, VideoClip clip)
+        public string CardName
         {
-            cardID = id;
-            cost = cardCost;
-            rarity = cardRarity;
-            icon = sprite;
-            demo = clip;
+            get => cardName;
+            set => cardName = value;
         }
+
+        public string Description => description;
+
+        public int Cost => cost;
+
+        public GameObject Model => model;
+
+        public Rarity Rarity => rarity;
+
+        public ClassAndFaction.Faction Faction => faction;
+
+        public ClassAndFaction.Class Class => @class;
+
+        public SkillTree SkillTree
+        {
+            get => skillTree;
+            set => skillTree = value;
+        }
+
+        public VideoClip Demo => demo;
+
+        public Sprite Icon => icon;
     }
+
 }

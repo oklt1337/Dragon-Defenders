@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.Faction;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.SkillSystem.SkillTree;
@@ -176,32 +177,29 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Methods
 
-        private void SetStats(CommanderModel.Scripts.CommanderModel commanderModel)
+        private void SetStats(CommanderCard commanderCard)
         {
-            commanderName = commanderModel.commanderName;
-            commanderObj = commanderModel.commanderObj;
-            faction = commanderModel.faction;
-            commanderClass = commanderModel.commanderClass;
-            health = commanderModel.health;
-            mana = commanderModel.mana;
-            attackDamageModifier = commanderModel.attackDamageModifier;
-            defense = commanderModel.defense;
-            speed = commanderModel.speed;
-            rank = commanderModel.rank;
-            level = commanderModel.level;
-            experience = commanderModel.experience;
-            skillTree = commanderModel.skillTree;
+            commanderName = commanderCard.CardName;
+            commanderObj = commanderCard.Model;
+            faction = commanderCard.Faction;
+            commanderClass = commanderCard.Class;
+            health = commanderCard.Health;
+            mana = commanderCard.Mana;
+            attackDamageModifier = commanderCard.AttackDamageModifier;
+            defense = commanderCard.Defense;
+            speed = commanderCard.Speed;
+            skillTree = commanderCard.SkillTree;
             navMeshAgent.speed = speed;
 
-            foreach (Ability ability in commanderModel.commanderAbilityDataBase.CommanderAbilitiesScripts.Select(type =>
+            foreach (Ability ability in commanderCard.CommanderAbilityDataBase.CommanderAbilitiesScripts.Select(type =>
                 (Ability)gameObject.AddComponent(type)))
             {
                 abilities.Add(ability);
             }
 
-            for (int i = 0; i < commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases.Count; i++)
+            for (int i = 0; i < commanderCard.CommanderAbilityDataBase.commanderAbilitiesDataBases.Count; i++)
             {
-                abilities[i].Init(commanderModel.commanderAbilityDataBase.commanderAbilitiesDataBases[i]);
+                abilities[i].Init(commanderCard.CommanderAbilityDataBase.commanderAbilitiesDataBases[i]);
             }
         }
 
@@ -219,9 +217,9 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Protected Methods
 
-        internal void InitializeCommander(CommanderModel.Scripts.CommanderModel commanderModel)
+        internal void InitializeCommander(CommanderCard commanderCard)
         {
-            SetStats(commanderModel);
+            SetStats(commanderCard);
         }
 
         #endregion

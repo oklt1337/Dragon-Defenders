@@ -69,11 +69,11 @@ namespace _Project.Deck_Cards.Decks.Scripts
         /// </summary>
         /// <param name="card">BaseCards</param>
         /// <returns>bool = true if card could be added.</returns>
-        public bool AddCard(BaseCards card)
+        public bool AddCard(BaseCard card)
         {
             if (card.GetType() == typeof(CommanderCard))
             {
-                if (commanderCard != null || ((CommanderCard) card).Commander.faction != faction)
+                if (commanderCard != null || ((CommanderCard) card).Faction != faction)
                     return false;
                 
                 commanderCard = (CommanderCard) card;
@@ -99,7 +99,7 @@ namespace _Project.Deck_Cards.Decks.Scripts
         /// </summary>
         /// <param name="card">BaseCards</param>
         /// <returns>bool = true if card could be removed.</returns>
-        public bool RemoveCard(BaseCards card)
+        public bool RemoveCard(BaseCard card)
         {
             if (card.GetType() == typeof(CommanderCard))
             {

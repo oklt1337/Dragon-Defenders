@@ -1,8 +1,8 @@
 using System;
+using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.GamePlay.GameManager.Scripts;
-using _Project.GamePlay.Player.Commander.CommanderModel.CLibrary;
-using _Project.GamePlay.Player.Commander.CommanderModel.Scripts;
 using _Project.SkillSystem.SkillTree;
+using Photon.Pun;
 using UnityEngine;
 
 namespace _Project.GamePlay.Player.PlayerModel.Scripts
@@ -14,18 +14,15 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
     {
         #region SerializeFields
 
-        [Header("Commander")] 
-        [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
+        [Header("Commander")] [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
 
-        [Header("Cameras")] 
-        [SerializeField] private Camera buildCamera;
+        [Header("Cameras")] [SerializeField] private Camera buildCamera;
         [SerializeField] private Camera commanderCamera;
 
-        [Header("Handler")] 
-        [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
+        [Header("Handler")] [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
         [SerializeField] private SoundHandler.Scripts.SoundHandler soundHandler;
         [SerializeField] private InputHandler.Scripts.InputHandler inputHandler;
-        
+
         //TODO: ColliderHandler adden
         //[SerializeField] private CollisionHandler CollisionHandler;
 
@@ -34,7 +31,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
         #region Private Fields
 
         private int _money;
-        
+
         #endregion
 
         #region Protected Fields
@@ -49,6 +46,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         public Commander.BaseCommanderClass.Scripts.Commander Commander => commander;
         public InputHandler.Scripts.InputHandler InputHandler => inputHandler;
+
         public int Money
         {
             get => _money;
@@ -58,18 +56,18 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                 {
                     value = 0;
                 }
-                
+
                 _money = value;
-            } 
-            
+            }
         }
+
         public Camera BuildCamera => buildCamera;
         public Camera CommanderCamera => commanderCamera;
 
         #endregion
 
         #region Events
-        
+
         public event Action<SkillTree> OnTryUpgradeSkill;
 
         #endregion
@@ -95,18 +93,21 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         private void ProcessInput(Ray ray)
         {
-            if (!Physics.Raycast(ray, out RaycastHit hit)) 
+            if (!Physics.Raycast(ray, out RaycastHit hit))
                 return;
-            
-            if (hit.collider.CompareTag("Enemy") && GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
+
+            if (hit.collider.CompareTag("Enemy") &&
+                GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
             {
                 commander.Attack(hit.transform);
             }
-            else if (hit.collider.CompareTag("Ground") && GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
+            else if (hit.collider.CompareTag("Ground") &&
+                     GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
             {
                 commander.Move(hit.point);
             }
-            else if (hit.collider.CompareTag("Unit/Tower") && GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
+            else if (hit.collider.CompareTag("Unit/Tower") &&
+                     GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
                 Units.Unit.BaseUnits.Unit unit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.Unit>();
                 if (unit != null)
@@ -114,7 +115,8 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
                     OnTryUpgradeSkill?.Invoke(unit.SkillTree);
                 }
             }
-            else if (hit.collider.CompareTag("Player") && GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
+            else if (hit.collider.CompareTag("Player") &&
+                     GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
                 OnTryUpgradeSkill?.Invoke(commander.SkillTree);
             }
@@ -122,13 +124,12 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
 
         private void Initialize()
         {
-            //TODO: Get Info from HashTable
-            
-            /*Hashtable hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
+            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
             if (!hashTable.ContainsKey("Commander"))
-                return;*/
-           CommanderModel commanderModel = GameManager.Scripts.GameManager.Instance.CommanderLibrary.CommanderModels[Commanders.Commander1];
-           commander.InitializeCommander(commanderModel);
+                return;
+            
+            var commanderCard = (CommanderCard) hashTable["Commander"];
+            commander.InitializeCommander(commanderCard);
         }
 
         private void ChangeCamera(GameState state)
@@ -177,11 +178,11 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
             {
                 return false;
             }
-            
+
             Money += amount;
             return true;
         }
-        
+
         #endregion
     }
 }
