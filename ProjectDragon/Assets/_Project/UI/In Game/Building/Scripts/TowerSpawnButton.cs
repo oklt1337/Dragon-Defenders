@@ -10,7 +10,7 @@ namespace _Project.UI.In_Game.Building.Scripts
     public class TowerSpawnButton : MonoBehaviourPun, IPointerClickHandler, IBeginDragHandler, IDragHandler,
         IEndDragHandler, ICanvas
     {
-        [SerializeField] private Unit unit;
+        [SerializeField] private OldUnit oldUnit;
         [SerializeField] private Camera buildCam;
         
         #region Unity Methods
@@ -45,7 +45,7 @@ namespace _Project.UI.In_Game.Building.Scripts
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (GameManager.Instance.PlayerModel.Money < unit.Cost)
+            if (GameManager.Instance.PlayerModel.Money < oldUnit.Cost)
                 return;
 
             Vector3 screenPos = Input.mousePosition;
@@ -59,9 +59,9 @@ namespace _Project.UI.In_Game.Building.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            GameObject tower = PhotonNetwork.Instantiate(string.Concat(unit.UnitPathName, unit.name), hit.point, Quaternion.identity);
+            GameObject tower = PhotonNetwork.Instantiate(string.Concat(oldUnit.UnitPathName, oldUnit.name), hit.point, Quaternion.identity);
 
-            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.Cost))
+            if (!GameManager.Instance.PlayerModel.ModifyMoney(-oldUnit.Cost))
             {
                 Destroy(tower);
             }
@@ -74,9 +74,9 @@ namespace _Project.UI.In_Game.Building.Scripts
             throw new System.NotImplementedException();
         }
 
-        public void UpdateUnitName(Unit newUnit)
+        public void UpdateUnitName(OldUnit newOldUnit)
         {
-            unit = newUnit;
+            oldUnit = newOldUnit;
         }
     }
 }

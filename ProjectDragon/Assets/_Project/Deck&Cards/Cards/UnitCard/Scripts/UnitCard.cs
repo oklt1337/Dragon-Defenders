@@ -12,6 +12,7 @@ namespace _Project.Deck_Cards.Cards.UnitCard.Scripts
     public abstract class UnitCard : BaseCards.Scripts.BaseCard
     {
         [SerializeField] internal UnitType unitType;
+        [SerializeField] internal int limit;
         [SerializeField] internal int goldCost;
         [SerializeField] internal UnitAbilityDataBase unitAbilityDataBase;
 
@@ -22,6 +23,7 @@ namespace _Project.Deck_Cards.Cards.UnitCard.Scripts
         }
 
         public int GoldCost => goldCost;
+        public int Limit => limit;
 
         public UnitAbilityDataBase UnitAbilityDataBase
         {

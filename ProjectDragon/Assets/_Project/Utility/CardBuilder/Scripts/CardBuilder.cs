@@ -47,6 +47,7 @@ namespace _Project.Utility.CardBuilder.Scripts
         private const string UnitPath = "Assets/Resources/Cards/UnitCards";
         private int selectedUnit;
         private UnitType unitType;
+        private int limit;
         private int goldCost;
         private UnitAbilityDataBase unitAbilityDatabase;
 
@@ -58,8 +59,6 @@ namespace _Project.Utility.CardBuilder.Scripts
         private float effectRange;
 
         public static int ToolBarIndex { get; private set; }
-
-        private static event Action<string> OnRecompile;
 
         [MenuItem("Window/Card Builder")]
         public static void Init()
@@ -212,6 +211,8 @@ namespace _Project.Utility.CardBuilder.Scripts
                 //UnitType
                 var types = Enum.GetValues(typeof(UnitType)).Cast<UnitType>().Select(v => v.ToString()).ToArray();
                 unitType = (UnitType) EditorGUILayout.Popup("Unit Type", (int) unitType, types);
+                //UnitLimit
+                limit = EditorGUILayout.IntField("Limit", limit);
                 //UnitGoldCost
                 goldCost = EditorGUILayout.IntField("Gold Cost", goldCost);
                 //UnitAbilities
@@ -222,7 +223,7 @@ namespace _Project.Utility.CardBuilder.Scripts
                 switch (unitType)
                 {
                     case UnitType.Combat:
-                        unitAttackDamageModifier = EditorGUILayout.FloatField("Attack", unitAttackDamageModifier);
+                        unitAttackDamageModifier = EditorGUILayout.FloatField("Attack Damage", unitAttackDamageModifier);
                         attackRange = EditorGUILayout.FloatField("Attack Range", attackRange);
                         break;
                     case UnitType.Utility:

@@ -109,10 +109,10 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
             else if (hit.collider.CompareTag("Unit/Tower") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
-                Units.Unit.BaseUnits.Unit unit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.Unit>();
-                if (unit != null)
+                Units.Unit.BaseUnits.OldUnit oldUnit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.OldUnit>();
+                if (oldUnit != null)
                 {
-                    OnTryUpgradeSkill?.Invoke(unit.SkillTree);
+                    OnTryUpgradeSkill?.Invoke(oldUnit.SkillTree);
                 }
             }
             else if (hit.collider.CompareTag("Player") &&

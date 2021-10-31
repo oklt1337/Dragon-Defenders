@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace _Project.Units.Unit.BaseUnits
 {
-    public class Combat : Unit
+    public class Combat : OldUnit
     {
         #region Singleton
 

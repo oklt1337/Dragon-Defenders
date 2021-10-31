@@ -95,22 +95,22 @@ namespace _Project.SkillSystem.BaseSkills
     
         #region Private Fields
 
-        private IEnumerator BlessingOfTheTreesCoroutine(Unit unit ,float waitSeconds, float activeSeconds, float increaseValue )
+        private IEnumerator BlessingOfTheTreesCoroutine(OldUnit oldUnit ,float waitSeconds, float activeSeconds, float increaseValue )
         {
-            float originalValueSpeed = ((SingleTargetDamageAbility)unit.Ability).Speed;
-            float originalValueCooldown = ((SingleTargetDamageAbility)unit.Ability).Speed;
+            float originalValueSpeed = ((SingleTargetDamageAbility)oldUnit.Ability).Speed;
+            float originalValueCooldown = ((SingleTargetDamageAbility)oldUnit.Ability).Speed;
             float modifiedValueSpeed = originalValueSpeed * increaseValue;
             float modifiedValueCooldown = originalValueSpeed / increaseValue;
             
-            while(unit.gameObject.activeSelf)
+            while(oldUnit.gameObject.activeSelf)
             {
-                ((SingleTargetDamageAbility) unit.Ability).Speed = originalValueSpeed;
-                ((SingleTargetDamageAbility) unit.Ability).Cooldown = originalValueCooldown;
+                ((SingleTargetDamageAbility) oldUnit.Ability).Speed = originalValueSpeed;
+                ((SingleTargetDamageAbility) oldUnit.Ability).Cooldown = originalValueCooldown;
                 
                 yield return new WaitForSeconds(waitSeconds);
                 
-                ((SingleTargetDamageAbility) unit.Ability).Speed = modifiedValueSpeed;
-                ((SingleTargetDamageAbility) unit.Ability).Speed = modifiedValueCooldown;
+                ((SingleTargetDamageAbility) oldUnit.Ability).Speed = modifiedValueSpeed;
+                ((SingleTargetDamageAbility) oldUnit.Ability).Speed = modifiedValueCooldown;
                 
                 yield return new WaitForSeconds(activeSeconds);
             }

@@ -9,17 +9,17 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.SelfBuffAbili
     {
         
         //private Commander Commander 
-        private Unit _unit;
+        private OldUnit oldUnit;
         
         public override void Cast()
         {
             Debug.Log("SelfBuff");
             if (!isCastable) return;
 
-            if (_unit)
+            if (oldUnit)
             {
-                Debug.Log(_unit.name + "has received Experience!");
-                CastEffect(_unit);
+                Debug.Log(oldUnit.name + "has received Experience!");
+                CastEffect(oldUnit);
                 //duration will be implemented when the active buff 
                 //system is implemented.
             }
@@ -33,10 +33,10 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.SelfBuffAbili
 
         private void GetTarget()
         {
-          _unit = GetComponentInParent<Unit>();
+          oldUnit = GetComponentInParent<OldUnit>();
         }
 
-        private void CastEffect(Unit target)
+        private void CastEffect(OldUnit target)
         {
             target.GainExp(BuffValue);
         }

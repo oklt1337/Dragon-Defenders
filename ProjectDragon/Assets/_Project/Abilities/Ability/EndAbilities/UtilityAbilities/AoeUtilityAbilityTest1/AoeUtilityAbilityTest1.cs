@@ -4,6 +4,7 @@ using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unit = _Project.Units.Unit.BaseUnits.Unit;
 
 namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbilityTest1
 {
@@ -24,7 +25,7 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
     
         #region Private Fields
 
-        private List<_Project.Units.Unit.BaseUnits.Unit> possibleBeneficiaries;
+        private List<_Project.Units.Unit.BaseUnits.OldUnit> possibleBeneficiaries;
         
         private Vector3 tempVector;
 
@@ -98,7 +99,7 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
             GameObject[] allTowers = GameObject.FindGameObjectsWithTag("Unit/Tower");
             for (int i = 0;i < allTowers.Length;i++)
             {
-                possibleBeneficiaries.Add(allTowers[i].GetComponent<_Project.Units.Unit.BaseUnits.Unit>());   
+                possibleBeneficiaries.Add(allTowers[i].GetComponent<_Project.Units.Unit.BaseUnits.OldUnit>());   
             }
         }
 
@@ -135,7 +136,7 @@ namespace _Project.Abilities.Ability.EndAbilities.UtilityAbilities.AoeUtilityAbi
         public override void Init(AbilityDataBase dataBase)
         {
             base.Init(dataBase);
-            possibleBeneficiaries = new List<_Project.Units.Unit.BaseUnits.Unit>();
+            possibleBeneficiaries = new List<_Project.Units.Unit.BaseUnits.OldUnit>();
             UpdateBeneficiaries();
         }
 

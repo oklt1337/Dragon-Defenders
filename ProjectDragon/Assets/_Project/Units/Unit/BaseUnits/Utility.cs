@@ -2,7 +2,7 @@ namespace _Project.Units.Unit.BaseUnits
 {   /// <summary>
     ///     Author: Peter Luu
     /// </summary>
-    public class Utility : Unit
+    public class Utility : OldUnit
     {
         #region Singleton
 

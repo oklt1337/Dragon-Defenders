@@ -37,7 +37,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
         #endregion
     
         #region protected Fields
-        protected List<Unit> possibleBeneficiariesUnits;
+        protected List<OldUnit> possibleBeneficiariesUnits;
         protected List<Commander> possibleBeneficiariesCommander;
         
     
@@ -133,7 +133,7 @@ namespace _Project.Abilities.Ability.BaseScripts.BaseAbilities
 
         }
 
-        private void ActivateBuffUnit(Unit unit)
+        private void ActivateBuffUnit(OldUnit oldUnit)
         {
             
         }
