@@ -23,16 +23,14 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         [SerializeField] internal int cost;
 
         [Header("Specifications")] 
-        [SerializeField]
-        internal GameObject model;
+        [SerializeField] internal GameObject model;
         [SerializeField] internal Rarity rarity;
         [SerializeField] internal ClassAndFaction.Faction faction;
         [SerializeField] internal ClassAndFaction.Class @class;
         [SerializeField] internal SkillTree skillTree;
 
         [Header("Visuals")]
-        [SerializeField]
-        internal VideoClip demo;
+        [SerializeField] internal VideoClip demo;
         [SerializeField] internal Sprite icon;
 
         public int CardID => cardID;
