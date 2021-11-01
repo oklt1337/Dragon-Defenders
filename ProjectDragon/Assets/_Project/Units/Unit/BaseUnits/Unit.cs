@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Project.Units.Unit.BaseUnits
 {
-    public abstract class Unit : MonoBehaviour
+    public class Unit : MonoBehaviour
     {
         #region SerializeFields
 
@@ -19,6 +19,7 @@ namespace _Project.Units.Unit.BaseUnits
         private string unitName;
         private string description;
         private int goldCost;
+        private int limit;
         private GameObject unitModel;
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
@@ -47,6 +48,7 @@ namespace _Project.Units.Unit.BaseUnits
             unitClass = unitCard.Class;
             skillTree = unitCard.SkillTree;
             goldCost = unitCard.GoldCost;
+            limit = unitCard.Limit;
         }
 
         public void Cast()

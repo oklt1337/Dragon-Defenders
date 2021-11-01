@@ -17,6 +17,7 @@ namespace _Project.Utility.CardBuilder.Scripts
         private static CardBuilder Instance;
 
         [Header("General")] 
+        private int toolBarIndex;
         private Vector2 scrollPos;
         private CreateCardWindow newCardWindow;
 
@@ -46,19 +47,9 @@ namespace _Project.Utility.CardBuilder.Scripts
         [Header("Unit Stats")] 
         private const string UnitPath = "Assets/Resources/Cards/UnitCards";
         private int selectedUnit;
-        private UnitType unitType;
         private int limit;
         private int goldCost;
         private UnitAbilityDataBase unitAbilityDatabase;
-
-        //Combat
-        private float unitAttackDamageModifier;
-        private float attackRange;
-
-        //Utility
-        private float effectRange;
-
-        public static int ToolBarIndex { get; private set; }
 
         [MenuItem("Window/Card Builder")]
         public static void Init()
@@ -77,10 +68,10 @@ namespace _Project.Utility.CardBuilder.Scripts
             DrawToolBar();
 
             EditorGUI.BeginChangeCheck();
-            ToolBarIndex = GUILayout.Toolbar(ToolBarIndex, new[] {new GUIContent("Commander"), new GUIContent("Unit")});
+            toolBarIndex = GUILayout.Toolbar(toolBarIndex, new[] {new GUIContent("Commander"), new GUIContent("Unit")});
             if (EditorGUI.EndChangeCheck())
             {
-                if (ToolBarIndex == 0)
+                if (toolBarIndex == 0)
                 {
                     var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
 
@@ -105,7 +96,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
 
-            switch (ToolBarIndex)
+            switch (toolBarIndex)
             {
                 case 0:
                     DrawCommanderStats();
@@ -208,9 +199,6 @@ namespace _Project.Utility.CardBuilder.Scripts
                 GUILayout.Space(10);
 
                 EditorGUILayout.LabelField("Unit Stats");
-                //UnitType
-                var types = Enum.GetValues(typeof(UnitType)).Cast<UnitType>().Select(v => v.ToString()).ToArray();
-                unitType = (UnitType) EditorGUILayout.Popup("Unit Type", (int) unitType, types);
                 //UnitLimit
                 limit = EditorGUILayout.IntField("Limit", limit);
                 //UnitGoldCost
@@ -218,20 +206,6 @@ namespace _Project.Utility.CardBuilder.Scripts
                 //UnitAbilities
                 unitAbilityDatabase = (UnitAbilityDataBase) EditorGUILayout.ObjectField("Abilities",
                     unitAbilityDatabase, typeof(UnitAbilityDataBase), false);
-
-                EditorGUILayout.Space(5);
-                switch (unitType)
-                {
-                    case UnitType.Combat:
-                        unitAttackDamageModifier = EditorGUILayout.FloatField("Attack Damage", unitAttackDamageModifier);
-                        attackRange = EditorGUILayout.FloatField("Attack Range", attackRange);
-                        break;
-                    case UnitType.Utility:
-                        effectRange = EditorGUILayout.FloatField("Effect Range", effectRange);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
             }
             else
             {
@@ -290,7 +264,7 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         private void SetStats(BaseCard baseCard)
         {
-            switch (ToolBarIndex)
+            switch (toolBarIndex)
             {
                 case 0:
                     if (baseCard != null)
@@ -318,28 +292,9 @@ namespace _Project.Utility.CardBuilder.Scripts
                     {
                         var unitCard = (UnitCard) baseCard;
                         SetBaseStats(unitCard);
-
-                        //UnitStats
-                        unitType = unitCard.UnitType;
+                        
                         goldCost = unitCard.GoldCost;
                         unitAbilityDatabase = unitCard.UnitAbilityDataBase;
-
-                        switch (unitType)
-                        {
-                            case UnitType.Combat:
-                                var combatUnitCard = (CombatUnitCard) unitCard;
-
-                                unitAttackDamageModifier = combatUnitCard.AttackDamageModifier;
-                                attackRange = combatUnitCard.AttackRange;
-                                break;
-                            case UnitType.Utility:
-                                var utilityUnitCard = (UtilityUnitCard) unitCard;
-
-                                effectRange = utilityUnitCard.EffectRange;
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
                     }
                     else
                     {
@@ -385,18 +340,12 @@ namespace _Project.Utility.CardBuilder.Scripts
             defense = 0;
             speed = 0;
             commanderAbilityDataBase = null;
-
-            unitType = 0;
+            
             goldCost = 0;
             unitAbilityDatabase = null;
-
-            unitAttackDamageModifier = 0;
-            attackRange = 0;
-
-            effectRange = 0;
         }
 
-        private void CreateCard(string newCardName, bool isCombatUnit)
+        private void CreateCard(string newCardName)
         {
             newCardWindow.OnCreate -= CreateCard;
 
@@ -404,7 +353,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             string path;
             string guid;
             int index;
-            switch (ToolBarIndex)
+            switch (toolBarIndex)
             {
                 case 0:
                     // Create Commander
@@ -440,44 +389,19 @@ namespace _Project.Utility.CardBuilder.Scripts
                     // Create Commander
                     guid = AssetDatabase.CreateFolder(UnitPath, newCardName);
                     path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
+                    
+                    var unitCard = CreateInstance<UnitCard>();
+                    unitCard.SkillTree = CreateInstance<SkillTree>();
+                    unitCard.UnitAbilityDataBase = CreateInstance<UnitAbilityDataBase>();
+                    unitCard.CardName = newCardName;
 
-                    //Create Instance
-                    // Create Unit
-                    switch (isCombatUnit)
-                    {
-                        case true:
-
-                            var combatUnitCard = CreateInstance<CombatUnitCard>();
-                            combatUnitCard.SkillTree = CreateInstance<SkillTree>();
-                            combatUnitCard.UnitAbilityDataBase = CreateInstance<UnitAbilityDataBase>();
-                            combatUnitCard.CardName = newCardName;
-                            combatUnitCard.UnitType = UnitType.Combat;
-
-                            //Create Assets
-                            AssetDatabase.CreateAsset(combatUnitCard, string.Concat(path, "-Card", ".asset"));
-                            AssetDatabase.CreateAsset(combatUnitCard.SkillTree,
-                                string.Concat(path, "-CommanderSkillTree", ".asset"));
-                            AssetDatabase.CreateAsset(combatUnitCard.UnitAbilityDataBase,
-                                string.Concat(path, "-CommanderAbilityDataBase", ".asset"));
-                            AssetDatabase.SaveAssets();
-                            break;
-                        case false:
-
-                            var utilityUnitCard = CreateInstance<UtilityUnitCard>();
-                            utilityUnitCard.SkillTree = CreateInstance<SkillTree>();
-                            utilityUnitCard.UnitAbilityDataBase = CreateInstance<UnitAbilityDataBase>();
-                            utilityUnitCard.CardName = newCardName;
-                            utilityUnitCard.UnitType = UnitType.Utility;
-
-                            //Create Assets
-                            AssetDatabase.CreateAsset(utilityUnitCard, string.Concat(path, "-Card", ".asset"));
-                            AssetDatabase.CreateAsset(utilityUnitCard.SkillTree,
-                                string.Concat(path, "-CommanderSkillTree", ".asset"));
-                            AssetDatabase.CreateAsset(utilityUnitCard.UnitAbilityDataBase,
-                                string.Concat(path, "-CommanderAbilityDataBase", ".asset"));
-                            AssetDatabase.SaveAssets();
-                            break;
-                    }
+                    //Create Assets
+                    AssetDatabase.CreateAsset(unitCard, string.Concat(path, "-Card", ".asset"));
+                    AssetDatabase.CreateAsset(unitCard.SkillTree,
+                        string.Concat(path, "-SkillTree", ".asset"));
+                    AssetDatabase.CreateAsset(unitCard.UnitAbilityDataBase,
+                        string.Concat(path, "-AbilityDataBase", ".asset"));
+                    AssetDatabase.SaveAssets();
 
                     // Set new Card as selected
                     var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
@@ -495,7 +419,7 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         private void Save()
         {
-            switch (ToolBarIndex)
+            switch (toolBarIndex)
             {
                 case 0:
                     // Commander Stats
@@ -512,27 +436,9 @@ namespace _Project.Utility.CardBuilder.Scripts
                     var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
                     if (unitCards.Length == 0)
                         return;
-
-                    switch (unitCards[selectedUnit].unitType)
-                    {
-                        case UnitType.Combat:
-                            //save
-                            var combatUnitCard = (CombatUnitCard) unitCards[selectedUnit];
-
-                            combatUnitCard.Save(cardID, cardName, description, cost, model, rarity, faction,
-                                @class, skillTree, demo, icon, unitType, goldCost, unitAbilityDatabase,
-                                unitAttackDamageModifier, attackRange);
-                            break;
-                        case UnitType.Utility:
-                            //save
-                            var utilityUnitCard = (UtilityUnitCard) unitCards[selectedUnit];
-
-                            utilityUnitCard.Save(cardID, cardName, description, cost, model, rarity, faction,
-                                @class, skillTree, demo, icon, unitType, goldCost, unitAbilityDatabase, effectRange);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    
+                    unitCards[selectedUnit].Save(cardID, cardName, description, cost, model, rarity, faction,
+                        @class, skillTree, demo, icon, goldCost, limit, unitAbilityDatabase);
                     break;
             }
             
@@ -543,7 +449,7 @@ namespace _Project.Utility.CardBuilder.Scripts
 
         private void Reload()
         {
-            if (ToolBarIndex == 0)
+            if (toolBarIndex == 0)
             {
                 var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
 
