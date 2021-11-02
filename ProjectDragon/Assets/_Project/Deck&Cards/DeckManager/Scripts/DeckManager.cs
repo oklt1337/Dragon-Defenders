@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Project.Deck_Cards.Decks.Scripts;
 using PlayFab.ClientModels;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -53,27 +54,40 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         public bool CreateDeck(string deckName)
         {
             var success = deckBuilder.CreateDeck(deckName);
-            if (success)
-            {
-                decks.Add(deckBuilder.Save());
-            }
+            if (!success) 
+                return false;
             
-            return success;
+            var deck = deckBuilder.Save();
+            deck.DeckId = decks.Count;
+            decks.Add(deck);
+            return true;
         }
+
 
         /// <summary>
         /// Removes a Deck from deckList.
         /// </summary>
-        /// <param name="deckName">string</param>
+        /// <param name="deckId">DeckId</param>
         /// <returns>bool = true if deckName could be found in deckList.</returns>
-        public bool DeleteDeck(string deckName)
+        [Button]
+        public bool DeleteDeck(int deckId)
         {
-            var index = decks.FindIndex(deck => deck.DeckName == deckName);
+            var index = decks.FindIndex(deck => deck.DeckId == deckId);
 
             if (index == -1)
                 return false;
 
-            decks.RemoveAt(index);
+            var path = string.Concat("Assets/Resources/Decks/", decks[index].DeckName);
+            var success = AssetDatabase.DeleteAsset(path);
+            if (success)
+            {
+                decks.RemoveAt(index);
+            }
+            else
+            {
+                return false;
+            }
+
             return true;
         }
 

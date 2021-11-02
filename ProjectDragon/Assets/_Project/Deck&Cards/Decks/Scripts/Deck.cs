@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace _Project.Deck_Cards.Decks.Scripts
 {
-    [CreateAssetMenu(menuName = "Tool/Cards/Deck", fileName = "Deck")]
     public class Deck : ScriptableObject
     {
         #region Serialze Fields
@@ -28,7 +27,11 @@ namespace _Project.Deck_Cards.Decks.Scripts
         
         #region Public Properties
 
-        public int DeckId => deckId;
+        public int DeckId
+        {
+            get => deckId;
+            set => deckId = value;
+        }
 
         public string DeckName
         {

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using _Project.Deck_Cards.Decks.Scripts;
 using UnityEditor;
 using UnityEngine;
@@ -37,7 +36,6 @@ namespace _Project.Deck_Cards.DeckBuilder.Scripts
                 // if generic Name is already taken search increase Number at end until deckName is not taken
                 while (index != -1 && deckNameIndex < 100)
                 {
-                    Debug.Log($"DeckIndex {index}");
                     deckNameIndex++;
                     deckName = string.Concat(tryDeckName, deckNameIndex);
                     index = decks.FindIndex(deck => deck.DeckName == deckName);
@@ -51,7 +49,7 @@ namespace _Project.Deck_Cards.DeckBuilder.Scripts
 
             CurrentSelection = ScriptableObject.CreateInstance<Deck>();
             CurrentSelection.DeckName = deckName;
-            CurrentSelection.name = string.Concat(deckName, "-Obj");
+
             return true;
         }
 
@@ -63,6 +61,11 @@ namespace _Project.Deck_Cards.DeckBuilder.Scripts
         {
             var deck = CurrentSelection;
             CurrentSelection = null;
+            
+            var guid = AssetDatabase.CreateFolder("Assets/Resources/Decks", deck.DeckName);
+            var path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", deck.DeckName);
+            AssetDatabase.CreateAsset(deck, string.Concat(path, "-Obj", ".asset"));
+            AssetDatabase.SaveAssets();
 
             return deck;
         }
