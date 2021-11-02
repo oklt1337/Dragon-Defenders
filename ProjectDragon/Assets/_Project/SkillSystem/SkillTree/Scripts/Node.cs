@@ -17,9 +17,9 @@ namespace _Project.SkillSystem.SkillTree.Scripts
         public Sprite Icon => icon;
         public int Cost => cost;
 
-        public virtual void EnableNode()
+        public virtual void SetState(NodeState state)
         {
-            NodeState = NodeState.Activated;
+            NodeState = state;
         }
     }
 }
