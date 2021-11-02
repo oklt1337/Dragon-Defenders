@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using _Project.SkillSystem.SkillTree;
+using _Project.SkillSystem.SkillTree.Scripts;
 using _Project.UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,14 +52,16 @@ namespace _Project.UI.In_Game.Building.Scripts
         public void OnClick(Button btn)
         {
             string buttonName = btn.gameObject.name;
-            
-            if(!skillTree.tree[buttonName].IsLearnable)
+            int.TryParse(buttonName, out var index);
+
+            if (skillTree.Nodes[index].NodeState != NodeState.Learnable) 
                 return;
             
-            //TODO: Money Check and using that money.
-            
-            skillTree.tree[buttonName].EnableSkill();
+            skillTree.SetNodeActive(index);
             UpdateImages();
+
+            //TODO: Money Check and using that money.
+
         }
 
         #endregion
@@ -73,20 +75,20 @@ namespace _Project.UI.In_Game.Building.Scripts
         {
             for (int i = 0; i < skillImages.Count; i++)
             {
-                string key = (i + 1).ToString();
+                var key = (i + 1);
 
                 // Fail check.
-                if (skillTree.tree[key].Sprite == null)
+                if (skillTree.Nodes[key].Icon == null)
                 {
                     skillImages[i].sprite = missingSprite;
                     continue;
                 }
 
                 // Update the sprite.
-                skillImages[i].sprite = skillTree.tree[key].Sprite;
+                skillImages[i].sprite = skillTree.Nodes[key].Icon;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
-                if (skillTree.tree[key].IsLearnable || skillTree.tree[key].IsSkillActive)
+                if (skillTree.Nodes[key].NodeState == NodeState.Learnable || skillTree.Nodes[key].NodeState == NodeState.Activated)
                     skillImages[i].color = Color.white;
                 else
                     skillImages[i].color = Color.gray;

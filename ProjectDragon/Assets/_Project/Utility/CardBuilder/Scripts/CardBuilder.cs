@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using _Project.Abilities.Ability.CommanderAbilityDataBase.Scripts;
+using _Project.Abilities.AbilityDataBase;
 using _Project.Deck_Cards.Cards.BaseCards.Scripts;
 using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.Deck_Cards.Cards.UnitCard.Scripts;
 using _Project.Faction;
-using _Project.SkillSystem.SkillTree;
+using _Project.SkillSystem.SkillTree.Scripts;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
@@ -31,6 +31,7 @@ namespace _Project.Utility.CardBuilder.Scripts
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class @class;
         private SkillTree skillTree;
+        private AbilityDataBase abilityDataBase;
         private VideoClip demo;
         private Sprite icon;
 
@@ -42,14 +43,12 @@ namespace _Project.Utility.CardBuilder.Scripts
         private float commanderAttackDamageModifier;
         private float defense;
         private float speed;
-        private CommanderAbilityDataBase commanderAbilityDataBase;
 
         [Header("Unit Stats")] 
         private const string UnitPath = "Assets/Resources/Cards/UnitCards";
         private int selectedUnit;
         private int limit;
         private int goldCost;
-        private UnitAbilityDataBase unitAbilityDatabase;
 
         [MenuItem("Window/Card Builder")]
         public static void Init()
@@ -170,7 +169,9 @@ namespace _Project.Utility.CardBuilder.Scripts
             @class = (ClassAndFaction.Class) EditorGUILayout.Popup("Class", (int) @class, classes);
             //CardSkillTree
             skillTree = (SkillTree) EditorGUILayout.ObjectField("SkillTree", skillTree, typeof(SkillTree), false);
-
+            //CardAbilities
+            abilityDataBase = (AbilityDataBase) EditorGUILayout.ObjectField("Abilities",
+                abilityDataBase, typeof(AbilityDataBase), false);
             //CardDemo
             demo = (VideoClip) EditorGUILayout.ObjectField("Demo", demo, typeof(VideoClip), false);
             //CardIcon
@@ -203,9 +204,6 @@ namespace _Project.Utility.CardBuilder.Scripts
                 limit = EditorGUILayout.IntField("Limit", limit);
                 //UnitGoldCost
                 goldCost = EditorGUILayout.IntField("Gold Cost", goldCost);
-                //UnitAbilities
-                unitAbilityDatabase = (UnitAbilityDataBase) EditorGUILayout.ObjectField("Abilities",
-                    unitAbilityDatabase, typeof(UnitAbilityDataBase), false);
             }
             else
             {
@@ -247,9 +245,6 @@ namespace _Project.Utility.CardBuilder.Scripts
                 defense = EditorGUILayout.FloatField("Defense", defense);
                 //CommanderSpeed
                 speed = EditorGUILayout.FloatField("Speed", speed);
-                //CommanderAbilities
-                commanderAbilityDataBase = (CommanderAbilityDataBase) EditorGUILayout.ObjectField("Abilities",
-                    commanderAbilityDataBase, typeof(CommanderAbilityDataBase), false);
             }
             else
             {
@@ -279,7 +274,6 @@ namespace _Project.Utility.CardBuilder.Scripts
                         commanderAttackDamageModifier = commanderCard.AttackDamageModifier;
                         defense = commanderCard.Defense;
                         speed = commanderCard.Speed;
-                        commanderAbilityDataBase = commanderCard.CommanderAbilityDataBase;
                     }
                     else
                     {
@@ -294,7 +288,6 @@ namespace _Project.Utility.CardBuilder.Scripts
                         SetBaseStats(unitCard);
                         
                         goldCost = unitCard.GoldCost;
-                        unitAbilityDatabase = unitCard.UnitAbilityDataBase;
                     }
                     else
                     {
@@ -316,6 +309,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             faction = baseCard.Faction;
             @class = baseCard.Class;
             skillTree = baseCard.SkillTree;
+            abilityDataBase = baseCard.AbilityDataBase;
             demo = baseCard.Demo;
             icon = baseCard.Icon;
         }
@@ -331,6 +325,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             faction = 0;
             @class = 0;
             skillTree = null;
+            abilityDataBase = null;
             demo = null;
             icon = null;
 
@@ -339,10 +334,8 @@ namespace _Project.Utility.CardBuilder.Scripts
             commanderAttackDamageModifier = 0;
             defense = 0;
             speed = 0;
-            commanderAbilityDataBase = null;
             
             goldCost = 0;
-            unitAbilityDatabase = null;
         }
 
         private void CreateCard(string newCardName)
@@ -363,14 +356,14 @@ namespace _Project.Utility.CardBuilder.Scripts
                     //Create Instance
                     var commanderCard = CreateInstance<CommanderCard>();
                     commanderCard.SkillTree = CreateInstance<SkillTree>();
-                    commanderCard.CommanderAbilityDataBase = CreateInstance<CommanderAbilityDataBase>();
+                    commanderCard.AbilityDataBase = CreateInstance<AbilityDataBase>();
                     commanderCard.CardName = newCardName;
 
                     //Create Assets
                     AssetDatabase.CreateAsset(commanderCard, string.Concat(path, "-Card", ".asset"));
                     AssetDatabase.CreateAsset(commanderCard.SkillTree,
                         string.Concat(path, "-CommanderSkillTree", ".asset"));
-                    AssetDatabase.CreateAsset(commanderCard.CommanderAbilityDataBase,
+                    AssetDatabase.CreateAsset(commanderCard.AbilityDataBase,
                         string.Concat(path, "-CommanderAbilityDataBase", ".asset"));
                     AssetDatabase.SaveAssets();
 
@@ -392,14 +385,14 @@ namespace _Project.Utility.CardBuilder.Scripts
                     
                     var unitCard = CreateInstance<UnitCard>();
                     unitCard.SkillTree = CreateInstance<SkillTree>();
-                    unitCard.UnitAbilityDataBase = CreateInstance<UnitAbilityDataBase>();
+                    unitCard.AbilityDataBase = CreateInstance<AbilityDataBase>();
                     unitCard.CardName = newCardName;
 
                     //Create Assets
                     AssetDatabase.CreateAsset(unitCard, string.Concat(path, "-Card", ".asset"));
                     AssetDatabase.CreateAsset(unitCard.SkillTree,
                         string.Concat(path, "-SkillTree", ".asset"));
-                    AssetDatabase.CreateAsset(unitCard.UnitAbilityDataBase,
+                    AssetDatabase.CreateAsset(unitCard.AbilityDataBase,
                         string.Concat(path, "-AbilityDataBase", ".asset"));
                     AssetDatabase.SaveAssets();
 
@@ -429,8 +422,7 @@ namespace _Project.Utility.CardBuilder.Scripts
 
                     //save
                     commanderCards[selectedCommander].Save(cardID, cardName, description, cost, model, rarity, faction,
-                        @class, skillTree, demo, icon, health, mana, commanderAttackDamageModifier, defense, speed,
-                        commanderAbilityDataBase);
+                        @class, skillTree, abilityDataBase,demo, icon, health, mana, commanderAttackDamageModifier, defense, speed);
                     break;
                 case 1:
                     var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
@@ -438,7 +430,7 @@ namespace _Project.Utility.CardBuilder.Scripts
                         return;
                     
                     unitCards[selectedUnit].Save(cardID, cardName, description, cost, model, rarity, faction,
-                        @class, skillTree, demo, icon, goldCost, limit, unitAbilityDatabase);
+                        @class, skillTree, abilityDataBase, demo, icon, goldCost, limit);
                     break;
             }
             

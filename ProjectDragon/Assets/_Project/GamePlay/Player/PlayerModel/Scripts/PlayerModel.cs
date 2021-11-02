@@ -2,6 +2,7 @@ using System;
 using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.SkillSystem.SkillTree;
+using _Project.SkillSystem.SkillTree.Scripts;
 using Photon.Pun;
 using UnityEngine;
 
@@ -109,10 +110,10 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
             else if (hit.collider.CompareTag("Unit/Tower") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
-                Units.Unit.BaseUnits.OldUnit oldUnit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.OldUnit>();
-                if (oldUnit != null)
+                var unit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.Unit>();
+                if (unit != null)
                 {
-                    OnTryUpgradeSkill?.Invoke(oldUnit.SkillTree);
+                    OnTryUpgradeSkill?.Invoke(unit.SkillTree);
                 }
             }
             else if (hit.collider.CompareTag("Player") &&
