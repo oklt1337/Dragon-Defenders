@@ -1,5 +1,4 @@
 using _Project.GamePlay.Map.Map_Objects.Base_Object.Scripts;
-using _Project.Projectiles.BaseProjectile;
 using UnityEngine;
 
 namespace _Project.GamePlay.Map.Map_Objects.Trees.Scripts
@@ -16,8 +15,8 @@ namespace _Project.GamePlay.Map.Map_Objects.Trees.Scripts
             if(!other.CompareTag("Ability"))
                 return;
 
-            var projectile = other.gameObject.GetComponent<Projectile>();
-            TakeDamage(projectile);
+            //var projectile = other.gameObject.GetComponent<Projectile>();
+            //TakeDamage(projectile);
         }
 
         private void OnDestroy()
@@ -28,12 +27,12 @@ namespace _Project.GamePlay.Map.Map_Objects.Trees.Scripts
 
         #endregion
 
-        private void TakeDamage(Projectile projectile)
+        /*private void TakeDamage(Projectile projectile)
         {
             health -= projectile.Damage;
             
             if(health <= 0)
                 Destroy(gameObject);
-        }
+        }*/
     }
 }
