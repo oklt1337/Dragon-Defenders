@@ -5,7 +5,7 @@ namespace _Project.AI.Enemies.Base_Enemy
 {
     public abstract class Enemy : MonoBehaviour
     {
-        #region Serialized Fields
+        #region Private Serialized Fields
 
         [Header("Internal Stats")]
         [SerializeField] private string enemyName;
@@ -21,7 +21,7 @@ namespace _Project.AI.Enemies.Base_Enemy
         
         #endregion
 
-        #region Protected Fields
+        #region Protected Serialized Fields
 
         [SerializeField] protected float health;
         [SerializeField] protected float maxHealth;
@@ -50,9 +50,13 @@ namespace _Project.AI.Enemies.Base_Enemy
 
         #endregion
 
-        #region Public Methods
+        #region Protected Methods
 
-        public virtual void TakeDamage(float damage)
+        /// <summary>
+        /// Deals damage to the enemy.
+        /// </summary>
+        /// <param name="damage"> How much damage the attack is dealing. </param>
+        protected virtual void TakeDamage(float damage)
         {
             if (damage < defense)
                 return;
@@ -63,17 +67,16 @@ namespace _Project.AI.Enemies.Base_Enemy
                 Death();
         }
 
-        #endregion
-
-        #region Private Methods
-
+        /// <summary>
+        /// The enemies death.
+        /// </summary>
         protected virtual void Death()
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
             Instance.PlayerModel.ModifyMoney(goldDrop);
             Destroy(gameObject);
         }
-
+        
         #endregion
     }
 }

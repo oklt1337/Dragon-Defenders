@@ -1,17 +1,12 @@
-using _Project.AI.Enemies.Base_Enemy;
-using _Project.AI.Enemies.Scripts;
-
 namespace _Project.AI.FSM.Scripts
 {
     public abstract class State
     {
         protected readonly FiniteStateMachine FiniteStateMachine;
-        protected readonly Enemy Owner;
 
-        protected State(FiniteStateMachine finiteStateMachine, Enemy owner)
+        protected State(FiniteStateMachine finiteStateMachine)
         {
             FiniteStateMachine = finiteStateMachine;
-            Owner = owner;
         }
 
         public abstract void CheckTransition();

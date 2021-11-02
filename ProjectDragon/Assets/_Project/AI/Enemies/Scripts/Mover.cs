@@ -1,4 +1,3 @@
-using System;
 using _Project.AI.Enemies.Base_Enemy;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace _Project.AI.Enemies.Scripts
             speed = speedUpValue;
         }
 
-        public override void TakeDamage(float damage)
+        protected override void TakeDamage(float damage)
         {
             base.TakeDamage(damage);
             
