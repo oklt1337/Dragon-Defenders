@@ -1,4 +1,7 @@
 using _Project.Deck_Cards.Decks.Scripts;
+using _Project.Network.NetworkManager.Scripts;
+using _Project.Network.PlayFab.Scripts;
+using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +15,9 @@ namespace _Project.Deck_Cards.DeckBuilder.Scripts
         #region Public Properties
 
         public Deck CurrentSelection { get; private set; }
+        
+        // ReSharper disable once PossiblyMistakenUseOfParamsMethod
+        public readonly string DeckRoot = string.Concat($"Assets/Resources/Decks");
 
         #endregion
 
@@ -61,9 +67,26 @@ namespace _Project.Deck_Cards.DeckBuilder.Scripts
         {
             var deck = CurrentSelection;
             CurrentSelection = null;
-            
-            var guid = AssetDatabase.CreateFolder("Assets/Resources/Decks", deck.DeckName);
-            var path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", deck.DeckName);
+
+            string guidPath;
+            var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
+                .PlayerId;
+            if (!AssetDatabase.IsValidFolder(string.Concat(DeckRoot, "/", id)))
+            {
+                guidPath = AssetDatabase.CreateFolder(DeckRoot, id);
+                guidPath = AssetDatabase.GUIDToAssetPath(guidPath);
+            }
+            else
+            {
+                var guid = AssetDatabase.GUIDFromAssetPath(string.Concat(DeckRoot, "/", id));
+                guidPath = AssetDatabase.GUIDToAssetPath(guid);
+            }
+
+            Debug.Log(guidPath);
+            guidPath = AssetDatabase.CreateFolder(guidPath, deck.DeckName);
+            Debug.Log(guidPath);
+            var path = string.Concat(AssetDatabase.GUIDToAssetPath(guidPath), "/", deck.DeckName);
+            Debug.Log(path);
             AssetDatabase.CreateAsset(deck, string.Concat(path, "-Obj", ".asset"));
             AssetDatabase.SaveAssets();
 

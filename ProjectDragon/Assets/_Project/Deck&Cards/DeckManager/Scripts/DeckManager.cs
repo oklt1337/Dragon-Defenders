@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using _Project.Deck_Cards.Decks.Scripts;
+using _Project.Network.NetworkManager.Scripts;
+using Photon.Pun;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
 using UnityEditor;
@@ -11,15 +15,18 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
     {
         public static DeckManager Instance;
 
-        #region Private Fields
+        #region Private Serializable Fields
 
         [SerializeField] private List<Deck> decks = new List<Deck>();
 
         #endregion
 
-        #region Private Region
+        #region Private Fields
 
         private readonly DeckBuilder.Scripts.DeckBuilder deckBuilder = DeckBuilder.Scripts.DeckBuilder.Instance;
+
+        // ReSharper disable once PossiblyMistakenUseOfParamsMethod
+        public readonly string Root = string.Concat($"Assets/Resources/");
 
         #endregion
 
@@ -28,7 +35,7 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         public List<Deck> Decks => decks;
 
         #endregion
-        
+
         #region Unity Methods
 
         private void Awake()
@@ -40,6 +47,38 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
             else
             {
                 Instance = this;
+            }
+
+            LoadDecksFromResources();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void LoadDecksFromResources()
+        {
+            var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
+                .PlayerId;
+            var origin = string.Concat(deckBuilder.DeckRoot, "/", id);
+            
+            //Check if PlayerFolder Exist
+            if (!AssetDatabase.IsValidFolder(origin))
+                return;
+            var paths = AssetDatabase.GetSubFolders(origin).ToList();
+            var index = 0;
+            //Load Every Deck from folder.
+            foreach (var assetPath in paths
+                .Select(path => string.Concat(path, "/", Path.GetFileName(Path.GetDirectoryName(path + "/")), "-Obj"))
+                .Select(assetPath => assetPath.Remove(0, Root.Length)))
+            {
+                var deck = Resources.Load<Deck>(assetPath);
+                deck.DeckId = index;
+                if (deck == null) 
+                    continue;
+                
+                decks.Add(deck);
+                index++;
             }
         }
 
@@ -54,9 +93,9 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         public bool CreateDeck(string deckName)
         {
             var success = deckBuilder.CreateDeck(deckName);
-            if (!success) 
+            if (!success)
                 return false;
-            
+
             var deck = deckBuilder.Save();
             deck.DeckId = decks.Count;
             decks.Add(deck);
@@ -69,7 +108,6 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         /// </summary>
         /// <param name="deckId">DeckId</param>
         /// <returns>bool = true if deckName could be found in deckList.</returns>
-        [Button]
         public bool DeleteDeck(int deckId)
         {
             var index = decks.FindIndex(deck => deck.DeckId == deckId);
@@ -77,11 +115,25 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
             if (index == -1)
                 return false;
 
-            var path = string.Concat("Assets/Resources/Decks/", decks[index].DeckName);
+            var path = string.Concat("Assets/Resources/Decks/", PhotonNetwork.LocalPlayer.UserId, "/",
+                decks[index].DeckName);
             var success = AssetDatabase.DeleteAsset(path);
             if (success)
             {
                 decks.RemoveAt(index);
+                
+                if (decks.Count == 0)
+                {
+                    AssetDatabase.DeleteAsset(
+                        string.Concat("Assets/Resources/Decks/", PhotonNetwork.LocalPlayer.UserId));
+                }
+                else
+                {
+                    for (var i = 0; i < decks.Count; i++)
+                    {
+                        decks[i].DeckId = i;
+                    }
+                }
             }
             else
             {
@@ -101,7 +153,7 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
         {
             if (decks[index] == null)
                 return false;
-            
+
             decks[index].DeckName = newDeckName;
             return true;
         }
@@ -118,9 +170,9 @@ namespace _Project.Deck_Cards.DeckManager.Scripts
                 return false;
 
             var index = decks.FindIndex(d => d == deck);
-            if (index == -1) 
+            if (index == -1)
                 return false;
-            
+
             decks[index].DeckName = newDeckName;
             return true;
         }
