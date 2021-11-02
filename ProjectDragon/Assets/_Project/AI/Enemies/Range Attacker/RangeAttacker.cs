@@ -31,25 +31,25 @@ namespace _Project.AI.Enemies.Range_Attacker
         // Update is called once per frame
         void Update()
         {
-            tempCoolDown -= Time.deltaTime;
-            if (tempCoolDown <= 0 )
-            {
-                
-                
-                tempCoolDown = cooldown;
-                GameObject tempTriShot = PhotonNetwork.Instantiate(
-                    string.Concat(projectilePath,projectileObject.name),
-                    transform.position,
-                    Quaternion.identity
-                );
-                tempTriShot.transform.rotation = Quaternion.LookRotation(target.transform.position - tempTriShot.transform.position);
+          // tempCoolDown -= Time.deltaTime;
+          // if (tempCoolDown <= 0 )
+          // {
+          //     
+          //     
+          //     tempCoolDown = cooldown;
+          //     GameObject tempTriShot = PhotonNetwork.Instantiate(
+          //         string.Concat(projectilePath,projectileObject.name),
+          //         transform.position,
+          //         Quaternion.identity
+          //     );
+          //     tempTriShot.transform.rotation = Quaternion.LookRotation(target.transform.position - tempTriShot.transform.position);
 
-                LinearProjectileEnemy projectile = tempTriShot.GetComponent<LinearProjectileEnemy>();
-                projectile.Speed = speed;
-                projectile.Damage = damage;
-                //calculate how far it will go with that speed;
-                projectile.SetLifeTime(maxDistance);
-            }
+          //     LinearProjectileEnemy projectile = tempTriShot.GetComponent<LinearProjectileEnemy>();
+          //     projectile.Speed = speed;
+          //     projectile.Damage = damage;
+          //     //calculate how far it will go with that speed;
+          //     projectile.SetLifeTime(maxDistance);
+          // }
         }
     }
 }
