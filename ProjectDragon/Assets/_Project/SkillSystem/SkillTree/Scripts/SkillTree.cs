@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Sirenix.OdinInspector.Editor;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 namespace _Project.SkillSystem.SkillTree.Scripts
