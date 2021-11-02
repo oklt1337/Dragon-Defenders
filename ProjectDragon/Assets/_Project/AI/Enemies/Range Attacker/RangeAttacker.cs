@@ -1,7 +1,5 @@
 using _Project.AI.Enemies.Scripts;
 using _Project.GamePlay.GameManager.Scripts;
-using _Project.Projectiles.LinearProjectiles;
-using Photon.Pun;
 using UnityEngine;
 
 namespace _Project.AI.Enemies.Range_Attacker
