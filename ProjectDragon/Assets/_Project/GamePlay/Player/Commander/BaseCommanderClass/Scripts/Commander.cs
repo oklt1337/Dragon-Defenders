@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using _Project.Abilities.Ability.BaseScripts.BaseAbilities;
+using _Project.Abilities.Ability.Scripts;
 using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
 using _Project.Faction;
 using _Project.GamePlay.GameManager.Scripts;
@@ -190,17 +189,6 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             speed = commanderCard.Speed;
             skillTree = commanderCard.SkillTree;
             navMeshAgent.speed = speed;
-
-            foreach (Ability ability in commanderCard.CommanderAbilityDataBase.CommanderAbilitiesScripts.Select(type =>
-                (Ability)gameObject.AddComponent(type)))
-            {
-                abilities.Add(ability);
-            }
-
-            for (int i = 0; i < commanderCard.CommanderAbilityDataBase.commanderAbilitiesDataBases.Count; i++)
-            {
-                abilities[i].Init(commanderCard.CommanderAbilityDataBase.commanderAbilitiesDataBases[i]);
-            }
         }
 
         private void StopMovement(GameState state)
