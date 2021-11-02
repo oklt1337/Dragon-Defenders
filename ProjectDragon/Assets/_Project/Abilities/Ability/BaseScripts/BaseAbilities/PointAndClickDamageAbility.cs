@@ -1,4 +1,5 @@
 using _Project.Abilities.Ability.BaseScripts.BaseAbilityDataBase;
+using _Project.AI.Enemies.Base_Enemy;
 using _Project.AI.Enemies.Scripts;
 using _Project.Projectiles.HominProjectile;
 using Photon.Pun;

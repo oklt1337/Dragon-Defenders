@@ -1,11 +1,10 @@
-using _Project.Enemies.Scripts;
+using _Project.AI.Enemies.Scripts;
 using _Project.GamePlay.GameManager.Scripts;
 using _Project.Projectiles.LinearProjectiles;
 using Photon.Pun;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace _Project.AI.Enemies.Scripts
+namespace _Project.AI.Enemies.Range_Attacker
 {
     //also burn this one and replace with a real AI system;
     public class RangeAttacker : Attacker
@@ -32,14 +31,6 @@ namespace _Project.AI.Enemies.Scripts
         // Update is called once per frame
         void Update()
         {
-            if ((target.transform.position - transform.position).sqrMagnitude >= 900 )
-            {
-                agent.SetDestination(target.transform.position);
-            }
-            else
-            {
-                agent.SetDestination(transform.position);
-            }
             tempCoolDown -= Time.deltaTime;
             if (tempCoolDown <= 0 )
             {

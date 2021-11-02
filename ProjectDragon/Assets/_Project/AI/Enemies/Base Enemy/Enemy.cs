@@ -1,49 +1,44 @@
 using UnityEngine;
-using UnityEngine.AI;
 using static _Project.GamePlay.GameManager.Scripts.GameManager;
 
-namespace _Project.AI.Enemies.Scripts
+namespace _Project.AI.Enemies.Base_Enemy
 {
     public abstract class Enemy : MonoBehaviour
     {
         #region Serialized Fields
 
+        [Header("Internal Stats")]
         [SerializeField] private string enemyName;
         [SerializeField] private string enemyPath;
+        [SerializeField] private int enemyCombatScore;
+        
+        [Header("Gameplay Stats")]
         [SerializeField] private float defense;
         [SerializeField] private float maxSpeed;
         [SerializeField] private float expDrop;
         [SerializeField] private int goldDrop;
         [SerializeField] private int hqDamage;
-        [SerializeField] private int enemyCombatScore;
-
-        [SerializeField] private GameObject enemyModel;
+        
         #endregion
 
         #region Protected Fields
 
-        [SerializeField] protected NavMeshAgent agent;
         [SerializeField] protected float health;
         [SerializeField] protected float maxHealth;
         [SerializeField] protected float speed;
 
         #endregion
 
-        #region Public Fields
+        #region Public Properties
 
-        public string EnemyName
-        {
-            get => enemyName;
-            set => enemyName = value;
-        }
-
+        public string EnemyName => enemyName;
         public string EnemyPath => enemyPath;
         public int EnemyCombatScore => enemyCombatScore;
 
         #endregion
 
         #region Unity Methods
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("HQ"))

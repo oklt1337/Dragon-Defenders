@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Project.AI.Enemies.Base_Enemy;
 using _Project.AI.Enemies.Scripts;
 using _Project.GamePlay.GameManager.Scripts;
 using Photon.Pun;
