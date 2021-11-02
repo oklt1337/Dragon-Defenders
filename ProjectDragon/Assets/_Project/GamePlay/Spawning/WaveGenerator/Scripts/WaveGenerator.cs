@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using _Project.AI.Enemies.Base_Enemy;
 using _Project.AI.Enemies.Scripts;
 using Sirenix.Serialization;
 using UnityEngine;

@@ -11,23 +11,7 @@ namespace _Project.AI.Enemies.Scripts
         
         
         private Transform commander;
-
-        /// <summary>
-        /// Flies to the Base.
-        /// </summary>
-        public void FlyToBase()
-        {
-            agent.SetDestination(GameManager.Instance.Hq.transform.position);
-        }
-
-        /// <summary>
-        /// Flies to the Base.
-        /// </summary>
-        public void FlyToCommander()
-        {
-            agent.SetDestination(commander.position);
-        }
-
+        
         public void Start()
         {
             commander = GameManager.Instance.PlayerModel.Commander.transform;
@@ -38,11 +22,6 @@ namespace _Project.AI.Enemies.Scripts
                         GameManager.Instance.PlayerModel.Commander.transform.position.y,
                         transform.position.z);
 
-        }
-
-        private void Update()
-        {
-            FlyToCommander();
         }
 
         private int counter = 0;

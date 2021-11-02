@@ -1,8 +1,8 @@
-using System;
-using _Project.Enemies.Scripts;
+using _Project.AI.Enemies.Scripts;
+using _Project.AI.FSM.Scripts;
 using UnityEngine;
 
-namespace _Project.AI.Enemies.Scripts
+namespace _Project.AI.Enemies.Runner
 {
     public class Runner : Mover
     {
@@ -12,31 +12,37 @@ namespace _Project.AI.Enemies.Scripts
 
         #endregion
 
-        private void Update()
+
+        public FiniteStateMachine Fsm { get; private set; }
+
+        #region Unity Methods
+        
+        private void Awake()
         {
-            WalkToBase();
+            Fsm = new FiniteStateMachine(this);
+
+            Fsm.Initialize(Fsm.RunAtTargetState);
         }
+
+        private void FixedUpdate()
+        {
+            Fsm.Update();
+        }
+
+        #endregion
+
 
         #region Publid Methods
 
-        /// <summary>
-        /// Walks to the Base.
-        /// </summary>
-        public void WalkToBase()
-        { 
-            agent.SetDestination(currentWayPoint);
-        }
-                
         /// <summary>
         /// Updates the current waypoint.
         /// </summary>
         /// <param name="newWayPoint"> The new point the mover shall go to. </param>
         public void UpdateWayPoint(Vector3 newWayPoint)
-        { 
+        {
             currentWayPoint = newWayPoint;
         }
 
         #endregion
-        
     }
 }
