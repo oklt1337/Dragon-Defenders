@@ -18,12 +18,6 @@ namespace _Project.Utility.SceneManager.Scripts
     
     public class SceneManager : MonoBehaviour
     {
-        #region SerialzeFields
-
-        [SerializeField] private float loadingAuthorizeSceneDelay = 3f;
-
-        #endregion
-
         #region Public Properties
 
         public static Scene CurrentScene => GetCurrentScene();

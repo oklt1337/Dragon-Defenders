@@ -1,4 +1,5 @@
 using _Project.Abilities.AbilityDataBase;
+using _Project.Abilities.AbilityDataBase.Scripts;
 using _Project.Faction;
 using _Project.SkillSystem.SkillTree;
 using _Project.SkillSystem.SkillTree.Scripts;

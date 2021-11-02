@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Abilities.AbilityDataBase
+namespace _Project.Abilities.AbilityDataBase.Scripts
 {
     public class AbilityDataBase : ScriptableObject
     {
