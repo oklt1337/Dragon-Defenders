@@ -1,5 +1,7 @@
+using _Project.Abilities.AbilityDataBase;
 using _Project.Faction;
 using _Project.SkillSystem.SkillTree;
+using _Project.SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -28,6 +30,7 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         [SerializeField] internal ClassAndFaction.Faction faction;
         [SerializeField] internal ClassAndFaction.Class @class;
         [SerializeField] internal SkillTree skillTree;
+        [SerializeField] internal AbilityDataBase abilityDataBase;
 
         [Header("Visuals")]
         [SerializeField] internal VideoClip demo;
@@ -57,6 +60,12 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         {
             get => skillTree;
             set => skillTree = value;
+        }
+
+        public AbilityDataBase AbilityDataBase
+        {
+            get => abilityDataBase;
+            set => abilityDataBase = value;
         }
 
         public VideoClip Demo => demo;
