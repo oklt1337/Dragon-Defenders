@@ -1,3 +1,5 @@
+using AI.FSM.Scripts;
+
 namespace _Project.AI.FSM.Scripts
 {
     public abstract class State

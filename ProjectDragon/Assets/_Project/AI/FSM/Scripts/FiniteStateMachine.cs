@@ -1,4 +1,6 @@
-namespace _Project.AI.FSM.Scripts
+using _Project.AI.FSM.Scripts;
+
+namespace AI.FSM.Scripts
 {
     public abstract class FiniteStateMachine
     {
