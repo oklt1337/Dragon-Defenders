@@ -12,7 +12,7 @@ namespace AI.Enemies.Scripts
             speed = speedUpValue;
         }
 
-        protected override void TakeDamage(float damage)
+        public override void TakeDamage(float damage)
         {
             base.TakeDamage(damage);
             

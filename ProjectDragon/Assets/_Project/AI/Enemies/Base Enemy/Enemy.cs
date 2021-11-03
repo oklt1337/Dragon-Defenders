@@ -11,14 +11,13 @@ namespace AI.Enemies.Base_Enemy
         [SerializeField] private string enemyName;
         [SerializeField] private string enemyPath;
         [SerializeField] private int enemyCombatScore;
-        
-        [Header("Gameplay Stats")]
+
+        [Header("Gameplay Stats")] 
         [SerializeField] private float defense;
-        [SerializeField] private float maxSpeed;
         [SerializeField] private float expDrop;
         [SerializeField] private int goldDrop;
         [SerializeField] private int hqDamage;
-        
+
         #endregion
 
         #region Protected Serialized Fields
@@ -26,6 +25,7 @@ namespace AI.Enemies.Base_Enemy
         [SerializeField] protected float health;
         [SerializeField] protected float maxHealth;
         [SerializeField] protected float speed;
+        [SerializeField] protected float maxSpeed;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace AI.Enemies.Base_Enemy
         #endregion
 
         #region Unity Methods
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("HQ"))
@@ -53,10 +53,25 @@ namespace AI.Enemies.Base_Enemy
         #region Protected Methods
 
         /// <summary>
+        /// The enemies death.
+        /// </summary>
+        protected virtual void Death()
+        {
+            Instance.EnemySpawner.IncreaseKilledEnemies();
+            Instance.PlayerModel.ModifyMoney(goldDrop);
+            // TODO: Give Commander EXP
+            Destroy(gameObject);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
         /// Deals damage to the enemy.
         /// </summary>
         /// <param name="damage"> How much damage the attack is dealing. </param>
-        protected virtual void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
             if (damage < defense)
                 return;
@@ -67,16 +82,6 @@ namespace AI.Enemies.Base_Enemy
                 Death();
         }
 
-        /// <summary>
-        /// The enemies death.
-        /// </summary>
-        protected virtual void Death()
-        {
-            Instance.EnemySpawner.IncreaseKilledEnemies();
-            Instance.PlayerModel.ModifyMoney(goldDrop);
-            Destroy(gameObject);
-        }
-        
         #endregion
     }
 }
