@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using _Project.AI.Enemies.Base_Enemy;
-using _Project.AI.Enemies.Scripts;
-using _Project.GamePlay.GameManager.Scripts;
+using AI.Enemies.Base_Enemy;
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.Spawning.WaveManager.Scripts
@@ -16,12 +15,12 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
 
         private void Awake()
         {
-            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
+            GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
         }
 
         private void OnDestroy()
         {
-            GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
+            GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
         }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
         /// </summary>
         private void SetNewWave()
         {
-            currentWave = GameManager.Scripts.GameManager.Instance.WaveGenerator.GetNextWave(currentWave);
+            currentWave = GameManager.Instance.WaveGenerator.GetNextWave(currentWave);
         }
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.GamePlay.CameraMovement.CameraFollow.Scripts
+namespace GamePlay.CameraMovement.CameraFollow.Scripts
 {
     /// <summary>
     /// Author: Christopher Zelch

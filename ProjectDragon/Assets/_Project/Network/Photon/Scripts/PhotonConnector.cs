@@ -2,17 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Project.Network.PlayFab.Scripts;
-using _Project.Utility.SceneManager.Scripts;
 using Photon.Pun;
 using Photon.Realtime;
 using PlayFab.ClientModels;
-using Unity.VisualScripting;
 using UnityEngine;
+using Utility.SceneManager.Scripts;
 using FriendInfo = Photon.Realtime.FriendInfo;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Random = UnityEngine.Random;
 
-namespace _Project.Network.Photon.Scripts
+namespace Network.Photon.Scripts
 {
     public class PhotonConnector : MonoBehaviourPunCallbacks
     {

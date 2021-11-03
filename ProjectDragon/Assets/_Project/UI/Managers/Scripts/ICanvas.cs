@@ -1,4 +1,4 @@
-namespace _Project.UI.Managers.Scripts
+namespace UI.Managers.Scripts
 {
     public interface ICanvas
     {

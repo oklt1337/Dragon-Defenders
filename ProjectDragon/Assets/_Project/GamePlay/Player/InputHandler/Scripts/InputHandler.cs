@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.InputHandler.Scripts
+namespace GamePlay.Player.InputHandler.Scripts
 {
     public class InputHandler : MonoBehaviour
     {

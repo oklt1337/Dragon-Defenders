@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _Project.AI.Enemies.Base_Enemy;
-using _Project.AI.Enemies.Scripts;
-using _Project.GamePlay.GameManager.Scripts;
+using AI.Enemies.Base_Enemy;
+using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using UnityEngine;
 
@@ -33,8 +32,8 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
 
         private void Awake()
         {
-            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StartSpawning;
-            GameManager.Scripts.GameManager.Instance.WaveManager.OnUpdateWave += UpdateNextEnemies;
+            GameManager.Instance.OnGameStateChanged += StartSpawning;
+            GameManager.Instance.WaveManager.OnUpdateWave += UpdateNextEnemies;
         }
 
         private void Update()
@@ -52,7 +51,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
 
         private void OnDestroy()
         {
-            GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= StartSpawning;
+            GameManager.Instance.OnGameStateChanged -= StartSpawning;
         }
 
         #endregion

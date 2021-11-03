@@ -1,7 +1,7 @@
-using _Project.UI.Managers.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 
-namespace _Project.UI.MainMenu.Friend_List_Screen.Scripts
+namespace UI.MainMenu.Friend_List_Screen.Scripts
 {
     public class FriendListScreen : MonoBehaviour, ICanvas
     {

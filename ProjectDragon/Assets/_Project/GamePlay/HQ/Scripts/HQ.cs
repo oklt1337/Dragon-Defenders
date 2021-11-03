@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.GamePlay.HQ.Scripts
+namespace GamePlay.HQ.Scripts
 {
     public class HQ : MonoBehaviour
     {

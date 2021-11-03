@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using Abilities.Ability.Scripts;
 using UnityEngine;
 
-namespace _Project.Abilities.AbilityDataBase.Scripts
+namespace Abilities.AbilityDataBase.Scripts
 {
     public class AbilityDataBase : ScriptableObject
     {
-        [SerializeField] private List<Ability.Scripts.Ability> abilities = new List<Ability.Scripts.Ability>();
+        [SerializeField] private List<AbilityObj> abilities = new List<AbilityObj>();
 
-        public List<Ability.Scripts.Ability> Abilities => abilities;
+        public List<AbilityObj> Abilities => abilities;
     }
 }

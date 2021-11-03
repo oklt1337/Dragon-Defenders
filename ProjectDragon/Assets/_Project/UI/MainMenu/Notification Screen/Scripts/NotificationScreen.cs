@@ -1,7 +1,7 @@
-using _Project.UI.Managers.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 
-namespace _Project.UI.MainMenu.Notification_Screen.Scripts
+namespace UI.MainMenu.Notification_Screen.Scripts
 {
     public class NotificationScreen : MonoBehaviour, ICanvas
     {

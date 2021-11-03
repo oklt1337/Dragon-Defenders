@@ -1,12 +1,10 @@
-using _Project.Abilities.AbilityDataBase;
-using _Project.Abilities.AbilityDataBase.Scripts;
-using _Project.Faction;
-using _Project.SkillSystem.SkillTree;
-using _Project.SkillSystem.SkillTree.Scripts;
+using Abilities.AbilityDataBase.Scripts;
+using Faction;
+using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
+namespace Deck_Cards.Cards.BaseCards.Scripts
 {
     public enum Rarity
     {
@@ -30,7 +28,7 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         [SerializeField] internal Rarity rarity;
         [SerializeField] internal ClassAndFaction.Faction faction;
         [SerializeField] internal ClassAndFaction.Class @class;
-        [SerializeField] internal SkillTree skillTree;
+        [SerializeField] internal SkillTreeObj skillTreeObj;
         [SerializeField] internal AbilityDataBase abilityDataBase;
 
         [Header("Visuals")]
@@ -42,7 +40,7 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
         public string CardName
         {
             get => cardName;
-            set => cardName = value;
+            internal set => cardName = value;
         }
 
         public string Description => description;
@@ -57,16 +55,16 @@ namespace _Project.Deck_Cards.Cards.BaseCards.Scripts
 
         public ClassAndFaction.Class Class => @class;
 
-        public SkillTree SkillTree
+        public SkillTreeObj SkillTreeObj
         {
-            get => skillTree;
-            set => skillTree = value;
+            get => skillTreeObj;
+            internal set => skillTreeObj = value;
         }
 
         public AbilityDataBase AbilityDataBase
         {
             get => abilityDataBase;
-            set => abilityDataBase = value;
+            internal set => abilityDataBase = value;
         }
 
         public VideoClip Demo => demo;

@@ -1,13 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.SkillSystem.SkillTree.Scripts
+namespace SkillSystem.SkillTree.Scripts
 {
-    public class SkillTree : ScriptableObject
+    public class SkillTreeObj : ScriptableObject
+    {
+        public readonly Dictionary<int, NodeObj> NodeObjs = new Dictionary<int, NodeObj>();
+        
+        public SkillTree CreateInstance()
+        {
+            return new SkillTree(this);
+        }
+    }
+
+    public class SkillTree
     {
         public readonly Dictionary<int, Node> Nodes = new Dictionary<int, Node>();
-
         private int currentRow;
+
+        public SkillTree(SkillTreeObj skillTreeObj)
+        {
+            foreach (var node in skillTreeObj.NodeObjs)
+            {
+                Nodes.Add(node.Key ,node.Value.CreateInstance());
+            }
+        }
 
         public void SetNodeActive(int nodeIndex)
         {

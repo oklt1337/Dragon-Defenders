@@ -1,13 +1,11 @@
 using System;
-using _Project.Network.PlayFab.Scripts;
-using _Project.UI.MainMenu.Manager.Scripts;
-using _Project.UI.Managers.Scripts;
-using _Project.Utility.SceneManager.Scripts;
 using Photon.Pun;
+using UI.MainMenu.Manager.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.MainMenu.Settings_Screen.Scripts
+namespace UI.MainMenu.Settings_Screen.Scripts
 {
     public class MainMenuSettingsScreen : MonoBehaviourPun, ICanvas
     {

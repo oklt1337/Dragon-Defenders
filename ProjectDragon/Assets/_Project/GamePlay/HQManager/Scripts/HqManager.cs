@@ -1,8 +1,6 @@
-using System;
-using _Project.GamePlay.HQ.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.HQManager.Scripts
+namespace GamePlay.HQManager.Scripts
 {
     public class HqManager : MonoBehaviour
     {

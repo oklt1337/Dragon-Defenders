@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
-using Sirenix.OdinInspector;
-using UnityEngine;
-
-public class AAADeleteMeTemplate : MonoBehaviour
+public class AAADeleteMeTemplate
 {
     #region Singleton
 
@@ -74,5 +68,4 @@ public class AAADeleteMeTemplate : MonoBehaviour
 
 
     #endregion
-    
 }

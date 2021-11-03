@@ -1,18 +1,18 @@
 using System;
-using _Project.GamePlay.CameraMovement.TrackingShot;
-using _Project.GamePlay.CommanderWaypoint.Scripts;
-using _Project.GamePlay.HQManager.Scripts;
-using _Project.GamePlay.Player.PlayerModel.Scripts;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
 using _Project.GamePlay.Spawning.WaveManager.Scripts;
-using _Project.UI.In_Game.Base_UI.Scripts;
-using _Project.UI.In_Game.Building.Scripts;
 using _Project.UI.In_Game.Commander.Scripts;
-using _Project.Units.UnitManager;
+using GamePlay.CameraMovement.TrackingShot;
+using GamePlay.CommanderWaypoint.Scripts;
+using GamePlay.HQManager.Scripts;
+using GamePlay.Player.PlayerModel.Scripts;
+using UI.In_Game.Base_UI.Scripts;
+using UI.In_Game.Building.Scripts;
+using Units.Unitmanager;
 using UnityEngine;
 
-namespace _Project.GamePlay.GameManager.Scripts
+namespace GamePlay.GameManager.Scripts
 {
     public enum GameState
     {

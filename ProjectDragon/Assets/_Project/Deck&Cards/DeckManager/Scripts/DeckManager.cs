@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using _Project.Deck_Cards.Decks.Scripts;
-using _Project.Network.NetworkManager.Scripts;
+using Deck_Cards.Decks.Scripts;
+using Network.NetworkManager.Scripts;
 using Photon.Pun;
-using PlayFab.ClientModels;
-using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.Deck_Cards.DeckManager.Scripts
+namespace Deck_Cards.DeckManager.Scripts
 {
     public class DeckManager : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Project.Utility.DeveloperConsole.Scripts.Commands;
+using Utility.DeveloperConsole.Scripts.Commands;
 
-namespace _Project.Utility.DeveloperConsole.Scripts
+namespace Utility.DeveloperConsole.Scripts
 {
     public class DeveloperConsole
     {

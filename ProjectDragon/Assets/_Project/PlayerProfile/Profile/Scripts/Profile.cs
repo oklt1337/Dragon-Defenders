@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using PlayFab.ClientModels;
 
-namespace _Project.PlayerProfile.Profile.Scripts
+namespace PlayerProfile.Profile.Scripts
 {
     public class Profile
     {

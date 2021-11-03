@@ -1,11 +1,11 @@
-using _Project.Abilities.Ability.Scripts;
-using _Project.Deck_Cards.Cards.UnitCard.Scripts;
-using _Project.Faction;
-using _Project.SkillSystem.SkillTree;
-using _Project.SkillSystem.SkillTree.Scripts;
+using Abilities.Ability.Scripts;
+using Deck_Cards.Cards.BaseCards.Scripts;
+using Deck_Cards.Cards.UnitCard.Scripts;
+using Faction;
+using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 
-namespace _Project.Units.Unit.BaseUnits
+namespace Units.Unit.BaseUnits
 {
     public class Unit : MonoBehaviour
     {
@@ -23,11 +23,7 @@ namespace _Project.Units.Unit.BaseUnits
 
         #region Private Fields
 
-        private string unitName;
-        private string description;
-        private int goldCost;
-        private int limit;
-        private GameObject unitModel;
+        private UnitCard card;
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
         private SkillTree skillTree;
@@ -51,35 +47,7 @@ namespace _Project.Units.Unit.BaseUnits
             set => animator = value;
         }
 
-        public string UnitName
-        {
-            get => unitName;
-            set => unitName = value;
-        }
-
-        public string Description
-        {
-            get => description;
-            set => description = value;
-        }
-
-        public int GoldCost
-        {
-            get => goldCost;
-            set => goldCost = value;
-        }
-
-        public int Limit
-        {
-            get => limit;
-            set => limit = value;
-        }
-
-        public GameObject UnitModel
-        {
-            get => unitModel;
-            set => unitModel = value;
-        }
+        public UnitCard Card => card;
 
         public ClassAndFaction.Faction Faction
         {
@@ -142,19 +110,16 @@ namespace _Project.Units.Unit.BaseUnits
         protected virtual void Initialize(UnitCard unitCard)
         {
             //Base Implement
-            unitName = unitCard.CardName;
-            description = unitCard.Description;
-            unitModel = unitCard.Model;
+            card = unitCard;
             faction = unitCard.Faction;
             unitClass = unitCard.Class;
-            skillTree = unitCard.SkillTree;
-            goldCost = unitCard.GoldCost;
-            limit = unitCard.Limit;
+            skillTree = unitCard.SkillTreeObj.CreateInstance();
+            ability = unitCard.abilityDataBase.Abilities[0].CreateInstance();
         }
 
         public void Cast()
         {
-            ability.Cast();
+            ability.AbilityObj.Cast(null, null);
         }
 
         #endregion

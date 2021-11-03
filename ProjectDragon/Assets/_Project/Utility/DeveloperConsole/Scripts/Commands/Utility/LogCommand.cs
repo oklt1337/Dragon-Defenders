@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Utility.DeveloperConsole.Scripts.Commands.Utility
+namespace Utility.DeveloperConsole.Scripts.Commands.Utility
 {
     [CreateAssetMenu(fileName = "New Log Command", menuName = "Utilities/DeveloperConsole/Commands/Log Command")]
     public class LogCommand : ConsoleCommand

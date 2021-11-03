@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using _Project.GamePlay.GameManager.Scripts;
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.CameraMovement.PinchAndZoom.Scripts
+namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
 {
     /// <summary>
     /// Author: Christopher Zelch

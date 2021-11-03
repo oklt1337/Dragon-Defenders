@@ -1,4 +1,4 @@
-namespace _Project.AI.Enemies.Scripts
+namespace AI.Enemies.Scripts
 {
     public class MeleeAttacker : Attacker
     {

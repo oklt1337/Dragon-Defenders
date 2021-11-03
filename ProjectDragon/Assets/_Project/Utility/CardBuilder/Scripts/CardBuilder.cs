@@ -1,16 +1,16 @@
 using System;
 using System.Linq;
-using _Project.Abilities.AbilityDataBase.Scripts;
-using _Project.Deck_Cards.Cards.BaseCards.Scripts;
-using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
-using _Project.Deck_Cards.Cards.UnitCard.Scripts;
-using _Project.Faction;
-using _Project.SkillSystem.SkillTree.Scripts;
+using Abilities.AbilityDataBase.Scripts;
+using Deck_Cards.Cards.BaseCards.Scripts;
+using Deck_Cards.Cards.CommanderCard.Scripts;
+using Deck_Cards.Cards.UnitCard.Scripts;
+using Faction;
+using SkillSystem.SkillTree.Scripts;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace _Project.Utility.CardBuilder.Scripts
+namespace Utility.CardBuilder.Scripts
 {
     public class CardBuilder : EditorWindow
     {
@@ -30,7 +30,7 @@ namespace _Project.Utility.CardBuilder.Scripts
         private Rarity rarity;
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class @class;
-        private SkillTree skillTree;
+        private SkillTreeObj skillTreeObj;
         private AbilityDataBase abilityDataBase;
         private VideoClip demo;
         private Sprite icon;
@@ -168,7 +168,7 @@ namespace _Project.Utility.CardBuilder.Scripts
                 .ToArray();
             @class = (ClassAndFaction.Class) EditorGUILayout.Popup("Class", (int) @class, classes);
             //CardSkillTree
-            skillTree = (SkillTree) EditorGUILayout.ObjectField("SkillTree", skillTree, typeof(SkillTree), false);
+            skillTreeObj = (SkillTreeObj) EditorGUILayout.ObjectField("SkillTree", skillTreeObj, typeof(SkillTreeObj), false);
             //CardAbilities
             abilityDataBase = (AbilityDataBase) EditorGUILayout.ObjectField("Abilities",
                 abilityDataBase, typeof(AbilityDataBase), false);
@@ -308,7 +308,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             rarity = baseCard.Rarity;
             faction = baseCard.Faction;
             @class = baseCard.Class;
-            skillTree = baseCard.SkillTree;
+            skillTreeObj = baseCard.SkillTreeObj;
             abilityDataBase = baseCard.AbilityDataBase;
             demo = baseCard.Demo;
             icon = baseCard.Icon;
@@ -324,7 +324,7 @@ namespace _Project.Utility.CardBuilder.Scripts
             rarity = 0;
             faction = 0;
             @class = 0;
-            skillTree = null;
+            skillTreeObj = null;
             abilityDataBase = null;
             demo = null;
             icon = null;
@@ -355,13 +355,13 @@ namespace _Project.Utility.CardBuilder.Scripts
 
                     //Create Instance
                     var commanderCard = CreateInstance<CommanderCard>();
-                    commanderCard.SkillTree = CreateInstance<SkillTree>();
+                    commanderCard.SkillTreeObj = CreateInstance<SkillTreeObj>();
                     commanderCard.AbilityDataBase = CreateInstance<AbilityDataBase>();
                     commanderCard.CardName = newCardName;
 
                     //Create Assets
                     AssetDatabase.CreateAsset(commanderCard, string.Concat(path, "-Card", ".asset"));
-                    AssetDatabase.CreateAsset(commanderCard.SkillTree,
+                    AssetDatabase.CreateAsset(commanderCard.SkillTreeObj,
                         string.Concat(path, "-CommanderSkillTree", ".asset"));
                     AssetDatabase.CreateAsset(commanderCard.AbilityDataBase,
                         string.Concat(path, "-CommanderAbilityDataBase", ".asset"));
@@ -384,13 +384,13 @@ namespace _Project.Utility.CardBuilder.Scripts
                     path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
                     
                     var unitCard = CreateInstance<UnitCard>();
-                    unitCard.SkillTree = CreateInstance<SkillTree>();
+                    unitCard.SkillTreeObj = CreateInstance<SkillTreeObj>();
                     unitCard.AbilityDataBase = CreateInstance<AbilityDataBase>();
                     unitCard.CardName = newCardName;
 
                     //Create Assets
                     AssetDatabase.CreateAsset(unitCard, string.Concat(path, "-Card", ".asset"));
-                    AssetDatabase.CreateAsset(unitCard.SkillTree,
+                    AssetDatabase.CreateAsset(unitCard.SkillTreeObj,
                         string.Concat(path, "-SkillTree", ".asset"));
                     AssetDatabase.CreateAsset(unitCard.AbilityDataBase,
                         string.Concat(path, "-AbilityDataBase", ".asset"));
@@ -422,7 +422,7 @@ namespace _Project.Utility.CardBuilder.Scripts
 
                     //save
                     commanderCards[selectedCommander].Save(cardID, cardName, description, cost, model, rarity, faction,
-                        @class, skillTree, abilityDataBase,demo, icon, health, mana, commanderAttackDamageModifier, defense, speed);
+                        @class, skillTreeObj, abilityDataBase,demo, icon, health, mana, commanderAttackDamageModifier, defense, speed);
                     break;
                 case 1:
                     var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
@@ -430,7 +430,7 @@ namespace _Project.Utility.CardBuilder.Scripts
                         return;
                     
                     unitCards[selectedUnit].Save(cardID, cardName, description, cost, model, rarity, faction,
-                        @class, skillTree, abilityDataBase, demo, icon, goldCost, limit);
+                        @class, skillTreeObj, abilityDataBase, demo, icon, goldCost, limit);
                     break;
             }
             

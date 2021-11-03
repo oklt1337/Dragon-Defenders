@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.GamePlay.CommanderWaypoint.Scripts
+namespace GamePlay.CommanderWaypoint.Scripts
 {
     public class MoveIndicator : MonoBehaviour
     {

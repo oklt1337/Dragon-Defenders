@@ -1,7 +1,7 @@
-using _Project.UI.Managers.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 
-namespace _Project.UI.MainMenu.Shop_Screen.Scripts
+namespace UI.MainMenu.Shop_Screen.Scripts
 {
     public class ShopScreen : MonoBehaviour, ICanvas
     {

@@ -6,7 +6,7 @@ using Photon.Pun;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-namespace _Project.Network.Photon.Scripts
+namespace Network.Photon.Scripts
 {
     public class PhotonChatConnector : MonoBehaviour, IChatClientListener
     {

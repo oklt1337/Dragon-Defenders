@@ -1,6 +1,6 @@
 using System;
-using _Project.GamePlay.GameManager.Scripts;
-using _Project.UI.Managers.Scripts;
+using GamePlay.GameManager.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 

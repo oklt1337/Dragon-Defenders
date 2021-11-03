@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-namespace _Project.Units.UnitManager
+namespace Units.Unitmanager
 {
     /// <summary>
     /// Author: Peter Luu

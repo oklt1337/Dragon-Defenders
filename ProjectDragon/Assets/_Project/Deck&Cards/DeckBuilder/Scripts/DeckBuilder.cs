@@ -1,11 +1,9 @@
-using _Project.Deck_Cards.Decks.Scripts;
-using _Project.Network.NetworkManager.Scripts;
-using _Project.Network.PlayFab.Scripts;
-using Photon.Pun;
+using Deck_Cards.Decks.Scripts;
+using Network.NetworkManager.Scripts;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.Deck_Cards.DeckBuilder.Scripts
+namespace Deck_Cards.DeckBuilder.Scripts
 {
     public class DeckBuilder
     {

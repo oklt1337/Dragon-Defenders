@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using _Project.Abilities.Ability.Scripts;
-using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
-using _Project.Faction;
-using _Project.GamePlay.GameManager.Scripts;
-using _Project.SkillSystem.SkillTree;
-using _Project.SkillSystem.SkillTree.Scripts;
+using Abilities.Ability.Scripts;
+using Deck_Cards.Cards.CommanderCard.Scripts;
+using Faction;
+using GamePlay.GameManager.Scripts;
+using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
+namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
     public class Commander : MonoBehaviour
     {
@@ -188,8 +187,13 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
             attackDamageModifier = commanderCard.AttackDamageModifier;
             defense = commanderCard.Defense;
             speed = commanderCard.Speed;
-            skillTree = commanderCard.SkillTree;
+            skillTree = commanderCard.SkillTreeObj.CreateInstance();
             navMeshAgent.speed = speed;
+
+            foreach (var ability in commanderCard.abilityDataBase.Abilities)
+            {
+                abilities.Add(ability.CreateInstance());
+            }
         }
 
         private void StopMovement(GameState state)
@@ -232,7 +236,7 @@ namespace _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts
         public void Attack(Component target)
         {
             Debug.Log(target.name);
-            abilities[0].Cast(transform, target.transform);
+            abilities[0].AbilityObj.Cast(transform, target.transform);
         }
 
         public void TakeDamage(float damage)

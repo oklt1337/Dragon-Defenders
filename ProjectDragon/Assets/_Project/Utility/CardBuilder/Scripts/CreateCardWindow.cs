@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace _Project.Utility.CardBuilder.Scripts
+namespace Utility.CardBuilder.Scripts
 {
     public class CreateCardWindow : EditorWindow
     {

@@ -1,7 +1,7 @@
-using _Project.UI.Managers.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 
-namespace _Project.UI.MainMenu.Profile_Screen.Scripts
+namespace UI.MainMenu.Profile_Screen.Scripts
 {
     public class ProfileScreen : MonoBehaviour, ICanvas
     {

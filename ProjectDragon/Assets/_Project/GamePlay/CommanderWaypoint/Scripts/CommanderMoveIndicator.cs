@@ -1,8 +1,7 @@
-using System;
-using _Project.GamePlay.GameManager.Scripts;
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.CommanderWaypoint.Scripts
+namespace GamePlay.CommanderWaypoint.Scripts
 {
     public class CommanderMoveIndicator : MonoBehaviour
     {

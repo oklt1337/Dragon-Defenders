@@ -1,8 +1,8 @@
-using _Project.AI.Enemies.Scripts;
-using _Project.GamePlay.GameManager.Scripts;
+using AI.Enemies.Scripts;
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 
-namespace _Project.AI.Enemies.Range_Attacker
+namespace AI.Enemies.Range_Attacker
 {
     //also burn this one and replace with a real AI system;
     public class RangeAttacker : Attacker

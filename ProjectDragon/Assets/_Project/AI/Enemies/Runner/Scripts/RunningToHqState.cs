@@ -1,12 +1,12 @@
 using _Project.AI.FSM.Scripts;
 
-namespace _Project.AI.Enemies.Runner.Scripts
+namespace AI.Enemies.Runner.Scripts
 {
     public class RunningToHqState : State
     {
-        private Runner owner;
+        private global::AI.Enemies.Runner.Scripts.Runner owner;
         
-        public RunningToHqState(FiniteStateMachine finiteStateMachine, Runner newOwner) : base(finiteStateMachine)
+        public RunningToHqState(FiniteStateMachine finiteStateMachine, global::AI.Enemies.Runner.Scripts.Runner newOwner) : base(finiteStateMachine)
         {
             owner = newOwner;
         }

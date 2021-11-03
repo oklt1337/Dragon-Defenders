@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using _Project.Network.Photon.Scripts;
+using Network.Photon.Scripts;
 using TMPro;
 using UnityEngine;
 
-namespace _Project.UI.Managers.Scripts
+namespace UI.Managers.Scripts
 {
     public class MasterCanvas : MonoBehaviour
     {

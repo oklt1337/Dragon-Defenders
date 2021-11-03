@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using _Project.SkillSystem.SkillTree.Scripts;
-using _Project.UI.Managers.Scripts;
+using SkillSystem.SkillTree.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.In_Game.Building.Scripts
+namespace UI.In_Game.Building.Scripts
 {
     public class UpgradePanel : MonoBehaviour, ICanvas
     {
@@ -37,10 +37,10 @@ namespace _Project.UI.In_Game.Building.Scripts
         /// <summary>
         /// Upgrades the skill tree.
         /// </summary>
-        /// <param name="skillTree"></param>
-        public void UpdateSkillTree(SkillTree skillTree)
+        /// <param name="newSkillTree">SkillTree</param>
+        public void UpdateSkillTree(SkillTree newSkillTree)
         {
-            this.skillTree = skillTree;
+            this.skillTree = newSkillTree;
             
             UpdateImages();
         }
@@ -78,14 +78,14 @@ namespace _Project.UI.In_Game.Building.Scripts
                 var key = (i + 1);
 
                 // Fail check.
-                if (skillTree.Nodes[key].Icon == null)
+                if (skillTree.Nodes[key].NodeObj.Icon == null)
                 {
                     skillImages[i].sprite = missingSprite;
                     continue;
                 }
 
                 // Update the sprite.
-                skillImages[i].sprite = skillTree.Nodes[key].Icon;
+                skillImages[i].sprite = skillTree.Nodes[key].NodeObj.Icon;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
                 if (skillTree.Nodes[key].NodeState == NodeState.Learnable || skillTree.Nodes[key].NodeState == NodeState.Activated)

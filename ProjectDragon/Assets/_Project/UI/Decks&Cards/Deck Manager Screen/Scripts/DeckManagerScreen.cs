@@ -1,12 +1,11 @@
-using System;
 using _Project.UI.Lobby.Manager.Scripts;
-using _Project.UI.MainMenu.Manager.Scripts;
-using _Project.UI.Managers.Scripts;
-using _Project.Utility.SceneManager.Scripts;
+using UI.MainMenu.Manager.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility.SceneManager.Scripts;
 
-namespace _Project.UI.Deck_Manager_Screen.Scripts
+namespace UI.Decks_Cards.Deck_Manager_Screen.Scripts
 {
     public class DeckManagerScreen : MonoBehaviour, ICanvas
     {

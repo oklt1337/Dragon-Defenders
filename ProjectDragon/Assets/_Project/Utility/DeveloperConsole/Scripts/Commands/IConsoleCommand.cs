@@ -1,4 +1,4 @@
-namespace _Project.Utility.DeveloperConsole.Scripts.Commands
+namespace Utility.DeveloperConsole.Scripts.Commands
 {
     public interface IConsoleCommand
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Utility.DeveloperConsole.Scripts.Commands
+namespace Utility.DeveloperConsole.Scripts.Commands
 {
     public abstract class ConsoleCommand : ScriptableObject, IConsoleCommand
     {

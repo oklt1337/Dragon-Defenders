@@ -1,7 +1,7 @@
-using _Project.AI.Enemies.Base_Enemy;
+using AI.Enemies.Base_Enemy;
 using UnityEngine;
 
-namespace _Project.AI.Enemies.Scripts
+namespace AI.Enemies.Scripts
 {
     public abstract class Mover : Enemy
     {

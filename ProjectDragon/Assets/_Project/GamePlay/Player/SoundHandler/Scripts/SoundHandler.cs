@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.SoundHandler.Scripts
+namespace GamePlay.Player.SoundHandler.Scripts
 {
     public class SoundHandler : MonoBehaviour
     {

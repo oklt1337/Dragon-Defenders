@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Utility.DeveloperConsole.Scripts.Commands.PlayerCommands
+namespace Utility.DeveloperConsole.Scripts.Commands.PlayerCommands
 {
     [CreateAssetMenu(fileName = "New Set Player Speed Command",
         menuName = "Utilities/DeveloperConsole/Commands/Player/Set Player Speed Command")]

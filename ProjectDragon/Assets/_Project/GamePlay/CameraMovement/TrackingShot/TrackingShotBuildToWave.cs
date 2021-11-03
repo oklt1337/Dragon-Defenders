@@ -1,10 +1,10 @@
 using System;
-using _Project.GamePlay.GameManager.Scripts;
-using _Project.GamePlay.Player.PlayerModel.Scripts;
 using Cinemachine;
+using GamePlay.GameManager.Scripts;
+using GamePlay.Player.PlayerModel.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.CameraMovement.TrackingShot
+namespace GamePlay.CameraMovement.TrackingShot
 {
     public class TrackingShotBuildToWave : MonoBehaviour
     {

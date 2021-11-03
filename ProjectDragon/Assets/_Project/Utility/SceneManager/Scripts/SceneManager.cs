@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using _Project.Network.NetworkManager.Scripts;
-using _Project.Network.PlayFab.Scripts;
 using Photon.Pun;
 using UnityEngine;
 
-namespace _Project.Utility.SceneManager.Scripts
+namespace Utility.SceneManager.Scripts
 {
     public enum Scene
     {

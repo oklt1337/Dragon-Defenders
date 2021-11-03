@@ -1,12 +1,11 @@
 using System;
-using _Project.GamePlay.GameManager.Scripts;
-using _Project.SkillSystem.SkillTree;
-using _Project.SkillSystem.SkillTree.Scripts;
-using _Project.UI.Managers.Scripts;
+using GamePlay.GameManager.Scripts;
+using SkillSystem.SkillTree.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.In_Game.Building.Scripts
+namespace UI.In_Game.Building.Scripts
 {
     public class BuildHUD : MonoBehaviour, ICanvas
     {

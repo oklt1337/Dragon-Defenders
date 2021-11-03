@@ -1,9 +1,9 @@
-using _Project.UI.Managers.Scripts;
 using TMPro;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.In_Game.Base_UI.Scripts
+namespace UI.In_Game.Base_UI.Scripts
 {
     public class HUD : MonoBehaviour, ICanvas
     {

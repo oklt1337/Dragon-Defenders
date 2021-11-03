@@ -1,14 +1,12 @@
 using System;
-using System.Net.NetworkInformation;
-using _Project.Network.NetworkManager.Scripts;
 using _Project.Network.PlayFab.Scripts;
-using _Project.UI.Managers.Scripts;
-using PlayFab.ClientModels;
+using Network.NetworkManager.Scripts;
 using TMPro;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.Authorize.Scripts
+namespace UI.Authorize.Scripts
 {
     public class AuthorizeCanvas : MonoBehaviour, ICanvas
     {

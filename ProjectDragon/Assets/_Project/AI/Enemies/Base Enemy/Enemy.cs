@@ -1,7 +1,7 @@
 using UnityEngine;
-using static _Project.GamePlay.GameManager.Scripts.GameManager;
+using static GamePlay.GameManager.Scripts.GameManager;
 
-namespace _Project.AI.Enemies.Base_Enemy
+namespace AI.Enemies.Base_Enemy
 {
     public abstract class Enemy : MonoBehaviour
     {

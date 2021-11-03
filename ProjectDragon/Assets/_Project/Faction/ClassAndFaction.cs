@@ -1,4 +1,4 @@
-namespace _Project.Faction
+namespace Faction
 {
     public static class ClassAndFaction
     {

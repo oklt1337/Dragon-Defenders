@@ -1,9 +1,9 @@
 using System;
-using _Project.Network.Photon.Scripts;
 using _Project.Network.PlayFab.Scripts;
+using Network.Photon.Scripts;
 using UnityEngine;
 
-namespace _Project.Network.NetworkManager.Scripts
+namespace Network.NetworkManager.Scripts
 {
     [DefaultExecutionOrder(-100)]
     public class NetworkManager : MonoBehaviour

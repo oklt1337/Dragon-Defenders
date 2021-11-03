@@ -1,11 +1,12 @@
 using System;
-using _Project.UI.Authorize.Scripts;
-using _Project.UI.MainMenu.Settings_Screen.Scripts;
+using Network.NetworkManager.Scripts;
 using PlayFab;
 using PlayFab.ClientModels;
+using UI.Authorize.Scripts;
+using UI.MainMenu.Settings_Screen.Scripts;
 using UnityEngine;
-using Scene = _Project.Utility.SceneManager.Scripts.Scene;
-using SceneManager = _Project.Utility.SceneManager.Scripts.SceneManager;
+using Scene = Utility.SceneManager.Scripts.Scene;
+using SceneManager = Utility.SceneManager.Scripts.SceneManager;
 
 namespace _Project.Network.PlayFab.Scripts
 {
@@ -44,7 +45,7 @@ namespace _Project.Network.PlayFab.Scripts
             AuthorizeCanvas.OnRegister += Authenticate;
             PlayFabFacebookAuth.OnFacebookInitializedDone += Authenticate;
             MainMenuSettingsScreen.OnLogout += Logout;
-            NetworkManager.Scripts.NetworkManager.Instance.OnAllServicesConnected += StartAuthenticationsProcess;
+            NetworkManager.Instance.OnAllServicesConnected += StartAuthenticationsProcess;
         }
 
         private void OnDisable()

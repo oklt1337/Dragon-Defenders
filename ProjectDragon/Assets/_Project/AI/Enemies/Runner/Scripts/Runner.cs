@@ -1,7 +1,6 @@
-using _Project.AI.Enemies.Scripts;
-using UnityEngine;
+using AI.Enemies.Scripts;
 
-namespace _Project.AI.Enemies.Runner.Scripts
+namespace AI.Enemies.Runner.Scripts
 {
     public class Runner : Mover
     {

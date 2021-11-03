@@ -1,11 +1,11 @@
-using _Project.GamePlay.GameManager.Scripts;
-using _Project.UI.Managers.Scripts;
-using _Project.Units.Unit.BaseUnits;
+using GamePlay.GameManager.Scripts;
 using Photon.Pun;
+using UI.Managers.Scripts;
+using Units.Unit.BaseUnits;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace _Project.UI.In_Game.Building.Scripts
+namespace UI.In_Game.Building.Scripts
 {
     public class TowerSpawnButton : MonoBehaviourPun, IPointerClickHandler, IBeginDragHandler, IDragHandler,
         IEndDragHandler, ICanvas
@@ -45,7 +45,7 @@ namespace _Project.UI.In_Game.Building.Scripts
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (GameManager.Instance.PlayerModel.Money < unit.GoldCost)
+            if (GameManager.Instance.PlayerModel.Money < unit.Card.GoldCost)
                 return;
 
             Vector3 screenPos = Input.mousePosition;
@@ -59,9 +59,9 @@ namespace _Project.UI.In_Game.Building.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            GameObject tower = PhotonNetwork.Instantiate(string.Concat(Unit.BasePath, unit.UnitName, unit.UnitName), hit.point, Quaternion.identity);
+            GameObject tower = PhotonNetwork.Instantiate(string.Concat(Unit.BasePath, unit.Card.CardName, unit.Card.cardName), hit.point, Quaternion.identity);
 
-            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.GoldCost))
+            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.Card.GoldCost))
             {
                 Destroy(tower);
             }

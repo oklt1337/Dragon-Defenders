@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using PlayFab.ClientModels;
 using Sirenix.Serialization;
 using UnityEngine;
-using Profile = _Project.PlayerProfile.Profile.Scripts.Profile;
+using Profile = PlayerProfile.Profile.Scripts.Profile;
 
 namespace _Project.Network.PlayFab.Scripts
 {

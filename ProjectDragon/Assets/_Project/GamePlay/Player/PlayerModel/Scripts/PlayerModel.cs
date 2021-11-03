@@ -1,12 +1,12 @@
 using System;
-using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
-using _Project.GamePlay.GameManager.Scripts;
-using _Project.SkillSystem.SkillTree;
-using _Project.SkillSystem.SkillTree.Scripts;
+using Deck_Cards.Cards.CommanderCard.Scripts;
+using GamePlay.GameManager.Scripts;
 using Photon.Pun;
+using SkillSystem.SkillTree.Scripts;
+using Units.Unit.BaseUnits;
 using UnityEngine;
 
-namespace _Project.GamePlay.Player.PlayerModel.Scripts
+namespace GamePlay.Player.PlayerModel.Scripts
 {
     /// <summary>
     /// Author: Christopher Zelch
@@ -110,7 +110,7 @@ namespace _Project.GamePlay.Player.PlayerModel.Scripts
             else if (hit.collider.CompareTag("Unit/Tower") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
-                var unit = hit.collider.gameObject.GetComponent<Units.Unit.BaseUnits.Unit>();
+                var unit = hit.collider.gameObject.GetComponent<Unit>();
                 if (unit != null)
                 {
                     OnTryUpgradeSkill?.Invoke(unit.SkillTree);

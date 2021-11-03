@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.AudioManager.Scripts
+namespace AudioManager.Scripts
 {
     public class AudioManager : MonoBehaviour
     {

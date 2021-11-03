@@ -1,9 +1,8 @@
-using System;
-using _Project.AI.Enemies.Base_Enemy;
-using _Project.GamePlay.Player.Commander.BaseCommanderClass.Scripts;
+using AI.Enemies.Base_Enemy;
+using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 
-namespace _Project.AI.Enemies.Scripts
+namespace AI.Enemies.Scripts
 {
     public class Attacker : Enemy
     {

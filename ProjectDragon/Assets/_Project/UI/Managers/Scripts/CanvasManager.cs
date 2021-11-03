@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Photon.Pun;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace _Project.UI.Managers.Scripts
+namespace UI.Managers.Scripts
 {
     public class CanvasManager : MonoBehaviour, ICanvas
     {

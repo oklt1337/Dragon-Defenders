@@ -1,9 +1,9 @@
-using System; 
-using _Project.Utility.DeveloperConsole.Scripts.Commands;
+using System;
 using TMPro;
 using UnityEngine;
+using Utility.DeveloperConsole.Scripts.Commands;
 
-namespace _Project.Utility.DeveloperConsole.Scripts
+namespace Utility.DeveloperConsole.Scripts
 {
     public class DeveloperConsoleManager : MonoBehaviour
     {

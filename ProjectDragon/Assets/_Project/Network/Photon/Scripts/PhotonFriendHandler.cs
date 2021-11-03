@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.Network.Photon.Scripts
+namespace Network.Photon.Scripts
 {
     public class PhotonFriendHandler : MonoBehaviour
     {

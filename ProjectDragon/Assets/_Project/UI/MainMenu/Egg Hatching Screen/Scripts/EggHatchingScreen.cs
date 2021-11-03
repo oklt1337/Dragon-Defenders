@@ -1,7 +1,7 @@
-using _Project.UI.Managers.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 
-namespace _Project.UI.MainMenu.Egg_Hatching_Screen.Scripts
+namespace UI.MainMenu.Egg_Hatching_Screen.Scripts
 {
     public class EggHatchingScreen : MonoBehaviour, ICanvas
     {

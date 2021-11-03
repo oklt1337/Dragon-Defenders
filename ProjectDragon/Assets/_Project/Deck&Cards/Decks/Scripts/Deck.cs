@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using _Project.Deck_Cards.Cards.BaseCards.Scripts;
-using _Project.Deck_Cards.Cards.CommanderCard.Scripts;
-using _Project.Deck_Cards.Cards.UnitCard.Scripts;
-using _Project.Faction;
+using Deck_Cards.Cards.BaseCards.Scripts;
+using Deck_Cards.Cards.CommanderCard.Scripts;
+using Deck_Cards.Cards.UnitCard.Scripts;
+using Faction;
 using UnityEngine;
 
-namespace _Project.Deck_Cards.Decks.Scripts
+namespace Deck_Cards.Decks.Scripts
 {
     public class Deck : ScriptableObject
     {

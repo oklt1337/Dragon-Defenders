@@ -1,13 +1,13 @@
-using _Project.Deck_Cards.DeckManager.Scripts;
 using _Project.UI.Lobby.Manager.Scripts;
-using _Project.UI.MainMenu.Manager.Scripts;
-using _Project.UI.Managers.Scripts;
-using _Project.Utility.SceneManager.Scripts;
+using Deck_Cards.DeckManager.Scripts;
 using TMPro;
+using UI.MainMenu.Manager.Scripts;
+using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility.SceneManager.Scripts;
 
-namespace _Project.UI.New_Deck_Screen.Scripts
+namespace UI.Decks_Cards.New_Deck_Screen.Scripts
 {
     public class NewDeckScreen : MonoBehaviour, ICanvas
     {
