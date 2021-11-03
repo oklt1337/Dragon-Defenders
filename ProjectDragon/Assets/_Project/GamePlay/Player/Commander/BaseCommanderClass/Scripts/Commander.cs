@@ -261,6 +261,11 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             OnDeath?.Invoke();
         }
 
+        public void AddExp(float gainedExp)
+        {
+            experience += gainedExp;
+        }
+
         #endregion
     }
 }
