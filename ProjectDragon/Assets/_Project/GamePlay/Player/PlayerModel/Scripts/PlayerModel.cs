@@ -84,6 +84,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         private void Start()
         {
+            transform.position = GameManager.Scripts.GameManager.Instance.PlayerSpawn.position;
             inputHandler.CommanderCam = commanderCamera;
             animationHandler.Animator = commander.Animator;
         }

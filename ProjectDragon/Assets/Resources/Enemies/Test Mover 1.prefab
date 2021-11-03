@@ -101,19 +101,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Test Mover 1
   enemyPath: Enemies/
+  enemyCombatScore: 1
   defense: 0
   maxSpeed: 0
   expDrop: 0
   goldDrop: 0
   hqDamage: 0
-  enemyCombatScore: 1
-  enemyModel: {fileID: 0}
-  agent: {fileID: 264498729499873607}
   health: 0
   maxHealth: 0
   speed: 0
   speedUpValue: 0
-  currentWayPoint: {x: 0, y: 0, z: 0}
 --- !u!195 &264498729499873607
 NavMeshAgent:
   m_ObjectHideFlags: 0

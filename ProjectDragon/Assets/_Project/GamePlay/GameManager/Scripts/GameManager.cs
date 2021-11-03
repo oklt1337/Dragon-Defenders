@@ -31,6 +31,7 @@ namespace GamePlay.GameManager.Scripts
 
         [Header("Player")]
         [SerializeField] private PlayerModel player;
+        [SerializeField] private Transform playerSpawn;
         
         [Header("Commander")]
         [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
@@ -59,6 +60,8 @@ namespace GamePlay.GameManager.Scripts
         #endregion
 
         #region Public Properties
+
+        public Transform PlayerSpawn => playerSpawn;
 
         public GameState CurrentGameState
         {
