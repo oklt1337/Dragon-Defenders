@@ -3,6 +3,7 @@ using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
 using _Project.GamePlay.Spawning.WaveManager.Scripts;
 using _Project.UI.In_Game.Commander.Scripts;
+using Dreamteck.Splines;
 using GamePlay.CameraMovement.TrackingShot;
 using GamePlay.CommanderWaypoint.Scripts;
 using GamePlay.HQManager.Scripts;
@@ -21,7 +22,7 @@ namespace GamePlay.GameManager.Scripts
         Wave,
         End
     }
-    
+
     [DefaultExecutionOrder(-100)]
     public class GameManager : MonoBehaviour
     {
@@ -29,27 +30,25 @@ namespace GamePlay.GameManager.Scripts
 
         #region SerializedFields
 
-        [Header("Player")]
-        [SerializeField] private PlayerModel player;
+        [Header("Player")] [SerializeField] private PlayerModel player;
         [SerializeField] private Transform playerSpawn;
-        
-        [Header("Commander")]
-        [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
-        
-        [Header("Managers")]
-        [SerializeField] private EnemySpawner enemySpawner;
+
+        [Header("Commander")] [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
+
+        [Header("Managers")] [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private WaveGenerator waveGenerator;
         [SerializeField] private UnitManager unitManager;
         [SerializeField] private HqManager hqManager;
-        
-        [Header("Camera")]
-        [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
-        
-        [Header("HUDs")]
-        [SerializeField] private HUD hud;
+
+        [Header("Camera")] [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
+
+        [Header("HUDs")] [SerializeField] private HUD hud;
         [SerializeField] private CommanderHUD commanderHUD;
         [SerializeField] private BuildHUD buildHUD;
+
+        [Header("Enemy")] 
+        [SerializeField] private SplineComputer splineComputer;
 
         #endregion
 
@@ -84,6 +83,7 @@ namespace GamePlay.GameManager.Scripts
         public HUD HUD => hud;
         public CommanderHUD CommanderHUD => commanderHUD;
         public BuildHUD BuildHUD => buildHUD;
+        public SplineComputer SplineComputer => splineComputer;
 
         #endregion
 
