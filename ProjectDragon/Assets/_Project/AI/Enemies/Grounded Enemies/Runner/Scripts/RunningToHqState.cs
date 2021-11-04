@@ -1,4 +1,5 @@
 using _Project.AI.FSM.Scripts;
+using AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies;
 using AI.FSM.Scripts;
 using GamePlay.GameManager.Scripts;
 
@@ -6,17 +7,24 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
 {
     public class RunningToHqState : State
     {
-        private Runner owner;
+        private BaseGroundedEnemies owner;
         
-        public RunningToHqState(FiniteStateMachine finiteStateMachine, global::AI.Enemies.Grounded_Enemies.Runner.Scripts.Runner newOwner) : base(finiteStateMachine)
+        public RunningToHqState(FiniteStateMachine finiteStateMachine, BaseGroundedEnemies newOwner) : base(finiteStateMachine)
         {
             owner = newOwner;
         }
-        public override void CheckTransition() {}
+
+        public override void CheckTransition()
+        {
+            if (owner is Runner runner)
+            {
+                
+            }
+        }
 
         public override void OnEnter()
         {
-            // Only for Beta, will be done in the enemy spawner for multiple splines.
+            // Only for Beta, will be updated for multiple splines.
             owner.SetSpline(GameManager.Instance.SplineComputer);
         }
 
