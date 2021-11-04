@@ -1,7 +1,5 @@
-﻿using _Project.GamePlay.Map.Map_Objects.Base_Object.Scripts;
-using AI.Enemies.Base_Enemy;
+﻿using AI.Enemies.Base_Enemy;
 using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
-using GamePlay.Player.PlayerModel.Scripts;
 using UnityEngine;
 
 namespace Abilities.Projectiles

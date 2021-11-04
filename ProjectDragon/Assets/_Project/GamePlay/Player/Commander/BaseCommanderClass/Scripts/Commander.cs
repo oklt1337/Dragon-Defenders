@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
+using AI.Enemies.Base_Enemy;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using Faction;
 using GamePlay.GameManager.Scripts;
@@ -183,7 +184,8 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         public void Attack(Component target)
         {
             Debug.Log(target.name);
-            abilities[0].AbilityObj.Cast(transform, target.transform);
+            //abilities[0].AbilityObj.Cast(transform, target.transform);
+            target.gameObject.GetComponent<Enemy>().TakeDamage(10);
         }
 
         public void TakeDamage(float damage)
