@@ -130,16 +130,31 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             commanderName = commanderCard.CardName;
             commanderObj = commanderCard.Model;
-            
+
             commanderStats = new CommanderStats.Scripts.CommanderStats(commanderCard.Faction, commanderCard.Class,
                 commanderCard.Health, commanderCard.Mana, commanderCard.AttackDamageModifier, commanderCard.Defense,
                 commanderCard.Speed);
             client.Visitors.Add(commanderStats);
 
-            foreach (var a in commanderCard.abilityDataBase.Abilities.Select(ability => ability.CreateInstance()))
+            foreach (var ability in commanderCard.abilityDataBase.Abilities)
             {
-                abilities.Add(a);
-                client.Visitors.Add(a);
+                switch (ability.AbilityType)
+                {
+                    case AbilityType.Damage:
+                        var damageAbilityObj = (DamageAbilityObj) ability;
+                        var damageAbility = damageAbilityObj.CreateInstance();
+                        abilities.Add(damageAbility);
+                        client.Visitors.Add(damageAbility);
+                        break;
+                    case AbilityType.Utility:
+                        var utilityAbilityObj = (UtilityAbilityObj) ability;
+                        var utilityAbility = utilityAbilityObj.CreateInstance();
+                        abilities.Add(utilityAbility);
+                        client.Visitors.Add(utilityAbility);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
             skillTree = commanderCard.SkillTreeObj.CreateInstance(client);
         }

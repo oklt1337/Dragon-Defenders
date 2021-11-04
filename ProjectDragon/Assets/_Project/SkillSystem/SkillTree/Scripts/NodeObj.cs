@@ -1,4 +1,3 @@
-using System;
 using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using UnityEngine;
@@ -11,21 +10,17 @@ namespace SkillSystem.SkillTree.Scripts
         Learnable,
         Activated
     }
-    public class NodeObj : ScriptableObject
+    public abstract class NodeObj : ScriptableObject
     {
+        [SerializeField] private string nodeName;
         [SerializeField] private Sprite icon;
         [SerializeField] private int cost;
         
+        public string NodeName => nodeName;
         public Sprite Icon => icon;
         public int Cost => cost;
 
-        public void Execute(IVisitor visitor)
-        {
-            if (visitor is Ability ability)
-            {
-                
-            }
-        }
+        public abstract void Execute(IVisitor visitor);
 
         public Node CreateInstance(SkillTree skillTree)
         {
@@ -33,7 +28,7 @@ namespace SkillSystem.SkillTree.Scripts
         }
     }
 
-    public class Node : IElement
+    public sealed class Node : IElement
     {
         public NodeState NodeState { get; private set; }
         public NodeObj NodeObj { get; }
@@ -46,7 +41,7 @@ namespace SkillSystem.SkillTree.Scripts
             skillTree = newSkillTree;
         }
         
-        public virtual void SetState(NodeState state)
+        public void SetState(NodeState state)
         {
             NodeState = state;
 

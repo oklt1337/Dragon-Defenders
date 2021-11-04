@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Units.Unit.BaseUnits
 {
-    public class Unit : MonoBehaviour
+    public class Unit : MonoBehaviour, IVisitor
     {
         #region Public Const Field
 
@@ -77,14 +78,40 @@ namespace Units.Unit.BaseUnits
             card = unitCard;
             faction = unitCard.Faction;
             unitClass = unitCard.Class;
-            ability = unitCard.abilityDataBase.Abilities[0].CreateInstance();
-            client.Visitors.Add(ability);
+
+            switch (unitCard.abilityDataBase.Abilities[0].AbilityType)
+            {
+                case AbilityType.Damage:
+                    var damageAbilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                    var damageAbility = damageAbilityObj.CreateInstance();
+                    ability = damageAbility;
+                    client.Visitors.Add(damageAbility);
+                    break;
+                case AbilityType.Utility:
+                    var utilityAbilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                    var utilityAbility = utilityAbilityObj.CreateInstance();
+                    ability = utilityAbility;
+                    client.Visitors.Add(utilityAbility);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             skillTree = unitCard.SkillTreeObj.CreateInstance(client);
         }
 
         public void Cast()
         {
             ability.AbilityObj.Cast(null, null);
+        }
+
+        #endregion
+
+
+        #region Visitor Pattern
+
+        public void Visit(Node node)
+        {
+            node.Accept(this);
         }
 
         #endregion

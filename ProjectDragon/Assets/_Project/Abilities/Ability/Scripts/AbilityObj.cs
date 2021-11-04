@@ -1,28 +1,28 @@
 using Abilities.VisitorPattern.Scripts;
 using SkillSystem.SkillTree.Scripts;
-using Unity.Entities.UniversalDelegates;
 using UnityEngine;
 
 namespace Abilities.Ability.Scripts
 {
+    public enum AbilityType
+    {
+        Damage,
+        Utility
+    }
+    
     public abstract class AbilityObj : ScriptableObject
     {
-        public Ability CreateInstance()
-        {
-            return new Ability(this);
-        }
-
-        public virtual void Cast(Transform spawnPoint, Transform target)
-        {
-            //Spawn projectile or Cast Buff
-        }
+        [SerializeField] private AbilityType abilityType;
+        public AbilityType AbilityType => abilityType;
+        
+        public abstract void Cast(Transform spawnPoint, Transform target);
     }
 
-    public class Ability : IVisitor
+    public abstract class Ability : IVisitor
     {
         public AbilityObj AbilityObj { get; }
 
-        public Ability(AbilityObj abilityObj)
+        protected Ability(AbilityObj abilityObj)
         {
             AbilityObj = abilityObj;
         }
