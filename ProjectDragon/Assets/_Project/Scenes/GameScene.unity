@@ -11947,7 +11947,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6287fd758ebcc439f3b0f170ae1a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  com: {fileID: 299285558}
   player: {fileID: 2036250212}
   playerSpawn: {fileID: 1904575437}
   commanderMoveIndicator: {fileID: 576650401}
@@ -11960,6 +11959,7 @@ MonoBehaviour:
   hud: {fileID: 1380770227}
   commanderHUD: {fileID: 1544868725}
   buildHUD: {fileID: 282191432}
+  splineComputer: {fileID: 299285558}
 --- !u!4 &1713089046
 Transform:
   m_ObjectHideFlags: 0
