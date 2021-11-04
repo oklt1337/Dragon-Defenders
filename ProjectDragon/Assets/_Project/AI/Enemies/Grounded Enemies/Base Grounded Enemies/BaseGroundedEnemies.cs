@@ -11,8 +11,8 @@ namespace AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies
 
         private void Start()
         {
-            // Only for Beta, will be done in the enemy spawner for multiple splines
-            SetSpline(GameManager.Instance.SplineComputer);
+            // Only for Beta, will be done in the enemy spawner for multiple splines.
+            follower.followSpeed = speed;
         }
 
         /// <summary>
@@ -20,7 +20,6 @@ namespace AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies
         /// </summary>
         public void WalkToHq()
         {
-            follower.followSpeed = speed;
             follower.followMode = SplineFollower.FollowMode.Uniform;
         }
 

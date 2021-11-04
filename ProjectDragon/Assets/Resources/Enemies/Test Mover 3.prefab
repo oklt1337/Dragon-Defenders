@@ -109,7 +109,7 @@ MonoBehaviour:
   hqDamage: 0
   health: 0
   maxHealth: 0
-  speed: 20
+  speed: 10
   maxSpeed: 0
   follower: {fileID: -7708556991525262681}
   speedUpValue: 0
