@@ -2,16 +2,15 @@
 using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 
-namespace Abilities.Projectiles
+namespace Abilities.Projectiles.Scripts
 {
-    public class Projectile : MonoBehaviour
+    public class DamageProjectile : Projectile
     {
-        [SerializeField] private Rigidbody myRigidbody;
-
-        public float Damage { get; set; }
-
-        public void Init(Transform target)
+        private float Damage { get; set; }
+        
+        public void Init(Transform target, float damage)
         {
+            Damage = damage;
             myRigidbody.MovePosition(target == null ? Vector3.forward : target.position);
         }
 

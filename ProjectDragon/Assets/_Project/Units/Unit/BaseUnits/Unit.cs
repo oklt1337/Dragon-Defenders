@@ -101,7 +101,19 @@ namespace Units.Unit.BaseUnits
 
         public void Cast()
         {
-            ability.AbilityObj.Cast(null, null);
+            switch (ability.AbilityObj.AbilityType)
+            {
+                case AbilityType.Damage:
+                    var damageAbility = (DamageAbility) ability;
+                    damageAbility.Cast(null, null);
+                    break;
+                case AbilityType.Utility:
+                    var utilityAbility = (UtilityAbility) ability;
+                    utilityAbility.Cast(transform);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

@@ -14,8 +14,6 @@ namespace Abilities.Ability.Scripts
     {
         [SerializeField] private AbilityType abilityType;
         public AbilityType AbilityType => abilityType;
-        
-        public abstract void Cast(Transform spawnPoint, Transform target);
     }
 
     public abstract class Ability : IVisitor
