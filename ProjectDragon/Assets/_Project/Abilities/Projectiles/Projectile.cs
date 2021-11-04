@@ -1,4 +1,7 @@
-﻿using AI.Enemies.Base_Enemy;
+﻿using _Project.GamePlay.Map.Map_Objects.Base_Object.Scripts;
+using AI.Enemies.Base_Enemy;
+using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
+using GamePlay.Player.PlayerModel.Scripts;
 using UnityEngine;
 
 namespace Abilities.Projectiles
@@ -16,8 +19,21 @@ namespace Abilities.Projectiles
 
         private void OnTriggerEnter(Collider other)
         {
-            var enemy = other.GetComponent<Enemy>();
-            //enemy.TakeDamage(Damage);
+            if (other.CompareTag("Enemy"))
+            {
+                var enemy = other.GetComponent<Enemy>();
+                enemy.TakeDamage(Damage);
+            }
+            else if(other.CompareTag("Player"))
+            {
+                var commander = other.GetComponent<Commander>();
+                commander.TakeDamage(Damage);
+            }
+            else if (other.CompareTag("Breakable"))
+            {
+                /*var baseMapObject = other.GetComponent<Tree>();
+                baseMapObject.TakeDamage(Damage);*/
+            }
         }
     }
 }

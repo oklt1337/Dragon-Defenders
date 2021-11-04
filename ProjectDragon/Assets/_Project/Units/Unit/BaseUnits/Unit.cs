@@ -1,5 +1,6 @@
+using System.Collections.Generic;
 using Abilities.Ability.Scripts;
-using Deck_Cards.Cards.BaseCards.Scripts;
+using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
 using SkillSystem.SkillTree.Scripts;
@@ -28,14 +29,7 @@ namespace Units.Unit.BaseUnits
         private ClassAndFaction.Class unitClass;
         private SkillTree skillTree;
         private Ability ability;
-        
-        //Runtime
-        private byte level;
-        private float experience;
-        private float cooldown;
-        
-        private float coolDownModifier;
-        private string currentSkillString;
+        private Client client;
 
         #endregion
 
@@ -73,36 +67,6 @@ namespace Units.Unit.BaseUnits
             set => ability = value;
         }
 
-        public byte Level
-        {
-            get => level;
-            set => level = value;
-        }
-
-        public float Experience
-        {
-            get => experience;
-            set => experience = value;
-        }
-
-        public float Cooldown
-        {
-            get => cooldown;
-            set => cooldown = value;
-        }
-
-        public float CoolDownModifier
-        {
-            get => coolDownModifier;
-            set => coolDownModifier = value;
-        }
-
-        public string CurrentSkillString
-        {
-            get => currentSkillString;
-            set => currentSkillString = value;
-        }
-
         #endregion
 
         #region Private Methods
@@ -113,8 +77,9 @@ namespace Units.Unit.BaseUnits
             card = unitCard;
             faction = unitCard.Faction;
             unitClass = unitCard.Class;
-            skillTree = unitCard.SkillTreeObj.CreateInstance();
             ability = unitCard.abilityDataBase.Abilities[0].CreateInstance();
+            client.Visitors.Add(ability);
+            skillTree = unitCard.SkillTreeObj.CreateInstance(client);
         }
 
         public void Cast()

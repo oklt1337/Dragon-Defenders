@@ -1,3 +1,6 @@
+using System;
+using Abilities.Ability.Scripts;
+using Abilities.VisitorPattern.Scripts;
 using UnityEngine;
 
 namespace SkillSystem.SkillTree.Scripts
@@ -16,35 +19,54 @@ namespace SkillSystem.SkillTree.Scripts
         public Sprite Icon => icon;
         public int Cost => cost;
 
-        public void Execute()
+        public void Execute(IVisitor visitor)
         {
-            
+            if (visitor is Ability ability)
+            {
+                
+            }
         }
 
-        public Node CreateInstance()
+        public Node CreateInstance(SkillTree skillTree)
         {
-            return new Node(this);
+            return new Node(this, skillTree);
         }
     }
 
-    public class Node
+    public class Node : IElement
     {
         public NodeState NodeState { get; private set; }
         public NodeObj NodeObj { get; }
 
-        public Node(NodeObj nodeObj)
+        private readonly SkillTree skillTree;
+
+        public Node(NodeObj nodeObj, SkillTree newSkillTree)
         {
             NodeObj = nodeObj;
+            skillTree = newSkillTree;
         }
         
         public virtual void SetState(NodeState state)
         {
             NodeState = state;
 
-            if (NodeState == NodeState.Activated)
+            if (NodeState != NodeState.Activated) 
+                return;
+
+            foreach (var visitor in skillTree.Client.Visitors)
             {
-                NodeObj.Execute();
+                visitor.Visit(this);
             }
+
+            foreach (var visitor in GlobalClients.Instance.Visitors)
+            {
+                visitor.Visit(this);
+            }
+        }
+
+        public void Accept(IVisitor visitor)
+        {
+            NodeObj.Execute(visitor);
         }
     }
 }

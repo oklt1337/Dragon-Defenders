@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Abilities.Ability.Scripts;
+using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using Faction;
 using GamePlay.GameManager.Scripts;
@@ -17,7 +19,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             Idle,
             Move
         }
-        
+
         #region SerializeFields
 
         [SerializeField] private NavMeshAgent navMeshAgent;
@@ -27,27 +29,23 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Fields
 
-        private string commanderName;
+        [Header("Basic")] private string commanderName;
         private GameObject commanderObj;
-        private ClassAndFaction.Faction faction;
-        private ClassAndFaction.Class commanderClass;
-        private float health;
-        private float maxHealth;
-        private float mana;
-        private float attackDamageModifier;
-        private float defense;
-        private float speed;
-        private bool dyingBreath;
+
+        [Header("Stats")] private CommanderStats.Scripts.CommanderStats commanderStats;
+        private SkillTree skillTree;
+        private List<Ability> abilities = new List<Ability>();
+        private Client client;
+
+        [Header("Runtime")] private bool dyingBreath;
         private byte rank;
         private byte level;
         private float experience;
-        private SkillTree skillTree;
-        private List<Ability> abilities = new List<Ability>();
-        private const float MINDamage = 10f;
-        private Vector3 destination;
         private State currentState;
+        private const float MINDamage = 10f;
 
-        private Coroutine movementCo;
+        [Header("Movement")] private Coroutine movementCo;
+        private Vector3 destination;
 
         #endregion
 
@@ -65,59 +63,10 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             private set => commanderObj = value;
         }
 
-        public ClassAndFaction.Faction Faction
+        public CommanderStats.Scripts.CommanderStats CommanderStats
         {
-            get => faction;
-            private set => faction = value;
-        }
-
-        public ClassAndFaction.Class CommanderClass
-        {
-            get => commanderClass;
-            private set => commanderClass = value;
-        }
-
-        public float MAXHealth
-        {
-            get => maxHealth;
-            internal set => maxHealth = value;
-        }
-
-        public float Health
-        {
-            get => health;
-            private set
-            {
-                health = value;
-                if (health <= 0)
-                {
-                    OnDeath?.Invoke();
-                }
-            }
-        }
-
-        public float Mana
-        {
-            get => mana;
-            internal set => mana = value;
-        }
-
-        public float AttackDamageModifier
-        {
-            get => attackDamageModifier;
-            internal set => attackDamageModifier = value;
-        }
-
-        public float Defense
-        {
-            get => defense;
-            internal set => defense = value;
-        }
-
-        public float Speed
-        {
-            get => speed;
-            internal set => speed = value;
+            get => commanderStats;
+            private set => commanderStats = value;
         }
 
         public byte Rank
@@ -180,20 +129,18 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             commanderName = commanderCard.CardName;
             commanderObj = commanderCard.Model;
-            faction = commanderCard.Faction;
-            commanderClass = commanderCard.Class;
-            health = commanderCard.Health;
-            mana = commanderCard.Mana;
-            attackDamageModifier = commanderCard.AttackDamageModifier;
-            defense = commanderCard.Defense;
-            speed = commanderCard.Speed;
-            skillTree = commanderCard.SkillTreeObj.CreateInstance();
-            navMeshAgent.speed = speed;
+            
+            commanderStats = new CommanderStats.Scripts.CommanderStats(commanderCard.Faction, commanderCard.Class,
+                commanderCard.Health, commanderCard.Mana, commanderCard.AttackDamageModifier, commanderCard.Defense,
+                commanderCard.Speed);
+            client.Visitors.Add(commanderStats);
 
-            foreach (var ability in commanderCard.abilityDataBase.Abilities)
+            foreach (var a in commanderCard.abilityDataBase.Abilities.Select(ability => ability.CreateInstance()))
             {
-                abilities.Add(ability.CreateInstance());
+                abilities.Add(a);
+                client.Visitors.Add(a);
             }
+            skillTree = commanderCard.SkillTreeObj.CreateInstance(client);
         }
 
         private void StopMovement(GameState state)
@@ -241,23 +188,24 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         public void TakeDamage(float damage)
         {
-            damage = Mathf.Clamp((damage * health / maxHealth), MINDamage, damage) / defense;
+            damage = Mathf.Clamp((damage * commanderStats.Health / commanderStats.MAXHealth), MINDamage, damage) /
+                     commanderStats.Defense;
 
-            if (health - damage <= 0 && !dyingBreath)
+            if (commanderStats.Health - damage <= 0 && !dyingBreath)
             {
-                health = 1f;
+                commanderStats.Health = 1f;
                 dyingBreath = true;
             }
             else
             {
-                health -= damage;
+                commanderStats.Health -= damage;
                 dyingBreath = false;
             }
 
-            if (!(health <= 0) || dyingBreath)
+            if (!(commanderStats.Health <= 0) || dyingBreath)
                 return;
 
-            health = 0;
+            commanderStats.Health = 0;
             OnDeath?.Invoke();
         }
 
