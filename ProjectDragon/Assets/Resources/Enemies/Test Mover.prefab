@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1876736512538414466}
   - component: {fileID: 1876736512538414465}
   - component: {fileID: 290059423846922596}
-  - component: {fileID: 264498729499873607}
   - component: {fileID: 1104297664621222579}
   - component: {fileID: 8103288161834981906}
   - component: {fileID: 1476523661301853660}
@@ -113,28 +112,6 @@ MonoBehaviour:
   maxSpeed: 0
   follower: {fileID: -4899149778589927847}
   speedUpValue: 0
---- !u!195 &264498729499873607
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876736512538414471}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 8
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &1104297664621222579
 Rigidbody:
   m_ObjectHideFlags: 0

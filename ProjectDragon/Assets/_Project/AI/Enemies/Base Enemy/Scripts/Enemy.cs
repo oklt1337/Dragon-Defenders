@@ -5,6 +5,13 @@ namespace AI.Enemies.Base_Enemy
 {
     public abstract class Enemy : MonoBehaviour
     {
+        #region Private Fields
+
+        private bool isStunned;
+        private float stunDuration;
+
+        #endregion
+        
         #region Private Serialized Fields
 
         [Header("Internal Stats")]
@@ -31,6 +38,8 @@ namespace AI.Enemies.Base_Enemy
 
         #region Public Properties
 
+        public bool IsStunned => isStunned;
+        
         public string EnemyName => enemyName;
         public string EnemyPath => enemyPath;
         public int EnemyCombatScore => enemyCombatScore;
@@ -80,6 +89,23 @@ namespace AI.Enemies.Base_Enemy
 
             if (health <= 0)
                 Death();
+        }
+        
+        public void Stun(float stunTime)
+        {
+            stunDuration = stunTime;
+            isStunned = true;
+        }
+
+        /// <summary>
+        /// Reduces the Stun Duration continually.
+        /// </summary>
+        public void WaitForStun()
+        {
+            stunDuration -= Time.deltaTime;
+
+            if (stunDuration <= 0)
+                isStunned = false;
         }
 
         #endregion

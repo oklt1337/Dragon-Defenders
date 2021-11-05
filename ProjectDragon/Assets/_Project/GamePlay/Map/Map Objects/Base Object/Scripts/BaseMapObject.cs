@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.GamePlay.Map.Map_Objects.Base_Object.Scripts
+namespace GamePlay.Map.Map_Objects.Base_Object.Scripts
 {
     public class BaseMapObject : MonoBehaviour
     {

@@ -1,5 +1,5 @@
-using _Project.AI.FSM.Scripts;
 using AI.FSM.Scripts;
+using AI.States.Base_Grounded_Enemies_States;
 
 namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
 {
@@ -10,7 +10,7 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
         //States
         public State RunToHqState { get; }
         
-        public RunnerFsm(Runner newOwner)
+        public RunnerFsm(Runner newOwner) : base(newOwner)
         {
             owner = newOwner;
             RunToHqState = new RunningToHqState(this, owner);

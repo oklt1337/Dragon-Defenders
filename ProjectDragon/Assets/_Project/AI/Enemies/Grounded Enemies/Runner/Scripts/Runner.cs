@@ -1,4 +1,4 @@
-using AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies;
+using AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies.Scripts;
 using UnityEngine;
 
 namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
@@ -6,6 +6,9 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
     public class Runner : BaseGroundedEnemies
     {
         [SerializeField] private float speedUpValue;
+
+        private float stunValue;
+        private bool hasBeenBoosted;
 
         public RunnerFsm Fsm { get; private set; }
 
@@ -28,9 +31,14 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
 
         #region Private Methods
 
+        /// <summary>
+        /// Increases the runners speed by its speedUpValue.
+        /// </summary>
         private void SpeedUp()
         {
-            speed = speedUpValue;
+            follower.followSpeed += speedUpValue;
+
+            hasBeenBoosted = true;
         }
 
         #endregion
@@ -41,10 +49,10 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
         {
             base.TakeDamage(damage);
 
-            if (health * 2 <= maxHealth)
+            if (health * 2 <= maxHealth && !hasBeenBoosted)
                 SpeedUp();
         }
-
+        
         #endregion
     }
 }

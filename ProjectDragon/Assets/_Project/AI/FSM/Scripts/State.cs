@@ -1,6 +1,4 @@
-using AI.FSM.Scripts;
-
-namespace _Project.AI.FSM.Scripts
+namespace AI.FSM.Scripts
 {
     public abstract class State
     {
@@ -10,7 +8,7 @@ namespace _Project.AI.FSM.Scripts
         {
             FiniteStateMachine = finiteStateMachine;
         }
-
+        
         public abstract void CheckTransition();
 
         public abstract void OnEnter();
