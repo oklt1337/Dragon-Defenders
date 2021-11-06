@@ -125,8 +125,9 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
             foreach (var enemy in enemies)
             {
                 UpdateSpawnPoints();
-                PhotonNetwork.Instantiate(string.Concat(enemy.EnemyPath, enemy.EnemyName),
+                var en = PhotonNetwork.Instantiate(string.Concat(enemy.EnemyPath, enemy.EnemyName),
                     spawnPositions[currentSpawnPosition].position, Quaternion.identity);
+                en.transform.parent = transform;
                 yield return new WaitForSeconds(enemySpawnDelay);
             }
 
