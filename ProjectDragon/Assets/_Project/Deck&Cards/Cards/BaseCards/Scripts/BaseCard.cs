@@ -21,7 +21,6 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
         [SerializeField] internal int cardID;
         [SerializeField] internal string cardName;
         [SerializeField] internal string description;
-        [SerializeField] internal int cost;
 
         [Header("Specifications")] 
         [SerializeField] internal GameObject model;
@@ -44,8 +43,6 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
         }
 
         public string Description => description;
-
-        public int Cost => cost;
 
         public GameObject Model => model;
 

@@ -25,7 +25,7 @@ namespace Deck_Cards.Cards.CommanderCard.Scripts
 
         public float Speed => speed;
 
-        public void Save(int cId, string cName, string cDescription, int cCost, GameObject cModel, Rarity cRarity,
+        public void Save(int cId, string cName, string cDescription, GameObject cModel, Rarity cRarity,
             ClassAndFaction.Faction cFaction, ClassAndFaction.Class cClass, SkillTreeObj cSkillTreeObj,
             AbilityDataBase cAbilityDataBase, VideoClip cDemo,
             Sprite cIcon, float cHealth, float cMana, float cAttackDamageModifier, float cDefense, float cSpeed)
@@ -33,7 +33,6 @@ namespace Deck_Cards.Cards.CommanderCard.Scripts
             cardID = cId;
             cardName = cName;
             description = cDescription;
-            cost = cCost;
             model = cModel;
             rarity = cRarity;
             faction = cFaction;

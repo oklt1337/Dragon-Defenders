@@ -25,7 +25,6 @@ namespace Utility.CardBuilder.Scripts
         private int cardID;
         private string cardName;
         private string description;
-        private int cost;
         private GameObject model;
         private Rarity rarity;
         private ClassAndFaction.Faction faction;
@@ -148,8 +147,6 @@ namespace Utility.CardBuilder.Scripts
             cardName = EditorGUILayout.TextField("Card Name", cardName);
             //CardDescription
             description = EditorGUILayout.TextField("Description", description);
-            //CardCost
-            cost = EditorGUILayout.IntField("Cost", cost);
 
             //CardModel
             model =
@@ -304,7 +301,6 @@ namespace Utility.CardBuilder.Scripts
             cardID = baseCard.CardID;
             cardName = baseCard.CardName;
             description = baseCard.Description;
-            cost = baseCard.Cost;
             model = baseCard.Model;
             rarity = baseCard.Rarity;
             faction = baseCard.Faction;
@@ -320,7 +316,6 @@ namespace Utility.CardBuilder.Scripts
             cardID = 0;
             cardName = string.Empty;
             description = string.Empty;
-            cost = 0;
             model = null;
             rarity = 0;
             faction = 0;
@@ -419,7 +414,7 @@ namespace Utility.CardBuilder.Scripts
                         return;
 
                     //save
-                    commanderCards[selectedCommander].Save(cardID, cardName, description, cost, model, rarity, faction,
+                    commanderCards[selectedCommander].Save(cardID, cardName, description, model, rarity, faction,
                         @class, skillTreeObj, abilityDataBase,demo, icon, health, mana, commanderAttackDamageModifier, defense, speed);
                     break;
                 case 1:
@@ -427,7 +422,7 @@ namespace Utility.CardBuilder.Scripts
                     if (unitCards.Length == 0)
                         return;
                     
-                    unitCards[selectedUnit].Save(cardID, cardName, description, cost, model, rarity, faction,
+                    unitCards[selectedUnit].Save(cardID, cardName, description, model, rarity, faction,
                         @class, skillTreeObj, abilityDataBase, demo, icon, goldCost, limit);
                     break;
             }
