@@ -8,6 +8,7 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
 {
     public enum Rarity
     {
+        Basic,
         Common,
         Rare,
         Epic,

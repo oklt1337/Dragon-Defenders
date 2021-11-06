@@ -147,7 +147,6 @@ namespace Utility.CardBuilder.Scripts
             cardName = EditorGUILayout.TextField("Card Name", cardName);
             //CardDescription
             description = EditorGUILayout.TextField("Description", description);
-
             //CardModel
             model =
                 (GameObject) EditorGUILayout.ObjectField("GameObject", model, typeof(GameObject), false);
