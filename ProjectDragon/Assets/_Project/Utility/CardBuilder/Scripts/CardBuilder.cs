@@ -288,6 +288,7 @@ namespace Utility.CardBuilder.Scripts
                         SetBaseStats(unitCard);
                         
                         goldCost = unitCard.GoldCost;
+                        limit = unitCard.Limit;
                     }
                     else
                     {
@@ -379,7 +380,7 @@ namespace Utility.CardBuilder.Scripts
 
                     break;
                 case 1:
-                    // Create Commander
+                    // Create Unit
                     guid = AssetDatabase.CreateFolder(UnitPath, newCardName);
                     path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
                     
@@ -390,10 +391,8 @@ namespace Utility.CardBuilder.Scripts
 
                     //Create Assets
                     AssetDatabase.CreateAsset(unitCard, string.Concat(path, "-Card", ".asset"));
-                    AssetDatabase.CreateAsset(unitCard.SkillTreeObj,
-                        string.Concat(path, "-SkillTree", ".asset"));
-                    AssetDatabase.CreateAsset(unitCard.AbilityDataBase,
-                        string.Concat(path, "-AbilityDataBase", ".asset"));
+                    AssetDatabase.CreateAsset(unitCard.SkillTreeObj,string.Concat(path, "-SkillTree", ".asset"));
+                    AssetDatabase.CreateAsset(unitCard.AbilityDataBase, string.Concat(path, "-AbilityDataBase", ".asset"));
                     AssetDatabase.SaveAssets();
 
                     // Set new Card as selected
@@ -405,7 +404,6 @@ namespace Utility.CardBuilder.Scripts
                         selectedCommander = index;
                         SetStats(unitCards[index]);
                     }
-
                     break;
             }
         }

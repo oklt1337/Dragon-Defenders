@@ -7,7 +7,7 @@ using UnityEngine.Video;
 
 namespace Deck_Cards.Cards.UnitCard.Scripts
 {
-    public abstract class UnitCard : BaseCard
+    public class UnitCard : BaseCard
     {
         [SerializeField] private int limit;
         [SerializeField] private int goldCost;
