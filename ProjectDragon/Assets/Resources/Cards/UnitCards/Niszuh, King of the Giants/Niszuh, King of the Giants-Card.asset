@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efe9577e88d11645b718462aecebee4, type: 3}
   m_Name: Niszuh, King of the Giants-Card
   m_EditorClassIdentifier: 
-  cardID: 0
+  cardID: 4
   cardName: Niszuh, King of the Giants
-  description: 
+  description: Swings his arm in front of him.
   model: {fileID: 0}
-  rarity: 0
-  faction: 0
+  rarity: 4
+  faction: 2
   class: 0
-  skillTreeObj: {fileID: 0}
-  abilityDataBase: {fileID: 0}
+  skillTreeObj: {fileID: 11400000, guid: af0ffa5c41960ca469181266dd6c1c33, type: 2}
+  abilityDataBase: {fileID: 11400000, guid: 358e354b7cd8eef419e627e974ac6025, type: 2}
   demo: {fileID: 0}
   icon: {fileID: 0}
-  limit: 0
-  goldCost: 0
+  limit: 1
+  goldCost: 200
