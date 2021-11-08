@@ -1,31 +1,31 @@
-using Abilities.Projectiles;
 using Abilities.Projectiles.Scripts;
 using UnityEngine;
 
 namespace Abilities.Ability.Scripts
 {
     [CreateAssetMenu(menuName = "Tools/Abilities/DamageAbility", fileName = "DamageAbility")]
-    public abstract class DamageAbilityObj : AbilityObj
+    public class DamageAbilityObj : AbilityObj
     {
         [SerializeField] private float damage;
         [SerializeField] private float attackRange;
+        [SerializeField] private float projectileSpeed;
         
         [SerializeField] private GameObject prefabProjectile;
-        [SerializeField] private DamageProjectile damageProjectile;
 
         public float Damage => damage;
-        public float AttackRange => attackRange;
+        public float AttackRange => attackRange; 
+        public float ProjectileSpeed => projectileSpeed;
         
         public DamageAbility CreateInstance()
         {
             return new DamageAbility(this);
         }
 
-        public void Cast(Transform spawnPoint, Transform target, float abilityDamage)
+        public void Cast(Transform spawnPoint, Transform target, float abilityDamage, float abilityProjectileSpeed)
         {
             //Spawn projectile
-            damageProjectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<DamageProjectile>();
-            damageProjectile.Init(target != null ? target : null, abilityDamage);
+            DamageProjectile damageProjectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<DamageProjectile>();
+            damageProjectile.Init(target != null ? target : null, abilityDamage, abilityProjectileSpeed);
         }
     }
     
@@ -33,17 +33,19 @@ namespace Abilities.Ability.Scripts
     {
         public float Damage { get; set; }
         public float AttackRange { get; set; }
+        public float ProjectileSpeed { get; set; }
 
         public DamageAbility(DamageAbilityObj abilityObj) : base(abilityObj)
         {
             Damage = abilityObj.Damage;
             AttackRange = abilityObj.AttackRange;
+            ProjectileSpeed = abilityObj.ProjectileSpeed;
         }
 
         public void Cast(Transform spawnPoint, Transform target)
         {
             var damageAbilityObj = (DamageAbilityObj) AbilityObj;
-            damageAbilityObj.Cast(spawnPoint, target, Damage);
+            damageAbilityObj.Cast(spawnPoint, target, Damage, ProjectileSpeed);
         }
     }
 }

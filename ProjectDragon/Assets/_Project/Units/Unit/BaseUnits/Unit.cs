@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
@@ -9,6 +8,7 @@ using UnityEngine;
 
 namespace Units.Unit.BaseUnits
 {
+    [RequireComponent(typeof(SphereCollider))]
     public class Unit : MonoBehaviour, IVisitor
     {
         #region Public Const Field
@@ -20,6 +20,8 @@ namespace Units.Unit.BaseUnits
         #region SerializeFields
 
         [SerializeField] private Animator animator;
+        [SerializeField] private Transform spawnPos;
+        [SerializeField] private SphereCollider sphereCollider;
         
         #endregion
 
@@ -70,6 +72,33 @@ namespace Units.Unit.BaseUnits
 
         #endregion
 
+        #region Unity Methods
+
+        private void Awake()
+        {
+            if (sphereCollider == null)
+            {
+                sphereCollider = GetComponent<SphereCollider>();
+            }
+        }
+        
+        private void OnTriggerEnter(Collider other)
+        {
+            if (ability.AbilityObj.AbilityType == AbilityType.Damage)
+            {
+                if (!other.CompareTag("Enemy")) 
+                    return;
+            
+                Cast(other.transform);
+            }
+            else
+            {
+                // Handle Buff
+            }
+        }
+
+        #endregion
+
         #region Private Methods
 
         protected virtual void Initialize(UnitCard unitCard)
@@ -85,12 +114,15 @@ namespace Units.Unit.BaseUnits
                     var damageAbilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
                     var damageAbility = damageAbilityObj.CreateInstance();
                     ability = damageAbility;
+                    sphereCollider.radius = damageAbility.AttackRange;
                     client.Visitors.Add(damageAbility);
                     break;
                 case AbilityType.Utility:
                     var utilityAbilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
                     var utilityAbility = utilityAbilityObj.CreateInstance();
                     ability = utilityAbility;
+
+                    sphereCollider.radius = utilityAbility.EffectRange;
                     client.Visitors.Add(utilityAbility);
                     break;
                 default:
@@ -99,13 +131,13 @@ namespace Units.Unit.BaseUnits
             skillTree = unitCard.SkillTreeObj.CreateInstance(client);
         }
 
-        public void Cast()
+        private void Cast(Transform target)
         {
             switch (ability.AbilityObj.AbilityType)
             {
                 case AbilityType.Damage:
                     var damageAbility = (DamageAbility) ability;
-                    damageAbility.Cast(null, null);
+                    damageAbility.Cast(spawnPos, target);
                     break;
                 case AbilityType.Utility:
                     var utilityAbility = (UtilityAbility) ability;
@@ -117,7 +149,6 @@ namespace Units.Unit.BaseUnits
         }
 
         #endregion
-
 
         #region Visitor Pattern
 

@@ -7,11 +7,28 @@ namespace Abilities.Projectiles.Scripts
     public class DamageProjectile : Projectile
     {
         private float Damage { get; set; }
-        
-        public void Init(Transform target, float damage)
+        private float Speed { get; set; }
+
+        public void Init(Transform target, float damage, float speed)
         {
             Damage = damage;
-            myRigidbody.MovePosition(target == null ? Vector3.forward : target.position);
+            Speed = speed;
+
+            MoveProjectile(target);
+        }
+
+        private void MoveProjectile(Transform target)
+        {
+            Vector3 dir;
+            if (target != null)
+            {
+                dir = (target.position - transform.position).normalized * Speed;
+            }
+            else
+            {
+                dir = (Vector3.forward - transform.position).normalized * Speed;
+            }
+            myRigidbody.velocity = dir;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -31,6 +48,8 @@ namespace Abilities.Projectiles.Scripts
                 /*var baseMapObject = other.GetComponent<Tree>();
                 baseMapObject.TakeDamage(Damage);*/
             }
+            
+            Destroy(gameObject);
         }
     }
 }
