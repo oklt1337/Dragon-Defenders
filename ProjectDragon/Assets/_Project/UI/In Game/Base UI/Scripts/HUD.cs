@@ -29,7 +29,7 @@ namespace UI.In_Game.Base_UI.Scripts
 
         public void OnClickSettings()
         {
-            
+            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.InGameSettingsScreen.gameObject.SetActive(true);
         }
     }
 }

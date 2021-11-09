@@ -4,7 +4,7 @@ using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.UI.In_Game.Commander.Scripts
+namespace UI.In_Game.Commander.Scripts
 {
     public class CommanderHUD : MonoBehaviour, ICanvas
     {

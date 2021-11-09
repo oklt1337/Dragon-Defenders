@@ -10,7 +10,6 @@ namespace UI.In_Game.Building.Scripts
     public class BuildHUD : MonoBehaviour, ICanvas
     {
         [SerializeField] private Button startWaveButton;
-        [SerializeField] private UpgradePanel upgradePanel;
 
         public event Action<GameState> OnWaveStart;
 
@@ -79,8 +78,8 @@ namespace UI.In_Game.Building.Scripts
 
         private void OpenUpgradePanel(SkillTree skillTree)
         {
-            upgradePanel.gameObject.SetActive(true);
-            upgradePanel.UpdateSkillTree(skillTree);
+            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.UpgradePanel.gameObject.SetActive(true);
+            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.UpgradePanel.UpdateSkillTree(skillTree);
         }
 
         #endregion

@@ -1,7 +1,9 @@
-using _Project.UI.In_Game.Commander.Scripts;
 using UI.In_Game.Base_UI.Scripts;
 using UI.In_Game.Building.Scripts;
+using UI.In_Game.Commander.Scripts;
+using UI.In_Game.Settings.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.In_Game.InGameCanvasManager.Scripts
 {
@@ -10,12 +12,15 @@ namespace UI.In_Game.InGameCanvasManager.Scripts
         public static InGameCanvasManager Instance;
 
         #region Private Fields
-
+        
         [SerializeField] private HUD hud;
-        [SerializeField] private BuildHUD buildHUD;
-        [SerializeField] private TowerSpawnButton[] towerSpawnButton;
-        [SerializeField] private UpgradePanel upgradePanel;
+        
+        [Header("Wave UI")]
         [SerializeField] private CommanderHUD commanderHUD;
+        
+        [Header("Build UI")]
+        [SerializeField] private BuildHUD buildHUD;
+        [SerializeField] private UpgradePanel upgradePanel;
         [SerializeField] private InGameSettingsScreen inGameSettingsScreen;
 
         #endregion
@@ -23,10 +28,11 @@ namespace UI.In_Game.InGameCanvasManager.Scripts
         #region Public Properties
 
         public HUD HUD => hud;
-        public BuildHUD BuildHUD => buildHUD;
-        public TowerSpawnButton[] TowerSpawnButton => towerSpawnButton;
-        public UpgradePanel UpgradePanel => upgradePanel;
+        
         public CommanderHUD CommanderHUD => commanderHUD;
+        
+        public BuildHUD BuildHUD => buildHUD;
+        public UpgradePanel UpgradePanel => upgradePanel;
         public InGameSettingsScreen InGameSettingsScreen => inGameSettingsScreen;
 
         #endregion
