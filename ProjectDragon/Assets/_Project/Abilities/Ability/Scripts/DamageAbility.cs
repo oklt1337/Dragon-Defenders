@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Abilities.Ability.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/DamageAbility", fileName = "DamageAbility")]
-    public class DamageAbilityObj : AbilityObj
+    public abstract class DamageAbilityObj : AbilityObj
     {
         [SerializeField] private float damage;
         [SerializeField] private float attackRange;
@@ -24,7 +23,7 @@ namespace Abilities.Ability.Scripts
         public void Cast(Transform spawnPoint, Transform target, float abilityDamage, float abilityProjectileSpeed)
         {
             //Spawn projectile
-            DamageProjectile damageProjectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<DamageProjectile>();
+            var damageProjectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<DamageProjectile>();
             damageProjectile.Init(target != null ? target : null, abilityDamage, abilityProjectileSpeed);
         }
     }
@@ -44,8 +43,12 @@ namespace Abilities.Ability.Scripts
 
         public void Cast(Transform spawnPoint, Transform target)
         {
+            if (TimeLeft > 0) 
+                return;
+            
             var damageAbilityObj = (DamageAbilityObj) AbilityObj;
             damageAbilityObj.Cast(spawnPoint, target, Damage, ProjectileSpeed);
+            Casted = true;
         }
     }
 }

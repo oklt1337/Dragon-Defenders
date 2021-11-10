@@ -15,12 +15,13 @@ namespace GamePlay.Player.PlayerModel.Scripts
     {
         #region SerializeFields
 
-        [Header("Commander")] [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
+        [Header("Commander")] 
+        [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
 
-        [Header("Cameras")] [SerializeField] private Camera buildCamera;
-        [SerializeField] private Camera commanderCamera;
+        
 
-        [Header("Handler")] [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
+        [Header("Handler")] 
+        [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
         [SerializeField] private SoundHandler.Scripts.SoundHandler soundHandler;
         [SerializeField] private InputHandler.Scripts.InputHandler inputHandler;
 
@@ -31,7 +32,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         #region Private Fields
 
-        private int _money;
+        private int money;
 
         #endregion
 
@@ -50,7 +51,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         public int Money
         {
-            get => _money;
+            get => money;
             private set
             {
                 if (value < 0)
@@ -58,12 +59,9 @@ namespace GamePlay.Player.PlayerModel.Scripts
                     value = 0;
                 }
 
-                _money = value;
+                money = value;
             }
         }
-
-        public Camera BuildCamera => buildCamera;
-        public Camera CommanderCamera => commanderCamera;
 
         #endregion
 
@@ -77,7 +75,6 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         private void Awake()
         {
-            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ChangeCamera;
             inputHandler.OnTouch += ProcessInput;
             Initialize();
         }
@@ -85,7 +82,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         private void Start()
         {
             transform.position = GameManager.Scripts.GameManager.Instance.PlayerSpawn.position;
-            inputHandler.CommanderCam = commanderCamera;
+            inputHandler.CommanderCam =  GameManager.Scripts.GameManager.Instance.CommanderCamera;
             animationHandler.Animator = commander.Animator;
         }
 
@@ -132,33 +129,6 @@ namespace GamePlay.Player.PlayerModel.Scripts
             
             var commanderCard = (CommanderCard) hashTable["Commander"];
             commander.InitializeCommander(commanderCard);
-        }
-
-        private void ChangeCamera(GameState state)
-        {
-            switch (state)
-            {
-                case GameState.Build:
-                    buildCamera.gameObject.SetActive(true);
-                    commanderCamera.gameObject.SetActive(false);
-                    break;
-                case GameState.Wave:
-                    buildCamera.gameObject.SetActive(false);
-                    commanderCamera.gameObject.SetActive(true);
-                    break;
-                case GameState.Prepare:
-                    buildCamera.gameObject.SetActive(false);
-                    commanderCamera.gameObject.SetActive(false);
-                    Debug.LogError($"GameState: {state}");
-                    break;
-                case GameState.End:
-                    buildCamera.gameObject.SetActive(false);
-                    commanderCamera.gameObject.SetActive(true);
-                    Debug.LogError($"GameState: {state}");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
-            }
         }
 
         #endregion

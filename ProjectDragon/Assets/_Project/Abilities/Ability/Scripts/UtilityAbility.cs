@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Abilities.Ability.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/UtilityAbility", fileName = "UtilityAbility")]
     public abstract class UtilityAbilityObj : AbilityObj
     {
         [SerializeField] private float effectRange;

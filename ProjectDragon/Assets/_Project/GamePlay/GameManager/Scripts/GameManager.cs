@@ -29,21 +29,30 @@ namespace GamePlay.GameManager.Scripts
         public static GameManager Instance;
 
         #region SerializedFields
+        
+        [Header("Cameras")] 
+        [SerializeField] private Camera buildCamera;
+        [SerializeField] private Camera commanderCamera;
 
-        [Header("Player")] [SerializeField] private PlayerModel player;
+        [Header("Player")] 
+        [SerializeField] private PlayerModel player;
         [SerializeField] private Transform playerSpawn;
 
-        [Header("Commander")] [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
+        [Header("Commander")] 
+        [SerializeField] private CommanderMoveIndicator commanderMoveIndicator;
 
-        [Header("Managers")] [SerializeField] private EnemySpawner enemySpawner;
+        [Header("Managers")] 
+        [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private WaveGenerator waveGenerator;
         [SerializeField] private UnitManager unitManager;
         [SerializeField] private HqManager hqManager;
 
-        [Header("Camera")] [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
+        [Header("Camera")] 
+        [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
 
-        [Header("HUDs")] [SerializeField] private HUD hud;
+        [Header("HUDs")] 
+        [SerializeField] private HUD hud;
         [SerializeField] private CommanderHUD commanderHUD;
         [SerializeField] private BuildHUD buildHUD;
 
@@ -54,20 +63,23 @@ namespace GamePlay.GameManager.Scripts
 
         #region Private Fields
 
-        private GameState _currentGameState;
+        private GameState currentGameState;
 
         #endregion
 
         #region Public Properties
+        
+        public Camera BuildCamera => buildCamera;
+        public Camera CommanderCamera => commanderCamera;
 
         public Transform PlayerSpawn => playerSpawn;
 
         public GameState CurrentGameState
         {
-            get => _currentGameState;
+            get => currentGameState;
             private set
             {
-                _currentGameState = value;
+                currentGameState = value;
                 OnGameStateChanged?.Invoke(CurrentGameState);
             }
         }
@@ -109,6 +121,7 @@ namespace GamePlay.GameManager.Scripts
             BuildHUD.OnWaveStart += ChangeState;
             enemySpawner.OnWaveSuccess += ChangeState;
             CameraTrackingShotBuildToWave.OnTrackingShotEnd += ChangeState;
+            OnGameStateChanged += ChangeCamera;
         }
 
         private void Start()
@@ -136,6 +149,33 @@ namespace GamePlay.GameManager.Scripts
         {
             ChangeState(GameState.End);
             //TODO: Show score and so on.
+        }
+        
+        private void ChangeCamera(GameState state)
+        {
+            switch (state)
+            {
+                case GameState.Build:
+                    buildCamera.gameObject.SetActive(true);
+                    commanderCamera.gameObject.SetActive(false);
+                    break;
+                case GameState.Wave:
+                    buildCamera.gameObject.SetActive(false);
+                    commanderCamera.gameObject.SetActive(true);
+                    break;
+                case GameState.Prepare:
+                    buildCamera.gameObject.SetActive(false);
+                    commanderCamera.gameObject.SetActive(false);
+                    Debug.LogError($"GameState: {state}");
+                    break;
+                case GameState.End:
+                    buildCamera.gameObject.SetActive(false);
+                    commanderCamera.gameObject.SetActive(true);
+                    Debug.LogError($"GameState: {state}");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
+            }
         }
 
         #endregion

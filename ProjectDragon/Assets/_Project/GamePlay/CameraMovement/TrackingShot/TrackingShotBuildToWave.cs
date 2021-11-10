@@ -139,12 +139,12 @@ namespace GamePlay.CameraMovement.TrackingShot
             switch (isBuildToWave)
             {
                 case true:
-                    path.m_Waypoints[0].position = playerModel.BuildCamera.transform.position;
-                    path.m_Waypoints[1].position = playerModel.CommanderCamera.transform.position;
+                    path.m_Waypoints[0].position = GameManager.Scripts.GameManager.Instance.BuildCamera.transform.position;
+                    path.m_Waypoints[1].position = GameManager.Scripts.GameManager.Instance.CommanderCamera.transform.position;
                     break;
                 case false:
-                    path.m_Waypoints[0].position = playerModel.CommanderCamera.transform.position;
-                    path.m_Waypoints[1].position = playerModel.BuildCamera.transform.position;
+                    path.m_Waypoints[0].position = GameManager.Scripts.GameManager.Instance.CommanderCamera.transform.position;
+                    path.m_Waypoints[1].position = GameManager.Scripts.GameManager.Instance.BuildCamera.transform.position;
                     break;
             }
         }
@@ -157,12 +157,12 @@ namespace GamePlay.CameraMovement.TrackingShot
             switch (isBuildToWave)
             {
                 case true:
-                    startOrtho = playerModel.BuildCamera.orthographicSize;
-                    endOrtho = playerModel.CommanderCamera.orthographicSize;
+                    startOrtho = GameManager.Scripts.GameManager.Instance.BuildCamera.orthographicSize;
+                    endOrtho = GameManager.Scripts.GameManager.Instance.CommanderCamera.orthographicSize;
                     break;
                 case false:
-                    startOrtho = playerModel.CommanderCamera.orthographicSize;
-                    endOrtho = playerModel.BuildCamera.orthographicSize;
+                    startOrtho = GameManager.Scripts.GameManager.Instance.CommanderCamera.orthographicSize;
+                    endOrtho = GameManager.Scripts.GameManager.Instance.BuildCamera.orthographicSize;
                     break;
             }
             virtualCamera.m_Lens.OrthographicSize = startOrtho;
@@ -176,12 +176,12 @@ namespace GamePlay.CameraMovement.TrackingShot
             switch (isBuildToWave)
             {
                 case true:
-                    startRotation = playerModel.BuildCamera.transform.rotation;
-                    endRotation = playerModel.CommanderCamera.transform.rotation;
+                    startRotation = GameManager.Scripts.GameManager.Instance.BuildCamera.transform.rotation;
+                    endRotation = GameManager.Scripts.GameManager.Instance.CommanderCamera.transform.rotation;
                     break;
                 case false:
-                    startRotation = playerModel.CommanderCamera.transform.rotation;
-                    endRotation = playerModel.BuildCamera.transform.rotation;
+                    startRotation = GameManager.Scripts.GameManager.Instance.CommanderCamera.transform.rotation;
+                    endRotation = GameManager.Scripts.GameManager.Instance.BuildCamera.transform.rotation;
                     break;
             }
             virtualCamera.transform.rotation = startRotation;

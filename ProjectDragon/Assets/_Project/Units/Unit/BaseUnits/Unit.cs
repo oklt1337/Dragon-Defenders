@@ -3,6 +3,7 @@ using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
+using Sirenix.OdinInspector;
 using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 
@@ -16,18 +17,18 @@ namespace Units.Unit.BaseUnits
         public const string BasePath = "Cards/UnitCards/";
 
         #endregion
-        
+
         #region SerializeFields
 
         [SerializeField] private Animator animator;
         [SerializeField] private Transform spawnPos;
         [SerializeField] private SphereCollider sphereCollider;
-        
+
         #endregion
 
         #region Private Fields
 
-        private UnitCard card;
+        [SerializeField] private UnitCard card;
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
         private SkillTree skillTree;
@@ -76,19 +77,22 @@ namespace Units.Unit.BaseUnits
 
         private void Awake()
         {
+            client = new Client();
+
             if (sphereCollider == null)
             {
                 sphereCollider = GetComponent<SphereCollider>();
             }
         }
+
         
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (ability.AbilityObj.AbilityType == AbilityType.Damage)
             {
-                if (!other.CompareTag("Enemy")) 
+                if (!other.CompareTag("Enemy"))
                     return;
-            
+
                 Cast(other.transform);
             }
             else
@@ -97,10 +101,21 @@ namespace Units.Unit.BaseUnits
             }
         }
 
+        private void Update()
+        {
+            if (ability == null)
+                return;
+
+            if (!ability.Casted && !(ability.TimeLeft > 0)) 
+                return;
+            ability.Tick(Time.deltaTime);
+        }
+
         #endregion
 
         #region Private Methods
 
+        [Button]
         protected virtual void Initialize(UnitCard unitCard)
         {
             //Base Implement
@@ -128,6 +143,7 @@ namespace Units.Unit.BaseUnits
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             skillTree = unitCard.SkillTreeObj.CreateInstance(client);
         }
 

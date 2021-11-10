@@ -6,7 +6,7 @@ namespace Abilities.VisitorPattern.Scripts
     {
         public List<IVisitor> Visitors { get; }
 
-        protected Client()
+        public Client()
         {
             Visitors = new List<IVisitor>();
         }
