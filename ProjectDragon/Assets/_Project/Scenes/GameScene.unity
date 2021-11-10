@@ -12025,6 +12025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6287fd758ebcc439f3b0f170ae1a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildCamera: {fileID: 761725025}
+  commanderCamera: {fileID: 549917467}
   player: {fileID: 2036250212}
   playerSpawn: {fileID: 1904575437}
   commanderMoveIndicator: {fileID: 576650401}
@@ -13301,8 +13303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commander: {fileID: 2010916032}
-  buildCamera: {fileID: 761725025}
-  commanderCamera: {fileID: 549917467}
   animationHandler: {fileID: 2036250215}
   soundHandler: {fileID: 2036250214}
   inputHandler: {fileID: 2036250216}

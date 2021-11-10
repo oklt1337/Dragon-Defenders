@@ -52,7 +52,13 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
             if (health * 2 <= maxHealth && !hasBeenBoosted)
                 SpeedUp();
         }
-        
+
+        public override void Stun(float stunTime)
+        {
+            base.Stun(stunTime);
+            Fsm.Transition(Fsm.EndureStunState);
+        }
+
         #endregion
     }
 }

@@ -17,19 +17,7 @@ namespace AI.States.Base_Grounded_Enemies_States
 
         public override void CheckTransition()
         {
-            if (owner.IsStunned)
-            {
-                FiniteStateMachine.Transition(FiniteStateMachine.EndureStunState);
-            }
             
-            if (owner is Enemies.Grounded_Enemies.Runner.Scripts.Runner runner)
-            {
-                
-            }
-            //else if (owner is )
-            {
-                
-            }
         }
 
         public override void OnEnter()

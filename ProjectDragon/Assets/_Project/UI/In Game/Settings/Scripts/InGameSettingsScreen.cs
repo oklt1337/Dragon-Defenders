@@ -1,3 +1,5 @@
+using GamePlay.GameManager.Scripts;
+using GamePlay.Player.PlayerModel.Scripts;
 using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,11 +17,13 @@ namespace UI.In_Game.Settings.Scripts
         private void OnEnable()
         {
             CanvasManager.Instance.Subscribe(this);
+            GameManager.Instance.PlayerModel.ChangeState(State.Blocked);
         }
 
         private void OnDisable()
         {
             CanvasManager.Instance.Unsubscribe(this);
+            GameManager.Instance.PlayerModel.ChangeState(State.Idle);
         }
 
         #endregion

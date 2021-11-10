@@ -14,10 +14,7 @@ namespace AI.States.Base_Flying_Enemies
         
         public override void CheckTransition()
         {
-            if (owner.IsStunned)
-            {
-                FiniteStateMachine.Transition(FiniteStateMachine.EndureStunState);
-            }
+            
         }
 
         public override void OnEnter()

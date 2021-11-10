@@ -12,5 +12,12 @@ namespace AI.Enemies.Flying_Enemies.Flyer.Scripts
             
             Fsm.Initialize(Fsm.FlyToHqState);
         }
+
+        public override void Stun(float stunTime)
+        {
+            base.Stun(stunTime);
+            
+            Fsm.Transition(Fsm.EndureStunState);
+        }
     }
 }

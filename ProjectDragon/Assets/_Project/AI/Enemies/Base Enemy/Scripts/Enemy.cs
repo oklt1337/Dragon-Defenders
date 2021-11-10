@@ -7,7 +7,6 @@ namespace AI.Enemies.Base_Enemy
     {
         #region Private Fields
 
-        private bool isStunned;
         private float stunDuration;
 
         #endregion
@@ -38,8 +37,7 @@ namespace AI.Enemies.Base_Enemy
 
         #region Public Properties
 
-        public bool IsStunned => isStunned;
-        
+        public float StunDuration => stunDuration;
         public string EnemyName => enemyName;
         public string EnemyPath => enemyPath;
         public int EnemyCombatScore => enemyCombatScore;
@@ -91,10 +89,9 @@ namespace AI.Enemies.Base_Enemy
                 Death();
         }
         
-        public void Stun(float stunTime)
+        public virtual void Stun(float stunTime)
         {
             stunDuration = stunTime;
-            isStunned = true;
         }
 
         /// <summary>
@@ -103,9 +100,6 @@ namespace AI.Enemies.Base_Enemy
         public void WaitForStun()
         {
             stunDuration -= Time.deltaTime;
-
-            if (stunDuration <= 0)
-                isStunned = false;
         }
 
         #endregion

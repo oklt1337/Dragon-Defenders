@@ -18,7 +18,7 @@ namespace AI.States.Base_Enemy_States
 
         public override void CheckTransition()
         {
-            if (owner.IsStunned)
+            if (owner.StunDuration > 0)
                 return;
 
             if (owner is BaseGroundedEnemies)
