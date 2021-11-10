@@ -6,7 +6,7 @@ namespace GamePlay.CommanderWaypoint.Scripts
     public class CommanderMoveIndicator : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
-        private GameObject _initializedObj;
+        private GameObject initializedObj;
         
         private void Awake()
         {
@@ -15,9 +15,9 @@ namespace GamePlay.CommanderWaypoint.Scripts
 
         private void DeletePoint()
         {
-            if (_initializedObj != null)
+            if (initializedObj != null)
             {
-                Destroy(_initializedObj);
+                Destroy(initializedObj);
             }
         }
         
@@ -32,7 +32,7 @@ namespace GamePlay.CommanderWaypoint.Scripts
         public void InitializeMovePoint(Vector3 position)
         {
             DeletePoint();
-            _initializedObj =  Instantiate(prefab, position, Quaternion.identity, transform);
+            initializedObj =  Instantiate(prefab, position, Quaternion.identity, transform);
         }
     }
 }

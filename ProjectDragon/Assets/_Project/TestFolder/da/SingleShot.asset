@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: SingleShot
   m_EditorClassIdentifier: 
   abilityType: 0
-  damage: 0
-  attackRange: 0
-  projectileSpeed: 0
-  prefabProjectile: {fileID: 0}
+  coolDown: 5
+  damage: 1
+  attackRange: 10
+  projectileSpeed: 1
+  prefabProjectile: {fileID: 5211328339153170760, guid: 800cc8302b58d0c488047f62206562ea,
+    type: 3}

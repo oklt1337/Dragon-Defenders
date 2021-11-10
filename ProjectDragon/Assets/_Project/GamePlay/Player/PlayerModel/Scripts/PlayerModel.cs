@@ -8,17 +8,21 @@ using UnityEngine;
 
 namespace GamePlay.Player.PlayerModel.Scripts
 {
-    /// <summary>
-    /// Author: Christopher Zelch
-    /// </summary>
+    public enum State
+    {
+        Idle,
+        Move,
+        Blocked
+    }
     public class PlayerModel : MonoBehaviour
     {
         #region SerializeFields
-
+        
+        [Header("State")]
+        [SerializeField] private State currentState;
+        
         [Header("Commander")] 
         [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
-
-        
 
         [Header("Handler")] 
         [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
@@ -35,19 +39,13 @@ namespace GamePlay.Player.PlayerModel.Scripts
         private int money;
 
         #endregion
-
-        #region Protected Fields
-
-        #endregion
-
-        #region Public Fields
-
-        #endregion
+        
 
         #region Public Properties
 
         public Commander.BaseCommanderClass.Scripts.Commander Commander => commander;
         public InputHandler.Scripts.InputHandler InputHandler => inputHandler;
+        public State CurrentState => currentState;
 
         public int Money
         {
@@ -68,6 +66,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         #region Events
 
         public event Action<SkillTree> OnTryUpgradeSkill;
+        public event Action<State> OnPlayerStateChanged;
 
         #endregion
 
@@ -77,6 +76,8 @@ namespace GamePlay.Player.PlayerModel.Scripts
         {
             inputHandler.OnTouch += ProcessInput;
             Initialize();
+            inputHandler.Initialize(this);
+            commander.Initialize(this);
         }
 
         private void Start()
@@ -153,6 +154,12 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
             Money += amount;
             return true;
+        }
+
+        public void ChangeState(State newState)
+        {
+            currentState = newState;
+            OnPlayerStateChanged?.Invoke(currentState);
         }
 
         #endregion

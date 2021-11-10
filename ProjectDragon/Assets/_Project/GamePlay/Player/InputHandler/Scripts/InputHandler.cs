@@ -1,26 +1,17 @@
 using System;
 using System.Collections.Generic;
+using GamePlay.Player.PlayerModel.Scripts;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace GamePlay.Player.InputHandler.Scripts
 {
     public class InputHandler : MonoBehaviour
     {
-        #region SerializeFields
-
-        #endregion
-
         #region Private Fields
 
-        private Vector3 _mousePos;
-
-        #endregion
-
-        #region Protected Fields
-
-        #endregion
-
-        #region Public Fields
+        private Vector3 mousePos;
+        private PlayerModel.Scripts.PlayerModel playerModel;
 
         #endregion
 
@@ -40,6 +31,9 @@ namespace GamePlay.Player.InputHandler.Scripts
         #region Unity Methods
         private void Update()
         {
+            if (playerModel.CurrentState == State.Blocked)
+                return;
+            
             if (Input.touchSupported)
             {
                 switch (Input.touchCount)
@@ -90,12 +84,13 @@ namespace GamePlay.Player.InputHandler.Scripts
 
         #endregion
 
-        #region Protected Methods
-
-        #endregion
-
         #region Public Methods
 
+        public void Initialize(PlayerModel.Scripts.PlayerModel model)
+        {
+            playerModel = model;
+        }
+        
         #endregion
     }
 }

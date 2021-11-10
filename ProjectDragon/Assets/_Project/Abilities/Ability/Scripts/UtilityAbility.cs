@@ -32,8 +32,12 @@ namespace Abilities.Ability.Scripts
             EffectRange = abilityObj.EffectRange;
         }
         
-        public void Cast(Transform spawnPoint)
+        public override void Cast(Transform spawnPoint, Transform target)
         {
+            if (TimeLeft > 0) 
+                return;
+            Casted = true;
+            
             var utilityAbilityObj = (UtilityAbilityObj) AbilityObj;
             utilityAbilityObj.Cast(spawnPoint, EffectRange);
         }

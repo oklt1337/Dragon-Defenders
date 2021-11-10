@@ -1,6 +1,8 @@
 using System;
 using Abilities.Ability.Scripts;
+using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.VisitorPattern.Scripts;
+using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
 using Sirenix.OdinInspector;
@@ -98,6 +100,7 @@ namespace Units.Unit.BaseUnits
             else
             {
                 // Handle Buff
+                //ability.Cast(spawnPos, null);
             }
         }
 
@@ -122,45 +125,36 @@ namespace Units.Unit.BaseUnits
             card = unitCard;
             faction = unitCard.Faction;
             unitClass = unitCard.Class;
-
-            switch (unitCard.abilityDataBase.Abilities[0].AbilityType)
-            {
-                case AbilityType.Damage:
-                    var damageAbilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                    var damageAbility = damageAbilityObj.CreateInstance();
-                    ability = damageAbility;
-                    sphereCollider.radius = damageAbility.AttackRange;
-                    client.Visitors.Add(damageAbility);
-                    break;
-                case AbilityType.Utility:
-                    var utilityAbilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                    var utilityAbility = utilityAbilityObj.CreateInstance();
-                    ability = utilityAbility;
-
-                    sphereCollider.radius = utilityAbility.EffectRange;
-                    client.Visitors.Add(utilityAbility);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
+            CreateAbility(unitCard);
             skillTree = unitCard.SkillTreeObj.CreateInstance(client);
+        }
+
+        private void CreateAbility(BaseCard unitCard)
+        {
+            var type = unitCard.abilityDataBase.Abilities[0].GetType();
+            if (type == typeof(SingleShotAbilityObj))
+            {
+                var abilityObj = (SingleShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
+            }
+            else if (type == typeof(UtilityAbility))
+            {
+                var utilityAbilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var utilityAbility = utilityAbilityObj.CreateInstance();
+                ability = utilityAbility;
+                sphereCollider.radius = utilityAbility.EffectRange;
+            }
+            client.Visitors.Add(ability);
         }
 
         private void Cast(Transform target)
         {
-            switch (ability.AbilityObj.AbilityType)
+            var type = ability.GetType();
+            if (type == typeof(SingleShotAbility))
             {
-                case AbilityType.Damage:
-                    var damageAbility = (DamageAbility) ability;
-                    damageAbility.Cast(spawnPos, target);
-                    break;
-                case AbilityType.Utility:
-                    var utilityAbility = (UtilityAbility) ability;
-                    utilityAbility.Cast(transform);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                ((SingleShotAbility) ability).Cast(spawnPos, target);
             }
         }
 

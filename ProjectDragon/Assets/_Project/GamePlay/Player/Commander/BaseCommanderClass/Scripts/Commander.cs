@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Abilities.Ability.Scripts;
+using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using AI.Enemies.Base_Enemy;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using Faction;
 using GamePlay.GameManager.Scripts;
+using GamePlay.Player.PlayerModel.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,12 +17,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
     public class Commander : MonoBehaviour
     {
-        public enum State
-        {
-            Idle,
-            Move
-        }
-
         #region SerializeFields
 
         [SerializeField] private NavMeshAgent navMeshAgent;
@@ -30,22 +26,27 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Fields
 
-        [Header("Basic")] private string commanderName;
+        private PlayerModel.Scripts.PlayerModel playerModel;
+
+        [Header("Basic")] 
+        private string commanderName;
         private GameObject commanderObj;
 
-        [Header("Stats")] private CommanderStats.Scripts.CommanderStats commanderStats;
+        [Header("Stats")]
+        private CommanderStats.Scripts.CommanderStats commanderStats;
         private SkillTree skillTree;
         private List<Ability> abilities = new List<Ability>();
         private Client client;
 
-        [Header("Runtime")] private bool dyingBreath;
+        [Header("Runtime")] 
+        private bool dyingBreath;
         private byte rank;
         private byte level;
         private float experience;
-        private State currentState;
         private const float MINDamage = 10f;
 
-        [Header("Movement")] private Coroutine movementCo;
+        [Header("Movement")] 
+        private Coroutine movementCo;
         private Vector3 destination;
 
         #endregion
@@ -118,7 +119,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         private void Awake()
         {
-            currentState = State.Idle;
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
         }
 
@@ -141,7 +141,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 switch (ability.AbilityType)
                 {
                     case AbilityType.Damage:
-                        var damageAbilityObj = (DamageAbilityObj) ability;
+                        var damageAbilityObj = (SingleShotAbilityObj) ability;
                         var damageAbility = damageAbilityObj.CreateInstance();
                         abilities.Add(damageAbility);
                         client.Visitors.Add(damageAbility);
@@ -177,6 +177,11 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             SetStats(commanderCard);
         }
+        
+        internal void Initialize(PlayerModel.Scripts.PlayerModel model)
+        {
+            playerModel = model;
+        }
 
         #endregion
 
@@ -188,7 +193,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             {
                 destination = moveTo;
                 GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(destination);
-                currentState = State.Move;
+                playerModel.ChangeState(State.Move);
             }
             else
             {

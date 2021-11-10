@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
   m_Name: da-AbilityDataBase
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 974928f7ff3d79d44bf510f6cfad49f2, type: 2}

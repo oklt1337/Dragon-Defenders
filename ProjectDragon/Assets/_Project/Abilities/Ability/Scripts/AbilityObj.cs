@@ -48,5 +48,7 @@ namespace Abilities.Ability.Scripts
                 TimeLeft -= deltaTime;
             }
         }
+
+        public abstract void Cast(Transform spawnPoint, Transform target);
     }
 }
