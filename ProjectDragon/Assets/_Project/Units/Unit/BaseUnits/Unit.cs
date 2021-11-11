@@ -7,12 +7,13 @@ using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
 using Sirenix.OdinInspector;
 using SkillSystem.SkillTree.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Units.Unit.BaseUnits
 {
     [RequireComponent(typeof(SphereCollider))]
-    public class Unit : MonoBehaviour, IVisitor
+    public sealed class Unit : MonoBehaviour, IVisitor
     {
         #region Public Const Field
 
@@ -118,17 +119,6 @@ namespace Units.Unit.BaseUnits
 
         #region Private Methods
 
-        [Button]
-        protected virtual void Initialize(UnitCard unitCard)
-        {
-            //Base Implement
-            card = unitCard;
-            faction = unitCard.Faction;
-            unitClass = unitCard.Class;
-            CreateAbility(unitCard);
-            skillTree = unitCard.SkillTreeObj.CreateInstance(client);
-        }
-
         private void CreateAbility(BaseCard unitCard)
         {
             var type = unitCard.abilityDataBase.Abilities[0].GetType();
@@ -165,6 +155,17 @@ namespace Units.Unit.BaseUnits
         public void Visit(Node node)
         {
             node.Accept(this);
+        }
+        
+        [Button]
+        public void Initialize(UnitCard unitCard)
+        {
+            //Base Implement
+            card = unitCard;
+            faction = unitCard.Faction;
+            unitClass = unitCard.Class;
+            CreateAbility(unitCard);
+            skillTree = unitCard.SkillTreeObj.CreateInstance(client);
         }
 
         #endregion
