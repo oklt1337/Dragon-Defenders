@@ -1,5 +1,7 @@
 using System;
+using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.ProfilesModels;
 using UnityEngine;
 
 namespace _Project.Network.PlayFab.Scripts
