@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
@@ -69,6 +70,34 @@ namespace Deck_Cards.Utility.Scripts
                     matches.Add(card);
                 }
             });
+            return matches;
+        }
+
+        #endregion
+
+        #region Sort
+
+        public static List<BaseCard> SortCommandersByFaction(IEnumerable<BaseCard> cards)
+        {
+            var matches = cards.OrderBy(card => card.faction).ToList();
+            return matches;
+        }
+        
+        public static List<BaseCard> SortCommandersByClass(IEnumerable<BaseCard> cards)
+        {
+            var matches = cards.OrderBy(card => card.Class).ToList();
+            return matches;
+        }
+        
+        public static List<BaseCard> SortCommandersByName(IEnumerable<BaseCard> cards)
+        {
+            var matches = cards.OrderBy(card => card.CardName).ToList();
+            return matches;
+        }
+        
+        public static List<BaseCard> SortCommandersByRarity(IEnumerable<BaseCard> cards)
+        {
+            var matches = cards.OrderBy(card => card.Rarity).ToList();
             return matches;
         }
 
