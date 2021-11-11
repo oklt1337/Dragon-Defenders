@@ -34,7 +34,7 @@ namespace Deck_Cards.Utility.Scripts
 
         #region Filter
 
-        public static List<BaseCard> FilterCommandersByFaction(ClassAndFaction.Faction faction, List<BaseCard> cards)
+        public static List<BaseCard> FilterByFaction(ClassAndFaction.Faction faction, List<BaseCard> cards)
         {
             var matches = new List<BaseCard>();
             cards.ForEach(card =>
@@ -47,7 +47,7 @@ namespace Deck_Cards.Utility.Scripts
             return matches;
         }
         
-        public static List<BaseCard> FilterCommandersByClass(ClassAndFaction.Class cClass, List<BaseCard> cards)
+        public static List<BaseCard> FilterByClass(ClassAndFaction.Class cClass, List<BaseCard> cards)
         {
             var matches = new List<BaseCard>();
             cards.ForEach(card =>
@@ -60,7 +60,7 @@ namespace Deck_Cards.Utility.Scripts
             return matches;
         }
         
-        public static List<BaseCard> FilterCommandersByRarity(List<Rarity> rarities, List<BaseCard> cards)
+        public static List<BaseCard> FilterByRarity(List<Rarity> rarities, List<BaseCard> cards)
         {
             var matches = new List<BaseCard>();
             cards.ForEach(card =>
@@ -72,32 +72,51 @@ namespace Deck_Cards.Utility.Scripts
             });
             return matches;
         }
+        
+        public static List<UnitCard> FilterUnitCardsByLimit(List<int> limits, List<UnitCard> cards)
+        {
+            var matches = new List<UnitCard>();
+            cards.ForEach(card =>
+            {
+                if (limits.Contains(card.Limit))
+                {
+                    matches.Add(card);
+                }
+            });
+            return matches;
+        }
 
         #endregion
 
         #region Sort
 
-        public static List<BaseCard> SortCommandersByFaction(IEnumerable<BaseCard> cards)
+        public static List<BaseCard> SortByFaction(IEnumerable<BaseCard> cards)
         {
             var matches = cards.OrderBy(card => card.faction).ToList();
             return matches;
         }
         
-        public static List<BaseCard> SortCommandersByClass(IEnumerable<BaseCard> cards)
+        public static List<BaseCard> SortByClass(IEnumerable<BaseCard> cards)
         {
             var matches = cards.OrderBy(card => card.Class).ToList();
             return matches;
         }
         
-        public static List<BaseCard> SortCommandersByName(IEnumerable<BaseCard> cards)
+        public static List<BaseCard> SortByName(IEnumerable<BaseCard> cards)
         {
             var matches = cards.OrderBy(card => card.CardName).ToList();
             return matches;
         }
         
-        public static List<BaseCard> SortCommandersByRarity(IEnumerable<BaseCard> cards)
+        public static List<BaseCard> SortByRarity(IEnumerable<BaseCard> cards)
         {
             var matches = cards.OrderBy(card => card.Rarity).ToList();
+            return matches;
+        }
+        
+        public static List<UnitCard> SortUnitCardsByLimit(IEnumerable<UnitCard> cards)
+        {
+            var matches = cards.OrderBy(card => card.Limit).ToList();
             return matches;
         }
 
