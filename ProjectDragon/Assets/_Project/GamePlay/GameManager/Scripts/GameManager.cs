@@ -2,14 +2,18 @@ using System;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
 using _Project.GamePlay.Spawning.WaveManager.Scripts;
+using Deck_Cards.DeckManager.Scripts;
+using Deck_Cards.Decks.Scripts;
 using Dreamteck.Splines;
 using GamePlay.CameraMovement.TrackingShot;
 using GamePlay.CommanderWaypoint.Scripts;
 using GamePlay.HQManager.Scripts;
 using GamePlay.Player.PlayerModel.Scripts;
+using Photon.Pun;
 using UI.In_Game.Base_UI.Scripts;
 using UI.In_Game.Building.Scripts;
 using UI.In_Game.Commander.Scripts;
+using UI.In_Game.InGameCanvasManager.Scripts;
 using Units.Unitmanager;
 using UnityEngine;
 
@@ -102,6 +106,7 @@ namespace GamePlay.GameManager.Scripts
         #region Events
 
         public event Action<GameState> OnGameStateChanged;
+        public event Action<Deck> OnDeckSet;
 
         #endregion
 
@@ -127,6 +132,7 @@ namespace GamePlay.GameManager.Scripts
         private void Start()
         {
             CurrentGameState = GameState.Build;
+            OnDeckSet?.Invoke(DeckManager.Instance.Decks[(int) PhotonNetwork.LocalPlayer.CustomProperties["PlayDeck"]]);
         }
 
         #endregion
