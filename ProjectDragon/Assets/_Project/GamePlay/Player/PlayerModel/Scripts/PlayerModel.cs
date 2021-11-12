@@ -1,5 +1,6 @@
 using System;
 using Deck_Cards.Cards.CommanderCard.Scripts;
+using Deck_Cards.Decks.Scripts;
 using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using SkillSystem.SkillTree.Scripts;
@@ -75,7 +76,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         private void Awake()
         {
             inputHandler.OnTouch += ProcessInput;
-            Initialize();
+            GameManager.Scripts.GameManager.Instance.OnDeckSet += Initialize;
             inputHandler.Initialize(this);
             commander.Initialize(this);
         }
@@ -93,7 +94,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         private void ProcessInput(Ray ray)
         {
-            if (!Physics.Raycast(ray, out RaycastHit hit))
+            if (!Physics.Raycast(ray, out var hit))
                 return;
 
             if (hit.collider.CompareTag("Enemy") &&
@@ -122,14 +123,9 @@ namespace GamePlay.Player.PlayerModel.Scripts
             }
         }
 
-        private void Initialize()
+        private void Initialize(Deck deck)
         {
-            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
-            if (!hashTable.ContainsKey("Commander"))
-                return;
-            
-            var commanderCard = (CommanderCard) hashTable["Commander"];
-            commander.InitializeCommander(commanderCard);
+            commander.InitializeCommander(deck.CommanderCard);
         }
 
         #endregion
