@@ -3,9 +3,14 @@ using Deck_Cards.Cards.CommanderCard.Scripts;
 using Deck_Cards.Decks.Scripts;
 using GamePlay.GameManager.Scripts;
 using Photon.Pun;
+using Sirenix.OdinInspector;
 using SkillSystem.SkillTree.Scripts;
-using Units.Unit.BaseUnits;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Windows;
+using Unit = Units.Unit.BaseUnits.Unit;
 
 namespace GamePlay.Player.PlayerModel.Scripts
 {
@@ -77,15 +82,12 @@ namespace GamePlay.Player.PlayerModel.Scripts
         {
             inputHandler.OnTouch += ProcessInput;
             GameManager.Scripts.GameManager.Instance.OnDeckSet += Initialize;
-            inputHandler.Initialize(this);
-            commander.Initialize(this);
         }
 
         private void Start()
         {
             transform.position = GameManager.Scripts.GameManager.Instance.PlayerSpawn.position;
             inputHandler.CommanderCam =  GameManager.Scripts.GameManager.Instance.CommanderCamera;
-            animationHandler.Animator = commander.Animator;
         }
 
         #endregion
@@ -100,7 +102,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
             if (hit.collider.CompareTag("Enemy") &&
                 GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
             {
-                commander.Attack(hit.transform);
+                commander.AutoAttack(hit.transform);
             }
             else if (hit.collider.CompareTag("Ground") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
@@ -122,10 +124,24 @@ namespace GamePlay.Player.PlayerModel.Scripts
                 OnTryUpgradeSkill?.Invoke(commander.SkillTree);
             }
         }
-
+        
         private void Initialize(Deck deck)
         {
+            var fullPath = AssetDatabase.GetAssetPath(deck.CommanderCard.Model.GetInstanceID());
+            fullPath = fullPath.Remove(0, 17);
+            var path = fullPath.Split('.');
+            var myTransform = transform;
+
+            var commanderObj = PhotonNetwork.Instantiate(path[0], myTransform.position, Quaternion.identity);
+            commander = commanderObj.GetComponent<Commander.BaseCommanderClass.Scripts.Commander>();
+            commander.transform.parent = myTransform;
+            commander.NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
             commander.InitializeCommander(deck.CommanderCard);
+            
+            //Init Rest
+            inputHandler.Initialize(this);
+            commander.Initialize(this);
+            animationHandler.Animator = commander.Animator;
         }
 
         #endregion

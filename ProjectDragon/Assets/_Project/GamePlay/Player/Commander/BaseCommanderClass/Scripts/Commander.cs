@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
+using Abilities.Projectiles.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using AI.Enemies.Base_Enemy;
 using Deck_Cards.Cards.CommanderCard.Scripts;
-using Faction;
 using GamePlay.GameManager.Scripts;
 using GamePlay.Player.PlayerModel.Scripts;
 using SkillSystem.SkillTree.Scripts;
@@ -25,18 +24,18 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #endregion
 
         #region Private Fields
-
+        
+        [Header("PlayerModel")]
         private PlayerModel.Scripts.PlayerModel playerModel;
 
         [Header("Basic")] 
         private string commanderName;
-        private GameObject commanderObj;
 
         [Header("Stats")]
         private CommanderStats.Scripts.CommanderStats commanderStats;
         private SkillTree skillTree;
         private List<Ability> abilities = new List<Ability>();
-        private Client client;
+        private readonly Client client = new Client();
 
         [Header("Runtime")] 
         private bool dyingBreath;
@@ -52,17 +51,16 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #endregion
 
         #region Public Properties
+        
+        internal NavMeshAgent NavMeshAgent
+        {
+            set => navMeshAgent = value;
+        }
 
         public string CommanderName
         {
             get => commanderName;
             private set => commanderName = value;
-        }
-
-        public GameObject CommanderObj
-        {
-            get => commanderObj;
-            private set => commanderObj = value;
         }
 
         public CommanderStats.Scripts.CommanderStats CommanderStats
@@ -129,7 +127,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void SetStats(CommanderCard commanderCard)
         {
             commanderName = commanderCard.CardName;
-            commanderObj = commanderCard.Model;
 
             commanderStats = new CommanderStats.Scripts.CommanderStats(commanderCard.Faction, commanderCard.Class,
                 commanderCard.Health, commanderCard.Mana, commanderCard.AttackDamageModifier, commanderCard.Defense,
@@ -201,11 +198,24 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             }
         }
 
-        public void Attack(Component target)
+        public void AutoAttack(Component target)
         {
-            Debug.Log(target.name);
-            //abilities[0].AbilityObj.Cast(transform, target.transform);
-            target.gameObject.GetComponent<Enemy>().TakeDamage(10);
+            abilities[0].Cast(transform, target.transform, Caster.Commander);
+        }
+        
+        public void Attack1(Component target)
+        {
+            abilities[1].Cast(transform, target.transform, Caster.Commander);
+        }
+        
+        public void Attack2(Component target)
+        {
+            abilities[2].Cast(transform, target.transform, Caster.Commander);
+        }
+        
+        public void Attack3(Component target)
+        {
+            abilities[3].Cast(transform, target.transform, Caster.Commander);
         }
 
         public void TakeDamage(float damage)

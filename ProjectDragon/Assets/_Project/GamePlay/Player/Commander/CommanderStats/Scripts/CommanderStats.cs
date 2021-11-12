@@ -1,9 +1,11 @@
+using System;
 using Abilities.VisitorPattern.Scripts;
 using Faction;
 using SkillSystem.SkillTree.Scripts;
 
 namespace GamePlay.Player.Commander.CommanderStats.Scripts
 {
+    [Serializable]
     public class CommanderStats : IVisitor
     {
         public CommanderStats(ClassAndFaction.Faction faction, ClassAndFaction.Class @class, float health, float mana,
