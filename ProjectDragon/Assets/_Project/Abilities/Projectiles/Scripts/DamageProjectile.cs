@@ -56,7 +56,7 @@ namespace Abilities.Projectiles.Scripts
                     if (other.CompareTag("Enemy"))
                     {
                         var enemy = other.GetComponent<Enemy>();
-                        //enemy.TakeDamage(Damage);
+                        enemy.TakeDamage(Damage);
                         Destroy(gameObject);
                     }
                     else if (other.CompareTag("Breakable"))

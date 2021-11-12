@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
 using _Project.GamePlay.Spawning.WaveManager.Scripts;
+using Deck_Cards.Cards.BaseCards.Scripts;
+using Deck_Cards.Cards.UnitCard.Scripts;
 using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
 using Dreamteck.Splines;
@@ -69,6 +72,8 @@ namespace GamePlay.GameManager.Scripts
 
         private GameState currentGameState;
 
+        private Dictionary<UnitCard, int> placedUnits;
+
         #endregion
 
         #region Public Properties
@@ -100,6 +105,7 @@ namespace GamePlay.GameManager.Scripts
         public CommanderHUD CommanderHUD => commanderHUD;
         public BuildHUD BuildHUD => buildHUD;
         public SplineComputer SplineComputer => splineComputer;
+        public Dictionary<UnitCard, int> PlacedUnits => placedUnits;
 
         #endregion
 
@@ -182,6 +188,30 @@ namespace GamePlay.GameManager.Scripts
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
+        }
+
+        #endregion
+
+        #region Public Methods
+        
+        public bool AddPlacedUnit(UnitCard unitCard)
+        {
+            if (!placedUnits.ContainsKey(unitCard)) 
+                return false;
+            if (placedUnits[unitCard] >= unitCard.Limit) 
+                return false;
+            placedUnits[unitCard]++;
+            return true;
+        }
+        
+        public bool RemovePlacedUnit(UnitCard unitCard)
+        {
+            if (!placedUnits.ContainsKey(unitCard)) 
+                return false;
+            if (placedUnits[unitCard] <= 0) 
+                return false;
+            placedUnits[unitCard]--;
+            return true;
         }
 
         #endregion

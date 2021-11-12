@@ -1,4 +1,5 @@
 ﻿using Abilities.Ability.Scripts;
+using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using UnityEngine;
 
