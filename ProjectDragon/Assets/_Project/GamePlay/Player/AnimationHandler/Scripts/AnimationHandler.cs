@@ -4,21 +4,9 @@ namespace GamePlay.Player.AnimationHandler.Scripts
 {
     public class AnimationHandler : MonoBehaviour
     {
-        #region SerializeFields
-
-        #endregion
-
         #region Private Fields
 
-        private Animator _animator;
-
-        #endregion
-
-        #region Protected Fields
-
-        #endregion
-
-        #region Public Fields
+        private Animator animator;
 
         #endregion
 
@@ -26,17 +14,9 @@ namespace GamePlay.Player.AnimationHandler.Scripts
         
         public Animator Animator
         {
-            get => _animator;
-            set => _animator = value;
+            get => animator;
+            set => animator = value;
         }
-
-        #endregion
-
-        #region Events
-
-        #endregion
-
-        #region Unity Methods
 
         #endregion
 
@@ -46,14 +26,6 @@ namespace GamePlay.Player.AnimationHandler.Scripts
         {
             
         }
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Public Methods
 
         #endregion
     }
