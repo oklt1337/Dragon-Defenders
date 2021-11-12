@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 0
   cardName: adad
   description: 
-  model: {fileID: 3599731149031926623, guid: 40cce3a91c8a40545a83a6f44345cc8a, type: 3}
+  model: {fileID: 3742108987610959377, guid: 09466fb5bb393d84396db3fc521a85a3, type: 3}
   rarity: 0
   faction: 0
   class: 0
@@ -23,8 +23,8 @@ MonoBehaviour:
   abilityDataBase: {fileID: 0}
   demo: {fileID: 0}
   icon: {fileID: 0}
-  health: 0
-  mana: 0
-  attackDamageModifier: 0
-  defense: 0
-  speed: 0
+  health: 13131
+  mana: 3113
+  attackDamageModifier: 11
+  defense: 31
+  speed: 1
