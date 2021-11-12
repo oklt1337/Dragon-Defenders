@@ -1,6 +1,7 @@
 using System;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
+using Abilities.Projectiles.Scripts;
 using AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies.Scripts;
 using GamePlay.GameManager.Scripts;
 using UnityEngine;
@@ -61,7 +62,7 @@ namespace AI.Enemies.Grounded_Enemies.Grounded_Attacker.Scripts
             if (attack == null)
                 return;
 
-            attack.Cast(abilitySpawnPosition, GameManager.Instance.PlayerModel.Commander.transform);
+            attack.Cast(abilitySpawnPosition, GameManager.Instance.PlayerModel.Commander.transform, Caster.Enemy);
             
             if (!attack.Casted && !(attack.TimeLeft > 0)) 
                 return;

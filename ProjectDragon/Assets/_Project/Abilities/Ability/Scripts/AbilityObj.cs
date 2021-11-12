@@ -1,3 +1,4 @@
+using Abilities.Projectiles.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
@@ -49,6 +50,6 @@ namespace Abilities.Ability.Scripts
             }
         }
 
-        public abstract void Cast(Transform spawnPoint, Transform target);
+        public abstract void Cast(Transform spawnPoint, Transform target, Caster caster);
     }
 }

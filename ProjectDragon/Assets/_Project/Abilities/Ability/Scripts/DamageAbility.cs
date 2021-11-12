@@ -31,7 +31,7 @@ namespace Abilities.Ability.Scripts
             ProjectileSpeed = abilityObj.ProjectileSpeed;
         }
 
-        public override void Cast(Transform spawnPoint, Transform target)
+        public override void Cast(Transform spawnPoint, Transform target, Caster caster)
         {
             if (TimeLeft > 0) 
                 return;

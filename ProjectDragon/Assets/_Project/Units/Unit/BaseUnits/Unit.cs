@@ -1,6 +1,7 @@
 using System;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
+using Abilities.Projectiles.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
@@ -144,7 +145,7 @@ namespace Units.Unit.BaseUnits
             var type = ability.GetType();
             if (type == typeof(SingleShotAbility))
             {
-                ((SingleShotAbility) ability).Cast(spawnPos, target);
+                ((SingleShotAbility) ability).Cast(spawnPos, target, Caster.Unit);
             }
         }
 
