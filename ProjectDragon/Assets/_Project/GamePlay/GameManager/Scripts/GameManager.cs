@@ -129,13 +129,10 @@ namespace GamePlay.GameManager.Scripts
             OnGameStateChanged += ChangeCamera;
         }
 
-
-        [SerializeField] private Deck deck;
         private void Start()
         {
             CurrentGameState = GameState.Build;
-            //OnDeckSet?.Invoke(DeckManager.Instance.Decks[(int) PhotonNetwork.LocalPlayer.CustomProperties["PlayDeck"]]);
-            OnDeckSet?.Invoke(deck);
+            OnDeckSet?.Invoke(DeckManager.Instance.Decks[(int) PhotonNetwork.LocalPlayer.CustomProperties["PlayDeck"]]);
         }
 
         #endregion
