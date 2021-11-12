@@ -1,3 +1,6 @@
+using System;
+using Deck_Cards.Cards.UnitCard.Scripts;
+using Deck_Cards.Decks.Scripts;
 using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using UI.Managers.Scripts;
@@ -10,10 +13,17 @@ namespace UI.In_Game.Building.Scripts
     public class TowerSpawnButton : MonoBehaviourPun, IPointerClickHandler, IBeginDragHandler, IDragHandler,
         IEndDragHandler, ICanvas
     {
-        [SerializeField] private Unit unit;
+        [SerializeField] private UnitCard unit;
         [SerializeField] private Camera buildCam;
         
+        
+        
         #region Unity Methods
+
+        private void Awake()
+        {
+            GameManager.Instance.OnDeckSet += UpdateUnit;
+        }
 
         private void OnEnable()
         {
@@ -45,7 +55,7 @@ namespace UI.In_Game.Building.Scripts
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (GameManager.Instance.PlayerModel.Money < unit.Card.GoldCost)
+            if (GameManager.Instance.PlayerModel.Money < unit.GoldCost)
                 return;
 
             Vector3 screenPos = Input.mousePosition;
@@ -59,9 +69,11 @@ namespace UI.In_Game.Building.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            GameObject tower = PhotonNetwork.Instantiate(string.Concat(Unit.BasePath, unit.Card.CardName, unit.Card.cardName), hit.point, Quaternion.identity);
-
-            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.Card.GoldCost))
+            GameObject tower = PhotonNetwork.Instantiate(string.Concat(Unit.BasePath, unit.CardName, unit.cardName), hit.point, Quaternion.identity);
+            var tempUnit = tower.gameObject.GetComponent<Unit>();
+            tempUnit.Initialize(unit);
+            
+            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.GoldCost))
             {
                 Destroy(tower);
             }
@@ -74,9 +86,9 @@ namespace UI.In_Game.Building.Scripts
             throw new System.NotImplementedException();
         }
 
-        public void UpdateUnitName(Unit newUnit)
+        public void UpdateUnit(Deck deck)
         {
-            unit = newUnit;
+            unit = deck.UnitCards[(int.Parse(name))];
         }
     }
 }

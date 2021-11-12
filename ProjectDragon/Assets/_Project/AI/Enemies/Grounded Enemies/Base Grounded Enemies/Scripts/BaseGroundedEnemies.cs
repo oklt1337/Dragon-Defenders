@@ -1,10 +1,11 @@
 using AI.Enemies.Base_Enemy;
 using Dreamteck.Splines;
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 
 namespace AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies.Scripts
 {
-    public class BaseGroundedEnemies : Enemy
+    public abstract class BaseGroundedEnemies : Enemy
     {
         [SerializeField] protected SplineFollower follower;
 
@@ -13,6 +14,9 @@ namespace AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies.Scripts
         private void Start()
         {
             follower.followSpeed = speed;
+            
+            // Only for Beta, will be updated for multiple splines.
+            follower.spline = GameManager.Instance.SplineComputer;
         }
 
         /// <summary>

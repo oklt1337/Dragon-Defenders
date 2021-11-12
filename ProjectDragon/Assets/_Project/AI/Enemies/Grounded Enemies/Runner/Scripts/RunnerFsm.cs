@@ -7,7 +7,7 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
     {
         private Runner owner;
         
-        //States
+        // States.
         public State RunToHqState { get; }
         
         public RunnerFsm(Runner newOwner) : base(newOwner)

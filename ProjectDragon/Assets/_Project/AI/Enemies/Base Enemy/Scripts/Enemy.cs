@@ -46,7 +46,7 @@ namespace AI.Enemies.Base_Enemy
 
         #region Unity Methods
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("HQ"))
                 return;
