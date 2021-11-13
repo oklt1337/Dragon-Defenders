@@ -1,4 +1,4 @@
-using UI.Decks_Cards.Deck_Manager_Screen.Scripts;
+using UI.Deck_Manager_Screen.Scripts;
 using UI.Decks_Cards.New_Deck_Screen.Scripts;
 using UI.MainMenu.Egg_Hatching_Screen.Scripts;
 using UI.MainMenu.Friend_List_Screen.Scripts;

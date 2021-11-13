@@ -1,3 +1,4 @@
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 using static GamePlay.GameManager.Scripts.GameManager;
 
@@ -66,7 +67,7 @@ namespace AI.Enemies.Base_Enemy
         {
             Instance.EnemySpawner.IncreaseKilledEnemies();
             Instance.PlayerModel.ModifyMoney(goldDrop);
-            // TODO: Give Commander EXP
+            Instance.PlayerModel.Commander.AddExp(expDrop);
             Destroy(gameObject);
         }
 

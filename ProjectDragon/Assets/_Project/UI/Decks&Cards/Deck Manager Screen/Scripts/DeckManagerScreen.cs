@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utility.SceneManager.Scripts;
 
-namespace UI.Decks_Cards.Deck_Manager_Screen.Scripts
+namespace UI.Deck_Manager_Screen.Scripts
 {
     public class DeckManagerScreen : MonoBehaviour, ICanvas
     {
@@ -27,22 +27,15 @@ namespace UI.Decks_Cards.Deck_Manager_Screen.Scripts
         /// </summary>
         public void OnCloseClick()
         {
-            switch (SceneManager.CurrentScene)
+            if (SceneManager.CurrentScene == Scene.MainMenu)
             {
-                case Scene.Intro:
-                    break;
-                case Scene.Authorize:
-                    break;
-                case Scene.MainMenu:
-                    MainMenuCanvasManager.Instance.HomeScreen.gameObject.SetActive(true);
-                    gameObject.SetActive(false);
-                    break;
-                case Scene.Lobby:
-                    LobbyCanvasManager.Instance.LobbyScreen.gameObject.SetActive(true);
-                    gameObject.SetActive(false);
-                    break;
-                case Scene.GameScene:
-                    break;
+                MainMenuCanvasManager.Instance.HomeScreen.gameObject.SetActive(true);
+                gameObject.SetActive(false);
+            }
+            else if (SceneManager.CurrentScene == Scene.Lobby)
+            {
+                LobbyCanvasManager.Instance.LobbyScreen.gameObject.SetActive(true);
+                gameObject.SetActive(false);
             }
         }
 
@@ -51,23 +44,16 @@ namespace UI.Decks_Cards.Deck_Manager_Screen.Scripts
         /// </summary>
         public void OnAddClick()
         {
-            switch (SceneManager.CurrentScene)
+            if (SceneManager.CurrentScene == Scene.MainMenu)
             {
-                case Scene.Intro:
-                    break;
-                case Scene.Authorize:
-                    break;
-                case Scene.MainMenu:
-                    MainMenuCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
-                    ChangeInteractableStatus(false);
-                    break;
-                case Scene.Lobby:
-                    LobbyCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
-                    ChangeInteractableStatus(false);
-                    break;
-                case Scene.GameScene:
-                    break;
-            } 
+                MainMenuCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
+                ChangeInteractableStatus(false);
+            }
+            else if (SceneManager.CurrentScene == Scene.Lobby)
+            {
+                LobbyCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
+                ChangeInteractableStatus(false);
+            }
         }
 
         public void ChangeInteractableStatus(bool status)
