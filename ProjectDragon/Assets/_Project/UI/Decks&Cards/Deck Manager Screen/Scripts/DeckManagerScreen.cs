@@ -32,7 +32,7 @@ namespace UI.Deck_Manager_Screen.Scripts
                 MainMenuCanvasManager.Instance.HomeScreen.gameObject.SetActive(true);
                 gameObject.SetActive(false);
             }
-            else if (SceneManager.CurrentScene == Scene.Lobby)
+            else
             {
                 LobbyCanvasManager.Instance.LobbyScreen.gameObject.SetActive(true);
                 gameObject.SetActive(false);
@@ -49,7 +49,7 @@ namespace UI.Deck_Manager_Screen.Scripts
                 MainMenuCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
                 ChangeInteractableStatus(false);
             }
-            else if (SceneManager.CurrentScene == Scene.Lobby)
+            else 
             {
                 LobbyCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
                 ChangeInteractableStatus(false);
