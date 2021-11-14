@@ -77,25 +77,6 @@ namespace Abilities.Projectiles.Scripts
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
-            if (other.CompareTag("Enemy"))
-            {
-                var enemy = other.GetComponent<Enemy>();
-                //enemy.TakeDamage(Damage);
-                Destroy(gameObject);
-            }
-            else if(other.CompareTag("Player"))
-            {
-                var commander = other.GetComponent<Commander>();
-                commander.TakeDamage(Damage);
-                Destroy(gameObject);
-            }
-            else if (other.CompareTag("Breakable"))
-            {
-                /*var baseMapObject = other.GetComponent<Tree>();
-                baseMapObject.TakeDamage(Damage);*/
-                Destroy(gameObject);
-            }
         }
     }
 }
