@@ -1,5 +1,6 @@
 using System;
 using Abilities.Ability.Scripts;
+using Abilities.EndAbilities.AOE_Area.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
 using Abilities.VisitorPattern.Scripts;
@@ -129,6 +130,13 @@ namespace Units.Unit.BaseUnits
                 var damageAbility = abilityObj.CreateInstance();
                 ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
+            }
+            else if (type == typeof(AoeAreaAbility))
+            {
+                var aoeAreaAbilityObj = (AoeAreaAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var aoeAreaAbility = aoeAreaAbilityObj.CreateInstance();
+                ability = aoeAreaAbility;
+                sphereCollider.radius = aoeAreaAbility.AttackRange;
             }
             else if (type == typeof(UtilityAbility))
             {

@@ -1,6 +1,5 @@
 ﻿using Abilities.Ability.Scripts;
 using Abilities.Projectiles.Scripts;
-using Photon.Pun;
 using UnityEngine;
 
 namespace Abilities.EndAbilities.SingleShot.Scripts
@@ -8,11 +7,14 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
     [CreateAssetMenu(menuName = "Tools/Abilities/SingleShot", fileName = "SingleShot")]
     public class SingleShotAbilityObj : DamageAbilityObj
     {
-        public void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage, float abilityProjectileSpeed)
+        [SerializeField] private float projectileSpeed;
+        public float ProjectileSpeed => projectileSpeed;
+        
+        public void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage , float abilityProjectileSpeed)
         {
             //Spawn projectile
-            var damageProjectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<DamageProjectile>();
-            damageProjectile.Init(target != null ? target : null, caster, abilityDamage, abilityProjectileSpeed);
+            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MovingProjectile>();
+            projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
         }
         
         public SingleShotAbility CreateInstance()
@@ -23,8 +25,11 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
     
     public class SingleShotAbility : DamageAbility
     {
-        public SingleShotAbility(DamageAbilityObj abilityObj) : base(abilityObj)
+        public float ProjectileSpeed { get; set; }
+        
+        public SingleShotAbility(SingleShotAbilityObj abilityObj) : base(abilityObj)
         {
+            ProjectileSpeed = abilityObj.ProjectileSpeed;
         }
         
         public override void Cast(Transform spawnPoint, Transform target, Caster caster)

@@ -8,7 +8,7 @@ namespace Abilities.Ability.Scripts
         [SerializeField] private float effectRange;
         
         [SerializeField] private GameObject prefabProjectile;
-        [SerializeField] private UtilityProjectile utilityProjectile;
+        [SerializeField] private UtilityProjectile projectile;
         public float EffectRange => effectRange;
         public UtilityAbility CreateInstance()
         {
@@ -18,8 +18,8 @@ namespace Abilities.Ability.Scripts
         public void Cast(Transform spawnPoint, float abilityEffectRange)
         {
             //Spawn projectile
-            utilityProjectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<UtilityProjectile>();
-            utilityProjectile.Init(abilityEffectRange);
+            projectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<UtilityProjectile>();
+            projectile.Init(abilityEffectRange);
         }
     }
     
