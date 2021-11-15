@@ -138,7 +138,10 @@ namespace GamePlay.GameManager.Scripts
         private void Start()
         {
             CurrentGameState = GameState.Build;
-            OnDeckSet?.Invoke(DeckManager.Instance.Decks[(int) PhotonNetwork.LocalPlayer.CustomProperties["PlayDeck"]]);
+
+            OnDeckSet?.Invoke(PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("PlayDeck")
+                ? DeckManager.Instance.Decks[(int) PhotonNetwork.LocalPlayer.CustomProperties["PlayDeck"]]
+                : DeckManager.Instance.Decks[0]);
         }
 
         #endregion
