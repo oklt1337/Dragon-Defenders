@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
@@ -15,7 +16,7 @@ namespace Deck_Cards.Decks.Scripts
         [SerializeField] private string deckName;
         [SerializeField] private ClassAndFaction.Faction faction;
         [SerializeField] private CommanderCard commanderCard;
-        [SerializeField] private List<UnitCard> unitCards = new List<UnitCard>();
+        [SerializeField] private UnitCard[] unitCards = new UnitCard[MaxCards];
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace Deck_Cards.Decks.Scripts
         {
             get
             {
-                if (unitCards.Count == MaxCards)
+                if (unitCards.Length == MaxCards)
                 {
                     return true;
                 }
@@ -60,7 +61,7 @@ namespace Deck_Cards.Decks.Scripts
 
         public CommanderCard CommanderCard => commanderCard;
 
-        public List<UnitCard> UnitCards => unitCards;
+        public UnitCard[] UnitCards => unitCards;
 
         #endregion
 
@@ -71,7 +72,23 @@ namespace Deck_Cards.Decks.Scripts
         /// Card can be a commander or a unit.
         /// </summary>
         /// <param name="card">BaseCards</param>
+        /// <param name="index"></param>
         /// <returns>bool = true if card could be added.</returns>
+        public bool AddCard(BaseCard card, int index)
+        {
+            if (card.GetType() != typeof(UnitCard)) 
+                return false;
+            
+            if (unitCards.Contains((UnitCard) card))
+                return false;
+            
+            if (unitCards.Length == MaxCards)
+                return false;
+
+            unitCards[index] = (UnitCard) card;
+            return true;
+        }
+
         public bool AddCard(BaseCard card)
         {
             if (card.GetType() == typeof(CommanderCard))
@@ -82,18 +99,7 @@ namespace Deck_Cards.Decks.Scripts
                 commanderCard = (CommanderCard) card;
                 return true;
             }
-
-            if (card.GetType() != typeof(UnitCard)) 
-                return false;
-            
-            if (unitCards.Contains((UnitCard) card))
-                return false;
-            
-            if (unitCards.Count == MaxCards)
-                return false;
-
-            unitCards.Add((UnitCard) card);
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -104,22 +110,21 @@ namespace Deck_Cards.Decks.Scripts
         /// <returns>bool = true if card could be removed.</returns>
         public bool RemoveCard(BaseCard card)
         {
-            if (card.GetType() == typeof(CommanderCard))
-            {
-                if (commanderCard == null)
-                    return false;
-                
-                commanderCard = null;
-                return true;
-            }
+            if (card.GetType() != typeof(CommanderCard))
+                return false;
+            if (commanderCard == null)
+                return false;
+            commanderCard = null;
+            return true;
+        }
 
+        public bool RemoveCard(BaseCard card, int index)
+        {
             if (card.GetType() != typeof(UnitCard)) 
                 return false;
-
             if (!unitCards.Contains((UnitCard)card))
                 return false;
-            
-            unitCards.Remove((UnitCard) card);
+            unitCards[index] = null;
             return true;
         }
 
