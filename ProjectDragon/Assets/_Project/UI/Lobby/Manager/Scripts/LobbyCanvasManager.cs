@@ -1,6 +1,6 @@
 using UI.Deck_Manager_Screen.Scripts;
-using UI.Decks_Cards.New_Deck_Screen.Scripts;
 using UI.Lobby.Lobby_Screen.Scripts;
+using UI.New_Deck_Screen.Scripts;
 using UnityEngine;
 
 namespace _Project.UI.Lobby.Manager.Scripts

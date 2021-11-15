@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
+using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
+using TMPro;
 using UI.MainMenu.Manager.Scripts;
-using UI.Managers.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility.SceneManager.Scripts;
+using ICanvas = UI.Managers.Scripts.ICanvas;
 
 namespace UI.Deck_Preview.Scripts
 {
     public class PreviewDeckPanel : MonoBehaviour, ICanvas
     {
         [Header("Base View")]
-        [SerializeField] private InputField deckName;
+        [SerializeField] private TMP_InputField deckName;
         [SerializeField] private Button commanderButton;
         [SerializeField] private List<PreviewDeckButton> unitButtons;
 
@@ -34,7 +36,7 @@ namespace UI.Deck_Preview.Scripts
         public void SetPreviewDeck(Deck newPreviewDeck)
         {
             PreviewDeck = newPreviewDeck;
-            AdjustPictures();
+            AdjustButtons();
         }
 
         public void OnEditDeckClick()
@@ -52,13 +54,22 @@ namespace UI.Deck_Preview.Scripts
 
             if(PreviewDeck.CommanderCard == null)
                 return;
-
+            
             DeckManager.Instance.SetDeckAsDefault(PreviewDeck.DeckId);
         }
 
         public void OnSaveDeckClick()
         {
             DeckManager.Instance.EditDeckName(PreviewDeck, deckName.text);
+            
+            if (SceneManager.CurrentScene == Scene.MainMenu)
+            {
+                MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
+            }
+            else
+            {
+                MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
+            }
             
             // Future TODO:
         }
@@ -82,16 +93,21 @@ namespace UI.Deck_Preview.Scripts
         }
         
         /// <summary>
-        /// Sets the pictures of the Buttons correctly.
+        /// Sets the the Buttons correctly.
         /// </summary>
-        private void AdjustPictures()
+        private void AdjustButtons()
         {
-            commanderButton.image.sprite = PreviewDeck.CommanderCard.Icon;
-
-            for (int i = 0; i < PreviewDeck.UnitCards.Length; i++)
+            deckName.text = PreviewDeck.DeckName;
+            
+            for (int i = 0; i < unitButtons.Count; i++)
             {
-                unitButtons[i].Button.image.sprite = PreviewDeck.UnitCards[i].Icon;
+                unitButtons[i].SetCard(PreviewDeck.UnitCards[i]);
             }
+            
+            if(PreviewDeck.CommanderCard == null)
+                return;
+            
+            commanderButton.image.sprite = PreviewDeck.CommanderCard.Icon;
         }
 
         /// <summary>
@@ -115,6 +131,22 @@ namespace UI.Deck_Preview.Scripts
             
             deleteDeckButton.gameObject.SetActive(tempBool);
             saveDeckButton.gameObject.SetActive(tempBool);
+        }
+
+        /// <summary>
+        /// Adds a Unit Card to the preview deck if there is free space.
+        /// </summary>
+        /// <param name="addCard"></param>
+        public void AddUnitCardToPreviewDeck(BaseCard addCard)
+        {
+            for (int i = 0; i < PreviewDeck.UnitCards.Length; i++)
+            {
+                if(PreviewDeck.UnitCards[i] != null)
+                    continue;
+                
+                PreviewDeck.AddCard(addCard, i);
+                return;
+            }
         }
 
         public void ChangeInteractableStatus(bool status)

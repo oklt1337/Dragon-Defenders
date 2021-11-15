@@ -1,5 +1,4 @@
 using UI.Deck_Manager_Screen.Scripts;
-using UI.Decks_Cards.New_Deck_Screen.Scripts;
 using UI.MainMenu.Egg_Hatching_Screen.Scripts;
 using UI.MainMenu.Friend_List_Screen.Scripts;
 using UI.MainMenu.Home_Screen.Scripts;
@@ -7,6 +6,7 @@ using UI.MainMenu.Notification_Screen.Scripts;
 using UI.MainMenu.Profile_Screen.Scripts;
 using UI.MainMenu.Settings_Screen.Scripts;
 using UI.MainMenu.Shop_Screen.Scripts;
+using UI.New_Deck_Screen.Scripts;
 using UnityEngine;
 
 namespace UI.MainMenu.Manager.Scripts

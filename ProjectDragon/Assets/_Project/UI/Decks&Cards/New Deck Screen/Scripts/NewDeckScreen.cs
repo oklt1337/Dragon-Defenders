@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utility.SceneManager.Scripts;
 
-namespace UI.Decks_Cards.New_Deck_Screen.Scripts
+namespace UI.New_Deck_Screen.Scripts
 {
     public class NewDeckScreen : MonoBehaviour, ICanvas
     {
@@ -42,9 +42,11 @@ namespace UI.Decks_Cards.New_Deck_Screen.Scripts
                     break;
                 case Scene.MainMenu:
                     MainMenuCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
+                    MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
                     break;
                 case Scene.Lobby:
                     LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
+                    LobbyCanvasManager.Instance.DeckManagerScreen.Start();
                     break;
                 case Scene.GameScene:
                     break;

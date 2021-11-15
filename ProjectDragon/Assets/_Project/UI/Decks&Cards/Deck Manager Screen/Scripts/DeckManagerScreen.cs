@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _Project.UI.Lobby.Manager.Scripts;
 using Deck_Cards.DeckManager.Scripts;
+using TMPro;
 using UI.Deck_Preview.Scripts;
 using UI.MainMenu.Manager.Scripts;
 using UI.Managers.Scripts;
@@ -23,8 +24,21 @@ namespace UI.Deck_Manager_Screen.Scripts
         [Header("Card View")] 
         [SerializeField] private GameObject cardView;
         [SerializeField] private Button deckViewButton;
+        [SerializeField] private List<AddCardButton> addCardButtons;
 
         #region Unity Methods
+
+        public void Start()
+        {
+            for (int i = 0; i < DeckManager.Instance.Decks.Count; i++)
+            {
+                var text = deckButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+                text.text = DeckManager.Instance.Decks[i].DeckName;
+
+                if(DeckManager.Instance.Decks[i].CommanderCard != null)
+                    deckButtons[i].image.sprite = DeckManager.Instance.Decks[i].CommanderCard.icon;
+            }
+        }
 
         private void OnEnable()
         {
@@ -82,13 +96,18 @@ namespace UI.Deck_Manager_Screen.Scripts
         /// </summary>
         public void OnClickDeck(Button btn)
         {
-            if (DeckManager.Instance.Decks[int.Parse(btn.name)] == null)
+            if (int.Parse(btn.name) >= DeckManager.Instance.Decks.Count)
                 return;
 
             if (!previewDeckPanel.gameObject.activeSelf)
                 previewDeckPanel.gameObject.SetActive(true);
 
             previewDeckPanel.SetPreviewDeck(DeckManager.Instance.Decks[int.Parse(btn.name)]);
+        }
+
+        public void OnAddCardClick(AddCardButton addCardButton)
+        {
+            previewDeckPanel.AddUnitCardToPreviewDeck(addCardButton.Card);
         }
 
         public void OnDeckViewClick()
@@ -110,6 +129,11 @@ namespace UI.Deck_Manager_Screen.Scripts
             foreach (var t in deckButtons)
             {
                 t.interactable = status;
+            }
+
+            foreach (var addButton in addCardButtons)
+            {
+                addButton.Button.interactable = status;
             }
 
             if (previewDeckPanel.PreviewDeck != null)
