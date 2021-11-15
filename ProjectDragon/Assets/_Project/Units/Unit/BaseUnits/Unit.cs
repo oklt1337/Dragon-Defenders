@@ -121,8 +121,14 @@ namespace Units.Unit.BaseUnits
 
         #region Private Methods
 
+        /// <summary>
+        /// Creates an Ability dont look into it :)
+        /// </summary>
+        /// <param name="unitCard"></param>
         private void CreateAbility(BaseCard unitCard)
         {
+            //sry Patrick ist obsolete
+            //spaeter dann i wann richtiges ability system das das ganze fixet :)
             var type = unitCard.abilityDataBase.Abilities[0].GetType();
             if (type == typeof(SingleShotAbilityObj))
             {
