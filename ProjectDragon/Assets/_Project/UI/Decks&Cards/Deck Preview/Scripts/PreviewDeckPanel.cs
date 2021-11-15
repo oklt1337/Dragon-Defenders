@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
 using UI.MainMenu.Manager.Scripts;
@@ -14,7 +15,7 @@ namespace UI.Deck_Preview.Scripts
         [Header("Base View")]
         [SerializeField] private InputField deckName;
         [SerializeField] private Button commanderButton;
-        [SerializeField] private List<Button> unitButtons;
+        [SerializeField] private List<PreviewDeckButton> unitButtons;
 
         [Header("Deck View")] 
         [SerializeField] private Button editDeckButton;
@@ -46,6 +47,12 @@ namespace UI.Deck_Preview.Scripts
         /// </summary>
         public void OnSetDefaultClick()
         {
+            if(PreviewDeck.UnitCards.Contains(null))
+                return;
+
+            if(PreviewDeck.CommanderCard == null)
+                return;
+
             DeckManager.Instance.SetDeckAsDefault(PreviewDeck.DeckId);
         }
 
@@ -66,9 +73,14 @@ namespace UI.Deck_Preview.Scripts
             ChangeView();
             
             gameObject.SetActive(false);
-            
         }
 
+        public void OnRemoveCardClick(PreviewDeckButton deckButton)
+        {
+            PreviewDeck.RemoveCard(deckButton.Card);
+            deckButton.SetCard(null);
+        }
+        
         /// <summary>
         /// Sets the pictures of the Buttons correctly.
         /// </summary>
@@ -76,9 +88,9 @@ namespace UI.Deck_Preview.Scripts
         {
             commanderButton.image.sprite = PreviewDeck.CommanderCard.Icon;
 
-            for (int i = 0; i < PreviewDeck.UnitCards.Count; i++)
+            for (int i = 0; i < PreviewDeck.UnitCards.Length; i++)
             {
-                unitButtons[i].image.sprite = PreviewDeck.UnitCards[i].Icon;
+                unitButtons[i].Button.image.sprite = PreviewDeck.UnitCards[i].Icon;
             }
         }
 
@@ -118,7 +130,7 @@ namespace UI.Deck_Preview.Scripts
 
             foreach (var button in unitButtons)
             {
-                button.interactable = status;
+                button.Button.interactable = status;
             }
         }
     }
