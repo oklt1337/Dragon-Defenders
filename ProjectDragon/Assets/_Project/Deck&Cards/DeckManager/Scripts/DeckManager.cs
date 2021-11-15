@@ -189,9 +189,6 @@ namespace Deck_Cards.DeckManager.Scripts
             var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
             if (hashTable.ContainsKey("PlayDeck"))
             {
-                if (Decks.Count < (int) hashTable["PlayDeck"]) 
-                    return;
-                
                 hashTable["PlayDeck"] = id;
             }
             else
