@@ -16,7 +16,7 @@ namespace Abilities.Projectiles.Scripts
         protected float Damage { get; set; }
         protected Caster Caster { get; set; }
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
             switch (Caster)
             {

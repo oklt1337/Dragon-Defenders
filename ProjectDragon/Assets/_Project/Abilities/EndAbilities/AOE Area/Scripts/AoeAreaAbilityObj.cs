@@ -8,13 +8,15 @@ namespace Abilities.EndAbilities.AOE_Area.Scripts
     public class AoeAreaAbilityObj : DamageAbilityObj
     {
         [SerializeField] private float aoeRange;
+        [SerializeField] private float duration;
         public float AoeRange => aoeRange;
+        public float Duration => duration;
         
-        public void Cast(Transform spawnPoint, Caster caster, float abilityDamage, float abilityAoeRange)
+        public void Cast(Transform spawnPoint, Caster caster, float abilityDamage, float abilityAoeRange, float abilityDuration)
         {
             //Spawn projectile
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<AoeProjectile>();
-            projectile.Init(caster, abilityDamage, abilityAoeRange);
+            projectile.Init(caster, abilityDamage, abilityAoeRange, abilityDuration);
         }
         
         public AoeAreaAbility CreateInstance()
@@ -26,9 +28,11 @@ namespace Abilities.EndAbilities.AOE_Area.Scripts
     public class AoeAreaAbility : DamageAbility
     {
         public float AoeRange { get; set; }
+        public float Duration { get; set; }
         public AoeAreaAbility(AoeAreaAbilityObj abilityObj) : base(abilityObj)
         {
             AoeRange = abilityObj.AoeRange;
+            Duration = abilityObj.Duration;
         }
         
         public override void Cast(Transform spawnPoint, Transform target, Caster caster)
@@ -38,7 +42,7 @@ namespace Abilities.EndAbilities.AOE_Area.Scripts
             Casted = true;
 
             var aoeAreaAbility = (AoeAreaAbilityObj) AbilityObj;
-            aoeAreaAbility.Cast(spawnPoint, caster, Damage, AoeRange);
+            aoeAreaAbility.Cast(spawnPoint, caster, Damage, AoeRange, Duration);
         }
     }
 }
