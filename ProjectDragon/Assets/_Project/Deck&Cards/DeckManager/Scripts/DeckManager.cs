@@ -184,6 +184,23 @@ namespace Deck_Cards.DeckManager.Scripts
             decks.Add(deck);
         }
 
+        public void SetDeckAsDefault(int id)
+        {
+            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
+            if (hashTable.ContainsKey("PlayDeck"))
+            {
+                if (Decks.Count < (int) hashTable["PlayDeck"]) 
+                    return;
+                
+                hashTable["PlayDeck"] = id;
+            }
+            else
+            {
+                hashTable.Add("PlayDeck", id);
+            }
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hashTable);
+        }
+
         //ToDo: Deck on edit edit 2nd instance on save override main instance and have bool for isSaved.
 
         #endregion

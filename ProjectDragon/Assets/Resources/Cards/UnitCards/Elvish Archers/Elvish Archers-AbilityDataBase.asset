@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
   m_Name: Elvish Archers-AbilityDataBase
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: e7b70d9fb67db6b4eac9e2fd143dd592, type: 2}
