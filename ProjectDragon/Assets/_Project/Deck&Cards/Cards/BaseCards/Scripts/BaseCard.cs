@@ -40,7 +40,7 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
         public string CardName
         {
             get => cardName;
-            internal set => cardName = value;
+            set => cardName = value;
         }
 
         public string Description => description;
@@ -56,13 +56,13 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
         public SkillTreeObj SkillTreeObj
         {
             get => skillTreeObj;
-            internal set => skillTreeObj = value;
+            set => skillTreeObj = value;
         }
 
         public AbilityDataBase AbilityDataBase
         {
             get => abilityDataBase;
-            internal set => abilityDataBase = value;
+            set => abilityDataBase = value;
         }
 
         public VideoClip Demo => demo;

@@ -483,7 +483,7 @@ namespace Utility.Editor.CardBuilder.Scripts
                         return;
 
                     //delete
-                    path = string.Concat(CommanderPath, "/", commanderCards[selectedCommander].cardName);
+                    path = string.Concat(CommanderPath, "/", commanderCards[selectedCommander].CardName);
                     success = AssetDatabase.DeleteAsset(path);
                     if (success)
                     {
@@ -496,7 +496,7 @@ namespace Utility.Editor.CardBuilder.Scripts
                         return;
 
                     //delete
-                    path = string.Concat(UnitPath, "/", unitCards[selectedUnit].cardName);
+                    path = string.Concat(UnitPath, "/", unitCards[selectedUnit].CardName);
                     success = AssetDatabase.DeleteAsset(path);
                     if (success)
                     {

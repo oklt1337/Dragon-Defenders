@@ -15,7 +15,7 @@ MonoBehaviour:
   deckId: 0
   deckName: "Cool\u200B"
   faction: 0
-  commanderCard: {fileID: 0}
+  commanderCard: {fileID: 11400000, guid: 0a4940e91854a5041860c90aa4872b48, type: 2}
   unitCards:
   - {fileID: 0}
   - {fileID: 0}
