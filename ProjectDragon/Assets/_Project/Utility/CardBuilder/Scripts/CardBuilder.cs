@@ -429,7 +429,7 @@ namespace Utility.CardBuilder.Scripts
                     commanderCards[selectedCommander].Save(cardID, cardName, description, model, rarity, faction,
                         @class, skillTreeObj, abilityDataBase,demo, icon, health, mana, commanderAttackDamageModifier, defense, speed);
                     EditorUtility.SetDirty(commanderCards[selectedCommander]);
-                    EditorApplication.ExecuteMenuItem("File/Save Project");
+                    AssetDatabase.SaveAssets();
                     break;
                 case 1:
                     var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
@@ -439,7 +439,7 @@ namespace Utility.CardBuilder.Scripts
                     unitCards[selectedUnit].Save(cardID, cardName, description, model, rarity, faction,
                         @class, skillTreeObj, abilityDataBase, demo, icon, goldCost, limit);
                     EditorUtility.SetDirty(unitCards[selectedUnit]);
-                    EditorApplication.ExecuteMenuItem("File/Save Project");
+                    AssetDatabase.SaveAssets();
                     break;
             }
             GUI.FocusControl(null);
