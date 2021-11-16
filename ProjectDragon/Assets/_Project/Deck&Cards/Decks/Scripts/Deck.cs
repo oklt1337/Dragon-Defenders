@@ -78,28 +78,22 @@ namespace Deck_Cards.Decks.Scripts
         {
             if (card.GetType() != typeof(UnitCard)) 
                 return false;
-            
             if (unitCards.Contains((UnitCard) card))
                 return false;
             
-            if (unitCards.Length == MaxCards)
-                return false;
-
             unitCards[index] = (UnitCard) card;
             return true;
         }
 
         public bool AddCard(BaseCard card)
         {
-            if (card.GetType() == typeof(CommanderCard))
-            {
-                if (commanderCard != null || ((CommanderCard) card).Faction != faction)
-                    return false;
+            if (card.GetType() != typeof(CommanderCard)) 
+                return false;
+            if (commanderCard != null || ((CommanderCard) card).Faction != faction)
+                return false;
                 
-                commanderCard = (CommanderCard) card;
-                return true;
-            }
-            return false;
+            commanderCard = (CommanderCard) card;
+            return true;
         }
 
         /// <summary>
@@ -114,6 +108,7 @@ namespace Deck_Cards.Decks.Scripts
                 return false;
             if (commanderCard == null)
                 return false;
+            
             commanderCard = null;
             return true;
         }
@@ -124,6 +119,7 @@ namespace Deck_Cards.Decks.Scripts
                 return false;
             if (!unitCards.Contains((UnitCard)card))
                 return false;
+            
             unitCards[index] = null;
             return true;
         }
