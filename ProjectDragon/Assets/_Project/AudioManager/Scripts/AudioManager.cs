@@ -23,15 +23,23 @@ namespace AudioManager.Scripts
             }
         }
 
-        public void PlayAudioClipOneShot(AudioClip audioClip)
-        {
-            audioSource.PlayOneShot(audioClip);
-        }
-
+        /// <summary>
+        /// Plays an desired audio clip.
+        /// </summary>
+        /// <param name="audioClip"> The desired audio clip. </param>
         public void PlayAudio(AudioClip audioClip)
         {
             audioSource.clip = audioClip;
             audioSource.Play();
+        }
+
+        /// <summary>
+        /// Plays an desired audio clip one shot.
+        /// </summary>
+        /// <param name="audioClip"> The desired audio clip. </param>
+        public void PlayAudioClipOneShot(AudioClip audioClip)
+        {
+            audioSource.PlayOneShot(audioClip);
         }
     }
 }
