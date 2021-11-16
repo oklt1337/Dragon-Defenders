@@ -8,7 +8,6 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
     {
         private Unit unit;
         private DamageAbility ability;
-        private float oldDamage;
         private float value;
         private float duration;
         private bool casted;
@@ -16,18 +15,13 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
         public void Init(float buffDuration, float increaseValue)
         {
             unit = GetComponent<Unit>();
-            if (unit.Ability is DamageAbility damageAbility)
-            {
-                unit.Ability.Casted += () => casted = true;
-                ability = damageAbility;
-                oldDamage = ability.Damage;
-                ability.Damage *= increaseValue;
-                duration = buffDuration;
-            }
-            else
-            {
-                Destroy(this);
-            }
+            if (!(unit.Ability is DamageAbility damageAbility)) 
+                return;
+            
+            unit.Ability.Casted += () => casted = true;
+            ability = damageAbility;
+            ability.Damage *= increaseValue;
+            duration = buffDuration;
         }
 
         private void Update()
@@ -39,7 +33,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
 
         private void OnDestroy()
         {
-            ability.Damage = oldDamage;
+            ability.Damage = ((DamageAbilityObj) ability.AbilityObj).Damage;
         }
     }
 }

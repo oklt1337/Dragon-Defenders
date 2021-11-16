@@ -16,7 +16,7 @@ MonoBehaviour:
   coolDown: 0.5
   damage: 60
   attackRange: 1
-  prefabProjectile: {fileID: 5595671125293661850, guid: 1b5e4fde70a6f354189cf51d5117dfd6,
+  prefabProjectile: {fileID: 6858757532033793912, guid: 1b5e4fde70a6f354189cf51d5117dfd6,
     type: 3}
   aoeRange: 1
   duration: 0.1
