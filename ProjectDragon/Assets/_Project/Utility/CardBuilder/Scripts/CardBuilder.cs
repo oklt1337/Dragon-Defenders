@@ -1,4 +1,4 @@
-#if Unity_Editor
+
 using System;
 using System.Linq;
 using Abilities.AbilityDataBase.Scripts;
@@ -532,4 +532,3 @@ namespace Utility.CardBuilder.Scripts
         }
     }
 }
-#endif

@@ -56,28 +56,28 @@ namespace Deck_Cards.DeckManager.Scripts
 
         private void LoadDecksFromResources()
         {
-            var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
-                .PlayerId;
-            var origin = string.Concat(deckBuilder.DeckRoot, "/", id);
-            
-            //Check if PlayerFolder Exist
-            if (!AssetDatabase.IsValidFolder(origin))
-                return;
-            var paths = AssetDatabase.GetSubFolders(origin).ToList();
-            var index = 0;
-            //Load Every Deck from folder.
-            foreach (var assetPath in paths
-                .Select(path => string.Concat(path, "/", Path.GetFileName(Path.GetDirectoryName(path + "/")), "-Obj"))
-                .Select(assetPath => assetPath.Remove(0, Root.Length)))
-            {
-                var deck = Resources.Load<Deck>(assetPath);
-                deck.DeckId = index;
-                if (deck == null) 
-                    continue;
-                
-                decks.Add(deck);
-                index++;
-            }
+         //   var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
+         //       .PlayerId;
+         //   var origin = string.Concat(deckBuilder.DeckRoot, "/", id);
+         //   
+         //   //Check if PlayerFolder Exist
+         //   if (!AssetDatabase.IsValidFolder(origin))
+         //       return;
+         //   var paths = AssetDatabase.GetSubFolders(origin).ToList();
+         //   var index = 0;
+         //   //Load Every Deck from folder.
+         //   foreach (var assetPath in paths
+         //       .Select(path => string.Concat(path, "/", Path.GetFileName(Path.GetDirectoryName(path + "/")), "-Obj"))
+         //       .Select(assetPath => assetPath.Remove(0, Root.Length)))
+         //   {
+         //       var deck = Resources.Load<Deck>(assetPath);
+         //       deck.DeckId = index;
+         //       if (deck == null) 
+         //           continue;
+         //       
+         //       decks.Add(deck);
+         //       index++;
+           // }
         }
 
         #endregion
@@ -108,37 +108,37 @@ namespace Deck_Cards.DeckManager.Scripts
         /// <returns>bool = true if deckName could be found in deckList.</returns>
         public bool DeleteDeck(int deckId)
         {
-            var index = decks.FindIndex(deck => deck.DeckId == deckId);
-
-            if (index == -1)
-                return false;
-
-            var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
-                .PlayerId;
-            var path = string.Concat("Assets/Resources/Decks/", id, "/", decks[index].DeckName);
-            var success = AssetDatabase.DeleteAsset(path);
-            if (success)
-            {
-                decks.RemoveAt(index);
-                
-                if (decks.Count == 0)
-                {
-                    AssetDatabase.DeleteAsset(
-                        string.Concat("Assets/Resources/Decks/", id));
-                }
-                else
-                {
-                    for (var i = 0; i < decks.Count; i++)
-                    {
-                        decks[i].DeckId = i;
-                    }
-                }
-            }
-            else
-            {
-                return false;
-            }
-
+          //  var index = decks.FindIndex(deck => deck.DeckId == deckId);
+//
+          //  if (index == -1)
+          //      return false;
+//
+          //  var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
+          //      .PlayerId;
+          //  var path = string.Concat("Assets/Resources/Decks/", id, "/", decks[index].DeckName);
+          //  var success = AssetDatabase.DeleteAsset(path);
+          //  if (success)
+          //  {
+          //      decks.RemoveAt(index);
+          //      
+          //      if (decks.Count == 0)
+          //      {
+          //          AssetDatabase.DeleteAsset(
+          //              string.Concat("Assets/Resources/Decks/", id));
+          //      }
+          //      else
+          //      {
+          //          for (var i = 0; i < decks.Count; i++)
+          //          {
+          //              decks[i].DeckId = i;
+          //          }
+          //      }
+          //  }
+          //  else
+          //  {
+          //      return false;
+          //  }
+//
             return true;
         }
 

@@ -123,21 +123,21 @@ namespace GamePlay.Player.PlayerModel.Scripts
         
         private void Initialize(Deck deck)
         {
-            var fullPath = AssetDatabase.GetAssetPath(deck.CommanderCard.Model.GetInstanceID());
-            fullPath = fullPath.Remove(0, 17);
-            var path = fullPath.Split('.');
-            var myTransform = transform;
+     //      var fullPath = AssetDatabase.GetAssetPath(deck.CommanderCard.Model.GetInstanceID());
+     //      fullPath = fullPath.Remove(0, 17);
+     //      var path = fullPath.Split('.');
+     //      var myTransform = transform;
 
-            var commanderObj = PhotonNetwork.Instantiate(path[0], myTransform.position, Quaternion.identity);
-            commander = commanderObj.GetComponent<Commander.BaseCommanderClass.Scripts.Commander>();
-            commander.transform.parent = myTransform;
-            commander.NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-            commander.InitializeCommander(deck.CommanderCard);
-            
-            //Init Rest
-            inputHandler.Initialize(this);
-            commander.Initialize(this);
-            animationHandler.Animator = commander.Animator;
+     //      var commanderObj = PhotonNetwork.Instantiate(path[0], myTransform.position, Quaternion.identity);
+     //      commander = commanderObj.GetComponent<Commander.BaseCommanderClass.Scripts.Commander>();
+     //      commander.transform.parent = myTransform;
+     //      commander.NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+     //      commander.InitializeCommander(deck.CommanderCard);
+     //      
+     //      //Init Rest
+     //      inputHandler.Initialize(this);
+     //      commander.Initialize(this);
+     //      animationHandler.Animator = commander.Animator;
         }
 
         #endregion

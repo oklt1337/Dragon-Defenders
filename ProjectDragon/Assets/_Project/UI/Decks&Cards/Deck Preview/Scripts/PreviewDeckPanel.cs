@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Deck_Cards.Cards.BaseCards.Scripts;
+using Deck_Cards.Cards.CommanderCard.Scripts;
 using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
 using TMPro;
@@ -88,7 +89,12 @@ namespace UI.Deck_Preview.Scripts
 
         public void OnRemoveCardClick(PreviewDeckButton deckButton)
         {
-            PreviewDeck.RemoveCard(deckButton.Card);
+            if(deckButton.Card is CommanderCard)
+                PreviewDeck.RemoveCard(deckButton.Card);
+            else
+            {
+                PreviewDeck.RemoveCard(deckButton.Card, int.Parse(deckButton.name));
+            }
             deckButton.SetCard(null);
         }
         
@@ -144,7 +150,13 @@ namespace UI.Deck_Preview.Scripts
                 if(PreviewDeck.UnitCards[i] != null)
                     continue;
                 
-                PreviewDeck.AddCard(addCard, i);
+                // Visuals.
+                if(!PreviewDeck.AddCard(addCard, i))
+                    return;
+                
+                unitButtons[i].SetCard(addCard);
+                unitButtons[i].Button.image.sprite = addCard.Icon;
+                unitButtons[i].Text.text = addCard.cardName;
                 return;
             }
         }

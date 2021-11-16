@@ -14,6 +14,7 @@ namespace UI.Deck_Preview.Scripts
         
         public BaseCard Card { get; private set; }
         public Button Button => button;
+        public TextMeshProUGUI Text => text;
 
         /// <summary>
         /// Sets the Card of the Preview Deck Button.
@@ -30,7 +31,8 @@ namespace UI.Deck_Preview.Scripts
             }
             else
             {
-                
+                image.sprite = null;
+                text.text = "(Empty)";
             }
         }
     }

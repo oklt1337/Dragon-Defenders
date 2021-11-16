@@ -1,5 +1,4 @@
 
-#if Unity_Editor
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -69,4 +68,3 @@ namespace Utility.CardBuilder.Scripts
         }
     }
 }
-#endif
