@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efe9577e88d11645b718462aecebee4, type: 3}
   m_Name: Niszuh, King of the Giants-Card
   m_EditorClassIdentifier: 
-  cardID: 4
+  cardID: 10105001
   cardName: Niszuh, King of the Giants
   description: Swings his arm in front of him.
   model: {fileID: 0}
