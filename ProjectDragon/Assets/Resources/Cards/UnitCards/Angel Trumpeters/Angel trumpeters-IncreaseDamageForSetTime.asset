@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9a590a17cb40c749a512cbadf089d86, type: 3}
-  m_Name: Lusters-AoeArea
+  m_Script: {fileID: 11500000, guid: 2a9c6af3e9be4c38ac0b6009e180e064, type: 3}
+  m_Name: Angel trumpeters-IncreaseDamageForSetTime
   m_EditorClassIdentifier: 
   abilityType: 0
-  coolDown: 0.5
-  damage: 60
-  attackRange: 1
-  prefabProjectile: {fileID: 5595671125293661850, guid: 1b5e4fde70a6f354189cf51d5117dfd6,
+  coolDown: 5
+  effectRange: 6
+  duration: 2
+  prefabProjectile: {fileID: 3113065910724194658, guid: c329a84378ca203439b1bdd017ffd24c,
     type: 3}
-  aoeRange: 1
-  duration: 0.1
+  increaseAttackValueInPercentage: 0.1

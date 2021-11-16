@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8207574568776585573}
   - component: {fileID: 3289946117548644467}
   m_Layer: 0
-  m_Name: Lusters-AoeAreaProjectile
+  m_Name: Lusters-AbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

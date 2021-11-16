@@ -1,4 +1,5 @@
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Photon.Pun;
 using UnityEngine;
 
@@ -30,7 +31,8 @@ namespace Abilities.Ability.Scripts
         {
             if (TimeLeft > 0) 
                 return;
-            Casted = true;
+            StartCooldown = true;
+            Casted?.Invoke();
         }
     }
 }

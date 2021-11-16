@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Abilities.Ability.Scripts;
+using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using AI.Enemies.Base_Enemy;
 using Deck_Cards.Cards.CommanderCard.Scripts;
@@ -144,7 +146,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                         client.Visitors.Add(damageAbility);
                         break;
                     case AbilityType.Utility:
-                        var utilityAbilityObj = (UtilityAbilityObj) ability;
+                        var utilityAbilityObj = (IncreaseDamageForSetTimeAbilityObj) ability;
                         var utilityAbility = utilityAbilityObj.CreateInstance();
                         abilities.Add(utilityAbility);
                         client.Visitors.Add(utilityAbility);

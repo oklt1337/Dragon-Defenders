@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
   m_Name: Angel Trumpeters-AbilityDataBase
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 670dfc0da3eee2a4184eac553423ec1e, type: 2}

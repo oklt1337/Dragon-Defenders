@@ -1,8 +1,10 @@
 using System;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.AOE_Area.Scripts;
+using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
@@ -112,7 +114,7 @@ namespace Units.Unit.BaseUnits
             if (ability == null)
                 return;
 
-            if (!ability.Casted && !(ability.TimeLeft > 0)) 
+            if (!ability.StartCooldown && !(ability.TimeLeft > 0)) 
                 return;
             ability.Tick(Time.deltaTime);
         }
@@ -144,9 +146,9 @@ namespace Units.Unit.BaseUnits
                 ability = aoeAreaAbility;
                 sphereCollider.radius = aoeAreaAbility.AttackRange;
             }
-            else if (type == typeof(UtilityAbility))
+            else if (type == typeof(IncreaseDamageForSetTimeAbility))
             {
-                var utilityAbilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var utilityAbilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var utilityAbility = utilityAbilityObj.CreateInstance();
                 ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;

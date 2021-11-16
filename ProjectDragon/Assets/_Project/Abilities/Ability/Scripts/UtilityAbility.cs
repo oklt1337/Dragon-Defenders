@@ -1,4 +1,5 @@
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using UnityEngine;
 
 namespace Abilities.Ability.Scripts
@@ -6,40 +7,30 @@ namespace Abilities.Ability.Scripts
     public abstract class UtilityAbilityObj : AbilityObj
     {
         [SerializeField] private float effectRange;
+        [SerializeField] private float duration;
         
-        [SerializeField] private GameObject prefabProjectile;
-        [SerializeField] private UtilityProjectile projectile;
+        [SerializeField] protected GameObject prefabProjectile;
         public float EffectRange => effectRange;
-        public UtilityAbility CreateInstance()
-        {
-            return new UtilityAbility(this);
-        }
-
-        public void Cast(Transform spawnPoint, float abilityEffectRange)
-        {
-            //Spawn projectile
-            projectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<UtilityProjectile>();
-            projectile.Init(abilityEffectRange);
-        }
+        public float Duration => duration;
     }
     
     public class UtilityAbility : Ability
     {
         public float EffectRange { get; set; }
-
+        public float Duration { get; set; }
+        
         public UtilityAbility(UtilityAbilityObj abilityObj) : base(abilityObj)
         {
             EffectRange = abilityObj.EffectRange;
+            Duration = abilityObj.Duration;
         }
-        
+
         public override void Cast(Transform spawnPoint, Transform target, Caster caster)
         {
             if (TimeLeft > 0) 
                 return;
-            Casted = true;
-            
-            var utilityAbilityObj = (UtilityAbilityObj) AbilityObj;
-            utilityAbilityObj.Cast(spawnPoint, EffectRange);
+            StartCooldown = true;
+            Casted?.Invoke();
         }
     }
 }

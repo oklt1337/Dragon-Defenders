@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Abilities.Projectiles.Scripts.BaseProjectiles;
+using UnityEngine;
 
 namespace Abilities.Projectiles.Scripts
 {

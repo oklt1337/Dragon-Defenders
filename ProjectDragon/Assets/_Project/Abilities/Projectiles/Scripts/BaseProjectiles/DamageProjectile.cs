@@ -3,7 +3,7 @@ using AI.Enemies.Base_Enemy;
 using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 
-namespace Abilities.Projectiles.Scripts
+namespace Abilities.Projectiles.Scripts.BaseProjectiles
 {
     public enum Caster
     {

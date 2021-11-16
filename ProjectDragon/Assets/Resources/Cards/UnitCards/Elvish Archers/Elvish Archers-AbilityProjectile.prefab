@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3650974844042762053}
   - component: {fileID: 3384461252152366661}
   m_Layer: 0
-  m_Name: Elvish Archers-Prop_Arrow
+  m_Name: Elvish Archers-AbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,6 @@
+using System;
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
@@ -24,7 +26,8 @@ namespace Abilities.Ability.Scripts
         public AbilityObj AbilityObj { get; }
         public float CoolDown { get; set; }
         public float TimeLeft { get; set; }
-        public bool Casted { get; internal set; }
+        public bool StartCooldown { get; internal set; }
+        public Action Casted;
 
         protected Ability(AbilityObj abilityObj)
         {
@@ -39,10 +42,10 @@ namespace Abilities.Ability.Scripts
 
         public void Tick(float deltaTime)
         {
-            if (Casted)
+            if (StartCooldown)
             {
                 TimeLeft = CoolDown;
-                Casted = false;
+                StartCooldown = false;
             }
             else
             {

@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Unit/Tower
   - Enemy
   - Ability
   - Ground
   - HQ
   - Water
   - Breakable
+  - Unit
   layers:
   - Default
   - TransparentFX

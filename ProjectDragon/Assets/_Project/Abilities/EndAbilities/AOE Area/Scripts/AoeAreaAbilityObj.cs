@@ -1,6 +1,7 @@
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using UnityEngine;
 
 namespace Abilities.EndAbilities.AOE_Area.Scripts
@@ -40,7 +41,8 @@ namespace Abilities.EndAbilities.AOE_Area.Scripts
         {
             if (TimeLeft > 0) 
                 return;
-            Casted = true;
+            StartCooldown = true;
+            Casted?.Invoke();
 
             var aoeAreaAbility = (AoeAreaAbilityObj) AbilityObj;
             aoeAreaAbility.Cast(spawnPoint, caster, Damage, AoeRange, Duration);

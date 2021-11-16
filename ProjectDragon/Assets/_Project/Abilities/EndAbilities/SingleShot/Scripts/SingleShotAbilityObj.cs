@@ -1,5 +1,6 @@
 ﻿using Abilities.Ability.Scripts;
 using Abilities.Projectiles.Scripts;
+using Abilities.Projectiles.Scripts.BaseProjectiles;
 using UnityEngine;
 
 namespace Abilities.EndAbilities.SingleShot.Scripts
@@ -36,8 +37,9 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
         {
             if (TimeLeft > 0) 
                 return;
-            Casted = true;
-
+            StartCooldown = true;
+            Casted?.Invoke();
+            
             var singeShotAbilityObj = (SingleShotAbilityObj) AbilityObj;
             singeShotAbilityObj.Cast(spawnPoint, target, caster, Damage, ProjectileSpeed);
         }
