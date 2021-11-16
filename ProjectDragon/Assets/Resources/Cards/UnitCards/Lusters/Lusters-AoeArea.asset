@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
-  m_Name: Lusters-AbilityDataBase
+  m_Script: {fileID: 11500000, guid: b9a590a17cb40c749a512cbadf089d86, type: 3}
+  m_Name: Lusters-AoeArea
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: ca4f27834ff16eb4ca2b6d39ffaedb9d, type: 2}
+  abilityType: 0
+  coolDown: 0.5
+  damage: 60
+  attackRange: 1
+  prefabProjectile: {fileID: 0}
+  aoeRange: 1
+  duration: 0.1

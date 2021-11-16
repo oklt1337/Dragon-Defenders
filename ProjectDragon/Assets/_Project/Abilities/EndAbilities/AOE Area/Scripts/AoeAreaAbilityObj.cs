@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Abilities.EndAbilities.AOE_Area.Scripts
 {
+    [CreateAssetMenu(menuName = "Tools/Abilities/AoeArea", fileName = "AoeArea")]
     public class AoeAreaAbilityObj : DamageAbilityObj
     {
         [SerializeField] private float aoeRange;
