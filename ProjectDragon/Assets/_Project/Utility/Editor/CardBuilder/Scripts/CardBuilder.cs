@@ -10,7 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace Utility.Editor.CardBuilder.Scripts
+namespace _Project.Utility.Editor.CardBuilder.Scripts
 {
     public class CardBuilder : EditorWindow
     {
