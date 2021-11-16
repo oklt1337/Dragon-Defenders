@@ -20,6 +20,7 @@ namespace Utility.CardBuilder.Scripts
         private int toolBarIndex;
         private Vector2 scrollPos;
         private CreateCardWindow newCardWindow;
+        private DeleteCardWindow deleteCardWindow;
 
         [Header("Base Stats")] 
         private int cardID;
@@ -103,9 +104,7 @@ namespace Utility.CardBuilder.Scripts
                     DrawUnitStats();
                     break;
             }
-
-            DrawSave();
-            EditorGUILayout.EndScrollView();
+            DrawButtons();
         }
 
         #region Draw
@@ -127,14 +126,28 @@ namespace Utility.CardBuilder.Scripts
 
         private void DrawSave()
         {
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
             if (GUILayout.Button(new GUIContent("Save"), GUILayout.Width(60)))
             {
                 Save();
             }
+        }
 
+        private void DrawDelete()
+        {
+            if (GUILayout.Button(new GUIContent("Delete"), GUILayout.Width(60)))
+            {
+                DeleteDisplay();
+            }
+        }
+
+        private void DrawButtons()
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            DrawDelete();
+            DrawSave();
             EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndScrollView();
         }
 
         private void DrawBaseStats()
@@ -395,7 +408,7 @@ namespace Utility.CardBuilder.Scripts
 
                     if (index != -1)
                     {
-                        selectedCommander = index;
+                        selectedUnit = index;
                         SetStats(unitCards[index]);
                     }
                     break;
@@ -425,7 +438,68 @@ namespace Utility.CardBuilder.Scripts
                         @class, skillTreeObj, abilityDataBase, demo, icon, goldCost, limit);
                     break;
             }
-            
+            GUI.FocusControl(null);
+        }
+
+        private void DeleteDisplay()
+        {
+            switch (toolBarIndex)
+            {
+                case 0:
+                    // Commander Stats
+                    var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
+                    if (commanderCards.Length == 0)
+                        return;
+
+                    deleteCardWindow = DeleteCardWindow.Init(position);
+                    deleteCardWindow.OnDelete += Delete;
+                    break;
+                case 1:
+                    var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
+                    if (unitCards.Length == 0)
+                        return;
+                    
+                    deleteCardWindow = DeleteCardWindow.Init(position);
+                    deleteCardWindow.OnDelete += Delete;
+                    break;
+            }
+            GUI.FocusControl(null);
+        }
+
+        private void Delete()
+        {
+            string path;
+            bool success;
+            switch (toolBarIndex)
+            {
+                case 0:
+                    // Commander Stats
+                    var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
+                    if (commanderCards.Length == 0)
+                        return;
+
+                    //delete
+                    path = string.Concat(CommanderPath, "/", commanderCards[selectedCommander].cardName);
+                    success = AssetDatabase.DeleteAsset(path);
+                    if (success)
+                    {
+                        Reload();
+                    }
+                    break;
+                case 1:
+                    var unitCards = Resources.LoadAll<UnitCard>(string.Empty);
+                    if (unitCards.Length == 0)
+                        return;
+
+                    //delete
+                    path = string.Concat(UnitPath, "/", unitCards[selectedUnit].cardName);
+                    success = AssetDatabase.DeleteAsset(path);
+                    if (success)
+                    {
+                        Reload();
+                    }
+                    break;
+            }
             GUI.FocusControl(null);
         }
 
@@ -436,7 +510,6 @@ namespace Utility.CardBuilder.Scripts
             if (toolBarIndex == 0)
             {
                 var commanderCards = Resources.LoadAll<CommanderCard>(string.Empty);
-
                 if (commanderCards.Length > 0)
                 {
                     SetStats(commanderCards[selectedCommander]);

@@ -113,8 +113,9 @@ namespace Deck_Cards.DeckManager.Scripts
             if (index == -1)
                 return false;
 
-            var path = string.Concat("Assets/Resources/Decks/", PhotonNetwork.LocalPlayer.UserId, "/",
-                decks[index].DeckName);
+            var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
+                .PlayerId;
+            var path = string.Concat("Assets/Resources/Decks/", id, "/", decks[index].DeckName);
             var success = AssetDatabase.DeleteAsset(path);
             if (success)
             {
@@ -123,7 +124,7 @@ namespace Deck_Cards.DeckManager.Scripts
                 if (decks.Count == 0)
                 {
                     AssetDatabase.DeleteAsset(
-                        string.Concat("Assets/Resources/Decks/", PhotonNetwork.LocalPlayer.UserId));
+                        string.Concat("Assets/Resources/Decks/", id));
                 }
                 else
                 {

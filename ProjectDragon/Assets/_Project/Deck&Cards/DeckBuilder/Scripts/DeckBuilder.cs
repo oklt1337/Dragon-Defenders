@@ -10,14 +10,9 @@ namespace Deck_Cards.DeckBuilder.Scripts
         public static DeckBuilder Instance => instance ??= new DeckBuilder();
         private static DeckBuilder instance;
 
-        #region Public Properties
-
-        public Deck CurrentSelection { get; private set; }
-        
+        private Deck CurrentSelection { get; set; }
         // ReSharper disable once PossiblyMistakenUseOfParamsMethod
         public readonly string DeckRoot = string.Concat($"Assets/Resources/Decks");
-
-        #endregion
 
         #region Public Methods
 
