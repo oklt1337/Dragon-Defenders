@@ -1,4 +1,3 @@
-
 using System;
 using System.Linq;
 using Abilities.AbilityDataBase.Scripts;
@@ -11,7 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
 
-namespace Utility.CardBuilder.Scripts
+namespace Utility.Editor.CardBuilder.Scripts
 {
     public class CardBuilder : EditorWindow
     {

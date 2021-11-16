@@ -1,20 +1,20 @@
-﻿
 using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Utility.CardBuilder.Scripts
+namespace Utility.Editor.CardBuilder.Scripts
 {
-    public class DeleteCardWindow : EditorWindow
+    public class CreateCardWindow : EditorWindow
     {
-        private static DeleteCardWindow Instance;
-        public event Action OnDelete;
+        private static CreateCardWindow Instance;
+        private string sName;
+        public event Action<string> OnCreate;
 
-        public static DeleteCardWindow Init(Rect pos)
+        public static CreateCardWindow Init(Rect pos)
         {
-            Instance = GetWindow<DeleteCardWindow>(string.Empty);
-            Instance.maxSize =  new Vector2(250,50);
-            Instance.minSize =  new Vector2(250,50);
+            Instance = GetWindow<CreateCardWindow>(string.Empty);
+            Instance.maxSize =  new Vector2(300,65);
+            Instance.minSize =  new Vector2(300,65);
             Instance.position = pos;
             Instance.Show();
 
@@ -23,17 +23,22 @@ namespace Utility.CardBuilder.Scripts
 
         private void OnGUI()
         {
-            GUILayout.Space(5);
-            GUILayout.Label("Are you sure you want to delete the card?");
+            DrawFields();
             DrawButtons();
         }
 
         #region Draw
-        
+
+        private void DrawFields()
+        {
+            //CardName
+            sName = EditorGUILayout.TextField("Name", sName);
+        }
+
         private void DrawButtons()
         {
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(new GUIContent("Delete"), GUILayout.Width(60)))
+            if (GUILayout.Button(new GUIContent("Create"), GUILayout.Width(60)))
             {
                 Create();
             }
@@ -49,7 +54,10 @@ namespace Utility.CardBuilder.Scripts
         
         private void Create()
         {
-            OnDelete?.Invoke();
+            if (string.IsNullOrEmpty(sName)) 
+                return;
+            
+            OnCreate?.Invoke(sName);
             Cancel();
         }
         
