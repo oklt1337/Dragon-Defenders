@@ -11,7 +11,7 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
         Commander,
         Enemy
     }
-    public class DamageProjectile : Projectile
+    public abstract class DamageProjectile : Projectile
     {
         protected float Damage { get; set; }
         protected Caster Caster { get; set; }
