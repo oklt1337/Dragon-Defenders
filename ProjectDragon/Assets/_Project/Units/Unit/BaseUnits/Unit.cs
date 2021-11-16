@@ -2,6 +2,7 @@ using System;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.AOE_Area.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
+using Abilities.EndAbilities.MeleeAttack.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
@@ -145,6 +146,13 @@ namespace Units.Unit.BaseUnits
                 var aoeAreaAbility = aoeAreaAbilityObj.CreateInstance();
                 ability = aoeAreaAbility;
                 sphereCollider.radius = aoeAreaAbility.AttackRange;
+            }
+            else if (type == typeof(MeleeAttackAbility))
+            {
+                var utilityAbilityObj = (MeleeAttackAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var utilityAbility = utilityAbilityObj.CreateInstance();
+                ability = utilityAbility;
+                sphereCollider.radius = utilityAbility.AttackRange;
             }
             else if (type == typeof(IncreaseDamageForSetTimeAbility))
             {

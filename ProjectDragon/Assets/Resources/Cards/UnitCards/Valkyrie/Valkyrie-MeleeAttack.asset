@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
-  m_Name: Valkyrie-AbilityDataBase
+  m_Script: {fileID: 11500000, guid: 52679644e9d04e21a4b67804a14c1b7a, type: 3}
+  m_Name: Valkyrie-MeleeAttack
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: bbd5e644b8265fe4f8e7a43c12d219db, type: 2}
+  abilityType: 0
+  coolDown: 1
+  damage: 30
+  attackRange: 1
+  prefabProjectile: {fileID: 837948568487164293, guid: fb6bc8fb8ff5ce8448433d95cc6ee9cc,
+    type: 3}
+  duration: 1

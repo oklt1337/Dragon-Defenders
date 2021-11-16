@@ -13,7 +13,7 @@ namespace Abilities.Ability.Scripts
 
         public float Damage => damage;
         public float AttackRange => attackRange;
-        public GameObject PrefabProjectile => prefabProjectile;
+        protected GameObject PrefabProjectile => prefabProjectile;
     }
 
     public class DamageAbility : Ability
@@ -21,7 +21,7 @@ namespace Abilities.Ability.Scripts
         public float Damage { get; set; }
         public float AttackRange { get; set; }
 
-        public DamageAbility(DamageAbilityObj abilityObj) : base(abilityObj)
+        protected DamageAbility(DamageAbilityObj abilityObj) : base(abilityObj)
         {
             Damage = abilityObj.Damage;
             AttackRange = abilityObj.AttackRange;
