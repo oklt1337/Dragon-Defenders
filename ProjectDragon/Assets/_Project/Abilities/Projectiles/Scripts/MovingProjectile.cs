@@ -5,9 +5,9 @@ namespace Abilities.Projectiles.Scripts
 {
     public class MovingProjectile : DamageProjectile
     {
-        private float Speed { get; set; }
+        protected float Speed { get; set; }
         
-        public void Init(Transform target, Caster caster, float damage, float speed)
+        public virtual void Init(Transform target, Caster caster, float damage, float speed)
         {
             Damage = damage;
             Speed = speed;
@@ -16,7 +16,7 @@ namespace Abilities.Projectiles.Scripts
             MoveProjectile(target);
         }
 
-        private void MoveProjectile(Transform target)
+        protected void MoveProjectile(Transform target)
         {
             Vector3 dir;
             if (target != null)

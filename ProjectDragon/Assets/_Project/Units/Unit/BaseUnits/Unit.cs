@@ -1,6 +1,7 @@
 using System;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.AOE_Area.Scripts;
+using Abilities.EndAbilities.HomingShot.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
 using Abilities.EndAbilities.MeleeAttack.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
@@ -142,22 +143,29 @@ namespace Units.Unit.BaseUnits
             }
             else if (type == typeof(AoeAreaAbility))
             {
-                var aoeAreaAbilityObj = (AoeAreaAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var aoeAreaAbility = aoeAreaAbilityObj.CreateInstance();
-                ability = aoeAreaAbility;
-                sphereCollider.radius = aoeAreaAbility.AttackRange;
+                var abilityObj = (AoeAreaAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
             }
             else if (type == typeof(MeleeAttackAbility))
             {
-                var utilityAbilityObj = (MeleeAttackAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var utilityAbility = utilityAbilityObj.CreateInstance();
-                ability = utilityAbility;
-                sphereCollider.radius = utilityAbility.AttackRange;
+                var abilityObj = (MeleeAttackAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
+            }
+            else if (type == typeof(HomingShotAbility))
+            {
+                var abilityObj = (HomingShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
             }
             else if (type == typeof(IncreaseDamageForSetTimeAbility))
             {
-                var utilityAbilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var utilityAbility = utilityAbilityObj.CreateInstance();
+                var abilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var utilityAbility = abilityObj.CreateInstance();
                 ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;
             }
