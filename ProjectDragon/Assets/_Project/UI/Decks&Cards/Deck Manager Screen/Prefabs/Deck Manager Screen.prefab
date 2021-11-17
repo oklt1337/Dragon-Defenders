@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b9b0510909e934b8b97bb474749e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commanderCard: {fileID: 11400000, guid: 527ac9024fc588f4c9b22278f423cb57, type: 2}
+  commanderCard: {fileID: 11400000, guid: db407c4caf4112d4c907f5791fc04bdf, type: 2}
   createButton: {fileID: 25347277}
   cancelButton: {fileID: 122672179}
   nameField: {fileID: 1828641792}

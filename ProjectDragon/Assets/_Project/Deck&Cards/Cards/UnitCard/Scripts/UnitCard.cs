@@ -17,11 +17,12 @@ namespace Deck_Cards.Cards.UnitCard.Scripts
         public int GoldCost => goldCost;
         public int Limit => limit;
         
-        public void Save(int cId, string cName, string cDescription, GameObject cModel, Rarity cRarity,
+        public void Save(int cId, string cPath, string cName, string cDescription, GameObject cModel, Rarity cRarity,
             ClassAndFaction.Faction cFaction, ClassAndFaction.Class cClass, SkillTreeObj cSkillTreeObj, AbilityDataBase cAbilityDataBase, VideoClip cDemo,
             Sprite cIcon, int cGoldCost, int cLimit)
         {
             cardID = cId;
+            PrefabPath = cPath;
             cardName = cName;
             description = cDescription;
             model = cModel;

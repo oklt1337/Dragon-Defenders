@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
-  m_Name: Test Commander-CommanderSkillTree
+  m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
+  m_Name: Rackl, the Heroic Dragon-CommanderAbilityDataBase
   m_EditorClassIdentifier: 
+  abilities: []

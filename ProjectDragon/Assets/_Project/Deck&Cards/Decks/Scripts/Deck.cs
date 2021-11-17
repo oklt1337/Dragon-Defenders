@@ -14,6 +14,7 @@ namespace Deck_Cards.Decks.Scripts
         #region Serialze Fields
          
         [SerializeField] private int deckId;
+        [SerializeField] private bool isDefault;
         [SerializeField] private string deckName;
         [SerializeField] private ClassAndFaction.Faction faction;
         [SerializeField] private CommanderCard commanderCard;
@@ -34,23 +35,23 @@ namespace Deck_Cards.Decks.Scripts
             get => deckId;
             set => deckId = value;
         }
-
+        public bool IsDefault
+        {
+            get => isDefault; 
+            set => isDefault = value;
+        }
         public string DeckName
         {
             get => deckName;
             set => deckName = value;
         }
-
         public bool IsUseAble => !unitCards.Contains(null) && commanderCard != null;
-
         public ClassAndFaction.Faction Faction
         {
             get => faction;
             set => faction = value;
         }
-
         public CommanderCard CommanderCard => commanderCard;
-
         public UnitCard[] UnitCards => unitCards;
 
         #endregion

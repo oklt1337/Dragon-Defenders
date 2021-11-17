@@ -24,6 +24,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
 
         [Header("Base Stats")] 
         private int cardID;
+        private string prefabPath;
         private string cardName;
         private string description;
         private GameObject model;
@@ -156,6 +157,8 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
 
             //CardId
             cardID = EditorGUILayout.IntField("ID", cardID);
+            //PrefabPath
+            prefabPath = EditorGUILayout.TextField("Prefab Path", prefabPath);
             //CardName
             cardName = EditorGUILayout.TextField("Card Name", cardName);
             //CardDescription
@@ -311,6 +314,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
         private void SetBaseStats(BaseCard baseCard)
         {
             cardID = baseCard.CardID;
+            prefabPath = baseCard.PrefabPath;
             cardName = baseCard.CardName;
             description = baseCard.Description;
             model = baseCard.Model;
@@ -326,6 +330,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
         private void SetEmpty()
         {
             cardID = 0;
+            prefabPath = string.Empty;
             cardName = string.Empty;
             description = string.Empty;
             model = null;
@@ -360,9 +365,12 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                     // Create Commander
                     guid = AssetDatabase.CreateFolder(CommanderPath, newCardName);
                     path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Prefabs");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Materials");
 
                     //Create Instance
                     var commanderCard = CreateInstance<CommanderCard>();
+                    commanderCard.PrefabPath = string.Concat("Cards/CommanderCards/", newCardName, "/Prefabs/");
                     commanderCard.SkillTreeObj = CreateInstance<SkillTreeObj>();
                     commanderCard.AbilityDataBase = CreateInstance<AbilityDataBase>();
                     commanderCard.CardName = newCardName;
@@ -390,8 +398,11 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                     // Create Unit
                     guid = AssetDatabase.CreateFolder(UnitPath, newCardName);
                     path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
+                    var prefabGuid = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Prefabs");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Materials");
                     
                     var unitCard = CreateInstance<UnitCard>();
+                    unitCard.PrefabPath = string.Concat("Cards/UnitCards/", newCardName, "/Prefabs/");
                     unitCard.SkillTreeObj = CreateInstance<SkillTreeObj>();
                     unitCard.AbilityDataBase = CreateInstance<AbilityDataBase>();
                     unitCard.CardName = newCardName;
@@ -426,7 +437,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                         return;
 
                     //save
-                    commanderCards[selectedCommander].Save(cardID, cardName, description, model, rarity, faction,
+                    commanderCards[selectedCommander].Save(cardID, prefabPath, cardName, description, model, rarity, faction,
                         @class, skillTreeObj, abilityDataBase,demo, icon, health, mana, commanderAttackDamageModifier, defense, speed);
                     EditorUtility.SetDirty(commanderCards[selectedCommander]);
                     AssetDatabase.SaveAssets();
@@ -436,7 +447,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                     if (unitCards.Length == 0)
                         return;
                     
-                    unitCards[selectedUnit].Save(cardID, cardName, description, model, rarity, faction,
+                    unitCards[selectedUnit].Save(cardID, prefabPath, cardName, description, model, rarity, faction,
                         @class, skillTreeObj, abilityDataBase, demo, icon, goldCost, limit);
                     EditorUtility.SetDirty(unitCards[selectedUnit]);
                     AssetDatabase.SaveAssets();
@@ -487,6 +498,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                     success = AssetDatabase.DeleteAsset(path);
                     if (success)
                     {
+                        selectedCommander = 0;
                         Reload();
                     }
                     break;
@@ -500,6 +512,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                     success = AssetDatabase.DeleteAsset(path);
                     if (success)
                     {
+                        selectedUnit = 0;
                         Reload();
                     }
                     break;

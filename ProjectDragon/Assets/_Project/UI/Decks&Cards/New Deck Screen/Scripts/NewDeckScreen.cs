@@ -56,7 +56,7 @@ namespace UI.New_Deck_Screen.Scripts
             
             // Only for Prototype, pls don't ever look at this.
             DeckManager.Instance.Decks[DeckManager.Instance.Decks.Count - 1].AddCard(commanderCard);
-            DeckManager.Instance.SaveDeck(DeckManager.Instance.Decks[DeckManager.Instance.Decks.Count - 1]);
+            DeckManager.SaveDeck(DeckManager.Instance.Decks[DeckManager.Instance.Decks.Count - 1]);
         }
 
         /// <summary>

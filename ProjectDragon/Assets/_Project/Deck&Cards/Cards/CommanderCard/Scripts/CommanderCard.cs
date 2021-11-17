@@ -27,12 +27,13 @@ namespace Deck_Cards.Cards.CommanderCard.Scripts
 
         public float Speed => speed;
 
-        public void Save(int cId, string cName, string cDescription, GameObject cModel, Rarity cRarity,
+        public void Save(int cId, string cPath, string cName, string cDescription, GameObject cModel, Rarity cRarity,
             ClassAndFaction.Faction cFaction, ClassAndFaction.Class cClass, SkillTreeObj cSkillTreeObj,
             AbilityDataBase cAbilityDataBase, VideoClip cDemo,
             Sprite cIcon, float cHealth, float cMana, float cAttackDamageModifier, float cDefense, float cSpeed)
         {
             cardID = cId;
+            PrefabPath = cPath;
             cardName = cName;
             description = cDescription;
             model = cModel;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Moose-Card
   m_EditorClassIdentifier: 
   cardID: 10803001
+  prefabPath: Cards/UnitCards/Moose/Prefabs/
   cardName: Moose
   description: Swings with his antlers
   model: {fileID: 0}

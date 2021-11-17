@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Elvish Archers-Card
   m_EditorClassIdentifier: 
   cardID: 20201001
+  prefabPath: Cards/UnitCards/Elvish Archers/Prefabs/
   cardName: Elvish Archers
   description: Shoots arrows at enemies.
   model: {fileID: 0}

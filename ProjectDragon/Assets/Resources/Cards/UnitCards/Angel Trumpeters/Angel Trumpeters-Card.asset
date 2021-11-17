@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Angel Trumpeters-Card
   m_EditorClassIdentifier: 
   cardID: 20401001
+  prefabPath: Cards/UnitCards/Angel Trumpeters/Prefabs/
   cardName: Angel Trumpeters
   description: Blast into their trumpets buffing units surrounding them.
   model: {fileID: 0}

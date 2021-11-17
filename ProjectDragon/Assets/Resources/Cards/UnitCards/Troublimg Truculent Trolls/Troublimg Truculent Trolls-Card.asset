@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Troublimg Truculent Trolls-Card
   m_EditorClassIdentifier: 
   cardID: 10102001
+  prefabPath: Cards/UnitCards/Troubling Truculent Trolls/Prefabs/
   cardName: Troubling Truculent Trolls
   description: Throws stones... yeah thats it
   model: {fileID: 0}

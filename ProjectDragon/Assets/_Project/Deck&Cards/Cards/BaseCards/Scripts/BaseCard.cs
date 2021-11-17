@@ -22,6 +22,7 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
     {
         [Header("General")] 
         [SerializeField] internal int cardID;
+        [SerializeField] private string prefabPath;
         [SerializeField] internal string cardName;
         [SerializeField] internal string description;
 
@@ -38,37 +39,32 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
         [SerializeField] internal Sprite icon;
 
         public int CardID => cardID;
-
+        public string PrefabPath 
+        {
+            get => Model != null ? string.Concat(prefabPath, Model.name) : prefabPath;
+            set => prefabPath = value;
+        }
         public string CardName
         {
             get => cardName;
             set => cardName = value;
         }
-
         public string Description => description;
-
         public GameObject Model => model;
-
         public Rarity Rarity => rarity;
-
         public ClassAndFaction.Faction Faction => faction;
-
         public ClassAndFaction.Class Class => @class;
-
         public SkillTreeObj SkillTreeObj
         {
             get => skillTreeObj;
             set => skillTreeObj = value;
         }
-
         public AbilityDataBase AbilityDataBase
         {
             get => abilityDataBase;
             set => abilityDataBase = value;
         }
-
         public VideoClip Demo => demo;
-
         public Sprite Icon => icon;
     }
 }

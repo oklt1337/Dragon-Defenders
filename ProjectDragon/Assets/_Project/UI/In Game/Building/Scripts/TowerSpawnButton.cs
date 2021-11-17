@@ -15,14 +15,12 @@ namespace UI.In_Game.Building.Scripts
     {
         [SerializeField] private UnitCard unit;
         [SerializeField] private Camera buildCam;
-        
-        
-        
+
         #region Unity Methods
 
-        private void Awake()
+        private void Start()
         {
-            GameManager.Instance.OnDeckSet += UpdateUnit;
+            UpdateUnit(GameManager.DefaultDeck);
         }
 
         private void OnEnable()

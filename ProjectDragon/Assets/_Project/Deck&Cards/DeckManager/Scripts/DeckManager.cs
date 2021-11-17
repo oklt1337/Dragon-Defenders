@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using Deck_Cards.DeckBuilder.DeckSerialization.Scripts;
 using Deck_Cards.Decks.Scripts;
+using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using UnityEngine;
 
@@ -42,6 +44,13 @@ namespace Deck_Cards.DeckManager.Scripts
             }
 
             decks = DeckDeserializer.LoadDecks();
+            
+            //Setting Default Deck
+            var index = decks.FindIndex(deck => deck.IsDefault);
+            if (index != -1)
+            {
+                SetDeckAsDefault(index);
+            }
         }
 
         #endregion
@@ -72,11 +81,15 @@ namespace Deck_Cards.DeckManager.Scripts
         /// <returns>bool = true if deckName could be found in deckList.</returns>
         public bool DeleteDeck(int deckId)
         {
-            var index = decks.FindIndex(deck => deck.DeckId == deckId);
+            var index = Decks.FindIndex(deck => deck.DeckId == deckId);
             if (index == -1)
                 return false;
-            DeckSerializer.DeleteDeckSaveFile(decks[index]);
+            DeckSerializer.DeleteDeckSaveFile(Decks[index]);
             decks.Remove(decks[index]);
+            for (var i = 0; i < Decks.Count; i++)
+            {
+                Decks[i].DeckId = i;
+            }
             return true;
         }
 
@@ -118,24 +131,22 @@ namespace Deck_Cards.DeckManager.Scripts
         /// Saves a deck
         /// </summary>
         /// <param name="deck">deck to save</param>
-        public void SaveDeck(Deck deck)
+        public static void SaveDeck(Deck deck)
         {
             DeckBuilder.Scripts.DeckBuilder.Save(deck);
         }
 
-        public static void SetDeckAsDefault(int id)
+        public void SetDeckAsDefault(int id)
         {
-            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
-            if (hashTable.ContainsKey("PlayDeck"))
+            foreach (var deck in Instance.Decks.Where(t => t.IsDefault))
             {
-                hashTable["PlayDeck"] = id;
-            }
-            else
-            {
-                hashTable.Add("PlayDeck", id);
+                deck.IsDefault = false;
+                break;
             }
 
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hashTable);
+            Decks[id].IsDefault = true;
+            SaveDeck(Decks[id]);
+            GameManager.DefaultDeck = Decks[id];
         }
 
         //ToDo: Deck on edit edit 2nd instance on save override main instance and have bool for isSaved.

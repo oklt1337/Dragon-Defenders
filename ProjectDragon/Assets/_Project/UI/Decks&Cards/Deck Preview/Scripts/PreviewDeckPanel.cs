@@ -4,6 +4,7 @@ using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
+using GamePlay.GameManager.Scripts;
 using TMPro;
 using UI.MainMenu.Manager.Scripts;
 using UI.Managers.Scripts;
@@ -63,7 +64,7 @@ namespace UI.Deck_Preview.Scripts
             if (PreviewDeck.CommanderCard == null)
                 return;
 
-            DeckManager.SetDeckAsDefault(PreviewDeck.DeckId);
+            DeckManager.Instance.SetDeckAsDefault(PreviewDeck.DeckId);
         }
 
         public void OnSaveDeckClick()
@@ -79,7 +80,7 @@ namespace UI.Deck_Preview.Scripts
                 MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
             }
 
-            DeckManager.Instance.SaveDeck(PreviewDeck);
+            DeckManager.SaveDeck(PreviewDeck);
             // Future TODO:
         }
 

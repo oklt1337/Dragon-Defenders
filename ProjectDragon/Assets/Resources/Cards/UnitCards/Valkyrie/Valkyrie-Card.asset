@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Valkyrie-Card
   m_EditorClassIdentifier: 
   cardID: 20402001
+  prefabPath: Cards/UnitCards/Valkyrie/Prefabs/
   cardName: Valkyrie
   description: Swings with her sword
   model: {fileID: 0}

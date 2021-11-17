@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
 using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
-using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
-using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
 using Dreamteck.Splines;
 using GamePlay.CameraMovement.TrackingShot;
@@ -12,12 +10,9 @@ using GamePlay.CommanderWaypoint.Scripts;
 using GamePlay.HQManager.Scripts;
 using GamePlay.Player.PlayerModel.Scripts;
 using GamePlay.Spawning.WaveManager.Scripts;
-using Photon.Pun;
 using UI.In_Game.Base_UI.Scripts;
 using UI.In_Game.Building.Scripts;
 using UI.In_Game.Commander.Scripts;
-using UI.In_Game.InGameCanvasManager.Scripts;
-using Units.Unitmanager;
 using UnityEngine;
 
 namespace GamePlay.GameManager.Scripts
@@ -52,7 +47,6 @@ namespace GamePlay.GameManager.Scripts
         [SerializeField] private EnemySpawner enemySpawner;
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private WaveGenerator waveGenerator;
-        [SerializeField] private UnitManager unitManager;
         [SerializeField] private HqManager hqManager;
 
         [Header("Camera")] 
@@ -97,7 +91,6 @@ namespace GamePlay.GameManager.Scripts
         public WaveManager WaveManager => waveManager;
         public WaveGenerator WaveGenerator => waveGenerator;
         public PlayerModel PlayerModel => player;
-        public UnitManager UnitManager => unitManager;
         public HqManager Hq => hqManager;
         public CommanderMoveIndicator CommanderMoveIndicator => commanderMoveIndicator;
         public TrackingShotBuildToWave CameraTrackingShotBuildToWave => cameraTrackingShotBuildToWave;
@@ -106,13 +99,13 @@ namespace GamePlay.GameManager.Scripts
         public BuildHUD BuildHUD => buildHUD;
         public SplineComputer SplineComputer => splineComputer;
         public Dictionary<UnitCard, int> PlacedUnits => placedUnits;
+        public static Deck DefaultDeck { get; set; }
 
         #endregion
 
         #region Events
 
         public event Action<GameState> OnGameStateChanged;
-        public event Action<Deck> OnDeckSet;
 
         #endregion
 
@@ -138,10 +131,6 @@ namespace GamePlay.GameManager.Scripts
         private void Start()
         {
             CurrentGameState = GameState.Build;
-
-            OnDeckSet?.Invoke(PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("PlayDeck")
-                ? DeckManager.Instance.Decks[(int) PhotonNetwork.LocalPlayer.CustomProperties["PlayDeck"]]
-                : DeckManager.Instance.Decks[0]);
         }
 
         #endregion

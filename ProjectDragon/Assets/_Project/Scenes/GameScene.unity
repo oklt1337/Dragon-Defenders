@@ -5524,7 +5524,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &440852306
 MonoBehaviour:
@@ -5793,7 +5793,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1713089046}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &479366677
 MonoBehaviour:
@@ -7276,7 +7276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWave: {fileID: 11400000, guid: 407ed2432967f144e8f76dd1c2b4f905, type: 2}
-  currentWaveIndex: 0
 --- !u!4 &705666260
 Transform:
   m_ObjectHideFlags: 0
@@ -7637,52 +7636,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 768723871}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &783883373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 783883375}
-  - component: {fileID: 783883374}
-  m_Layer: 0
-  m_Name: UnitManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &783883374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783883373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3dcdb7e3e3d8a04abee082c945a7bcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  units:
-  - {fileID: 5719551676885714538, guid: fa7aa9f6ce7c3344f952bb8fb1d4204d, type: 3}
-  - {fileID: 959093990641995446, guid: 2595f124348432d4caf68719eff7ed38, type: 3}
---- !u!4 &783883375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783883373}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1713089046}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &806328841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4872793378149383345, guid: 2b7e532e77a8cf04097cf984295708bd,
@@ -12066,14 +12019,12 @@ MonoBehaviour:
   enemySpawner: {fileID: 1298276599}
   waveManager: {fileID: 705666259}
   waveGenerator: {fileID: 1275092366}
-  unitManager: {fileID: 783883374}
   hqManager: {fileID: 407553236}
   cameraTrackingShotBuildToWave: {fileID: 1155049007}
   hud: {fileID: 1380770227}
   commanderHUD: {fileID: 1544868725}
   buildHUD: {fileID: 282191432}
   splineComputer: {fileID: 299285558}
-  deck: {fileID: 11400000, guid: 4003faf04c445a440aaeccf12a6a0f2a, type: 2}
 --- !u!4 &1713089046
 Transform:
   m_ObjectHideFlags: 0
@@ -12090,7 +12041,6 @@ Transform:
   - {fileID: 407553237}
   - {fileID: 1275092367}
   - {fileID: 705666260}
-  - {fileID: 783883375}
   - {fileID: 440852305}
   - {fileID: 479366676}
   m_Father: {fileID: 0}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fairy Twins-Card
   m_EditorClassIdentifier: 
   cardID: 20204001
+  prefabPath: Cards/UnitCards/Fairy Twins/Prefabs/
   cardName: Fairy Twins
   description: Buffs closest commander or unit.
   model: {fileID: 0}

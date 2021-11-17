@@ -1,5 +1,6 @@
 using _Project.UI.Lobby.Manager.Scripts;
 using Deck_Cards.DeckManager.Scripts;
+using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using UI.Managers.Scripts;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace UI.Lobby.Lobby_Screen.Scripts
 
         public void OnMapClick()
         {
-            if(!CheckDeck())
+            if(!GameManager.DefaultDeck.IsUseAble)
                 return;
             
             SceneManager.ChangeScene(Scene.GameScene);
@@ -34,31 +35,6 @@ namespace UI.Lobby.Lobby_Screen.Scripts
         {
             LobbyCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
             gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// Checks if the deck is legal.
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckDeck()
-        {
-            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
-
-            if (!hashTable.ContainsKey("PlayDeck")) 
-                return false;
-            
-            int deckId = (int) hashTable["PlayDeck"];
-                
-            // Checks if deck exists.
-            if (DeckManager.Instance.Decks.Count <= deckId)
-            {
-                return false;
-            }
-
-            var deck = DeckManager.Instance.Decks[deckId];
-                
-            // Checks if deck is legal.
-            return deck.IsUseAble;
         }
     }
 }
