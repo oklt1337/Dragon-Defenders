@@ -37,7 +37,9 @@ namespace UI.Deck_Preview.Scripts
         public void SetPreviewDeck(Deck newPreviewDeck)
         {
             PreviewDeck = newPreviewDeck;
-            AdjustButtons();
+            
+            if(newPreviewDeck != null)
+                AdjustButtons();
         }
 
         public void OnEditDeckClick()
@@ -65,11 +67,11 @@ namespace UI.Deck_Preview.Scripts
             
             if (SceneManager.CurrentScene == Scene.MainMenu)
             {
-                MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
+                MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
             }
             else
             {
-                MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
+                MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
             }
             DeckManager.Instance.SaveDeck(PreviewDeck);
             // Future TODO:
@@ -82,6 +84,15 @@ namespace UI.Deck_Preview.Scripts
             
             DeckManager.Instance.DeleteDeck(PreviewDeck.DeckId);
 
+            if (SceneManager.CurrentScene == Scene.MainMenu)
+            {
+                MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
+            }
+            else
+            {
+                MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
+            }
+            
             ChangeView();
             
             gameObject.SetActive(false);
@@ -89,6 +100,12 @@ namespace UI.Deck_Preview.Scripts
 
         public void OnRemoveCardClick(PreviewDeckButton deckButton)
         {
+            if (editDeckButton.gameObject.activeSelf)
+                return;
+            
+            if(deckButton.Card == null)
+                return;
+            
             if(deckButton.Card is CommanderCard)
                 PreviewDeck.RemoveCard(deckButton.Card);
             else

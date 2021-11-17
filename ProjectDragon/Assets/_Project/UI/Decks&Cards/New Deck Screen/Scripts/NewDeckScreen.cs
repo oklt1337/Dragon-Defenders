@@ -42,11 +42,11 @@ namespace UI.New_Deck_Screen.Scripts
                     break;
                 case Scene.MainMenu:
                     MainMenuCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
-                    MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
+                    MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
                     break;
                 case Scene.Lobby:
                     LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
-                    LobbyCanvasManager.Instance.DeckManagerScreen.Start();
+                    LobbyCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
                     break;
                 case Scene.GameScene:
                     break;

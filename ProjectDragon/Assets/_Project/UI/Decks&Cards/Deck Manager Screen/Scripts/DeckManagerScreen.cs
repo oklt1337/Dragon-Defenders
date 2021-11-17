@@ -28,16 +28,9 @@ namespace UI.Deck_Manager_Screen.Scripts
 
         #region Unity Methods
 
-        public void Start()
+        private void Start()
         {
-            for (int i = 0; i < DeckManager.Instance.Decks.Count; i++)
-            {
-                var text = deckButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-                text.text = DeckManager.Instance.Decks[i].DeckName;
-
-                if(DeckManager.Instance.Decks[i].CommanderCard != null)
-                    deckButtons[i].image.sprite = DeckManager.Instance.Decks[i].CommanderCard.icon;
-            }
+            UpdateDecks();
         }
 
         private void OnEnable()
@@ -149,6 +142,21 @@ namespace UI.Deck_Manager_Screen.Scripts
         {
             cardView.SetActive(!cardView.activeSelf);
             deckView.SetActive(!cardView.activeSelf);
+        }
+
+        /// <summary>
+        /// Updates the names of all decks.
+        /// </summary>
+        public void UpdateDecks()
+        {
+            for (int i = 0; i < DeckManager.Instance.Decks.Count; i++)
+            {
+                var text = deckButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+                text.text = DeckManager.Instance.Decks[i].DeckName;
+
+                if(DeckManager.Instance.Decks[i].CommanderCard != null)
+                    deckButtons[i].image.sprite = DeckManager.Instance.Decks[i].CommanderCard.icon;
+            }
         }
 
         #endregion

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SkillSystem.SkillTree.Scripts;
 using UI.Managers.Scripts;
@@ -8,8 +9,12 @@ namespace UI.In_Game.Building.Scripts
 {
     public class UpgradePanel : MonoBehaviour, ICanvas
     {
-        [SerializeField] private List<Image> skillImages = new List<Image>();
+        [SerializeField] private List<Button> skillButtons = new List<Button>();
+        [SerializeField] private List<Image> commanderSkillImages = new List<Image>();
+        [SerializeField] private List<Image> unitSkillImages = new List<Image>();
         [SerializeField] private Sprite missingSprite;
+        [SerializeField] private GameObject commanderPanel;
+        [SerializeField] private GameObject unitPanel;
 
         private SkillTree skillTree;
 
@@ -31,7 +36,10 @@ namespace UI.In_Game.Building.Scripts
         
         public void ChangeInteractableStatus(bool status)
         {
-            throw new System.NotImplementedException();
+            foreach (var button in skillButtons)
+            {
+                button.interactable = status;
+            }
         }
 
         /// <summary>
@@ -40,7 +48,16 @@ namespace UI.In_Game.Building.Scripts
         /// <param name="newSkillTree">SkillTree</param>
         public void UpdateSkillTree(SkillTree newSkillTree)
         {
-            this.skillTree = newSkillTree;
+            skillTree = newSkillTree;
+            
+            if (skillTree.Nodes.Keys.Count > 6)
+            {
+                commanderPanel.gameObject.SetActive(true);
+            }
+            else
+            {
+                unitPanel.gameObject.SetActive(false);
+            }
             
             UpdateImages();
         }
@@ -73,25 +90,27 @@ namespace UI.In_Game.Building.Scripts
         /// </summary>
         private void UpdateImages()
         {
-            for (int i = 0; i < skillImages.Count; i++)
+            var activeSkillImages = skillTree.Nodes.Keys.Count > 6 ? commanderSkillImages : unitSkillImages;
+
+            for (int i = 0; i < activeSkillImages.Count; i++)
             {
                 var key = (i + 1);
 
                 // Fail check.
                 if (skillTree.Nodes[key].NodeObj.Icon == null)
                 {
-                    skillImages[i].sprite = missingSprite;
+                    activeSkillImages[i].sprite = missingSprite;
                     continue;
                 }
 
                 // Update the sprite.
-                skillImages[i].sprite = skillTree.Nodes[key].NodeObj.Icon;
+                activeSkillImages[i].sprite = skillTree.Nodes[key].NodeObj.Icon;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
                 if (skillTree.Nodes[key].NodeState == NodeState.Learnable || skillTree.Nodes[key].NodeState == NodeState.Activated)
-                    skillImages[i].color = Color.white;
+                    activeSkillImages[i].color = Color.white;
                 else
-                    skillImages[i].color = Color.gray;
+                    activeSkillImages[i].color = Color.gray;
             }
         }
 
