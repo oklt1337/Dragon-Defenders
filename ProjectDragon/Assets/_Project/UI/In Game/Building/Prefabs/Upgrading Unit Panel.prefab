@@ -2595,7 +2595,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d9a845a27623349b2aacecbd48a471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillImages:
+  skillButtons:
+  - {fileID: 4971263755016524788}
+  - {fileID: 1114335833239716172}
+  - {fileID: 7580660356963040669}
+  - {fileID: 2904087259330092244}
+  - {fileID: 7580660357795052074}
+  - {fileID: 8908321505178566361}
+  - {fileID: 8442530517442613247}
+  - {fileID: 4513975817866886553}
+  - {fileID: 8997006716058431205}
+  - {fileID: 79992854489688041}
+  - {fileID: 1280692168265653821}
+  - {fileID: 2384133747651299685}
+  - {fileID: 2638300024286824076}
+  - {fileID: 6733198305346162372}
+  missingSprite: {fileID: 21300000, guid: e02b13b719e8ce741a9a2dbf4c31e1ad, type: 3}
+  commanderPanel: {fileID: 2448190588806653165}
+  commanderSkillImages:
   - {fileID: 88390380783621394}
   - {fileID: 6813742417583029769}
   - {fileID: 7580660356963040668}
@@ -2605,7 +2622,13 @@ MonoBehaviour:
   - {fileID: 3703038980439744146}
   - {fileID: 2600490202472508634}
   - {fileID: 5998348068960468052}
-  missingSprite: {fileID: 21300000, guid: e02b13b719e8ce741a9a2dbf4c31e1ad, type: 3}
+  unitSkillImages:
+  - {fileID: 298302224361057539}
+  - {fileID: 8954437444649336279}
+  - {fileID: 1060602501453096154}
+  - {fileID: 3954505120604718413}
+  - {fileID: 5683724593724516529}
+  unitPanel: {fileID: 8928650696685304006}
 --- !u!1 &7580660357374776763
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,7 +3334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7951774049465556753
 RectTransform:
   m_ObjectHideFlags: 0
