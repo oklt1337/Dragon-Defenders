@@ -19,19 +19,10 @@ namespace UI.Lobby.Lobby_Screen.Scripts
 
         public void OnMapClick()
         {
-            SceneManager.ChangeScene(Scene.GameScene);
+            if(!CheckDeck())
+                return;
             
-            // Checks Deck stuff.
-            int deckId = 0;
-            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
-            if (hashTable.ContainsKey("PlayDeck"))
-            {
-                if (DeckManager.Instance.Decks.Count < (int) hashTable["PlayDeck"])
-                {
-                    return;
-                }
-                DeckManager.SetDeckAsDefault(deckId);
-            }
+            SceneManager.ChangeScene(Scene.GameScene);
         }
 
         public void OnBackClick()
@@ -43,6 +34,31 @@ namespace UI.Lobby.Lobby_Screen.Scripts
         {
             LobbyCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
             gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// Checks if the deck is legal.
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckDeck()
+        {
+            var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
+
+            if (!hashTable.ContainsKey("PlayDeck")) 
+                return false;
+            
+            int deckId = (int) hashTable["PlayDeck"];
+                
+            // Checks if deck exists.
+            if (DeckManager.Instance.Decks.Count <= deckId)
+            {
+                return false;
+            }
+
+            var deck = DeckManager.Instance.Decks[deckId];
+                
+            // Checks if deck is legal.
+            return deck.IsUseAble;
         }
     }
 }

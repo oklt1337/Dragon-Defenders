@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4946009d916c647b76c256a28031d6, type: 3}
+  m_Name: Rackl-Card
+  m_EditorClassIdentifier: 
+  cardID: 0
+  cardName: Rackl
+  description: Small boy whos wish it is to be a hero one day.
+  model: {fileID: 0}
+  rarity: 0
+  faction: 0
+  class: 0
+  skillTreeObj: {fileID: 11400000, guid: bcf67e0c511cc1248b4699416779cb5b, type: 2}
+  abilityDataBase: {fileID: 11400000, guid: 62d27153c4cf37c49935276f3ccae146, type: 2}
+  demo: {fileID: 0}
+  icon: {fileID: 0}
+  health: 1000
+  mana: 250
+  attackDamageModifier: 100
+  defense: 100
+  speed: 100
