@@ -1,19 +1,43 @@
 using System.Collections.Generic;
+using GamePlay.GameManager.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UI.Managers.Scripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.In_Game.Building.Scripts
 {
     public class UpgradePanel : MonoBehaviour, ICanvas
     {
-        [SerializeField] private List<Image> skillImages = new List<Image>();
+        #region Serialized Fields
+
+        [Header("Base Stiff")] 
+        [SerializeField] private List<Button> skillButtons = new List<Button>();
         [SerializeField] private Sprite missingSprite;
 
+        [Header("Commander Stuff")]
+        [SerializeField] private GameObject commanderPanel;
+        [SerializeField] private List<Image> commanderSkillImages = new List<Image>();
+
+        [Header("Unit Stuff")] 
+        [SerializeField] private List<Image> unitSkillImages = new List<Image>();
+        [SerializeField] private GameObject unitPanel;
+
+        #endregion
+
+        #region Private Fields
+        
         private SkillTree skillTree;
 
+        #endregion
+
         #region Unity Methods
+
+        private void Update()
+        {
+            CheckClosing();
+        }
 
         private void OnEnable()
         {
@@ -26,12 +50,15 @@ namespace UI.In_Game.Building.Scripts
         }
 
         #endregion
-        
+
         #region Public Methods
-        
+
         public void ChangeInteractableStatus(bool status)
         {
-            throw new System.NotImplementedException();
+            foreach (var button in skillButtons)
+            {
+                button.interactable = status;
+            }
         }
 
         /// <summary>
@@ -40,8 +67,21 @@ namespace UI.In_Game.Building.Scripts
         /// <param name="newSkillTree">SkillTree</param>
         public void UpdateSkillTree(SkillTree newSkillTree)
         {
-            this.skillTree = newSkillTree;
-            
+            // Turning them of for fail save reasons.
+            commanderPanel.SetActive(false);
+            unitPanel.SetActive(false);
+
+            skillTree = newSkillTree;
+
+            if (skillTree.Nodes.Keys.Count > 6)
+            {
+                commanderPanel.gameObject.SetActive(true);
+            }
+            else
+            {
+                unitPanel.gameObject.SetActive(true);
+            }
+
             UpdateImages();
         }
 
@@ -54,18 +94,30 @@ namespace UI.In_Game.Building.Scripts
             string buttonName = btn.gameObject.name;
             int.TryParse(buttonName, out var index);
 
-            if (skillTree.Nodes[index].NodeState != NodeState.Learnable) 
+            if (skillTree.Nodes[index].NodeState != NodeState.Learnable)
                 return;
-            
+
+            if (skillTree.Nodes.Keys.Count > 6)
+            {
+                // Checks if player has reached the appropriate wave for the level up. 
+                if (skillTree.Nodes[index].NodeObj.Cost > GameManager.Instance.WaveManager.CurrentWaveIndex)
+                    return;
+            }
+            else
+            {
+                // Checks if player has enough money for the Level up and takes that money.
+                if (skillTree.Nodes[index].NodeObj.Cost > GameManager.Instance.PlayerModel.Money)
+                    return;
+
+                GameManager.Instance.PlayerModel.ModifyMoney(-skillTree.Nodes[index].NodeObj.Cost);
+            }
+
             skillTree.SetNodeActive(index);
             UpdateImages();
-
-            //TODO: Money Check and using that money.
-
         }
 
         #endregion
-        
+
         #region Private Methods
 
         /// <summary>
@@ -73,29 +125,44 @@ namespace UI.In_Game.Building.Scripts
         /// </summary>
         private void UpdateImages()
         {
-            for (int i = 0; i < skillImages.Count; i++)
+            var activeSkillImages = skillTree.Nodes.Keys.Count > 6 ? commanderSkillImages : unitSkillImages;
+
+            for (int i = 0; i < activeSkillImages.Count; i++)
             {
                 var key = (i + 1);
 
                 // Fail check.
                 if (skillTree.Nodes[key].NodeObj.Icon == null)
                 {
-                    skillImages[i].sprite = missingSprite;
+                    activeSkillImages[i].sprite = missingSprite;
                     continue;
                 }
 
                 // Update the sprite.
-                skillImages[i].sprite = skillTree.Nodes[key].NodeObj.Icon;
+                activeSkillImages[i].sprite = skillTree.Nodes[key].NodeObj.Icon;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
-                if (skillTree.Nodes[key].NodeState == NodeState.Learnable || skillTree.Nodes[key].NodeState == NodeState.Activated)
-                    skillImages[i].color = Color.white;
+                if (skillTree.Nodes[key].NodeState == NodeState.Learnable ||
+                    skillTree.Nodes[key].NodeState == NodeState.Activated)
+                    activeSkillImages[i].color = Color.white;
                 else
-                    skillImages[i].color = Color.gray;
+                    activeSkillImages[i].color = Color.gray;
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Checks if the player wants to close the panel.
+        /// </summary>
+        private void CheckClosing()
+        {
+            if (EventSystem.current.IsPointerOverGameObject(0))
+                return;
 
+            commanderPanel.SetActive(false);
+            unitPanel.SetActive(false);
+            gameObject.SetActive(false);
+        }
+
+        #endregion
     }
 }

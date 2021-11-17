@@ -4,23 +4,24 @@ using AI.Enemies.Base_Enemy;
 using GamePlay.GameManager.Scripts;
 using UnityEngine;
 
-namespace _Project.GamePlay.Spawning.WaveManager.Scripts
+namespace GamePlay.Spawning.WaveManager.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private Wave.Scripts.Wave currentWave;
-        [SerializeField] private int currentWaveIndex;
+        [SerializeField] private _Project.GamePlay.Spawning.Wave.Scripts.Wave currentWave;
+        
+        public int CurrentWaveIndex { get; private set; }
 
         public event Action<List<Enemy>> OnUpdateWave;
 
         private void Awake()
         {
-            GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += AdvanceToNextWave;
         }
 
         private void OnDestroy()
         {
-            GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
             if(state != GameState.Build)
                 return;
             
-            currentWaveIndex++;
+            CurrentWaveIndex++;
             SetNewWave();
             OnUpdateWave?.Invoke(currentWave.Enemies);
         }
@@ -41,7 +42,7 @@ namespace _Project.GamePlay.Spawning.WaveManager.Scripts
         /// </summary>
         private void SetNewWave()
         {
-            currentWave = GameManager.Instance.WaveGenerator.GetNextWave(currentWave);
+            currentWave = GameManager.Scripts.GameManager.Instance.WaveGenerator.GetNextWave(currentWave);
         }
     }
 }
