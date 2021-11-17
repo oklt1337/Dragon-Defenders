@@ -1,4 +1,5 @@
 using System;
+using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
@@ -19,6 +20,8 @@ namespace Abilities.Ability.Scripts
         [SerializeField] private float coolDown;
         public AbilityType AbilityType => abilityType;
         public float CoolDown => coolDown;
+
+        public new abstract T CreateInstance<T>() where T : Ability;
     }
 
     public abstract class Ability : IVisitor

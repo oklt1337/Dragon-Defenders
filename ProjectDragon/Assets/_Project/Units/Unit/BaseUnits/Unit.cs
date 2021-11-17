@@ -134,38 +134,17 @@ namespace Units.Unit.BaseUnits
             //sry Patrick ist obsolete
             //spaeter dann i wann richtiges ability system das das ganze fixet :)
             var type = unitCard.abilityDataBase.Abilities[0].GetType();
-            if (type == typeof(SingleShotAbilityObj))
+            if (type == typeof(DamageAbilityObj))
             {
-                var abilityObj = (SingleShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var damageAbility = abilityObj.CreateInstance();
-                ability = damageAbility;
-                sphereCollider.radius = damageAbility.AttackRange;
-            }
-            else if (type == typeof(AoeAreaAbility))
-            {
-                var abilityObj = (AoeAreaAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var damageAbility = abilityObj.CreateInstance();
-                ability = damageAbility;
-                sphereCollider.radius = damageAbility.AttackRange;
-            }
-            else if (type == typeof(MeleeAttackAbility))
-            {
-                var abilityObj = (MeleeAttackAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var damageAbility = abilityObj.CreateInstance();
-                ability = damageAbility;
-                sphereCollider.radius = damageAbility.AttackRange;
-            }
-            else if (type == typeof(HomingShotAbility))
-            {
-                var abilityObj = (HomingShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var damageAbility = abilityObj.CreateInstance();
+                var abilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance<DamageAbility>();
                 ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }
             else if (type == typeof(IncreaseDamageForSetTimeAbility))
             {
-                var abilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var utilityAbility = abilityObj.CreateInstance();
+                var abilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var utilityAbility = abilityObj.CreateInstance<UtilityAbility>();
                 ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;
             }

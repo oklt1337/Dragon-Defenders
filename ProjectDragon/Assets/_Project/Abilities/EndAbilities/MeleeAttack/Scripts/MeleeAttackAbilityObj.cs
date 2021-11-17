@@ -17,10 +17,11 @@ namespace Abilities.EndAbilities.MeleeAttack.Scripts
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MeleeProjectile>();
             projectile.Init(caster, abilityDamage, abilityDuration);
         }
-        
-        public MeleeAttackAbility CreateInstance()
+
+
+        public override T CreateInstance<T>()
         {
-            return new MeleeAttackAbility(this);
+            return new MeleeAttackAbility(this) as T;
         }
     }
 

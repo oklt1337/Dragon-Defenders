@@ -17,10 +17,10 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
             var projectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<BuffAttackDamageForSetTimeProjectile>();
             projectile.Init(abilityEffectRange, abilityDuration, abilityIncreaseAttackValueInPercentage);
         }
-        
-        public IncreaseDamageForSetTimeAbility CreateInstance()
+
+        public override T CreateInstance<T>()
         {
-            return new IncreaseDamageForSetTimeAbility(this);
+            return new IncreaseDamageForSetTimeAbility(this) as T;
         }
     }
     

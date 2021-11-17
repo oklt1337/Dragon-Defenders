@@ -17,10 +17,10 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MovingProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
         }
-        
-        public SingleShotAbility CreateInstance()
+
+        public override T CreateInstance<T>()
         {
-            return new SingleShotAbility(this);
+            return new SingleShotAbility(this) as T;
         }
     }
     

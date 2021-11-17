@@ -1,6 +1,4 @@
-using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
-using Photon.Pun;
 using UnityEngine;
 
 namespace Abilities.Ability.Scripts
@@ -21,7 +19,7 @@ namespace Abilities.Ability.Scripts
         public float Damage { get; set; }
         public float AttackRange { get; set; }
 
-        protected DamageAbility(DamageAbilityObj abilityObj) : base(abilityObj)
+        public DamageAbility(DamageAbilityObj abilityObj) : base(abilityObj)
         {
             Damage = abilityObj.Damage;
             AttackRange = abilityObj.AttackRange;

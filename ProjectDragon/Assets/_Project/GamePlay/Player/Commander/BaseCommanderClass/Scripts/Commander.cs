@@ -140,14 +140,14 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 switch (ability.AbilityType)
                 {
                     case AbilityType.Damage:
-                        var damageAbilityObj = (SingleShotAbilityObj) ability;
-                        var damageAbility = damageAbilityObj.CreateInstance();
+                        var damageAbilityObj = (DamageAbilityObj) ability;
+                        var damageAbility = damageAbilityObj.CreateInstance<DamageAbility>();
                         abilities.Add(damageAbility);
                         client.Visitors.Add(damageAbility);
                         break;
                     case AbilityType.Utility:
-                        var utilityAbilityObj = (IncreaseDamageForSetTimeAbilityObj) ability;
-                        var utilityAbility = utilityAbilityObj.CreateInstance();
+                        var utilityAbilityObj = (UtilityAbilityObj) ability;
+                        var utilityAbility = utilityAbilityObj.CreateInstance<UtilityAbility>();
                         abilities.Add(utilityAbility);
                         client.Visitors.Add(utilityAbility);
                         break;

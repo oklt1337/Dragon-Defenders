@@ -29,7 +29,7 @@ namespace AI.Enemies.Grounded_Enemies.Grounded_Attacker.Scripts
 
             Fsm.Initialize(Fsm.RunToHqState);
 
-            attack = attackObj.CreateInstance();
+            attack = attackObj.CreateInstance<SingleShotAbility>();
             
             attackRange = attack.AttackRange;
         }

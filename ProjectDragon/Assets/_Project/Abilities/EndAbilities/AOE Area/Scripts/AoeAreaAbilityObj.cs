@@ -20,10 +20,10 @@ namespace Abilities.EndAbilities.AOE_Area.Scripts
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<AoeProjectile>();
             projectile.Init(caster, abilityDamage, abilityAoeRange, abilityDuration);
         }
-        
-        public AoeAreaAbility CreateInstance()
+
+        public override T CreateInstance<T>()
         {
-            return new AoeAreaAbility(this);
+            return new AoeAreaAbility(this) as T;
         }
     }
     
