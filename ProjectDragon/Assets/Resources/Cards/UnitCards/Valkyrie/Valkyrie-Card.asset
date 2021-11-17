@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efe9577e88d11645b718462aecebee4, type: 3}
   m_Name: Valkyrie-Card
   m_EditorClassIdentifier: 
-  cardID: 0
+  cardID: 20402001
   cardName: Valkyrie
-  description: 
+  description: Swings with her sword
   model: {fileID: 0}
-  rarity: 0
+  rarity: 1
   faction: 0
-  class: 0
+  class: 2
   skillTreeObj: {fileID: 11400000, guid: b20c7551a7695f7468b291e418d230bc, type: 2}
   abilityDataBase: {fileID: 11400000, guid: 7fd8b3beb1b70c347bb3965d8fde9881, type: 2}
   demo: {fileID: 0}
   icon: {fileID: 0}
-  limit: 0
-  goldCost: 0
+  limit: 9
+  goldCost: 60

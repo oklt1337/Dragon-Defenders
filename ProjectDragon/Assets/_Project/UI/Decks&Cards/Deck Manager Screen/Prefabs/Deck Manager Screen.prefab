@@ -5783,6 +5783,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card Button (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6181296249755551609, guid: 1b040599ba39d424493f34260020955b,
+        type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 11400000, guid: 639ee5b6894fef8498f55eb35e5553cd,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b040599ba39d424493f34260020955b, type: 3}
 --- !u!114 &6181296249502986158 stripped
@@ -9057,6 +9063,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card Button (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6181296249755551609, guid: 1b040599ba39d424493f34260020955b,
+        type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 11400000, guid: 3eec755a53a20294bb9a21d27554cd98,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b040599ba39d424493f34260020955b, type: 3}
 --- !u!114 &6181296248893411836 stripped
@@ -9775,6 +9787,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card Button (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6181296249755551609, guid: 1b040599ba39d424493f34260020955b,
+        type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 11400000, guid: e7a1c67c76fe33f42b8c381237cfa138,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b040599ba39d424493f34260020955b, type: 3}
 --- !u!114 &6181296248503781483 stripped
@@ -10129,6 +10147,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card Button (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6181296249755551609, guid: 1b040599ba39d424493f34260020955b,
+        type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 11400000, guid: a89b1c57725cf0244a98525462fd7b58,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b040599ba39d424493f34260020955b, type: 3}
 --- !u!114 &6181296248541670809 stripped

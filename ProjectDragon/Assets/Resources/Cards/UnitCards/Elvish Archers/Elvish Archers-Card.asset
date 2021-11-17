@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efe9577e88d11645b718462aecebee4, type: 3}
   m_Name: Elvish Archers-Card
   m_EditorClassIdentifier: 
-  cardID: 0
+  cardID: 20201001
   cardName: Elvish Archers
   description: Shoots arrows at enemies.
   model: {fileID: 0}
   rarity: 0
   faction: 0
-  class: 0
+  class: 1
   skillTreeObj: {fileID: 11400000, guid: 658983d5509d7e24cab1a003c5f6441e, type: 2}
   abilityDataBase: {fileID: 11400000, guid: b23c58cab63971b499e34b9f17c0dfd2, type: 2}
   demo: {fileID: 0}
   icon: {fileID: 21300000, guid: 1384c38ad09879f4bb06dc82df1e36fd, type: 3}
-  limit: 0
-  goldCost: 0
+  limit: 8
+  goldCost: 50

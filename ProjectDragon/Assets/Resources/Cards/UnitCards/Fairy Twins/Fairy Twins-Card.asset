@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efe9577e88d11645b718462aecebee4, type: 3}
   m_Name: Fairy Twins-Card
   m_EditorClassIdentifier: 
-  cardID: 0
+  cardID: 20204001
   cardName: Fairy Twins
-  description: 
+  description: Buffs closest commander or unit.
   model: {fileID: 0}
-  rarity: 0
+  rarity: 3
   faction: 0
-  class: 0
+  class: 1
   skillTreeObj: {fileID: 0}
   abilityDataBase: {fileID: 0}
   demo: {fileID: 0}
   icon: {fileID: 0}
-  limit: 0
-  goldCost: 0
+  limit: 2
+  goldCost: 175
