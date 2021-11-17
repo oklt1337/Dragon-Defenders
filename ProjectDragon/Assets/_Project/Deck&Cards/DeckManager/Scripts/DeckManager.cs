@@ -120,7 +120,7 @@ namespace Deck_Cards.DeckManager.Scripts
         /// <param name="deck">deck to save</param>
         public void SaveDeck(Deck deck)
         {
-            deckBuilder.Save(deck);
+            DeckBuilder.Scripts.DeckBuilder.Save(deck);
         }
 
         public static void SetDeckAsDefault(int id)

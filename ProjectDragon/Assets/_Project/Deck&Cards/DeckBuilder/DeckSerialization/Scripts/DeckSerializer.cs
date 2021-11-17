@@ -18,9 +18,7 @@ namespace Deck_Cards.DeckBuilder.DeckSerialization.Scripts
             var deckFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 ProjectName, ID);
             CreateDeckFolderAndUserFolder(deckFolderPath);
-            
-            File.WriteAllText(Path.Combine(deckFolderPath, deck.DeckName + ".json"),
-                JsonConvert.SerializeObject(deck, Formatting.Indented));
+            File.WriteAllText(Path.Combine(deckFolderPath, deck.DeckName + ".json"), JsonUtility.ToJson(deck, true));
         }
 
         public static void DeleteDeckSaveFile(Deck deck)
@@ -29,7 +27,6 @@ namespace Deck_Cards.DeckBuilder.DeckSerialization.Scripts
                 ProjectName, ID);
 
             var path = Path.Combine(deckFolderPath, deck.DeckName + ".json");
-            Debug.Log(path);
             File.Delete(path);
         }
 

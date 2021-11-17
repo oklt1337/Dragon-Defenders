@@ -4,6 +4,7 @@ using System.IO;
 using Deck_Cards.Decks.Scripts;
 using Network.NetworkManager.Scripts;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Deck_Cards.DeckBuilder.DeckSerialization.Scripts
 {
@@ -33,7 +34,7 @@ namespace Deck_Cards.DeckBuilder.DeckSerialization.Scripts
 
         private static Deck LoadDeck(string path)
         {
-            return JsonConvert.DeserializeObject<Deck>(File.ReadAllText(path));
+            return JsonUtility.FromJson<Deck>(File.ReadAllText(path));
         }
     }
 }

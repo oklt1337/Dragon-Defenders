@@ -45,8 +45,10 @@ namespace Deck_Cards.DeckBuilder.Scripts
                 }
             }
 
-            CurrentSelection = ScriptableObject.CreateInstance<Deck>();
-            CurrentSelection.DeckName = deckName;
+            CurrentSelection = new Deck
+            {
+                DeckName = deckName
+            };
 
             return true;
         }
@@ -63,7 +65,7 @@ namespace Deck_Cards.DeckBuilder.Scripts
             return deck;
         }
 
-        public void Save(Deck deck)
+        public static void Save(Deck deck)
         {
             DeckSerializer.SaveDeck(deck);
         }

@@ -5,7 +5,7 @@ namespace Faction
         public enum Class
         {
             None,
-            Forrest,
+            Forest,
             Heaven,
             Elemental,
             Corrupted,

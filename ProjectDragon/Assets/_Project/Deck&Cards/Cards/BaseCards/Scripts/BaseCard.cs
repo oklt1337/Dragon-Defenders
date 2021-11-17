@@ -71,5 +71,4 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
 
         public Sprite Icon => icon;
     }
-
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
@@ -10,10 +9,10 @@ using UnityEngine;
 namespace Deck_Cards.Decks.Scripts
 {
     [Serializable]
-    public class Deck : ScriptableObject
+    public class Deck
     {
         #region Serialze Fields
-        
+         
         [SerializeField] private int deckId;
         [SerializeField] private string deckName;
         [SerializeField] private ClassAndFaction.Faction faction;
