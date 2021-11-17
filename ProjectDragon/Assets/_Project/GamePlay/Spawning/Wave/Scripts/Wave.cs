@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AI.Enemies.Base_Enemy;
+using AI.Enemies.Base_Enemy.Scripts;
 using UnityEngine;
 
 namespace _Project.GamePlay.Spawning.Wave.Scripts

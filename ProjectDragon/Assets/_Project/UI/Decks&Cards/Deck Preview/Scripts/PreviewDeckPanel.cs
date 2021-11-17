@@ -150,10 +150,16 @@ namespace UI.Deck_Preview.Scripts
                 unitButtons[i].SetCard(PreviewDeck.UnitCards[i]);
             }
 
+            var text = commanderButton.GetComponentInChildren<TextMeshProUGUI>();
             if (PreviewDeck.CommanderCard == null)
-                return;
-
-            commanderButton.image.sprite = PreviewDeck.CommanderCard.Icon;
+            {
+                text.text = "(Empty)";
+            }
+            else
+            {
+                text.text = PreviewDeck.CommanderCard.cardName;
+                commanderButton.image.sprite = PreviewDeck.CommanderCard.Icon;
+            }
         }
 
         /// <summary>

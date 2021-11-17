@@ -1,5 +1,6 @@
 ﻿using System;
 using AI.Enemies.Base_Enemy;
+using AI.Enemies.Base_Enemy.Scripts;
 using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 

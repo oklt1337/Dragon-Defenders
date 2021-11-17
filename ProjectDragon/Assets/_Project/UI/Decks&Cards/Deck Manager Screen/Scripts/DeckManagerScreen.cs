@@ -149,9 +149,16 @@ namespace UI.Deck_Manager_Screen.Scripts
         /// </summary>
         public void UpdateDecks()
         {
-            for (int i = 0; i < DeckManager.Instance.Decks.Count; i++)
+            for (int i = 0; i < deckButtons.Count; i++)
             {
                 var text = deckButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+                
+                if (DeckManager.Instance.Decks.Count <= i)
+                {
+                    text.text = "(Empty)";
+                    continue;
+                }
+                
                 text.text = DeckManager.Instance.Decks[i].DeckName;
 
                 if(DeckManager.Instance.Decks[i].CommanderCard != null)

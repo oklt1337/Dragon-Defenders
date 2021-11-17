@@ -628,6 +628,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7453277103721602959, guid: 59c9cb2835618254b90fbe3a62dbf733,
+        type: 3}
+      propertyPath: deckButtons.Array.size
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59c9cb2835618254b90fbe3a62dbf733, type: 3}
 --- !u!224 &350035448 stripped

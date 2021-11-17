@@ -868,6 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b9b0510909e934b8b97bb474749e52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commanderCard: {fileID: 11400000, guid: 527ac9024fc588f4c9b22278f423cb57, type: 2}
   createButton: {fileID: 25347277}
   cancelButton: {fileID: 122672179}
   nameField: {fileID: 1828641792}
@@ -10649,6 +10650,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Commander Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577697414986826825, guid: f06177361f6b9104d9b7c96248b554c1,
+        type: 3}
+      propertyPath: m_text
+      value: Commander
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577697414986826825, guid: f06177361f6b9104d9b7c96248b554c1,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f06177361f6b9104d9b7c96248b554c1, type: 3}

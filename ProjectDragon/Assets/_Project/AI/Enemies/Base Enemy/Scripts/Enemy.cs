@@ -1,8 +1,7 @@
-using GamePlay.GameManager.Scripts;
 using UnityEngine;
 using static GamePlay.GameManager.Scripts.GameManager;
 
-namespace AI.Enemies.Base_Enemy
+namespace AI.Enemies.Base_Enemy.Scripts
 {
     public abstract class Enemy : MonoBehaviour
     {
@@ -53,7 +52,7 @@ namespace AI.Enemies.Base_Enemy
                 return;
 
             Instance.Hq.Hq.TakeDamage(hqDamage);
-            Death();
+            Death(false);
         }
 
         #endregion
@@ -63,11 +62,15 @@ namespace AI.Enemies.Base_Enemy
         /// <summary>
         /// The enemies death.
         /// </summary>
-        protected virtual void Death()
+        protected virtual void Death(bool byPlayer)
         {
+            if (byPlayer)
+            {
+                Instance.PlayerModel.ModifyMoney(goldDrop);
+                Instance.PlayerModel.Commander.AddExp(expDrop);
+            }
+            
             Instance.EnemySpawner.IncreaseKilledEnemies();
-            Instance.PlayerModel.ModifyMoney(goldDrop);
-            Instance.PlayerModel.Commander.AddExp(expDrop);
             Destroy(gameObject);
         }
 
@@ -87,7 +90,7 @@ namespace AI.Enemies.Base_Enemy
             health -= (damage - defense);
 
             if (health <= 0)
-                Death();
+                Death(true);
         }
         
         public virtual void Stun(float stunTime)

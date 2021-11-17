@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rackl-Card
   m_EditorClassIdentifier: 
   cardID: 0
-  cardName: Rackl
+  cardName: Rackl, the Heroic Dragon
   description: Small boy whos wish it is to be a hero one day.
   model: {fileID: 0}
   rarity: 0

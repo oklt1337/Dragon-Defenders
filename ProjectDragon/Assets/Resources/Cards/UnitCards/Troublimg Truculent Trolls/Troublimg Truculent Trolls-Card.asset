@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Troublimg Truculent Trolls-Card
   m_EditorClassIdentifier: 
   cardID: 10102001
-  cardName: Troublimg Truculent Trolls
+  cardName: Troubling Truculent Trolls
   description: Throws stones... yeah thats it
   model: {fileID: 0}
   rarity: 1
