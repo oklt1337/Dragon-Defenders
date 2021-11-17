@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Angel Trumpeters-Card
   m_EditorClassIdentifier: 
   cardID: 20401001
-  prefabPath: Cards/UnitCards/Angel Trumpeters/Prefabs/
+  prefabPath: Cards/UnitCards/Angel Trumpeters/Prefabs/Angel Trumpeters
   cardName: Angel Trumpeters
   description: Blast into their trumpets buffing units surrounding them.
-  model: {fileID: 0}
+  model: {fileID: 145202657819601075, guid: 737bd08f90dff8d4e9980fffdd4400ce, type: 3}
   rarity: 0
   faction: 0
   class: 2

@@ -16,7 +16,7 @@ MonoBehaviour:
   prefabPath: Cards/UnitCards/Troubling Truculent Trolls/Prefabs/
   cardName: Troubling Truculent Trolls
   description: Throws stones... yeah thats it
-  model: {fileID: 0}
+  model: {fileID: 6724679398089075884, guid: 21dbaea21a9a3dd44a1db82737d72e09, type: 3}
   rarity: 1
   faction: 2
   class: 0
