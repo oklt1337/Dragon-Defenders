@@ -41,7 +41,6 @@ namespace GamePlay.Player.PlayerModel.Scripts
         private int money;
 
         #endregion
-        
 
         #region Public Properties
 
@@ -105,7 +104,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
             {
                 commander.Move(hit.point);
             }
-            else if (hit.collider.CompareTag("Unit/Tower") &&
+            else if (hit.collider.CompareTag("Unit") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
                 var unit = hit.collider.gameObject.GetComponent<Unit>();

@@ -1,3 +1,4 @@
+using System;
 using Abilities.AbilityDataBase.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Faction;
@@ -7,6 +8,7 @@ using UnityEngine.Video;
 
 namespace Deck_Cards.Cards.CommanderCard.Scripts
 {
+    [Serializable]
     public class CommanderCard : BaseCard
     {
         [SerializeField] private float health;

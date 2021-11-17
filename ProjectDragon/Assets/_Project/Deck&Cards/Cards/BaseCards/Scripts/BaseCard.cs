@@ -1,3 +1,4 @@
+using System;
 using Abilities.AbilityDataBase.Scripts;
 using Faction;
 using SkillSystem.SkillTree.Scripts;
@@ -16,6 +17,7 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
         Mythical
     }
 
+    [Serializable]
     public abstract class BaseCard : ScriptableObject
     {
         [Header("General")] 

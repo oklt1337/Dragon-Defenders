@@ -1,3 +1,4 @@
+using Deck_Cards.DeckBuilder.DeckSerialization.Scripts;
 using Deck_Cards.Decks.Scripts;
 using Network.NetworkManager.Scripts;
 using UnityEditor;
@@ -11,8 +12,6 @@ namespace Deck_Cards.DeckBuilder.Scripts
         private static DeckBuilder instance;
 
         private Deck CurrentSelection { get; set; }
-        // ReSharper disable once PossiblyMistakenUseOfParamsMethod
-        public readonly string DeckRoot = string.Concat($"Assets/Resources/Decks");
 
         #region Public Methods
 
@@ -59,31 +58,14 @@ namespace Deck_Cards.DeckBuilder.Scripts
         public Deck Save()
         {
             var deck = CurrentSelection;
-          // CurrentSelection = null;
-
-          // string guidPath;
-          // var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
-          //     .PlayerId;
-          // if (!AssetDatabase.IsValidFolder(string.Concat(DeckRoot, "/", id)))
-          // {
-          //     guidPath = AssetDatabase.CreateFolder(DeckRoot, id);
-          //     guidPath = AssetDatabase.GUIDToAssetPath(guidPath);
-          // }
-          // else
-          // {
-          //     var guid = AssetDatabase.GUIDFromAssetPath(string.Concat(DeckRoot, "/", id));
-          //     guidPath = AssetDatabase.GUIDToAssetPath(guid);
-          // }
-
-          // Debug.Log(guidPath);
-          // guidPath = AssetDatabase.CreateFolder(guidPath, deck.DeckName);
-          // Debug.Log(guidPath);
-          // var path = string.Concat(AssetDatabase.GUIDToAssetPath(guidPath), "/", deck.DeckName);
-          // Debug.Log(path);
-          // AssetDatabase.CreateAsset(deck, string.Concat(path, "-Obj", ".asset"));
-          // AssetDatabase.SaveAssets();
-
+            CurrentSelection = null;
+            DeckSerializer.SaveDeck(deck);
             return deck;
+        }
+
+        public void Save(Deck deck)
+        {
+            DeckSerializer.SaveDeck(deck);
         }
 
         #endregion

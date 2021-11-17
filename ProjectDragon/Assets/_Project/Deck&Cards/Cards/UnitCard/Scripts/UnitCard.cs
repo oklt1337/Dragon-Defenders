@@ -1,3 +1,4 @@
+using System;
 using Abilities.AbilityDataBase.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Faction;
@@ -7,6 +8,7 @@ using UnityEngine.Video;
 
 namespace Deck_Cards.Cards.UnitCard.Scripts
 {
+    [Serializable]
     public class UnitCard : BaseCard
     {
         [SerializeField] private int limit;

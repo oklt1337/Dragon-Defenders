@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Deck_Cards.Cards.BaseCards.Scripts;
@@ -8,6 +9,7 @@ using UnityEngine;
 
 namespace Deck_Cards.Decks.Scripts
 {
+    [Serializable]
     public class Deck : ScriptableObject
     {
         #region Serialze Fields
@@ -40,18 +42,7 @@ namespace Deck_Cards.Decks.Scripts
             set => deckName = value;
         }
 
-        public bool IsUseAble
-        {
-            get
-            {
-                if (unitCards.Length == MaxCards)
-                {
-                    return true;
-                }
-
-                return commanderCard != null;
-            }
-        }
+        public bool IsUseAble => !unitCards.Contains(null) && commanderCard != null;
 
         public ClassAndFaction.Faction Faction
         {

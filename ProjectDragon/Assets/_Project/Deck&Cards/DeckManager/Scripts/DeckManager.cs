@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using Deck_Cards.DeckBuilder.DeckSerialization.Scripts;
 using Deck_Cards.Decks.Scripts;
-using Network.NetworkManager.Scripts;
 using Photon.Pun;
-using UnityEditor;
 using UnityEngine;
 
 namespace Deck_Cards.DeckManager.Scripts
@@ -22,9 +19,6 @@ namespace Deck_Cards.DeckManager.Scripts
         #region Private Fields
 
         private readonly DeckBuilder.Scripts.DeckBuilder deckBuilder = DeckBuilder.Scripts.DeckBuilder.Instance;
-
-        // ReSharper disable once PossiblyMistakenUseOfParamsMethod
-        public readonly string Root = string.Concat($"Assets/Resources/");
 
         #endregion
 
@@ -47,37 +41,7 @@ namespace Deck_Cards.DeckManager.Scripts
                 Instance = this;
             }
 
-            LoadDecksFromResources();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void LoadDecksFromResources()
-        {
-         //   var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
-         //       .PlayerId;
-         //   var origin = string.Concat(deckBuilder.DeckRoot, "/", id);
-         //   
-         //   //Check if PlayerFolder Exist
-         //   if (!AssetDatabase.IsValidFolder(origin))
-         //       return;
-         //   var paths = AssetDatabase.GetSubFolders(origin).ToList();
-         //   var index = 0;
-         //   //Load Every Deck from folder.
-         //   foreach (var assetPath in paths
-         //       .Select(path => string.Concat(path, "/", Path.GetFileName(Path.GetDirectoryName(path + "/")), "-Obj"))
-         //       .Select(assetPath => assetPath.Remove(0, Root.Length)))
-         //   {
-         //       var deck = Resources.Load<Deck>(assetPath);
-         //       deck.DeckId = index;
-         //       if (deck == null) 
-         //           continue;
-         //       
-         //       decks.Add(deck);
-         //       index++;
-           // }
+            decks = DeckDeserializer.LoadDecks();
         }
 
         #endregion
@@ -108,37 +72,11 @@ namespace Deck_Cards.DeckManager.Scripts
         /// <returns>bool = true if deckName could be found in deckList.</returns>
         public bool DeleteDeck(int deckId)
         {
-          //  var index = decks.FindIndex(deck => deck.DeckId == deckId);
-//
-          //  if (index == -1)
-          //      return false;
-//
-          //  var id = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile.ProfileModel
-          //      .PlayerId;
-          //  var path = string.Concat("Assets/Resources/Decks/", id, "/", decks[index].DeckName);
-          //  var success = AssetDatabase.DeleteAsset(path);
-          //  if (success)
-          //  {
-          //      decks.RemoveAt(index);
-          //      
-          //      if (decks.Count == 0)
-          //      {
-          //          AssetDatabase.DeleteAsset(
-          //              string.Concat("Assets/Resources/Decks/", id));
-          //      }
-          //      else
-          //      {
-          //          for (var i = 0; i < decks.Count; i++)
-          //          {
-          //              decks[i].DeckId = i;
-          //          }
-          //      }
-          //  }
-          //  else
-          //  {
-          //      return false;
-          //  }
-//
+            var index = decks.FindIndex(deck => deck.DeckId == deckId);
+            if (index == -1)
+                return false;
+            DeckSerializer.DeleteDeckSaveFile(decks[index]);
+            decks.Remove(decks[index]);
             return true;
         }
 
@@ -182,10 +120,10 @@ namespace Deck_Cards.DeckManager.Scripts
         /// <param name="deck">deck to save</param>
         public void SaveDeck(Deck deck)
         {
-            decks.Add(deck);
+            deckBuilder.Save(deck);
         }
 
-        public void SetDeckAsDefault(int id)
+        public static void SetDeckAsDefault(int id)
         {
             var hashTable = PhotonNetwork.LocalPlayer.CustomProperties;
             if (hashTable.ContainsKey("PlayDeck"))
@@ -196,6 +134,7 @@ namespace Deck_Cards.DeckManager.Scripts
             {
                 hashTable.Add("PlayDeck", id);
             }
+
             PhotonNetwork.LocalPlayer.SetCustomProperties(hashTable);
         }
 

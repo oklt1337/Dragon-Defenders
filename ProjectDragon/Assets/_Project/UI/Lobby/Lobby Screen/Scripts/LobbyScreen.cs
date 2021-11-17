@@ -30,7 +30,7 @@ namespace UI.Lobby.Lobby_Screen.Scripts
                 {
                     return;
                 }
-                DeckManager.Instance.SetDeckAsDefault(deckId);
+                DeckManager.SetDeckAsDefault(deckId);
             }
         }
 

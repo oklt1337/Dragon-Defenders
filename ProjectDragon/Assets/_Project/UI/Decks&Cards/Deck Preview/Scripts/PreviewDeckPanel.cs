@@ -56,7 +56,7 @@ namespace UI.Deck_Preview.Scripts
             if(PreviewDeck.CommanderCard == null)
                 return;
             
-            DeckManager.Instance.SetDeckAsDefault(PreviewDeck.DeckId);
+            DeckManager.SetDeckAsDefault(PreviewDeck.DeckId);
         }
 
         public void OnSaveDeckClick()
@@ -71,7 +71,7 @@ namespace UI.Deck_Preview.Scripts
             {
                 MainMenuCanvasManager.Instance.DeckManagerScreen.Start();
             }
-            
+            DeckManager.Instance.SaveDeck(PreviewDeck);
             // Future TODO:
         }
 
