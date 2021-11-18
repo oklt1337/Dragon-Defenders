@@ -19,6 +19,7 @@ namespace UI.Deck_Manager_Screen.Scripts
         [SerializeField] private Button addDeckButton;
         [SerializeField] private List<Button> deckButtons;
         [SerializeField] private List<TextMeshProUGUI> deckButtonTexts;
+        [SerializeField] private Sprite deckSprite;
 
         [SerializeField] private PreviewDeckPanel previewDeckPanel;
 
@@ -156,6 +157,7 @@ namespace UI.Deck_Manager_Screen.Scripts
                 if (DeckManager.Instance.Decks.Count <= i)
                 {
                     deckButtonTexts[i].text = "(Empty)";
+                    deckButtons[i].image.sprite = deckSprite;
                     continue;
                 }
                 

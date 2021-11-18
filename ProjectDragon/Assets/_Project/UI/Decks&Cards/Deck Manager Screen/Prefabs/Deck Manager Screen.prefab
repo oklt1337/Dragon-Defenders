@@ -3637,6 +3637,7 @@ MonoBehaviour:
   - {fileID: 8068990252645660597}
   - {fileID: 8068990252508264034}
   - {fileID: 8068990253203314476}
+  deckSprite: {fileID: 21300000, guid: 3d20a5e89dd5bdf4a94f6017bdb6cf6e, type: 3}
   previewDeckPanel: {fileID: 864957188}
   cardView: {fileID: 7110646436036531282}
   deckViewButton: {fileID: 1140962991}
