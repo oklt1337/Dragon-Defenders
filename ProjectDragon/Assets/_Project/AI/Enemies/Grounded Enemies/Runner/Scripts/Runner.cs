@@ -9,6 +9,7 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
 
         private float stunValue;
         private bool hasBeenBoosted;
+        private static readonly int IsStunned = Animator.StringToHash("IsStunned");
 
         public RunnerFsm Fsm { get; private set; }
 
@@ -57,6 +58,7 @@ namespace AI.Enemies.Grounded_Enemies.Runner.Scripts
         {
             base.Stun(stunTime);
             Fsm.Transition(Fsm.EndureStunState);
+            Animator.SetBool(IsStunned,true);
         }
 
         #endregion

@@ -1,4 +1,3 @@
-using AI.Enemies.Base_Enemy;
 using AI.Enemies.Base_Enemy.Scripts;
 using AI.States.Base_Enemy_States;
 

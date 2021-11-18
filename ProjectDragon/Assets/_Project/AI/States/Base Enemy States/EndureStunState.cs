@@ -1,4 +1,3 @@
-using AI.Enemies.Base_Enemy;
 using AI.Enemies.Base_Enemy.Scripts;
 using AI.Enemies.Flying_Enemies.Base_Flying_Enemies.Scripts;
 using AI.Enemies.Flying_Enemies.Flyer.Scripts;
@@ -6,12 +5,14 @@ using AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies.Scripts;
 using AI.Enemies.Grounded_Enemies.Grounded_Attacker.Scripts;
 using AI.Enemies.Grounded_Enemies.Runner.Scripts;
 using AI.FSM.Scripts;
+using UnityEngine;
 
 namespace AI.States.Base_Enemy_States
 {
     public class EndureStunState : State
     {
-        private Enemy owner;
+        private readonly Enemy owner;
+        private static readonly int IsStunned = Animator.StringToHash("IsStunned");
 
         public EndureStunState(FiniteStateMachine finiteStateMachine, Enemy newOwner) : base(finiteStateMachine)
         {
@@ -23,6 +24,7 @@ namespace AI.States.Base_Enemy_States
             if (owner.StunDuration > 0)
                 return;
 
+            owner.Animator.SetBool(IsStunned,false);
             switch (owner)
             {
                 case BaseGroundedEnemies _:

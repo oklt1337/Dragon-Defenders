@@ -17,6 +17,7 @@ namespace AI.Enemies.Base_Enemy.Scripts
         [SerializeField] private string enemyName;
         [SerializeField] private string enemyPath;
         [SerializeField] private int enemyCombatScore;
+        [SerializeField] private Animator animator;
 
         [Header("Gameplay Stats")] 
         [SerializeField] private float defense;
@@ -42,6 +43,7 @@ namespace AI.Enemies.Base_Enemy.Scripts
         public string EnemyName => enemyName;
         public string EnemyPath => enemyPath;
         public int EnemyCombatScore => enemyCombatScore;
+        public Animator Animator => animator;
 
         #endregion
 
