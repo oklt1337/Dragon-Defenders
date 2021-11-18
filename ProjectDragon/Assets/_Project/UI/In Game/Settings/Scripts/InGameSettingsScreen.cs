@@ -11,6 +11,8 @@ namespace UI.In_Game.Settings.Scripts
     {
         [SerializeField] private Button closeSettingsButton;
         [SerializeField] private Button toLobbyButton;
+        [SerializeField] private Slider sfxSlider;
+        [SerializeField] private Slider musicSlider;
 
         #region Unity Methods
 
@@ -44,6 +46,16 @@ namespace UI.In_Game.Settings.Scripts
         public void OnLobbyClick()
         {
             SceneManager.ChangeScene(Scene.Lobby);
+        }
+        
+        public void OnSfxChange()
+        {
+            AudioManager.Scripts.AudioManager.Instance.SetSfxVolume(sfxSlider.value);
+        }
+        
+        public void OnMusicChange()
+        {
+            AudioManager.Scripts.AudioManager.Instance.SetMusicVolume(musicSlider.value);
         }
 
         #endregion

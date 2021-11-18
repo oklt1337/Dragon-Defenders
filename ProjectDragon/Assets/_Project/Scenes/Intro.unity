@@ -1472,6 +1472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bb0e371d4a26848b612832a9fb0259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 8b89bd161b3fb41458d33532456a7ba0, type: 2}
   audioSource: {fileID: 1503258820}
   uiSound: []
   backgroundMusic: []

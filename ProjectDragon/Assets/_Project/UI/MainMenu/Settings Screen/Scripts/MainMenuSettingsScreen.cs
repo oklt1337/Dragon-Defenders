@@ -11,6 +11,8 @@ namespace UI.MainMenu.Settings_Screen.Scripts
     {
         [SerializeField] private Button logOutButton;
         [SerializeField] private Button homeScreenButton;
+        [SerializeField] private Slider sfxSlider;
+        [SerializeField] private Slider musicSlider;
 
         #region Events
 
@@ -43,10 +45,22 @@ namespace UI.MainMenu.Settings_Screen.Scripts
             gameObject.SetActive(false);
         }
 
+        public void OnSfxChange()
+        {
+            AudioManager.Scripts.AudioManager.Instance.SetSfxVolume(sfxSlider.value);
+        }
+        
+        public void OnMusicChange()
+        {
+            AudioManager.Scripts.AudioManager.Instance.SetMusicVolume(musicSlider.value);
+        }
+
         public void ChangeInteractableStatus(bool status)
         {
             logOutButton.interactable = status;
             homeScreenButton.interactable = status;
+            sfxSlider.interactable = status;
+            musicSlider.interactable = status;
         }
     }
 }
