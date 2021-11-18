@@ -60,7 +60,9 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>Wave</returns>
         public _Project.GamePlay.Spawning.Wave.Scripts.Wave GetNextWave(_Project.GamePlay.Spawning.Wave.Scripts.Wave lastWave)
         {
+            Debug.Log(lastWave.WaveCombatScore);
             combatScore = (int) (lastWave.WaveCombatScore * waveDifficultlyModifier);
+            Debug.Log(combatScore);
             var allowedEnemiesInWave = (from enemy in allowedEnemies where enemy.Value select enemy.Key).ToList();
 
             return GenerateWave(allowedEnemiesInWave);

@@ -803,15 +803,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Runner 1
   enemyPath: Enemies/
-  enemyCombatScore: 20
+  enemyCombatScore: 1
   defense: 3
   expDrop: 15
   goldDrop: 15
   hqDamage: 2
   health: 25
   maxHealth: 25
-  speed: 20
-  maxSpeed: 20
+  speed: 2
+  maxSpeed: 3
   follower: {fileID: 7441545932884290839}
   speedUpValue: 5
 --- !u!1 &5857874052185745633

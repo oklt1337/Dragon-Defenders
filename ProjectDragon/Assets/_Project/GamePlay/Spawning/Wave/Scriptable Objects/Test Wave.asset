@@ -15,5 +15,21 @@ MonoBehaviour:
   enemies:
   - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
   - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
-  - {fileID: 2873003485920201158, guid: 04343907acd3d174c95a31fcbd54c944, type: 3}
-  - {fileID: 2875262377140846249, guid: fe078f6e6c2194341bcbc7046a8aa5b5, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
+  - {fileID: 6100981302396622693, guid: 811e2c82a6382304a8ed09729332c9bc, type: 3}
+  - {fileID: 6243952515104382651, guid: e8f80ce18caae1b4fa4dadbe4a962fa7, type: 3}
