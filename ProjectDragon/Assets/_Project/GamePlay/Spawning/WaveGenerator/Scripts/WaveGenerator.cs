@@ -60,9 +60,7 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>Wave</returns>
         public _Project.GamePlay.Spawning.Wave.Scripts.Wave GetNextWave(_Project.GamePlay.Spawning.Wave.Scripts.Wave lastWave)
         {
-            Debug.Log(lastWave.WaveCombatScore);
             combatScore = (int) (lastWave.WaveCombatScore * waveDifficultlyModifier);
-            Debug.Log(combatScore);
             var allowedEnemiesInWave = (from enemy in allowedEnemies where enemy.Value select enemy.Key).ToList();
 
             return GenerateWave(allowedEnemiesInWave);
@@ -81,6 +79,8 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         {
             minEnemies = SetMinEnemiesCount(combatScore);
             maxEnemies = SetMaxEnemiesCount(combatScore);
+            Debug.Log(minEnemies);
+            Debug.Log(maxEnemies);
             var enemyCount = Random.Range(minEnemies, maxEnemies);
             
             var wave = ScriptableObject.CreateInstance<_Project.GamePlay.Spawning.Wave.Scripts.Wave>();
@@ -143,15 +143,38 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>int minEnemies</returns>
         private int SetMinEnemiesCount(int waveCombatScore)
         {
-            var newMinEnemies = waveCombatScore / minWaveCountModifier;
-            const int min = 10;
-
-            if (newMinEnemies <= min)
+            const int cMinEnemies = 5;
+            const int cMinEnemiesThreshold = 20;
+            if (waveCombatScore < cMinEnemiesThreshold)
+                return cMinEnemies;
+            
+            var threshold = (int) (cMinEnemiesThreshold * 2.5f);
+            if (waveCombatScore < threshold)
             {
-                newMinEnemies = min;
+                return (int) (cMinEnemies * waveDifficultlyModifier);
             }
-
-            return (int) newMinEnemies;
+            
+            //Get new threshold and set new min
+            var newMin = (int) (cMinEnemies * waveDifficultlyModifier);
+            threshold = (int) (threshold * 2.5f);
+            
+            //increase threshold until waveCombatScore < threshold
+            var index = 0;
+            while (waveCombatScore > threshold)
+            {
+                index++;
+                threshold = (int) (threshold * 2.5f);
+            }
+            
+            if (index <= 0) 
+                return newMin;
+            
+            //increase new min as often as threshold was increased.
+            for (var i = 0; i < index; i++)
+            {
+                newMin = (int) (newMin * waveDifficultlyModifier);
+            }
+            return newMin;
         }
 
         /// <summary>
@@ -161,15 +184,38 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>int maxEnemies</returns>
         private int SetMaxEnemiesCount(int waveCombatScore)
         {
-            var newMaxEnemies = waveCombatScore / maxWaveCountModifier;
-            const int max = 100;
-
-            if (newMaxEnemies <= max)
+            const int cMaxEnemies = 10;
+            const int cMaxEnemiesThreshold = 20;
+            if (waveCombatScore < cMaxEnemiesThreshold)
+                return cMaxEnemies;
+            
+            var threshold = (int) (cMaxEnemiesThreshold * 2.5f);
+            if (waveCombatScore < threshold)
             {
-                newMaxEnemies = max;
+                return (int) (cMaxEnemies * waveDifficultlyModifier);
             }
-
-            return (int) newMaxEnemies;
+            
+            //Get new threshold and set new min
+            var newMax = (int) (cMaxEnemies * waveDifficultlyModifier);
+            threshold = (int) (threshold * 2.5f);
+            
+            //increase threshold until waveCombatScore < threshold
+            var index = 0;
+            while (waveCombatScore > threshold)
+            {
+                index++;
+                threshold = (int) (threshold * 2.5f);
+            }
+            
+            if (index <= 0) 
+                return newMax;
+            
+            //increase new min as often as threshold was increased.
+            for (var i = 0; i < index; i++)
+            {
+                newMax = (int) (newMax * waveDifficultlyModifier);
+            }
+            return newMax;
         }
 
         #endregion

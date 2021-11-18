@@ -528,8 +528,8 @@ MonoBehaviour:
   hqDamage: 3
   health: 40
   maxHealth: 40
-  speed: 3
-  maxSpeed: 5
+  speed: 8
+  maxSpeed: 10
   follower: {fileID: 3986032912168583202}
   speedUpValue: 10
 --- !u!1 &8426469634481679236
