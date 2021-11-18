@@ -27,7 +27,7 @@ namespace Abilities.Projectiles.Scripts
             {
                 dir = (Vector3.forward - transform.position).normalized * Speed;
             }
-            myRigidbody.velocity = dir;
+            myRigidbody.AddForce(dir, ForceMode.VelocityChange);
         }
     }
 }

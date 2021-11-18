@@ -13,9 +13,19 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
         
         public virtual void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage , float abilityProjectileSpeed)
         {
+            
             //Spawn projectile
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MovingProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
+            FixRotation(target, projectile.transform);
+        }
+        
+        private static void FixRotation(Transform target, Transform projectile)
+        {
+            var rotation = Quaternion.LookRotation(target.position - projectile.position, Vector3.up).eulerAngles;
+            rotation.z = 0;
+            rotation.x = 0;
+            projectile.rotation = Quaternion.Euler(rotation);
         }
 
         public override T CreateInstance<T>()

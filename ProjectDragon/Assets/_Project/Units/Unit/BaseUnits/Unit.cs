@@ -91,8 +91,9 @@ namespace Units.Unit.BaseUnits
             {
                 if (!other.CompareTag("Enemy"))
                     return;
-
-                Debug.Log("Cast");
+                if (ability.TimeLeft > 0) 
+                    return;
+                FixRotation(other.transform);
                 Cast(other.transform);
             }
             else
@@ -106,7 +107,6 @@ namespace Units.Unit.BaseUnits
         {
             if (ability == null)
                 return;
-
             if (!ability.StartCooldown && !(ability.TimeLeft > 0)) 
                 return;
             ability.Tick(Time.deltaTime);
@@ -166,8 +166,6 @@ namespace Units.Unit.BaseUnits
         private void Cast(Transform target)
         {
             var type = ability.GetType();
-            Debug.Log(type);
-            
             if (type == typeof(SingleShotAbility))
             {
                 ((SingleShotAbility) ability).Cast(spawnPos, target, Caster.Unit);
@@ -188,6 +186,14 @@ namespace Units.Unit.BaseUnits
             {
                 ((IncreaseDamageForSetTimeAbility) ability).Cast(spawnPos, target, Caster.Unit);
             }
+        }
+
+        private void FixRotation(Transform target)
+        {
+            var rotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up).eulerAngles;
+            rotation.z = 0;
+            rotation.x = 0;
+            transform.rotation = Quaternion.Euler(rotation);
         }
 
         #endregion
