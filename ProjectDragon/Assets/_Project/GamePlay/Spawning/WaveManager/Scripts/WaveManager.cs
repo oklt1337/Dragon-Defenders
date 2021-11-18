@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using AI.Enemies.Base_Enemy;
 using AI.Enemies.Base_Enemy.Scripts;
 using GamePlay.GameManager.Scripts;
 using UnityEngine;
@@ -34,6 +33,7 @@ namespace GamePlay.Spawning.WaveManager.Scripts
                 return;
             
             CurrentWaveIndex++;
+            GameManager.Scripts.GameManager.Instance.HUD.OnWaveChange();
             SetNewWave();
             OnUpdateWave?.Invoke(currentWave.Enemies);
         }
