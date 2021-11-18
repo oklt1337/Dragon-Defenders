@@ -83,7 +83,7 @@ namespace Units.Unit.BaseUnits
                 sphereCollider = GetComponent<SphereCollider>();
             }
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (TriggerReturns(other))
@@ -99,9 +99,7 @@ namespace Units.Unit.BaseUnits
             enteredEnemies = enteredEnemies.Where(enemy => enemy != null).ToList();
             if (!TriggerReturns(other)) 
                 return;
-            if (Ability.TimeLeft > 0) 
-                return;
-
+            
             SelectTarget();
         }
         
@@ -120,6 +118,12 @@ namespace Units.Unit.BaseUnits
             if (!Ability.StartCooldown && !(Ability.TimeLeft > 0)) 
                 return;
             Ability.Tick(Time.deltaTime);
+        }
+
+        private void FixedUpdate()
+        {
+            if (Ability.AbilityAbilityObj.AbilityType == AbilityType.Utility)
+                Cast(transform);
         }
 
         #endregion
@@ -149,12 +153,12 @@ namespace Units.Unit.BaseUnits
                     Cast(weakest.First());
                     break;
                 case AttackOrder.HighestHealth:
-                    //var highestHealth = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().Health).ToArray();
-                    //Cast(highestHealth.Last());
+                    var highestHealth = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().EnemyHealth).ToArray();
+                    Cast(highestHealth.Last());
                     break;
                 case AttackOrder.LowestHealth:
-                    //var lowestHealth = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().Health).ToArray();
-                    //Cast(lowestHealth.First());
+                    var lowestHealth = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().EnemyHealth).ToArray();
+                    Cast(lowestHealth.First());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -192,7 +196,11 @@ namespace Units.Unit.BaseUnits
 
         private void Cast(Transform target)
         {
-            FixRotation(target);
+            if (Ability.TimeLeft > 0) 
+                return;
+            if (Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage)
+                FixRotation(target);
+            
             Ability.Cast(spawnPos, target, Caster.Unit);
         }
 

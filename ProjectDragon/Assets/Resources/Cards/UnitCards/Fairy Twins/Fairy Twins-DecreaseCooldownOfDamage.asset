@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9c6af3e9be4c38ac0b6009e180e064, type: 3}
-  m_Name: Angel trumpeters-IncreaseDamageForSetTime
+  m_Script: {fileID: 11500000, guid: e8023cb7fbeb4753b2f74ad0e20ccb18, type: 3}
+  m_Name: Fairy Twins-DecreaseCooldownOfDamage
   m_EditorClassIdentifier: 
   abilityType: 1
-  coolDown: 5
-  effectRange: 6
-  duration: 2
-  prefabProjectile: {fileID: 3113065910724194658, guid: c329a84378ca203439b1bdd017ffd24c,
+  coolDown: 0.5
+  effectRange: 3
+  duration: 0
+  prefabProjectile: {fileID: 287389494851641215, guid: cc2380e4f894f9d4f81ea84566c2d645,
     type: 3}
-  increaseAttackValueInPercentage: 0.1
+  decreaseCooldownValueInPercentage: 0.25

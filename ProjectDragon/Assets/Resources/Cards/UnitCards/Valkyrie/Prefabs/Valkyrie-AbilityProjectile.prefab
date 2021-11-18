@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 861832202079564691}
   - component: {fileID: 5281699433730471681}
   - component: {fileID: 4196867893505123121}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Valkyrie-AbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

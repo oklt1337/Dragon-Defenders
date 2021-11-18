@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5685048816542520114}
   - component: {fileID: 56317718558783910}
   - component: {fileID: 5588657248325251240}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Lusters-AbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

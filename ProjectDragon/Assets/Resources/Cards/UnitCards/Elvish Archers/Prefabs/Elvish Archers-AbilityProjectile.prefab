@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3735062872689438198}
   - component: {fileID: 3650974844042762053}
   - component: {fileID: 194392696725943808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Elvish Archers-AbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

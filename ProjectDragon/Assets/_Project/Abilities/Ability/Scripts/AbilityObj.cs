@@ -4,6 +4,7 @@ using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using SkillSystem.SkillTree.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Abilities.Ability.Scripts
@@ -28,7 +29,9 @@ namespace Abilities.Ability.Scripts
     {
         public AbilityObj AbilityAbilityObj { get; }
         public float CoolDown { get; set; }
+
         public float TimeLeft { get; set; }
+
         public bool StartCooldown { get; internal set; }
         public Action Casted;
 

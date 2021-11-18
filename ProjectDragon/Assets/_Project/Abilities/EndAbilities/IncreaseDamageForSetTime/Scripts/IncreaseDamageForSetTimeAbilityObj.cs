@@ -11,7 +11,7 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
         [SerializeField] private float increaseAttackValueInPercentage;
         public float IncreaseAttackValueInPercentage => increaseAttackValueInPercentage;
         
-        public void Cast(Transform spawnPoint, float abilityEffectRange, float abilityDuration, float abilityIncreaseAttackValueInPercentage)
+        public void Cast(Transform spawnPoint, float abilityEffectRange, float abilityDuration ,float abilityIncreaseAttackValueInPercentage)
         {
             //Spawn projectile
             var projectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<BuffAttackDamageForSetTimeProjectile>();

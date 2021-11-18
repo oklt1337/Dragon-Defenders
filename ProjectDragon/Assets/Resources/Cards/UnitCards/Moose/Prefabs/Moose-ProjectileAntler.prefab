@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5048061594118843209}
   - component: {fileID: 5372520950376963303}
   - component: {fileID: 6854730086031734972}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Antler (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3682141724888609648}
   - component: {fileID: 8824320133942027717}
   - component: {fileID: 7553783252527606017}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Moose-ProjectileAntler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 6396243677483949786}
   - component: {fileID: 1903354708053117500}
   - component: {fileID: 4576746321975866787}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Antler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2917774704598027085}
   - component: {fileID: 719653680207754515}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}

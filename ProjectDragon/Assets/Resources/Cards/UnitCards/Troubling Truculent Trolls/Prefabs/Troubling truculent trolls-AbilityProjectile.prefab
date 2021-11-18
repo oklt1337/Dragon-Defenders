@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 550360256594650878}
   - component: {fileID: 5871381125263691328}
   - component: {fileID: 6015472915615364342}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Troubling truculent trolls-AbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

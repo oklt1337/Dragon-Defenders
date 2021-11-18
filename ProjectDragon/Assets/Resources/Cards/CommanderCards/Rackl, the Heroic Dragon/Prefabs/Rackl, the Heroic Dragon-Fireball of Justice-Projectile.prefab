@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9119179778473288094}
   - component: {fileID: 8222549049509743390}
   - component: {fileID: 4391400490754058987}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Rackl, the Heroic Dragon-Fireball of Justice-Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
