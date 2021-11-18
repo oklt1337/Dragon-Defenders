@@ -1,7 +1,4 @@
-using System;
-using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
-using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using AI.Enemies.Grounded_Enemies.Base_Grounded_Enemies.Scripts;
 using GamePlay.GameManager.Scripts;
@@ -41,8 +38,12 @@ namespace AI.Enemies.Grounded_Enemies.Grounded_Attacker.Scripts
 
         protected override void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Player"))
+            if (other.CompareTag("Player"))
+            {
                 Fsm.Transition(Fsm.AttackState);
+                print("Enemy Spottet");
+            }
+                
             
             base.OnTriggerEnter(other);
         }

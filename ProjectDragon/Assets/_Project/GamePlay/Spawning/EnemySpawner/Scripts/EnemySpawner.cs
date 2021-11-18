@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AI.Enemies.Base_Enemy;
 using AI.Enemies.Base_Enemy.Scripts;
 using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using UnityEngine;
 
-namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
+namespace GamePlay.Spawning.EnemySpawner.Scripts
 {
     public class EnemySpawner : MonoBehaviourPun
     {
@@ -33,8 +32,8 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
 
         private void Awake()
         {
-            GameManager.Instance.OnGameStateChanged += StartSpawning;
-            GameManager.Instance.WaveManager.OnUpdateWave += UpdateNextEnemies;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StartSpawning;
+            GameManager.Scripts.GameManager.Instance.WaveManager.OnUpdateWave += UpdateNextEnemies;
         }
 
         private void Update()
@@ -52,7 +51,7 @@ namespace _Project.GamePlay.Spawning.EnemySpawner.Scripts
 
         private void OnDestroy()
         {
-            GameManager.Instance.OnGameStateChanged -= StartSpawning;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= StartSpawning;
         }
 
         #endregion

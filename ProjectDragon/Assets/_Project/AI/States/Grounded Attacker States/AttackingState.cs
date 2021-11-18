@@ -1,7 +1,5 @@
 using AI.Enemies.Grounded_Enemies.Grounded_Attacker.Scripts;
 using AI.FSM.Scripts;
-using GamePlay.GameManager.Scripts;
-using UnityEngine;
 
 namespace AI.States.Grounded_Attacker_States
 {

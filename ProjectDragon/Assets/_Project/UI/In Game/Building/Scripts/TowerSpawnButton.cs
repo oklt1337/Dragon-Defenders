@@ -1,12 +1,13 @@
-using System;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Deck_Cards.Decks.Scripts;
 using GamePlay.GameManager.Scripts;
 using Photon.Pun;
+using TMPro;
 using UI.Managers.Scripts;
 using Units.Unit.BaseUnits;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI.In_Game.Building.Scripts
 {
@@ -15,6 +16,8 @@ namespace UI.In_Game.Building.Scripts
     {
         [SerializeField] private UnitCard unit;
         [SerializeField] private Camera buildCam;
+        [SerializeField] private Image image;
+        [SerializeField] private TextMeshProUGUI prototypeText;
 
         #region Unity Methods
 
@@ -83,9 +86,17 @@ namespace UI.In_Game.Building.Scripts
             throw new System.NotImplementedException();
         }
 
-        public void UpdateUnit(Deck deck)
+        /// <summary>
+        /// Updates the unit and the displayed info.
+        /// </summary>
+        /// <param name="deck"></param>
+        private void UpdateUnit(Deck deck)
         {
             unit = deck.UnitCards[(int.Parse(name))];
+            image.sprite = unit.Icon;
+            
+            // Only for prototype.
+            prototypeText.text = unit.CardName;
         }
     }
 }
