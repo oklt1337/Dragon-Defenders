@@ -20,9 +20,9 @@ namespace UI.Lobby.Lobby_Screen.Scripts
 
         public void OnMapClick()
         {
-            if(!GameManager.DefaultDeck.IsUseAble)
+            if(!(GameManager.DefaultDeck is {IsUseAble: true}))
                 return;
-            
+
             SceneManager.ChangeScene(Scene.GameScene);
         }
 
