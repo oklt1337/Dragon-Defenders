@@ -761,7 +761,6 @@ MonoBehaviour:
   animator: {fileID: 6899873999685877723}
   spawnPos: {fileID: 3090432030692080454}
   sphereCollider: {fileID: -7186651241203114648}
-  card: {fileID: 11400000, guid: 1269b97185b0c384a8bb9aa79890318a, type: 2}
 --- !u!95 &6899873999685877723
 Animator:
   serializedVersion: 3
@@ -789,7 +788,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6815718579237173541}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

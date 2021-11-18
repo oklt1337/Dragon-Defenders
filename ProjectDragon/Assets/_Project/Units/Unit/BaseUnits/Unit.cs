@@ -1,19 +1,12 @@
-using System;
 using Abilities.Ability.Scripts;
-using Abilities.EndAbilities.AOE_Area.Scripts;
-using Abilities.EndAbilities.HomingShot.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
-using Abilities.EndAbilities.MeleeAttack.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
-using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
-using Sirenix.OdinInspector;
 using SkillSystem.SkillTree.Scripts;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Units.Unit.BaseUnits
@@ -21,12 +14,6 @@ namespace Units.Unit.BaseUnits
     [RequireComponent(typeof(SphereCollider))]
     public sealed class Unit : MonoBehaviour, IVisitor
     {
-        #region Public Const Field
-
-        public const string BasePath = "Cards/UnitCards/";
-
-        #endregion
-
         #region SerializeFields
 
         [SerializeField] private Animator animator;
@@ -37,7 +24,7 @@ namespace Units.Unit.BaseUnits
 
         #region Private Fields
 
-        [SerializeField] private UnitCard card;
+        private UnitCard card;
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
         private SkillTree skillTree;
@@ -172,6 +159,7 @@ namespace Units.Unit.BaseUnits
         
         public void Initialize(UnitCard unitCard)
         {
+            Debug.Log("Init");
             //Base Implement
             card = unitCard;
             faction = unitCard.Faction;
