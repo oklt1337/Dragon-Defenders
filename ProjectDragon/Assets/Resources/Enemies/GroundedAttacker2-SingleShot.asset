@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityType: 0
   coolDown: 3
-  damage: 40
+  damage: 500
   attackRange: 10
   prefabProjectile: {fileID: 2491251986834770555, guid: 73db9c57991493646a05800b3ff842ea,
     type: 3}

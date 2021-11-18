@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 7002844549707461070}
   m_Layer: 0
   m_Name: Rackl, the Heroic Dragon-Prefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
