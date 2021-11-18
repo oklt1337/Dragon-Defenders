@@ -37,6 +37,7 @@ namespace AI.Enemies.Base_Enemy.Scripts
 
         #region Public Properties
 
+        public float EnemyHealth => health;
         public float StunDuration => stunDuration;
         public string EnemyName => enemyName;
         public string EnemyPath => enemyPath;
