@@ -1,3 +1,4 @@
+using System.Globalization;
 using GamePlay.GameManager.Scripts;
 using TMPro;
 using UI.Managers.Scripts;
@@ -13,11 +14,11 @@ namespace UI.In_Game.Base_UI.Scripts
         [SerializeField] private TextMeshProUGUI money;
         [SerializeField] private TextMeshProUGUI waveCount;
 
-        private void Start()
+        private void Awake()
         {
             OnWaveChange();
-            OnMoneyChange();
-            OnHqHealthChange();
+            GameManager.Instance.PlayerModel.OnPlayerMoneyChanged += OnMoneyChange;
+            GameManager.Instance.Hq.Hq.OnHqHealthChanged += OnHqHealthChange;
         }
 
         private void OnEnable()
@@ -43,17 +44,17 @@ namespace UI.In_Game.Base_UI.Scripts
         /// <summary>
         /// Changes the visible Hq Health. 
         /// </summary>
-        public void OnHqHealthChange()
+        private void OnHqHealthChange(float newHealth)
         {
-            //hqHealth.text = GameManager.Instance.Hq.Hq.Health.ToString();
+            hqHealth.text = newHealth.ToString(CultureInfo.InvariantCulture);
         }
         
         /// <summary>
         /// Changes the visible money. 
         /// </summary>
-        public void OnMoneyChange()
+        private void OnMoneyChange(float newMoney)
         {
-            money.text = GameManager.Instance.PlayerModel.Money.ToString();
+            money.text = newMoney.ToString(CultureInfo.InvariantCulture);
         }
 
         /// <summary>
