@@ -134,6 +134,7 @@ namespace Units.Unit.BaseUnits
             //sry Patrick ist obsolete
             //spaeter dann i wann richtiges ability system das das ganze fixet :)
             var type = unitCard.abilityDataBase.Abilities[0].GetType();
+            Debug.Log(type);
             if (type == typeof(DamageAbilityObj))
             {
                 var abilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];

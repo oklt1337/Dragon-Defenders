@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using AI.Enemies.Base_Enemy;
 using AI.Enemies.Base_Enemy.Scripts;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
+namespace GamePlay.Spawning.WaveGenerator.Scripts
 {
     public class WaveGenerator : MonoBehaviour
     {
@@ -59,10 +58,9 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// </summary>
         /// <param name="lastWave">Wave</param>
         /// <returns>Wave</returns>
-        public Wave.Scripts.Wave GetNextWave(Wave.Scripts.Wave lastWave)
+        public _Project.GamePlay.Spawning.Wave.Scripts.Wave GetNextWave(_Project.GamePlay.Spawning.Wave.Scripts.Wave lastWave)
         {
             combatScore = lastWave.WaveCombatScore * waveDifficultlyModifier;
-            
             var allowedEnemiesInWave = (from enemy in allowedEnemies where enemy.Value select enemy.Key).ToList();
 
             return GenerateWave(allowedEnemiesInWave);
@@ -77,20 +75,20 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
         /// </summary>
         /// <param name="enemies">List Enemy</param>
         /// <returns>Wave</returns>
-        private Wave.Scripts.Wave GenerateWave(IEnumerable<Enemy> enemies)
+        private _Project.GamePlay.Spawning.Wave.Scripts.Wave GenerateWave(IEnumerable<Enemy> enemies)
         {
             minEnemies = SetMinEnemiesCount(combatScore);
             maxEnemies = SetMaxEnemiesCount(combatScore);
             var enemyCount = Random.Range(minEnemies, maxEnemies);
             
-            var wave = ScriptableObject.CreateInstance<Wave.Scripts.Wave>();
+            var wave = ScriptableObject.CreateInstance<_Project.GamePlay.Spawning.Wave.Scripts.Wave>();
             var enemiesWithinCombatScore = enemies.Where(enemy => enemy.EnemyCombatScore <= combatScore).ToList();
 
-            var averageOfAllEnemies = (float)  combatScore / enemyCount;
+            var averageOfAllEnemies = (float) combatScore / enemyCount;
             
             var lowerAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore <= averageOfAllEnemies).ToList();
             var higherAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore > averageOfAllEnemies).ToList();
-            
+
             var averageOfCurrentEnemy = 0;
             var totalCurrentEnemyScore = 0;
 
@@ -101,14 +99,33 @@ namespace _Project.GamePlay.Spawning.WaveGenerator.Scripts
                 if (averageOfCurrentEnemy >= averageOfAllEnemies)
                 { 
                     index = Random.Range(0, lowerAverage.Count);
-                    wave.Enemies.Add(lowerAverage[index]);
-                    totalCurrentEnemyScore += lowerAverage[index].EnemyCombatScore;
+
+                    if (lowerAverage.Count > index)
+                    {
+                        wave.Enemies.Add(lowerAverage[index]);
+                        totalCurrentEnemyScore += lowerAverage[index].EnemyCombatScore;
+                    }
+                    else
+                    {
+                        index = Random.Range(0, higherAverage.Count);
+                        wave.Enemies.Add(higherAverage[index]);
+                        totalCurrentEnemyScore += higherAverage[index].EnemyCombatScore;
+                    }
                 }
                 else
                 {
                     index = Random.Range(0, higherAverage.Count);
-                    wave.Enemies.Add(higherAverage[index]);
-                    totalCurrentEnemyScore += higherAverage[index].EnemyCombatScore;
+                    if (higherAverage.Count > index)
+                    {
+                        wave.Enemies.Add(higherAverage[index]);
+                        totalCurrentEnemyScore += higherAverage[index].EnemyCombatScore;
+                    }
+                    else
+                    {
+                        index = Random.Range(0, lowerAverage.Count);
+                        wave.Enemies.Add(lowerAverage[index]);
+                        totalCurrentEnemyScore += lowerAverage[index].EnemyCombatScore;
+                    }
                 }
                 
                 averageOfCurrentEnemy = totalCurrentEnemyScore / wave.Enemies.Count;

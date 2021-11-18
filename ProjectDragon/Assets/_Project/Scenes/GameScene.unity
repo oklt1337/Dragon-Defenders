@@ -10100,8 +10100,8 @@ MonoBehaviour:
   - {fileID: 2875262377140846249, guid: fe078f6e6c2194341bcbc7046a8aa5b5, type: 3}
   waveDifficultlyModifier: 3
   strengthsThreshold: 100
-  minWaveCountModifier: 3
-  maxWaveCountModifier: 8
+  minWaveCountModifier: 8
+  maxWaveCountModifier: 3
 --- !u!4 &1275092367
 Transform:
   m_ObjectHideFlags: 0

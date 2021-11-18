@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using _Project.GamePlay.Spawning.EnemySpawner.Scripts;
-using _Project.GamePlay.Spawning.WaveGenerator.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Deck_Cards.Decks.Scripts;
 using Dreamteck.Splines;
@@ -9,6 +8,7 @@ using GamePlay.CameraMovement.TrackingShot;
 using GamePlay.CommanderWaypoint.Scripts;
 using GamePlay.HQManager.Scripts;
 using GamePlay.Player.PlayerModel.Scripts;
+using GamePlay.Spawning.WaveGenerator.Scripts;
 using GamePlay.Spawning.WaveManager.Scripts;
 using UI.In_Game.Base_UI.Scripts;
 using UI.In_Game.Building.Scripts;
