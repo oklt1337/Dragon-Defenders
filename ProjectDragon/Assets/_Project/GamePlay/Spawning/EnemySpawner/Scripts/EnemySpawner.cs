@@ -12,7 +12,6 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
     {
         [Header("Enemy Related Stuff")] 
         [SerializeField] private int waveSize;
-
         [SerializeField] private int killedEnemies;
         [SerializeField] private float enemySpawnDelay;
 
@@ -34,19 +33,6 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StartSpawning;
             GameManager.Scripts.GameManager.Instance.WaveManager.OnUpdateWave += UpdateNextEnemies;
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                StartSpawning(GameState.Wave);
-            }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                OnWaveSuccess?.Invoke(GameState.Prepare);
-            }
         }
 
         private void OnDestroy()

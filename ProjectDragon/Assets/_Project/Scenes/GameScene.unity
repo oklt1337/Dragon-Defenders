@@ -10362,7 +10362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7712a2e7928211e46935bf28dd144b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveSize: 0
+  waveSize: 7
   killedEnemies: 0
   enemySpawnDelay: 1.5
   spawnPositions:
