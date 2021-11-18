@@ -67,7 +67,7 @@ namespace UI.In_Game.Building.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            GameObject tower = PhotonNetwork.Instantiate(string.Concat(Unit.BasePath, unit.CardName, unit.cardName), hit.point, Quaternion.identity);
+            GameObject tower = PhotonNetwork.Instantiate(unit.PrefabPath, hit.point, Quaternion.identity);
             var tempUnit = tower.gameObject.GetComponent<Unit>();
             tempUnit.Initialize(unit);
             
