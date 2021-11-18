@@ -11,6 +11,7 @@ using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
 using SkillSystem.SkillTree.Scripts;
+using UnityEditor;
 using UnityEngine;
 
 namespace Units.Unit.BaseUnits
@@ -20,8 +21,8 @@ namespace Units.Unit.BaseUnits
     {
         #region SerializeFields
 
-        [SerializeField] private Animator animator;
         [SerializeField] private Transform spawnPos;
+        [SerializeField] private Animator animator;
         [SerializeField] private SphereCollider sphereCollider;
 
         #endregion
@@ -72,22 +73,15 @@ namespace Units.Unit.BaseUnits
             }
         }
 
-        
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage)
-            {
-                if (!other.CompareTag("Enemy"))
-                    return;
-                if (Ability.TimeLeft > 0) 
-                    return;
-                Cast(other.transform);
-            }
-            else
-            {
-                // Handle Buff
-                //ability.Cast(spawnPos, null);
-            }
+            if (Ability.AbilityAbilityObj.AbilityType != AbilityType.Damage) 
+                return;
+            if (!other.CompareTag("Enemy"))
+                return;
+            if (Ability.TimeLeft > 0) 
+                return;
+            Cast(other.transform);
         }
 
         private void Update()
@@ -109,23 +103,17 @@ namespace Units.Unit.BaseUnits
         /// <param name="unitCard"></param>
         private void CreateAbility(BaseCard unitCard)
         {
-            //sry Patrick ist obsolete
-            //spaeter dann i wann richtiges ability system das das ganze fixet :)
             var type = unitCard.abilityDataBase.Abilities[0].GetType();
-            if (type == typeof(SingleShotAbilityObj) 
-                || type == typeof(MeleeAttackAbilityObj)
-                || type == typeof(HomingShotAbilityObj)
-                || type == typeof(AoeAreaAbilityObj)
-                || type == typeof(SingleShotSetRangeAbilityObj))
+            if (type.IsSubclassOf(typeof(DamageAbilityObj)))
             {
                 var abilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var damageAbility = abilityObj.CreateInstance<DamageAbility>();
                 Ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }
-            else if (type == typeof(IncreaseDamageForSetTimeAbilityObj))
+            else if (type.IsSubclassOf(typeof(UtilityAbilityObj)))
             {
-                var abilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var abilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var utilityAbility = abilityObj.CreateInstance<UtilityAbility>();
                 Ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;
@@ -149,13 +137,8 @@ namespace Units.Unit.BaseUnits
 
         #endregion
 
-        #region Visitor Pattern
+        #region Public Methods
 
-        public void Visit(Node node)
-        {
-            node.Accept(this);
-        }
-        
         public void Initialize(UnitCard unitCard)
         {
             //Base Implement
@@ -163,6 +146,15 @@ namespace Units.Unit.BaseUnits
             unitClass = unitCard.Class;
             CreateAbility(unitCard);
             SkillTree = unitCard.SkillTreeObj.CreateInstance(client);
+        }
+
+        #endregion
+
+        #region Visitor Pattern
+
+        public void Visit(Node node)
+        {
+            node.Accept(this);
         }
 
         #endregion

@@ -13,7 +13,6 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
         
         public virtual void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage , float abilityProjectileSpeed)
         {
-            
             //Spawn projectile
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<MovingProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);

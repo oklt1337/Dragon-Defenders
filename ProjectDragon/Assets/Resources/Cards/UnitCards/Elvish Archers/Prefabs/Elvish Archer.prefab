@@ -758,8 +758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d032f57014191984d8851647e1c5e735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6899873999685877723}
   spawnPos: {fileID: 3090432030692080454}
+  animator: {fileID: 6899873999685877723}
   sphereCollider: {fileID: -7186651241203114648}
 --- !u!95 &6899873999685877723
 Animator:
