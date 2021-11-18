@@ -169,7 +169,6 @@ namespace Units.Unit.BaseUnits
             node.Accept(this);
         }
         
-        [Button]
         public void Initialize(UnitCard unitCard)
         {
             //Base Implement

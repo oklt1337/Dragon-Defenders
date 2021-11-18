@@ -15,9 +15,9 @@ namespace Abilities.EndAbilities.HomingShot.Scripts
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
         }
         
-        public HomingShotAbility CreateInstance()
+        public override T CreateInstance<T>()
         {
-            return new HomingShotAbility(this);
+            return new HomingShotAbility(this) as T;
         }
     }
 
