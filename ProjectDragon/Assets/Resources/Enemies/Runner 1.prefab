@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 6100981302396622693}
   m_Layer: 0
   m_Name: Runner 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

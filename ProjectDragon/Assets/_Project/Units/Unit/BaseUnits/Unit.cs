@@ -92,6 +92,7 @@ namespace Units.Unit.BaseUnits
                 if (!other.CompareTag("Enemy"))
                     return;
 
+                Debug.Log("Cast");
                 Cast(other.transform);
             }
             else
@@ -165,6 +166,8 @@ namespace Units.Unit.BaseUnits
         private void Cast(Transform target)
         {
             var type = ability.GetType();
+            Debug.Log(type);
+            
             if (type == typeof(SingleShotAbility))
             {
                 ((SingleShotAbility) ability).Cast(spawnPos, target, Caster.Unit);

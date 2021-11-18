@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 160999149731796069}
   m_Layer: 0
   m_Name: Fairy Twins
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +297,6 @@ MonoBehaviour:
   animator: {fileID: 7248991705291911295}
   spawnPos: {fileID: 1199728818}
   sphereCollider: {fileID: -4124111673731704407}
-  card: {fileID: 11400000, guid: c78671f3951c0e943bb28debbf9151ee, type: 2}
 --- !u!95 &7248991705291911295
 Animator:
   serializedVersion: 3
