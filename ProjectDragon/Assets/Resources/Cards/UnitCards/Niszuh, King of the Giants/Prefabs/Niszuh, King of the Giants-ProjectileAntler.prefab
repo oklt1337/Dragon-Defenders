@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8215176361392771031}
   - component: {fileID: 4282355161970547042}
   - component: {fileID: 3012871749077456294}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Niszuh, King of the Giants-ProjectileAntler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 1864409432799404669}
   - component: {fileID: 6589223900380624539}
   - component: {fileID: 9122161698870118660}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Antler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7594678238590154730}
   - component: {fileID: 5253178527120116148}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 510563146543355886}
   - component: {fileID: 834490201738944576}
   - component: {fileID: 2178431112726643739}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Antler (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

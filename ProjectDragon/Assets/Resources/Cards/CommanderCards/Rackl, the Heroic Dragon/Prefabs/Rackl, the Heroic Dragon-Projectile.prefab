@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6423154633646622965}
   - component: {fileID: 2434054216085532067}
   - component: {fileID: 1566872219923642713}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Rackl, the Heroic Dragon-Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

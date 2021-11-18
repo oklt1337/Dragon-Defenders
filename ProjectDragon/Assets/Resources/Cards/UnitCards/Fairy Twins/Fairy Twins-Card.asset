@@ -20,8 +20,8 @@ MonoBehaviour:
   rarity: 3
   faction: 0
   class: 1
-  skillTreeObj: {fileID: 0}
-  abilityDataBase: {fileID: 0}
+  skillTreeObj: {fileID: 11400000, guid: ff196e7df1563fd478f9fc103e4ce123, type: 2}
+  abilityDataBase: {fileID: 11400000, guid: b9dc504bf332d174ea47743f07f153bd, type: 2}
   demo: {fileID: 0}
   icon: {fileID: 0}
   limit: 2
