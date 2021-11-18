@@ -1,21 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Abilities.Ability.Scripts;
-using Abilities.EndAbilities.AOE_Area.Scripts;
-using Abilities.EndAbilities.HomingShot.Scripts;
-using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
-using Abilities.EndAbilities.MeleeAttack.Scripts;
-using Abilities.EndAbilities.SingleShot.Scripts;
-using Abilities.EndAbilities.SingleShotSetRange.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
+using AI.Enemies.Base_Enemy.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
 using SkillSystem.SkillTree.Scripts;
-using UnityEditor;
 using UnityEngine;
 
 namespace Units.Unit.BaseUnits
 {
+    public enum AttackOrder
+    {
+        First,
+        Last,
+        Closest,
+        Strongest,
+        Weakest
+    }
+    
     [RequireComponent(typeof(SphereCollider))]
     public sealed class Unit : MonoBehaviour, IVisitor
     {
@@ -28,7 +34,9 @@ namespace Units.Unit.BaseUnits
         #endregion
 
         #region Private Fields
-        
+
+        private List<Transform> enteredEnemies = new List<Transform>();
+        private AttackOrder attackOrder;
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
         private Client client;
@@ -66,22 +74,41 @@ namespace Units.Unit.BaseUnits
         private void Awake()
         {
             client = new Client();
+            attackOrder = AttackOrder.First;
 
             if (sphereCollider == null)
             {
                 sphereCollider = GetComponent<SphereCollider>();
             }
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
-            if (Ability.AbilityAbilityObj.AbilityType != AbilityType.Damage) 
+            if (TriggerReturns(other))
+            {
+                enteredEnemies.Add(other.transform);
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (enteredEnemies.Count == 0)
                 return;
-            if (!other.CompareTag("Enemy"))
+            enteredEnemies = enteredEnemies.Where(enemy => enemy != null).ToList();
+            if (!TriggerReturns(other)) 
                 return;
             if (Ability.TimeLeft > 0) 
                 return;
-            Cast(other.transform);
+
+            SelectTarget();
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            if (TriggerReturns(other))
+            {
+                enteredEnemies.Remove(other.transform);
+            }
         }
 
         private void Update()
@@ -96,6 +123,38 @@ namespace Units.Unit.BaseUnits
         #endregion
 
         #region Private Methods
+
+        private void SelectTarget()
+        {
+            switch (attackOrder)
+            {
+                case AttackOrder.First:
+                    Cast(enteredEnemies.First());
+                    break;
+                case AttackOrder.Last:
+                    Cast(enteredEnemies.Last());
+                    break;
+                case AttackOrder.Closest:
+                    var closest = enteredEnemies.OrderBy(enemy => Vector3.Distance(enemy.position, transform.position)).ToArray();
+                    Cast(closest.First());
+                    break;
+                case AttackOrder.Strongest:
+                    var strongest = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().EnemyCombatScore).ToArray();
+                    Cast(strongest.Last());
+                    break;
+                case AttackOrder.Weakest:
+                    var weakest = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().EnemyCombatScore).ToArray();
+                    Cast(weakest.First());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private bool TriggerReturns(Component other)
+        {
+            return Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage && other.CompareTag("Enemy");
+        }
 
         /// <summary>
         /// Creates an Ability dont look into it :)
