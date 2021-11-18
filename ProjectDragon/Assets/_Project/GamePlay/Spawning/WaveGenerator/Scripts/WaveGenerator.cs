@@ -12,10 +12,10 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
 
         [SerializeField] private List<Enemy> allEnemies = new List<Enemy>();
         [OdinSerialize] private Dictionary<Enemy, bool> allowedEnemies = new Dictionary<Enemy, bool>();
-        [SerializeField] private int waveDifficultlyModifier;
-        [SerializeField] private int strengthsThreshold;
-        [SerializeField] private int minWaveCountModifier;
-        [SerializeField] private int maxWaveCountModifier;
+        [SerializeField] private float waveDifficultlyModifier;
+        [SerializeField] private float strengthsThreshold;
+        [SerializeField] private float minWaveCountModifier;
+        [SerializeField] private float maxWaveCountModifier;
 
         #endregion
 
@@ -60,7 +60,7 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>Wave</returns>
         public _Project.GamePlay.Spawning.Wave.Scripts.Wave GetNextWave(_Project.GamePlay.Spawning.Wave.Scripts.Wave lastWave)
         {
-            combatScore = lastWave.WaveCombatScore * waveDifficultlyModifier;
+            combatScore = (int) (lastWave.WaveCombatScore * waveDifficultlyModifier);
             var allowedEnemiesInWave = (from enemy in allowedEnemies where enemy.Value select enemy.Key).ToList();
 
             return GenerateWave(allowedEnemiesInWave);
@@ -149,7 +149,7 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
                 newMinEnemies = min;
             }
 
-            return newMinEnemies;
+            return (int) newMinEnemies;
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
                 newMaxEnemies = max;
             }
 
-            return newMaxEnemies;
+            return (int) newMaxEnemies;
         }
 
         #endregion

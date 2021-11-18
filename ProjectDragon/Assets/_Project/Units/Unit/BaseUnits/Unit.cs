@@ -1,5 +1,8 @@
 using Abilities.Ability.Scripts;
+using Abilities.EndAbilities.AOE_Area.Scripts;
+using Abilities.EndAbilities.HomingShot.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
+using Abilities.EndAbilities.MeleeAttack.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
@@ -121,18 +124,38 @@ namespace Units.Unit.BaseUnits
             //sry Patrick ist obsolete
             //spaeter dann i wann richtiges ability system das das ganze fixet :)
             var type = unitCard.abilityDataBase.Abilities[0].GetType();
-            Debug.Log(type);
-            if (type == typeof(DamageAbilityObj))
+            if (type == typeof(SingleShotAbilityObj))
             {
-                var abilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var damageAbility = abilityObj.CreateInstance<DamageAbility>();
+                var abilityObj = (SingleShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance<SingleShotAbility>();
                 ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }
-            else if (type == typeof(IncreaseDamageForSetTimeAbility))
+            else if (type == typeof(MeleeAttackAbilityObj))
             {
-                var abilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var utilityAbility = abilityObj.CreateInstance<UtilityAbility>();
+                var abilityObj = (MeleeAttackAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance<MeleeAttackAbility>();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
+            }
+            else if (type == typeof(HomingShotAbilityObj))
+            {
+                var abilityObj = (HomingShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance<HomingShotAbility>();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
+            }
+            else if (type == typeof(AoeAreaAbilityObj))
+            {
+                var abilityObj = (AoeAreaAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance<AoeAreaAbility>();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
+            }
+            else if (type == typeof(IncreaseDamageForSetTimeAbilityObj))
+            {
+                var abilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var utilityAbility = abilityObj.CreateInstance<IncreaseDamageForSetTimeAbility>();
                 ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;
             }
@@ -145,6 +168,22 @@ namespace Units.Unit.BaseUnits
             if (type == typeof(SingleShotAbility))
             {
                 ((SingleShotAbility) ability).Cast(spawnPos, target, Caster.Unit);
+            }
+            else if (type == typeof(MeleeAttackAbility))
+            {
+                ((MeleeAttackAbility) ability).Cast(spawnPos, target, Caster.Unit);
+            }
+            else if (type == typeof(HomingShotAbility))
+            {
+                ((HomingShotAbility) ability).Cast(spawnPos, target, Caster.Unit);
+            }
+            else if (type == typeof(AoeAreaAbility))
+            {
+                ((AoeAreaAbility) ability).Cast(spawnPos, target, Caster.Unit);
+            }
+            else if (type == typeof(IncreaseDamageForSetTimeAbility))
+            {
+                ((IncreaseDamageForSetTimeAbility) ability).Cast(spawnPos, target, Caster.Unit);
             }
         }
 
@@ -159,7 +198,6 @@ namespace Units.Unit.BaseUnits
         
         public void Initialize(UnitCard unitCard)
         {
-            Debug.Log("Init");
             //Base Implement
             card = unitCard;
             faction = unitCard.Faction;

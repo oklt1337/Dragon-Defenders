@@ -1,5 +1,4 @@
 using Abilities.Ability.Scripts;
-using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using UnityEngine;

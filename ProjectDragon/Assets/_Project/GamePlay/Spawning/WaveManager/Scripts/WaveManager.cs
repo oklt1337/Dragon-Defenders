@@ -34,7 +34,11 @@ namespace GamePlay.Spawning.WaveManager.Scripts
             
             CurrentWaveIndex++;
             GameManager.Scripts.GameManager.Instance.HUD.OnWaveChange();
-            SetNewWave();
+            if (CurrentWaveIndex > 1)
+            {
+                SetNewWave();
+            }
+
             OnUpdateWave?.Invoke(currentWave.Enemies);
         }
 
