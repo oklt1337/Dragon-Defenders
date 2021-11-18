@@ -69,6 +69,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         public event Action<SkillTree> OnTryUpgradeSkill;
         public event Action<State> OnPlayerStateChanged;
+        public event Action<float> OnPlayerMoneyChanged;
 
         #endregion
 
@@ -157,6 +158,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
             }
 
             Money += amount;
+            OnPlayerMoneyChanged?.Invoke(Money);
             return true;
         }
 
