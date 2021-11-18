@@ -128,7 +128,7 @@ namespace Units.Unit.BaseUnits
             if (type == typeof(SingleShotAbilityObj))
             {
                 var abilityObj = (SingleShotAbilityObj) unitCard.abilityDataBase.Abilities[0];
-                var damageAbility = abilityObj.CreateInstance<SingleShotAbility>();
+                var damageAbility = abilityObj.CreateInstance<DamageAbility>();
                 ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }

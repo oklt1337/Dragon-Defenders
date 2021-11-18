@@ -11,6 +11,7 @@ TagManager:
   - Water
   - Breakable
   - Unit
+  - MapEnd
   layers:
   - Default
   - TransparentFX

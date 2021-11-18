@@ -19,6 +19,10 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
 
         protected virtual void OnTriggerEnter(Collider other)
         {
+            if (other.CompareTag("MapEnd"))
+            {
+                Destroy(gameObject);
+            }
             switch (Caster)
             {
                 case Caster.Unit:

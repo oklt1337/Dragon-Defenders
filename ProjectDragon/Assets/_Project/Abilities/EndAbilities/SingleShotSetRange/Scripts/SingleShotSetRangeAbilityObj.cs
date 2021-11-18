@@ -14,7 +14,7 @@ namespace Abilities.EndAbilities.SingleShotSetRange.Scripts
         public void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage , float abilityProjectileSpeed, float abilityTravelRange)
         {
             //Spawn projectile
-            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MovingSetRangeProjectile>();
+            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<MovingSetRangeProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed, abilityProjectileSpeed);
             FixRotation(target, projectile.transform);
         }

@@ -15,7 +15,7 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
         {
             
             //Spawn projectile
-            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MovingProjectile>();
+            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<MovingProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
             FixRotation(target, projectile.transform);
         }
