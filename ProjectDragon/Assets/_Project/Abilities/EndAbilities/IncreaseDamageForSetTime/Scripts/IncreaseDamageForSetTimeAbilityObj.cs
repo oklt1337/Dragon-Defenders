@@ -40,7 +40,7 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
             StartCooldown = true;
             Casted?.Invoke();
             
-            var abilityObj = (IncreaseDamageForSetTimeAbilityObj) AbilityObj;
+            var abilityObj = (IncreaseDamageForSetTimeAbilityObj) AbilityAbilityObj;
             abilityObj.Cast(spawnPoint, EffectRange, Duration, IncreaseAttackValueInPercentage);
         }
     }

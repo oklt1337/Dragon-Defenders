@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 288770290243672363}
   - component: {fileID: 851362080740995621}
   - component: {fileID: 861832202079564691}
-  - component: {fileID: 7962444378460160422}
+  - component: {fileID: 5281699433730471681}
   - component: {fileID: 4196867893505123121}
   m_Layer: 0
   m_Name: Valkyrie-AbilityProjectile
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 4196867893505123121}
-  myCollider: {fileID: 7962444378460160422}
+  myCollider: {fileID: 5281699433730471681}
 --- !u!33 &851362080740995621
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,8 +99,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7962444378460160422
-MeshCollider:
+--- !u!65 &5281699433730471681
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,10 +109,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 41c02276a422f2b4ea68f0df2a4653f9, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.17475496, y: 1.0892363, z: 0.075}
+  m_Center: {x: 0.006694831, y: 0.7181165, z: 0}
 --- !u!54 &4196867893505123121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,7 +123,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

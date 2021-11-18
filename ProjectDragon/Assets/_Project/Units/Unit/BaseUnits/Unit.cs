@@ -4,6 +4,7 @@ using Abilities.EndAbilities.HomingShot.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
 using Abilities.EndAbilities.MeleeAttack.Scripts;
 using Abilities.EndAbilities.SingleShot.Scripts;
+using Abilities.EndAbilities.SingleShotSetRange.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
@@ -87,13 +88,12 @@ namespace Units.Unit.BaseUnits
         
         private void OnTriggerStay(Collider other)
         {
-            if (ability.AbilityObj.AbilityType == AbilityType.Damage)
+            if (ability.AbilityAbilityObj.AbilityType == AbilityType.Damage)
             {
                 if (!other.CompareTag("Enemy"))
                     return;
                 if (ability.TimeLeft > 0) 
                     return;
-                FixRotation(other.transform);
                 Cast(other.transform);
             }
             else
@@ -153,6 +153,13 @@ namespace Units.Unit.BaseUnits
                 ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }
+            else if (type == typeof(SingleShotSetRangeAbilityObj))
+            {
+                var abilityObj = (SingleShotSetRangeAbilityObj) unitCard.abilityDataBase.Abilities[0];
+                var damageAbility = abilityObj.CreateInstance<SingleShotSetRangeAbility>();
+                ability = damageAbility;
+                sphereCollider.radius = damageAbility.AttackRange;
+            }
             else if (type == typeof(IncreaseDamageForSetTimeAbilityObj))
             {
                 var abilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
@@ -165,27 +172,8 @@ namespace Units.Unit.BaseUnits
 
         private void Cast(Transform target)
         {
-            var type = ability.GetType();
-            if (type == typeof(SingleShotAbility))
-            {
-                ((SingleShotAbility) ability).Cast(spawnPos, target, Caster.Unit);
-            }
-            else if (type == typeof(MeleeAttackAbility))
-            {
-                ((MeleeAttackAbility) ability).Cast(spawnPos, target, Caster.Unit);
-            }
-            else if (type == typeof(HomingShotAbility))
-            {
-                ((HomingShotAbility) ability).Cast(spawnPos, target, Caster.Unit);
-            }
-            else if (type == typeof(AoeAreaAbility))
-            {
-                ((AoeAreaAbility) ability).Cast(spawnPos, target, Caster.Unit);
-            }
-            else if (type == typeof(IncreaseDamageForSetTimeAbility))
-            {
-                ((IncreaseDamageForSetTimeAbility) ability).Cast(spawnPos, target, Caster.Unit);
-            }
+            FixRotation(target);
+            ability.Cast(spawnPos, target, Caster.Unit);
         }
 
         private void FixRotation(Transform target)

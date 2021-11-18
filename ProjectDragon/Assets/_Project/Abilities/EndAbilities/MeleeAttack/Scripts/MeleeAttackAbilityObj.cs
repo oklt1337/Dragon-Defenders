@@ -41,7 +41,7 @@ namespace Abilities.EndAbilities.MeleeAttack.Scripts
             StartCooldown = true;
             Casted?.Invoke();
 
-            var aoeAreaAbility = (MeleeAttackAbilityObj) AbilityObj;
+            var aoeAreaAbility = (MeleeAttackAbilityObj) AbilityAbilityObj;
             aoeAreaAbility.Cast(spawnPoint, caster, Damage, Duration);
         }
     }

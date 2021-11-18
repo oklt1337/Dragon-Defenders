@@ -33,7 +33,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
 
         private void OnDestroy()
         {
-            ability.Damage = ((DamageAbilityObj) ability.AbilityObj).Damage;
+            ability.Damage = ((DamageAbilityObj) ability.AbilityAbilityObj).Damage;
         }
     }
 }

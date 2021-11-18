@@ -19,10 +19,10 @@ namespace Abilities.Ability.Scripts
         public float Damage { get; set; }
         public float AttackRange { get; set; }
 
-        public DamageAbility(DamageAbilityObj abilityObj) : base(abilityObj)
+        public DamageAbility(DamageAbilityObj abilityAbilityObj) : base(abilityAbilityObj)
         {
-            Damage = abilityObj.Damage;
-            AttackRange = abilityObj.AttackRange;
+            Damage = abilityAbilityObj.Damage;
+            AttackRange = abilityAbilityObj.AttackRange;
         }
 
         public override void Cast(Transform spawnPoint, Transform target, Caster caster)

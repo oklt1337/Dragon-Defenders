@@ -26,16 +26,16 @@ namespace Abilities.Ability.Scripts
 
     public abstract class Ability : IVisitor
     {
-        public AbilityObj AbilityObj { get; }
+        public AbilityObj AbilityAbilityObj { get; }
         public float CoolDown { get; set; }
         public float TimeLeft { get; set; }
         public bool StartCooldown { get; internal set; }
         public Action Casted;
 
-        protected Ability(AbilityObj abilityObj)
+        protected Ability(AbilityObj abilityAbilityObj)
         {
-            AbilityObj = abilityObj;
-            CoolDown = abilityObj.CoolDown;
+            AbilityAbilityObj = abilityAbilityObj;
+            CoolDown = abilityAbilityObj.CoolDown;
         }
 
         public void Visit(Node node)

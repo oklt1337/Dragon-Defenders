@@ -43,7 +43,7 @@ namespace Abilities.EndAbilities.AOE_Area.Scripts
             StartCooldown = true;
             Casted?.Invoke();
 
-            var aoeAreaAbility = (AoeAreaAbilityObj) AbilityObj;
+            var aoeAreaAbility = (AoeAreaAbilityObj) AbilityAbilityObj;
             aoeAreaAbility.Cast(spawnPoint, caster, Damage, AoeRange, Duration);
         }
     }

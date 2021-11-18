@@ -34,7 +34,7 @@ namespace Abilities.EndAbilities.HomingShot.Scripts
             StartCooldown = true;
             Casted?.Invoke();
             
-            var singeShotAbilityObj = (HomingShotAbilityObj) AbilityObj;
+            var singeShotAbilityObj = (HomingShotAbilityObj) AbilityAbilityObj;
             singeShotAbilityObj.Cast(spawnPoint, target, caster, Damage, ProjectileSpeed);
         }
     }

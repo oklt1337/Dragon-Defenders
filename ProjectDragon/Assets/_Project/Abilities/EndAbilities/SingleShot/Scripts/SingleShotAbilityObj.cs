@@ -20,7 +20,7 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
             FixRotation(target, projectile.transform);
         }
         
-        private static void FixRotation(Transform target, Transform projectile)
+        protected static void FixRotation(Transform target, Transform projectile)
         {
             var rotation = Quaternion.LookRotation(target.position - projectile.position, Vector3.up).eulerAngles;
             rotation.z = 0;
@@ -38,9 +38,9 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
     {
         public float ProjectileSpeed { get; set; }
         
-        public SingleShotAbility(SingleShotAbilityObj abilityObj) : base(abilityObj)
+        public SingleShotAbility(SingleShotAbilityObj abilityAbilityObj) : base(abilityAbilityObj)
         {
-            ProjectileSpeed = abilityObj.ProjectileSpeed;
+            ProjectileSpeed = abilityAbilityObj.ProjectileSpeed;
         }
         
         public override void Cast(Transform spawnPoint, Transform target, Caster caster)
@@ -50,7 +50,7 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
             StartCooldown = true;
             Casted?.Invoke();
             
-            var singeShotAbilityObj = (SingleShotAbilityObj) AbilityObj;
+            var singeShotAbilityObj = (SingleShotAbilityObj) AbilityAbilityObj;
             singeShotAbilityObj.Cast(spawnPoint, target, caster, Damage, ProjectileSpeed);
         }
     }
