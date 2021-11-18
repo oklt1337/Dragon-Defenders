@@ -67,13 +67,12 @@ namespace UI.In_Game.Building.Scripts
                 return;
             
             // Do the spawning when everything works out.
-            GameObject tower = PhotonNetwork.Instantiate(unit.PrefabPath, hit.point, Quaternion.identity);
-            var tempUnit = tower.gameObject.GetComponent<Unit>();
-            tempUnit.Initialize(unit);
+            Unit tower = PhotonNetwork.Instantiate(unit.PrefabPath, hit.point, Quaternion.identity).GetComponent<Unit>();
+            tower.Initialize(unit);
             
             if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.GoldCost))
             {
-                Destroy(tower);
+                Destroy(tower.gameObject);
             }
         }
 
