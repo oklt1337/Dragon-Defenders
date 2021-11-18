@@ -112,6 +112,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region Events
 
         public event Action OnDeath;
+        public event Action<float> OnCommanderHealthChanged; 
 
         #endregion
 
@@ -233,6 +234,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             else
             {
                 commanderStats.Health -= damage;
+                OnCommanderHealthChanged?.Invoke(commanderStats.Health);
                 dyingBreath = false;
             }
 

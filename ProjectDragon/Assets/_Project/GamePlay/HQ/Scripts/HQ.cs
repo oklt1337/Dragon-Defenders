@@ -6,25 +6,14 @@ namespace GamePlay.HQ.Scripts
     public class HQ : MonoBehaviour
     {
         #region SerializeFields
-
-        [SerializeField] private GameObject hqObj;
+        
         [SerializeField] private float health;
 
         #endregion
 
-        #region Private Fields
+        #region Events
 
-        #endregion
-
-        #region Protected Fields
-
-        #endregion
-
-        #region Public Fields
-
-        #endregion
-
-        #region Public Properties
+        public event Action<float> OnHqHealthChanged; 
 
         #endregion
 
@@ -34,19 +23,12 @@ namespace GamePlay.HQ.Scripts
         
         #endregion
 
-        #region Private Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
         #region Public Methods
 
         public void TakeDamage(int damage)
         {
             health -= damage;
+            OnHqHealthChanged?.Invoke(health);
 
             if (!(health <= 0)) 
                 return;
