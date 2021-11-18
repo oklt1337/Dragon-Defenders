@@ -27,12 +27,9 @@ namespace Units.Unit.BaseUnits
         #endregion
 
         #region Private Fields
-
-        private UnitCard card;
+        
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
-        private SkillTree skillTree;
-        private Ability ability;
         private Client client;
 
         #endregion
@@ -44,8 +41,6 @@ namespace Units.Unit.BaseUnits
             get => animator;
             set => animator = value;
         }
-
-        public UnitCard Card => card;
 
         public ClassAndFaction.Faction Faction
         {
@@ -59,17 +54,9 @@ namespace Units.Unit.BaseUnits
             set => unitClass = value;
         }
 
-        public SkillTree SkillTree
-        {
-            get => skillTree;
-            set => skillTree = value;
-        }
+        public SkillTree SkillTree { get; private set; }
 
-        public Ability Ability
-        {
-            get => ability;
-            set => ability = value;
-        }
+        public Ability Ability { get; private set; }
 
         #endregion
 
@@ -88,11 +75,11 @@ namespace Units.Unit.BaseUnits
         
         private void OnTriggerStay(Collider other)
         {
-            if (ability.AbilityAbilityObj.AbilityType == AbilityType.Damage)
+            if (Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage)
             {
                 if (!other.CompareTag("Enemy"))
                     return;
-                if (ability.TimeLeft > 0) 
+                if (Ability.TimeLeft > 0) 
                     return;
                 Cast(other.transform);
             }
@@ -105,11 +92,11 @@ namespace Units.Unit.BaseUnits
 
         private void Update()
         {
-            if (ability == null)
+            if (Ability == null)
                 return;
-            if (!ability.StartCooldown && !(ability.TimeLeft > 0)) 
+            if (!Ability.StartCooldown && !(Ability.TimeLeft > 0)) 
                 return;
-            ability.Tick(Time.deltaTime);
+            Ability.Tick(Time.deltaTime);
         }
 
         #endregion
@@ -133,23 +120,23 @@ namespace Units.Unit.BaseUnits
             {
                 var abilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var damageAbility = abilityObj.CreateInstance<DamageAbility>();
-                ability = damageAbility;
+                Ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }
             else if (type == typeof(IncreaseDamageForSetTimeAbilityObj))
             {
                 var abilityObj = (IncreaseDamageForSetTimeAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var utilityAbility = abilityObj.CreateInstance<UtilityAbility>();
-                ability = utilityAbility;
+                Ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;
             }
-            client.Visitors.Add(ability);
+            client.Visitors.Add(Ability);
         }
 
         private void Cast(Transform target)
         {
             FixRotation(target);
-            ability.Cast(spawnPos, target, Caster.Unit);
+            Ability.Cast(spawnPos, target, Caster.Unit);
         }
 
         private void FixRotation(Transform target)
@@ -172,11 +159,10 @@ namespace Units.Unit.BaseUnits
         public void Initialize(UnitCard unitCard)
         {
             //Base Implement
-            card = unitCard;
             faction = unitCard.Faction;
             unitClass = unitCard.Class;
             CreateAbility(unitCard);
-            skillTree = unitCard.SkillTreeObj.CreateInstance(client);
+            SkillTree = unitCard.SkillTreeObj.CreateInstance(client);
         }
 
         #endregion
