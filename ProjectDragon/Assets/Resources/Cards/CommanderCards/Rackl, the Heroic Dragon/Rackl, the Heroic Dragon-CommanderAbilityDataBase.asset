@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c299962c9c4f46b1192de4c369f95, type: 3}
   m_Name: Rackl, the Heroic Dragon-CommanderAbilityDataBase
   m_EditorClassIdentifier: 
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 19a14e7c40c3d3a458949e174102fb2c, type: 2}
+  - {fileID: 11400000, guid: 19a14e7c40c3d3a458949e174102fb2c, type: 2}
+  - {fileID: 11400000, guid: 19a14e7c40c3d3a458949e174102fb2c, type: 2}
+  - {fileID: 11400000, guid: 19a14e7c40c3d3a458949e174102fb2c, type: 2}

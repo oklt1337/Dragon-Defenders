@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Abilities.EndAbilities.HomingShot.Scripts
 {
+    [CreateAssetMenu(menuName = "Tools/Abilities/HomingShot", fileName = "HomingShot")]
     public class HomingShotAbilityObj : SingleShotAbilityObj
     {
         public override void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage , float abilityProjectileSpeed)
@@ -14,7 +15,7 @@ namespace Abilities.EndAbilities.HomingShot.Scripts
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
         }
         
-        public new HomingShotAbility CreateInstance()
+        public HomingShotAbility CreateInstance()
         {
             return new HomingShotAbility(this);
         }
