@@ -16,7 +16,7 @@ MonoBehaviour:
   prefabPath: Cards/CommanderCards/Rackl, the Heroic Dragon/Prefabs/
   cardName: Rackl, the Heroic Dragon
   description: Small boy whos wish it is to be a hero one day.
-  model: {fileID: 5545947574712401187, guid: c42e249b8bee9ec47b0cfb096b9fa113, type: 3}
+  model: {fileID: 6606831500922802972, guid: 60a38428ba211b745807b021e0fb5650, type: 3}
   rarity: 0
   faction: 0
   class: 0
