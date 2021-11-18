@@ -19,7 +19,9 @@ namespace Units.Unit.BaseUnits
         Last,
         Closest,
         Strongest,
-        Weakest
+        Weakest,
+        HighestHealth,
+        LowestHealth
     }
     
     [RequireComponent(typeof(SphereCollider))]
@@ -145,6 +147,14 @@ namespace Units.Unit.BaseUnits
                 case AttackOrder.Weakest:
                     var weakest = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().EnemyCombatScore).ToArray();
                     Cast(weakest.First());
+                    break;
+                case AttackOrder.HighestHealth:
+                    //var highestHealth = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().Health).ToArray();
+                    //Cast(highestHealth.Last());
+                    break;
+                case AttackOrder.LowestHealth:
+                    //var lowestHealth = enteredEnemies.OrderBy(enemy => enemy.GetComponent<Enemy>().Health).ToArray();
+                    //Cast(lowestHealth.First());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -16,7 +16,7 @@ namespace Abilities.Projectiles.Scripts
             Damage = damage;
             Caster = caster;
             Duration = duration;
-            ((SphereCollider) myCollider).radius = aoeRange;
+            transform.localScale = new Vector3(aoeRange,aoeRange,aoeRange);
         }
 
         protected override void Update()

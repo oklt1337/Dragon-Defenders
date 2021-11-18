@@ -1240,7 +1240,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9049855627383361065}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 10
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   follower: {fileID: 1032496072417889615}
   attackRange: 10
   abilitySpawnPosition: {fileID: 6398579004973550509}
-  attackObj: {fileID: 0}
+  attackObj: {fileID: 11400000, guid: 539a4ef11e60ecf42ab3319c65943022, type: 2}
 --- !u!1 &9049866207556061351
 GameObject:
   m_ObjectHideFlags: 0

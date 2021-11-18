@@ -607,8 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d032f57014191984d8851647e1c5e735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5090501607505387226}
   spawnPos: {fileID: 9125543820037244219}
+  animator: {fileID: 5090501607505387226}
   sphereCollider: {fileID: -8430466530072733724}
 --- !u!95 &5090501607505387226
 Animator:
@@ -641,7 +641,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &3717065811048041806
 Rigidbody:
   m_ObjectHideFlags: 0
