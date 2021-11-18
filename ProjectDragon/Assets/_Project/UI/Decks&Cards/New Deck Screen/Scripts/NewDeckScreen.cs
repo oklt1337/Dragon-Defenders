@@ -36,22 +36,16 @@ namespace UI.New_Deck_Screen.Scripts
                 return;
             
             gameObject.SetActive(false);
-            switch (SceneManager.CurrentScene)
+            
+            if (SceneManager.CurrentScene == Scene.MainMenu)
             {
-                case Scene.Intro:
-                    break;
-                case Scene.Authorize:
-                    break;
-                case Scene.MainMenu:
-                    MainMenuCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
-                    MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
-                    break;
-                case Scene.Lobby:
-                    LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
-                    LobbyCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
-                    break;
-                case Scene.GameScene:
-                    break;
+                MainMenuCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
+                MainMenuCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
+            }
+            else
+            {
+                LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
+                LobbyCanvasManager.Instance.DeckManagerScreen.UpdateDecks();
             }
             
             // Only for Prototype, pls don't ever look at this.
@@ -65,20 +59,14 @@ namespace UI.New_Deck_Screen.Scripts
         public void OnCancelClick()
         {
             gameObject.SetActive(false);
-            switch (SceneManager.CurrentScene)
+
+            if (SceneManager.CurrentScene == Scene.MainMenu)
             {
-                case Scene.Intro:
-                    break;
-                case Scene.Authorize:
-                    break;
-                case Scene.MainMenu:
-                    MainMenuCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
-                    break;
-                case Scene.Lobby:
-                    LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
-                    break;
-                case Scene.GameScene:
-                    break;
+                MainMenuCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
+            }
+            else
+            {
+                LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
             }
         }
 

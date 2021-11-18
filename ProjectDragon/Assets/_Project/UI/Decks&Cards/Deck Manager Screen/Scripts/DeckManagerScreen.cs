@@ -18,6 +18,7 @@ namespace UI.Deck_Manager_Screen.Scripts
         [SerializeField] private Button closeButton;
         [SerializeField] private Button addDeckButton;
         [SerializeField] private List<Button> deckButtons;
+        [SerializeField] private List<TextMeshProUGUI> deckButtonTexts;
 
         [SerializeField] private PreviewDeckPanel previewDeckPanel;
 
@@ -151,15 +152,14 @@ namespace UI.Deck_Manager_Screen.Scripts
         {
             for (int i = 0; i < deckButtons.Count; i++)
             {
-                var text = deckButtons[i].GetComponentInChildren<TextMeshProUGUI>();
                 
                 if (DeckManager.Instance.Decks.Count <= i)
                 {
-                    text.text = "(Empty)";
+                    deckButtonTexts[i].text = "(Empty)";
                     continue;
                 }
                 
-                text.text = DeckManager.Instance.Decks[i].DeckName;
+                deckButtonTexts[i].text = DeckManager.Instance.Decks[i].DeckName;
 
                 if(DeckManager.Instance.Decks[i].CommanderCard != null)
                     deckButtons[i].image.sprite = DeckManager.Instance.Decks[i].CommanderCard.icon;
