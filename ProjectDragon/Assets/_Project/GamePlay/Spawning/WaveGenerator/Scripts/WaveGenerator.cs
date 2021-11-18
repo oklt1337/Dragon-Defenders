@@ -13,17 +13,13 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         [SerializeField] private List<Enemy> allEnemies = new List<Enemy>();
         [OdinSerialize] private Dictionary<Enemy, bool> allowedEnemies = new Dictionary<Enemy, bool>();
         [SerializeField] private float waveDifficultlyModifier;
-        [SerializeField] private float strengthsThreshold;
-        [SerializeField] private float minWaveCountModifier;
-        [SerializeField] private float maxWaveCountModifier;
+        [SerializeField] private int strengthsThreshold = 15;
 
         #endregion
 
         #region Private Fields
 
         private int combatScore;
-        private int minEnemies;
-        private int maxEnemies;
 
         #endregion
 
@@ -77,17 +73,21 @@ namespace GamePlay.Spawning.WaveGenerator.Scripts
         /// <returns>Wave</returns>
         private _Project.GamePlay.Spawning.Wave.Scripts.Wave GenerateWave(IEnumerable<Enemy> enemies)
         {
-            minEnemies = SetMinEnemiesCount(combatScore);
-            maxEnemies = SetMaxEnemiesCount(combatScore);
-            Debug.Log(minEnemies);
-            Debug.Log(maxEnemies);
-            var enemyCount = Random.Range(minEnemies, maxEnemies);
-            
             var wave = ScriptableObject.CreateInstance<_Project.GamePlay.Spawning.Wave.Scripts.Wave>();
             var enemiesWithinCombatScore = enemies.Where(enemy => enemy.EnemyCombatScore <= combatScore).ToList();
-
-            var averageOfAllEnemies = (float) combatScore / enemyCount;
             
+            //Get Min and Max enemies
+            var minEnemies = SetMinEnemiesCount(combatScore);
+            var maxEnemies = SetMaxEnemiesCount(combatScore);
+            //Generate count of enemies
+            var enemyCount = Random.Range(minEnemies, maxEnemies);
+            
+            //Get Avrg Combat Score of all enemies
+            var averageOfAllEnemies = combatScore / enemyCount;
+            if (averageOfAllEnemies == 0)
+                averageOfAllEnemies = 1;
+
+            //Sort enemies in List of lower and higher than the avg
             var lowerAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore <= averageOfAllEnemies).ToList();
             var higherAverage = enemiesWithinCombatScore.Where(enemy => enemy.EnemyCombatScore > averageOfAllEnemies).ToList();
 
