@@ -15,8 +15,9 @@ namespace Abilities.Projectiles.Scripts
             Target = target;
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             MoveProjectile(Target);
         }
     }

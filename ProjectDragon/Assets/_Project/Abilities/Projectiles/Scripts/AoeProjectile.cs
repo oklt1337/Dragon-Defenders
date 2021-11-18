@@ -19,8 +19,9 @@ namespace Abilities.Projectiles.Scripts
             ((SphereCollider) myCollider).radius = aoeRange;
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             Duration -= Time.deltaTime;
             if (Duration <= 0)
             {
@@ -30,10 +31,6 @@ namespace Abilities.Projectiles.Scripts
 
         protected override void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("MapEnd"))
-            {
-                Destroy(gameObject);
-            }
             switch (Caster)
             {
                 case Caster.Unit:

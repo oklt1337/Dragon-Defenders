@@ -46,9 +46,10 @@ namespace Abilities.Projectiles.Scripts
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
-        private void Update()
+
+        protected override void Update()
         {
+            base.Update();
             if (Math.Abs(Vector3.Distance(startPos, transform.position) - TravelRange) < 0.1f)
             {
                 Destroy(gameObject);

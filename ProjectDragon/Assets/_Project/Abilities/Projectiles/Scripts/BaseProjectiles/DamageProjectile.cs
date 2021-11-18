@@ -16,13 +16,18 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
     {
         protected float Damage { get; set; }
         protected Caster Caster { get; set; }
-
-        protected virtual void OnTriggerEnter(Collider other)
+        private float maxLifetime = 10;
+        protected virtual void Update()
         {
-            if (other.CompareTag("MapEnd"))
+            maxLifetime -= Time.deltaTime;
+            if (maxLifetime < 0)
             {
                 Destroy(gameObject);
             }
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
+        {
             switch (Caster)
             {
                 case Caster.Unit:
