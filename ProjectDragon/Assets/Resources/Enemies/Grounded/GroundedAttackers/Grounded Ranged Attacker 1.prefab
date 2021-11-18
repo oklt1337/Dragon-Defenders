@@ -142,7 +142,7 @@ Animator:
   m_GameObject: {fileID: 1882696365300591854}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 96e5ef1975da973428244c3e92e0203a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -350,8 +350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Grounded Ranged Attacker 1
-  enemyPath: Enemies/
+  enemyPath: Enemies/Grounded/GroundedAttackers/
   enemyCombatScore: 30
+  animator: {fileID: 1979140051179241428}
   defense: 10
   expDrop: 50
   goldDrop: 50

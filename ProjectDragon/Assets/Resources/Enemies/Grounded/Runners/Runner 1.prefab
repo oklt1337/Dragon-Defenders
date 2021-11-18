@@ -1024,8 +1024,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Runner 1
-  enemyPath: Enemies/
+  enemyPath: Enemies/Grounded/Runners/
   enemyCombatScore: 1
+  animator: {fileID: 5772949207250076413}
   defense: 3
   expDrop: 15
   goldDrop: 15

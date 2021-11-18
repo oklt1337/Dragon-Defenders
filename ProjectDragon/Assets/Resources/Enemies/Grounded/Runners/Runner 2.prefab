@@ -326,9 +326,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e6f8c6b4cd0c5d24fbefebd224edfdb5, type: 3}
   m_Controller: {fileID: 9100000, guid: 09fc3681348df5f43b109db0783c6004, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -520,8 +520,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Runner 2
-  enemyPath: Enemies/
+  enemyPath: Enemies/Grounded/Runners/
   enemyCombatScore: 5
+  animator: {fileID: 8477855373374148762}
   defense: 5
   expDrop: 20
   goldDrop: 20

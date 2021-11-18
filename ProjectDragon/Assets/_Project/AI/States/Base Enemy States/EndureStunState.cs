@@ -24,7 +24,7 @@ namespace AI.States.Base_Enemy_States
             if (owner.StunDuration > 0)
                 return;
 
-            owner.Animator.SetBool(IsStunned,false);
+            
             switch (owner)
             {
                 case BaseGroundedEnemies _:
@@ -55,6 +55,7 @@ namespace AI.States.Base_Enemy_States
 
         public override void OnEnter()
         {
+            owner.Animator.SetBool(IsStunned,true);
         }
 
         public override void Update()
@@ -64,6 +65,7 @@ namespace AI.States.Base_Enemy_States
 
         public override void OnExit()
         {
+            owner.Animator.SetBool(IsStunned,false);
         }
     }
 }
