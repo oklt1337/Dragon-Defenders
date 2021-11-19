@@ -14,7 +14,7 @@ namespace Abilities.Ability.Scripts
         protected GameObject PrefabProjectile => prefabProjectile;
     }
 
-    public class DamageAbility : Ability
+    public abstract class DamageAbility : Ability
     {
         public float Damage { get; set; }
         public float AttackRange { get; set; }
@@ -25,12 +25,8 @@ namespace Abilities.Ability.Scripts
             AttackRange = abilityAbilityObj.AttackRange;
         }
 
-        public override void Cast(Transform spawnPoint, Transform target, Caster caster)
-        {
-            if (TimeLeft > 0) 
-                return;
-            StartCooldown = true;
-            Casted?.Invoke();
-        }
+
+        public abstract void Cast(Transform spawnPoint, Transform target, Caster caster);
+
     }
 }

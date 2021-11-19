@@ -38,5 +38,10 @@ namespace Abilities.Effects.ReduceDamageAbilityCooldown.Scripts
         {
             ability.CoolDown = ((DamageAbilityObj) ability.AbilityAbilityObj).CoolDown;
         }
+
+        public void Destroy()
+        {
+            Destroy(this);
+        }
     }
 }

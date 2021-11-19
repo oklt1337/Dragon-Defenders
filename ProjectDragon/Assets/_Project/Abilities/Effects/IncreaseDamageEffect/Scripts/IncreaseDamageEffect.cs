@@ -27,8 +27,9 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
         private void Update()
         {
             duration -= Time.deltaTime;
-            if (duration <= 0 && casted)
-                Destroy(this);
+            if (!(duration <= 0) || !casted) 
+                return;
+            Destroy(this);
         }
 
         private void OnDestroy()

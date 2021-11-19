@@ -1,7 +1,8 @@
 ﻿using Abilities.Ability.Scripts;
-using Abilities.Projectiles.Scripts;
-using Abilities.Projectiles.Scripts.BaseProjectiles;
+using Abilities.Effects.IncreaseDamageEffect.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
+using Unit = Units.Unit.BaseUnits.Unit;
 
 namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
 {
@@ -11,11 +12,15 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
         [SerializeField] private float increaseAttackValueInPercentage;
         public float IncreaseAttackValueInPercentage => increaseAttackValueInPercentage;
         
-        public void Cast(Transform spawnPoint, float abilityEffectRange, float abilityDuration ,float abilityIncreaseAttackValueInPercentage)
+        public static void Cast(Transform target ,float abilityDuration ,float abilityIncreaseAttackValueInPercentage)
         {
-            //Spawn projectile
-            var projectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<BuffAttackDamageForSetTimeProjectile>();
-            projectile.Init(abilityEffectRange, abilityDuration, abilityIncreaseAttackValueInPercentage);
+            if (target.GetComponent<IncreaseDamageEffect>() != null)
+                return;
+            if (!(target.GetComponent<Unit>().Ability is DamageAbility)) 
+                return;
+            
+            var effect = target.AddComponent<IncreaseDamageEffect>();
+            effect.Init(abilityDuration, abilityIncreaseAttackValueInPercentage);
         }
 
         public override T CreateInstance<T>()
@@ -32,16 +37,28 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
         {
             IncreaseAttackValueInPercentage = abilityObj.IncreaseAttackValueInPercentage;
         }
-        
-        public override void Cast(Transform spawnPoint, Transform target, Caster caster)
+
+        public override void OnEnter(Transform target)
+        {
+        }
+
+        public override void OnStay(Transform target)
         {
             if (TimeLeft > 0) 
                 return;
             StartCooldown = true;
             Casted?.Invoke();
             
-            var abilityObj = (IncreaseDamageForSetTimeAbilityObj) AbilityAbilityObj;
-            abilityObj.Cast(spawnPoint, EffectRange, Duration, IncreaseAttackValueInPercentage);
+            IncreaseDamageForSetTimeAbilityObj.Cast(target, Duration, IncreaseAttackValueInPercentage);
+        }
+
+        public override void OnExit(Transform target)
+        {
+        }
+
+        public override void Init(Transform owner)
+        {
+            Owner = owner;
         }
     }
 }

@@ -16,6 +16,7 @@ MonoBehaviour:
   coolDown: 0.5
   effectRange: 3
   duration: 0
-  prefabProjectile: {fileID: 287389494851641215, guid: cc2380e4f894f9d4f81ea84566c2d645,
-    type: 3}
+  handleEnter: 1
+  handleStay: 1
+  handleExit: 1
   decreaseCooldownValueInPercentage: 0.25

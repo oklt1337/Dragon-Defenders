@@ -86,28 +86,65 @@ namespace Units.Unit.BaseUnits
 
         private void OnTriggerEnter(Collider other)
         {
-            if (TriggerReturns(other))
+            switch (Ability.AbilityAbilityObj.AbilityType)
             {
-                enteredEnemies.Add(other.transform);
+                case AbilityType.Damage:
+                    if (other.CompareTag("Enemy"))
+                    {
+                        enteredEnemies.Add(other.transform);
+                    }
+                    break;
+                case AbilityType.Utility:
+                    if (((UtilityAbility) Ability).HandleEnter)
+                    {
+                        ((UtilityAbility) Ability).OnEnter(other.transform);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (enteredEnemies.Count == 0)
-                return;
-            enteredEnemies = enteredEnemies.Where(enemy => enemy != null).ToList();
-            if (!TriggerReturns(other)) 
-                return;
-            
-            SelectTarget();
+            switch (Ability.AbilityAbilityObj.AbilityType)
+            {
+                case AbilityType.Damage:
+                    if (enteredEnemies.Count == 0)
+                        return;
+                    enteredEnemies = enteredEnemies.Where(enemy => enemy != null).ToList();
+                    if (!other.CompareTag("Enemy")) 
+                        return;
+                    SelectTarget();
+                    break;
+                case AbilityType.Utility:
+                    if (!other.CompareTag("Player") && !other.CompareTag("Unit"))
+                        return;
+                    Cast(other.transform);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
         
         private void OnTriggerExit(Collider other)
         {
-            if (TriggerReturns(other))
+            switch (Ability.AbilityAbilityObj.AbilityType)
             {
-                enteredEnemies.Remove(other.transform);
+                case AbilityType.Damage:
+                    if (other.CompareTag("Enemy"))
+                    {
+                        enteredEnemies.Remove(other.transform);
+                    }
+                    break;
+                case AbilityType.Utility:
+                    if (((UtilityAbility) Ability).HandleExit)
+                    {
+                        ((UtilityAbility) Ability).OnExit(other.transform);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -118,12 +155,6 @@ namespace Units.Unit.BaseUnits
             if (!Ability.StartCooldown && !(Ability.TimeLeft > 0)) 
                 return;
             Ability.Tick(Time.deltaTime);
-        }
-
-        private void FixedUpdate()
-        {
-            if (Ability.AbilityAbilityObj.AbilityType == AbilityType.Utility)
-                Cast(transform);
         }
 
         #endregion
@@ -165,11 +196,6 @@ namespace Units.Unit.BaseUnits
             }
         }
 
-        private bool TriggerReturns(Component other)
-        {
-            return Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage && other.CompareTag("Enemy");
-        }
-
         /// <summary>
         /// Creates an Ability dont look into it :)
         /// </summary>
@@ -198,10 +224,21 @@ namespace Units.Unit.BaseUnits
         {
             if (Ability.TimeLeft > 0) 
                 return;
-            if (Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage)
-                FixRotation(target);
-            
-            Ability.Cast(spawnPos, target, Caster.Unit);
+            switch (Ability.AbilityAbilityObj.AbilityType)
+            {
+                case AbilityType.Damage:
+                    FixRotation(target);
+                    ((DamageAbility) Ability).Cast(spawnPos, target, Caster.Unit);
+                    break;
+                case AbilityType.Utility:
+                    if (((UtilityAbility) Ability).HandleStay)
+                    {
+                        ((UtilityAbility) Ability).OnStay(target);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void FixRotation(Transform target)

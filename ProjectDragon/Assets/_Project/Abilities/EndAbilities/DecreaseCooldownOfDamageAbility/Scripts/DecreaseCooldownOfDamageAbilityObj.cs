@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Abilities.Ability.Scripts;
-using Abilities.Projectiles.Scripts;
-using Abilities.Projectiles.Scripts.BaseProjectiles;
-using Photon.Pun;
+using Abilities.Effects.ReduceDamageAbilityCooldown.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Unit = Units.Unit.BaseUnits.Unit;
 
 namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
 {
@@ -13,17 +16,27 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
         [SerializeField] private float decreaseCooldownValueInPercentage;
         public float DecreaseCooldownValueInPercentage => decreaseCooldownValueInPercentage;
 
-        public void Cast(Transform spawnPoint, float abilityEffectRange, float abilityDecreaseCooldownValueInPercentage, ref Action<Transform> action)
+        public static void Cast(Transform target, float value)
         {
-            //Spawn projectile
-            if (spawnPoint.GetComponent<ReduceCooldownOfDamageAbilityProjectile>() != null)
+            if (target.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
                 return;
-            
-            var projectile = Instantiate(prefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint)
-                .GetComponent<ReduceCooldownOfDamageAbilityProjectile>();
-            projectile.Init(spawnPoint, abilityEffectRange, abilityDecreaseCooldownValueInPercentage);
-            var myAction = action;
-            projectile.OnTargetChanged += transform => myAction?.Invoke(transform);
+            var unit = target.GetComponent<Unit>();
+            if (unit != null)
+            {
+                if (!(unit.Ability is DamageAbility)) 
+                    return;
+                AddEffect(unit, value);
+            }
+            else
+            {
+                AddEffect(target, value);
+            }
+        }
+
+        private static void AddEffect(Object target, float value)
+        {
+            var effect = target.AddComponent<ReduceDamageAbilityCooldownEffect>();
+            effect.Init(value);
         }
 
         public override T CreateInstance<T>()
@@ -36,21 +49,95 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
     {
         public float DecreaseCooldownValueInPercentage { get; set; }
         public event Action<Transform> OnTargetChanged;
+        
+        private readonly List<Transform> units = new List<Transform>();
+        private Transform lastTarget;
 
         public DecreaseCooldownOfDamageAbility(DecreaseCooldownOfDamageAbilityObj abilityObj) : base(abilityObj)
         {
             DecreaseCooldownValueInPercentage = abilityObj.DecreaseCooldownValueInPercentage;
         }
-
-        public override void Cast(Transform spawnPoint, Transform target, Caster caster)
+        
+        public override void Init(Transform owner)
         {
-            if (TimeLeft > 0)
-                return;
-            StartCooldown = true;
-            Casted?.Invoke();
+            Owner = owner;
+        }
+        
+        public override void OnEnter(Transform target)
+        {
+            units.Add(target);
+        }
 
-            var abilityObj = (DecreaseCooldownOfDamageAbilityObj) AbilityAbilityObj;
-            abilityObj.Cast(spawnPoint, EffectRange, DecreaseCooldownValueInPercentage, ref OnTargetChanged);
+        public override void OnStay(Transform target)
+        {
+            if (CheckIfPlayerIsInRange(target))
+                return;
+            if (units.Count == 0)
+                return;
+            if (!target.CompareTag("Unit"))
+                return;
+            SelectUnit();
+        }
+
+        public override void OnExit(Transform target)
+        {
+            if (!target.CompareTag("Player"))
+            {
+                if (target == lastTarget)
+                    RemoveBuffOfOldTarget();
+                return;
+            }
+            
+            if (!target.CompareTag("Unit"))
+                return;
+            if (target == lastTarget)
+                RemoveBuffOfOldTarget();
+            
+            units.Remove(target);
+        }
+
+        private bool CheckIfPlayerIsInRange(Component other)
+        {
+            if (!other.CompareTag("Player")) 
+                return false;
+            if (lastTarget == other.transform)
+            {
+                if (lastTarget.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
+                    return true;
+            }
+            else
+            {
+                RemoveBuffOfOldTarget();
+                //Set new Target
+                lastTarget = other.transform;
+            }
+            DecreaseCooldownOfDamageAbilityObj.Cast(lastTarget, DecreaseCooldownValueInPercentage);
+            OnTargetChanged?.Invoke(lastTarget);
+            return true;
+        }
+        
+        private void SelectUnit()
+        {
+            var closest = units.OrderBy(unit => Vector3.Distance(unit.position, Owner.position)).ToArray();
+            if (lastTarget == closest.First())
+            {
+                DecreaseCooldownOfDamageAbilityObj.Cast(lastTarget, DecreaseCooldownValueInPercentage);
+            }
+            else
+            {
+                RemoveBuffOfOldTarget();
+                //Set new Target
+                lastTarget = closest.First();
+            }
+        }
+        
+        private void RemoveBuffOfOldTarget()
+        {
+            if (lastTarget == null) 
+                return;
+            var component = lastTarget.GetComponent<ReduceDamageAbilityCooldownEffect>();
+            if (component != null)
+                component.Destroy();
         }
     }
 }

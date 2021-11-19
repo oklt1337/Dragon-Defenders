@@ -26,34 +26,29 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #endregion
 
         #region Private Fields
-        
-        [Header("PlayerModel")]
-        private PlayerModel.Scripts.PlayerModel playerModel;
 
-        [Header("Basic")] 
-        private string commanderName;
+        [Header("PlayerModel")] private PlayerModel.Scripts.PlayerModel playerModel;
 
-        [Header("Stats")]
-        private CommanderStats.Scripts.CommanderStats commanderStats;
+        [Header("Basic")] private string commanderName;
+
+        [Header("Stats")] private CommanderStats.Scripts.CommanderStats commanderStats;
         private SkillTree skillTree;
         private List<Ability> abilities = new List<Ability>();
         private readonly Client client = new Client();
 
-        [Header("Runtime")] 
-        private bool dyingBreath;
+        [Header("Runtime")] private bool dyingBreath;
         private byte rank;
         private byte level;
         private float experience;
         private const float MINDamage = 10f;
 
-        [Header("Movement")] 
-        private Coroutine movementCo;
+        [Header("Movement")] private Coroutine movementCo;
         private Vector3 destination;
 
         #endregion
 
         #region Public Properties
-        
+
         internal NavMeshAgent NavMeshAgent
         {
             set => navMeshAgent = value;
@@ -112,7 +107,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region Events
 
         public event Action OnDeath;
-        public event Action<float> OnCommanderHealthChanged; 
+        public event Action<float> OnCommanderHealthChanged;
 
         #endregion
 
@@ -156,6 +151,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                         throw new ArgumentOutOfRangeException();
                 }
             }
+
             skillTree = commanderCard.SkillTreeObj.CreateInstance(client);
         }
 
@@ -169,6 +165,18 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             };
         }
 
+        private void Cast(int index, Transform target)
+        {
+            if (abilities[index].AbilityAbilityObj.AbilityType == AbilityType.Damage)
+            {
+                ((DamageAbility) abilities[index]).Cast(transform, target, Caster.Commander);
+            }
+            else
+            {
+                ((UtilityAbility) abilities[index]).OnStay(target);
+            }
+        }
+
         #endregion
 
         #region Protected Methods
@@ -177,7 +185,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             SetStats(commanderCard);
         }
-        
+
         internal void Initialize(PlayerModel.Scripts.PlayerModel model)
         {
             playerModel = model;
@@ -201,24 +209,24 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             }
         }
 
-        public void AutoAttack(Component target)
+        public void AutoAttack(Transform target)
         {
-            abilities[0].Cast(transform, target.transform, Caster.Commander);
+            Cast(0, target);
         }
-        
-        public void Attack1(Component target)
+
+        public void Attack1(Transform target)
         {
-            abilities[1].Cast(transform, target.transform, Caster.Commander);
+            Cast(1, target);
         }
-        
-        public void Attack2(Component target)
+
+        public void Attack2(Transform target)
         {
-            abilities[2].Cast(transform, target.transform, Caster.Commander);
+            Cast(2, target);
         }
-        
-        public void Attack3(Component target)
+
+        public void Attack3(Transform target)
         {
-            abilities[3].Cast(transform, target.transform, Caster.Commander);
+            Cast(3, target);
         }
 
         public void TakeDamage(float damage)
