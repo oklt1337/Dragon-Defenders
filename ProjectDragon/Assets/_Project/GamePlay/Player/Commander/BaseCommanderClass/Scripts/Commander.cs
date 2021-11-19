@@ -144,6 +144,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                     case AbilityType.Utility:
                         var utilityAbilityObj = (UtilityAbilityObj) ability;
                         var utilityAbility = utilityAbilityObj.CreateInstance<UtilityAbility>();
+                        utilityAbility.Init(transform);
                         abilities.Add(utilityAbility);
                         client.Visitors.Add(utilityAbility);
                         break;

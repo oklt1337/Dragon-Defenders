@@ -214,6 +214,7 @@ namespace Units.Unit.BaseUnits
             {
                 var abilityObj = (UtilityAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var utilityAbility = abilityObj.CreateInstance<UtilityAbility>();
+                utilityAbility.Init(transform);
                 Ability = utilityAbility;
                 sphereCollider.radius = utilityAbility.EffectRange;
             }

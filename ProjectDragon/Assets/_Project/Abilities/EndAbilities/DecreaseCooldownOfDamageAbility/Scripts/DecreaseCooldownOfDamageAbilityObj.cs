@@ -65,72 +65,84 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
         
         public override void OnEnter(Transform target)
         {
+            if (!target.CompareTag("Unit"))
+                return;
             units.Add(target);
         }
 
         public override void OnStay(Transform target)
         {
-            if (CheckIfPlayerIsInRange(target))
-                return;
-            if (units.Count == 0)
-                return;
-            if (!target.CompareTag("Unit"))
-                return;
-            SelectUnit();
+            SelectTarget(target);
         }
 
         public override void OnExit(Transform target)
         {
-            if (!target.CompareTag("Player"))
-            {
-                if (target == lastTarget)
-                    RemoveBuffOfOldTarget();
+            if (!target.CompareTag("Player") && !target.CompareTag("Unit")) 
                 return;
-            }
             
-            if (!target.CompareTag("Unit"))
-                return;
             if (target == lastTarget)
+            {
                 RemoveBuffOfOldTarget();
-            
-            units.Remove(target);
+            }
+            if (units.Contains(target))
+            {
+                units.Remove(target);
+            }
         }
 
-        private bool CheckIfPlayerIsInRange(Component other)
+        private void SelectTarget(Transform target)
         {
-            if (!other.CompareTag("Player")) 
-                return false;
-            if (lastTarget == other.transform)
+            if (lastTarget == null)
+                lastTarget = target;
+
+            if (target.CompareTag("Player"))
             {
-                if (lastTarget.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
-                    return true;
+                SetPlayerAsTarget(target);
+            }
+            else if (target.CompareTag("Unit"))
+            {
+                if (lastTarget.CompareTag("Player"))
+                    return;
+                SetUnitAsTarget();
+            }
+        }
+
+        private void SetPlayerAsTarget(Transform target)
+        {
+            if (lastTarget == target)
+            {
+                if (target.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
+                    return;
+                DecreaseCooldownOfDamageAbilityObj.Cast(target, DecreaseCooldownValueInPercentage);
             }
             else
             {
+                DecreaseCooldownOfDamageAbilityObj.Cast(target, DecreaseCooldownValueInPercentage);
                 RemoveBuffOfOldTarget();
-                //Set new Target
-                lastTarget = other.transform;
+                OnTargetChanged?.Invoke(target);
             }
-            DecreaseCooldownOfDamageAbilityObj.Cast(lastTarget, DecreaseCooldownValueInPercentage);
-            OnTargetChanged?.Invoke(lastTarget);
-            return true;
         }
-        
-        private void SelectUnit()
+
+        private void SetUnitAsTarget()
         {
             var closest = units.OrderBy(unit => Vector3.Distance(unit.position, Owner.position)).ToArray();
             if (lastTarget == closest.First())
             {
+                if (lastTarget.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
+                    return;
                 DecreaseCooldownOfDamageAbilityObj.Cast(lastTarget, DecreaseCooldownValueInPercentage);
             }
             else
             {
                 RemoveBuffOfOldTarget();
-                //Set new Target
                 lastTarget = closest.First();
+                if (lastTarget.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
+                    return;
+                DecreaseCooldownOfDamageAbilityObj.Cast(lastTarget, DecreaseCooldownValueInPercentage);
+                OnTargetChanged?.Invoke(closest.First());
             }
         }
-        
+
         private void RemoveBuffOfOldTarget()
         {
             if (lastTarget == null) 
