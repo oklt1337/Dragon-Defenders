@@ -37,7 +37,7 @@ namespace UI.In_Game.Building.Scripts
         }
 
         #endregion
-        
+
         #region Interface Methods
 
         public void OnPointerClick(PointerEventData eventData)
@@ -66,17 +66,21 @@ namespace UI.In_Game.Building.Scripts
 
             Physics.Raycast(ray, out RaycastHit hit);
 
-            if (!hit.collider.CompareTag("Ground")) 
+            if (!hit.collider.CompareTag("Ground"))
                 return;
-            
+
+            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.GoldCost))
+                return;
+
+            if (!GameManager.Instance.AddPlacedUnit(unit))
+                return;
+
             // Do the spawning when everything works out.
             var tower = PhotonNetwork.Instantiate(unit.PrefabPath, hit.point, Quaternion.identity).GetComponent<Unit>();
             tower.Initialize(unit);
-            
-            if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.GoldCost))
-            {
-                Destroy(tower.gameObject);
-            }
+
+
+            Destroy(tower.gameObject);
         }
 
         #endregion
@@ -94,7 +98,7 @@ namespace UI.In_Game.Building.Scripts
         {
             unit = deck.UnitCards[(int.Parse(name))];
             image.sprite = unit.Icon;
-            
+
             // Only for prototype.
             prototypeText.text = unit.CardName;
         }
