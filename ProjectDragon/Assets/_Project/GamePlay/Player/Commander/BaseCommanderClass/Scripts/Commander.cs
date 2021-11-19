@@ -174,7 +174,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             {
                 if (abilities[index] is IncreaseDamageForSetTimeAbility)
                 {
-                    var units = GameManager.Scripts.GameManager.Instance.Units;
+                    var units = GameManager.Scripts.GameManager.Instance.UnitManager.Units;
 
                     foreach (var unit in units
                         .Where(unit =>

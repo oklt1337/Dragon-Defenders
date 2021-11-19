@@ -262,7 +262,7 @@ namespace Units.Unit.BaseUnits
             unitClass = unitCard.Class;
             CreateAbility(unitCard);
             SkillTree = unitCard.SkillTreeObj.CreateInstance(client);
-            GameManager.Instance.Units.Add(this);
+            GameManager.Instance.UnitManager.Units.Add(this);
         }
 
         #endregion

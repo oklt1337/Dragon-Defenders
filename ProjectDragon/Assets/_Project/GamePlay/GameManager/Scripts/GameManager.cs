@@ -13,7 +13,6 @@ using GamePlay.Spawning.WaveManager.Scripts;
 using UI.In_Game.Base_UI.Scripts;
 using UI.In_Game.Building.Scripts;
 using UI.In_Game.Commander.Scripts;
-using Units.Unit.BaseUnits;
 using UnityEngine;
 
 namespace GamePlay.GameManager.Scripts
@@ -49,6 +48,7 @@ namespace GamePlay.GameManager.Scripts
         [SerializeField] private WaveManager waveManager;
         [SerializeField] private WaveGenerator waveGenerator;
         [SerializeField] private HqManager hqManager;
+        [SerializeField] private UnitManager.Scripts.UnitManager unitManager;
 
         [Header("Camera")] 
         [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
@@ -91,16 +91,13 @@ namespace GamePlay.GameManager.Scripts
         public WaveGenerator WaveGenerator => waveGenerator;
         public PlayerModel PlayerModel => player;
         public HqManager Hq => hqManager;
+        public UnitManager.Scripts.UnitManager UnitManager => unitManager;
         public CommanderMoveIndicator CommanderMoveIndicator => commanderMoveIndicator;
         public TrackingShotBuildToWave CameraTrackingShotBuildToWave => cameraTrackingShotBuildToWave;
         public HUD HUD => hud;
         public CommanderHUD CommanderHUD => commanderHUD;
         public BuildHUD BuildHUD => buildHUD;
         public SplineComputer SplineComputer => splineComputer;
-        public Dictionary<UnitCard, int> PlacedUnits { get; } = new Dictionary<UnitCard, int>();
-
-        public List<Unit> Units { get; } = new List<Unit>();
-
         public static Deck DefaultDeck { get; set; }
 
         #endregion
@@ -183,30 +180,6 @@ namespace GamePlay.GameManager.Scripts
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
-        }
-
-        #endregion
-
-        #region Public Methods
-        
-        public bool AddPlacedUnit(UnitCard unitCard)
-        {
-            if (!PlacedUnits.ContainsKey(unitCard)) 
-                return false;
-            if (PlacedUnits[unitCard] >= unitCard.Limit) 
-                return false;
-            PlacedUnits[unitCard]++;
-            return true;
-        }
-        
-        public bool RemovePlacedUnit(UnitCard unitCard)
-        {
-            if (!PlacedUnits.ContainsKey(unitCard)) 
-                return false;
-            if (PlacedUnits[unitCard] <= 0) 
-                return false;
-            PlacedUnits[unitCard]--;
-            return true;
         }
 
         #endregion
