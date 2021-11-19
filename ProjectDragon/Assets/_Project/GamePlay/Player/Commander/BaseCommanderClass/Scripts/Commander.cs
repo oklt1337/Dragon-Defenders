@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
-using Abilities.EndAbilities.SingleShot.Scripts;
-using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
-using AI.Enemies.Base_Enemy;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using GamePlay.GameManager.Scripts;
 using GamePlay.Player.PlayerModel.Scripts;
@@ -174,6 +172,20 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             }
             else
             {
+                if (abilities[index] is IncreaseDamageForSetTimeAbility)
+                {
+                    var units = GameManager.Scripts.GameManager.Instance.Units;
+
+                    foreach (var unit in units
+                        .Where(unit =>
+                            Vector3.Distance(unit.transform.position, transform.position) <=
+                            ((IncreaseDamageForSetTimeAbility) abilities[index]).EffectRange).Where(unit =>
+                            unit.Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage))
+                    {
+                        ((IncreaseDamageForSetTimeAbility) abilities[index]).OnStay(unit.transform);
+                    }
+                }
+
                 ((UtilityAbility) abilities[index]).OnStay(target);
             }
         }

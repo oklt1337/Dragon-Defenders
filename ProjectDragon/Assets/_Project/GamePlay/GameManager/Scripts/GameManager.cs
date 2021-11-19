@@ -13,6 +13,7 @@ using GamePlay.Spawning.WaveManager.Scripts;
 using UI.In_Game.Base_UI.Scripts;
 using UI.In_Game.Building.Scripts;
 using UI.In_Game.Commander.Scripts;
+using Units.Unit.BaseUnits;
 using UnityEngine;
 
 namespace GamePlay.GameManager.Scripts
@@ -99,6 +100,7 @@ namespace GamePlay.GameManager.Scripts
         public BuildHUD BuildHUD => buildHUD;
         public SplineComputer SplineComputer => splineComputer;
         public Dictionary<UnitCard, int> PlacedUnits => placedUnits;
+        public List<Unit> Units { get; set; }
         public static Deck DefaultDeck { get; set; }
 
         #endregion
