@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityType: 0
   coolDown: 0.5
   damage: 60
-  attackRange: 1
+  attackRange: 2.5
   prefabProjectile: {fileID: 6858757532033793912, guid: 1b5e4fde70a6f354189cf51d5117dfd6,
     type: 3}
   aoeRange: 1
