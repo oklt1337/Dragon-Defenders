@@ -67,8 +67,6 @@ namespace GamePlay.GameManager.Scripts
 
         private GameState currentGameState;
 
-        private Dictionary<UnitCard, int> placedUnits;
-
         #endregion
 
         #region Public Properties
@@ -99,8 +97,10 @@ namespace GamePlay.GameManager.Scripts
         public CommanderHUD CommanderHUD => commanderHUD;
         public BuildHUD BuildHUD => buildHUD;
         public SplineComputer SplineComputer => splineComputer;
-        public Dictionary<UnitCard, int> PlacedUnits => placedUnits;
-        public List<Unit> Units { get; set; }
+        public Dictionary<UnitCard, int> PlacedUnits { get; } = new Dictionary<UnitCard, int>();
+
+        public List<Unit> Units { get; } = new List<Unit>();
+
         public static Deck DefaultDeck { get; set; }
 
         #endregion
@@ -191,21 +191,21 @@ namespace GamePlay.GameManager.Scripts
         
         public bool AddPlacedUnit(UnitCard unitCard)
         {
-            if (!placedUnits.ContainsKey(unitCard)) 
+            if (!PlacedUnits.ContainsKey(unitCard)) 
                 return false;
-            if (placedUnits[unitCard] >= unitCard.Limit) 
+            if (PlacedUnits[unitCard] >= unitCard.Limit) 
                 return false;
-            placedUnits[unitCard]++;
+            PlacedUnits[unitCard]++;
             return true;
         }
         
         public bool RemovePlacedUnit(UnitCard unitCard)
         {
-            if (!placedUnits.ContainsKey(unitCard)) 
+            if (!PlacedUnits.ContainsKey(unitCard)) 
                 return false;
-            if (placedUnits[unitCard] <= 0) 
+            if (PlacedUnits[unitCard] <= 0) 
                 return false;
-            placedUnits[unitCard]--;
+            PlacedUnits[unitCard]--;
             return true;
         }
 

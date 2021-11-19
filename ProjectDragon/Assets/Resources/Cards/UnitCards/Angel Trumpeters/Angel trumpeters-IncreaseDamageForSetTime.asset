@@ -19,4 +19,4 @@ MonoBehaviour:
   handleEnter: 0
   handleStay: 1
   handleExit: 0
-  increaseAttackValueInPercentage: 0.1
+  increaseAttackValueInPercentage: 1.1

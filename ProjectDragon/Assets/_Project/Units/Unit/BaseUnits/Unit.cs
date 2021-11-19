@@ -8,6 +8,7 @@ using AI.Enemies.Base_Enemy.Scripts;
 using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
+using GamePlay.GameManager.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 
@@ -261,6 +262,7 @@ namespace Units.Unit.BaseUnits
             unitClass = unitCard.Class;
             CreateAbility(unitCard);
             SkillTree = unitCard.SkillTreeObj.CreateInstance(client);
+            GameManager.Instance.Units.Add(this);
         }
 
         #endregion

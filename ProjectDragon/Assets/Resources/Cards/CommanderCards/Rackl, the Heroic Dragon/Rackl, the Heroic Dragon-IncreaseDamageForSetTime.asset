@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9c6af3e9be4c38ac0b6009e180e064, type: 3}
   m_Name: Rackl, the Heroic Dragon-IncreaseDamageForSetTime
   m_EditorClassIdentifier: 
-  abilityType: 0
+  abilityType: 1
   coolDown: 6
   effectRange: 8
   duration: 4
   handleEnter: 0
   handleStay: 1
   handleExit: 0
-  increaseAttackValueInPercentage: 0.15
+  increaseAttackValueInPercentage: 1.15

@@ -19,4 +19,4 @@ MonoBehaviour:
   handleEnter: 1
   handleStay: 1
   handleExit: 1
-  decreaseCooldownValueInPercentage: 0.25
+  decreaseCooldownValueInPercentage: 0.75
