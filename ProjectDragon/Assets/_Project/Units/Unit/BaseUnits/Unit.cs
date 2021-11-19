@@ -232,6 +232,8 @@ namespace Units.Unit.BaseUnits
 
         private void Cast(Transform target)
         {
+            if (GameManager.Instance.CurrentGameState != GameState.Wave)
+                return;
             if (Ability.TimeLeft > 0) 
                 return;
             switch (Ability.AbilityAbilityObj.AbilityType)
