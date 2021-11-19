@@ -1,7 +1,6 @@
 ﻿using Abilities.Ability.Scripts;
 using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
-using Units.Unit.BaseUnits;
 using UnityEngine;
 
 namespace Abilities.EndAbilities.MeleeAttack.Scripts
