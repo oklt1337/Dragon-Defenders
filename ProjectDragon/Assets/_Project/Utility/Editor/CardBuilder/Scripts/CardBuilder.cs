@@ -364,9 +364,12 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                 case 0:
                     // Create Commander
                     guid = AssetDatabase.CreateFolder(CommanderPath, newCardName);
-                    path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
                     AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Prefabs");
                     AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Materials");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Animations");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Sounds");
+                    guid = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "ScriptableObjects");
+                    path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
 
                     //Create Instance
                     var commanderCard = CreateInstance<CommanderCard>();
@@ -397,9 +400,12 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                 case 1:
                     // Create Unit
                     guid = AssetDatabase.CreateFolder(UnitPath, newCardName);
-                    path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
-                    var prefabGuid = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Prefabs");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Prefabs");
                     AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Materials");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Animations");
+                    AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Sounds");
+                    guid = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "ScriptableObjects");
+                    path = string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
                     
                     var unitCard = CreateInstance<UnitCard>();
                     unitCard.PrefabPath = string.Concat("Cards/UnitCards/", newCardName, "/Prefabs/");
