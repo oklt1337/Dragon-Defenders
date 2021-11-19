@@ -1,33 +1,24 @@
 using System;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
-using AI.Enemies.Base_Enemy;
 using AI.Enemies.Base_Enemy.Scripts;
 using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
+using Units.Unit.BaseUnits;
 using UnityEngine;
 
 namespace Abilities.Projectiles.Scripts
 {
     public class MeleeProjectile : DamageProjectile
     {
-        private float Duration { get; set; }
-
-        public void Init(Caster caster, float damage, float duration)
+        public void Init(Caster caster, float damage)
         {
             Damage = damage;
             Caster = caster;
-            Duration = duration;
         }
-        
+
         protected override void Update()
         {
-            base.Update();
-            Duration -= Time.deltaTime;
-            if (Duration <= 0)
-            {
-                Destroy(gameObject);
-            }
         }
-        
+
         protected override void OnTriggerEnter(Collider other)
         {
             switch (Caster)

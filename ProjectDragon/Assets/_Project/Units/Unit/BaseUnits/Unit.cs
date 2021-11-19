@@ -43,6 +43,8 @@ namespace Units.Unit.BaseUnits
         private ClassAndFaction.Faction faction;
         private ClassAndFaction.Class unitClass;
         private Client client;
+        private static readonly int IsAttacking = Animator.StringToHash("IsAttacking");
+        private static readonly int IsCasting = Animator.StringToHash("IsCasting");
 
         #endregion
 
@@ -111,12 +113,18 @@ namespace Units.Unit.BaseUnits
             switch (Ability.AbilityAbilityObj.AbilityType)
             {
                 case AbilityType.Damage:
-                    if (enteredEnemies.Count == 0)
-                        return;
                     enteredEnemies = enteredEnemies.Where(enemy => enemy != null).ToList();
-                    if (!other.CompareTag("Enemy")) 
-                        return;
-                    SelectTarget();
+                    if (enteredEnemies.Count == 0)
+                    {
+                        animator.SetBool(IsAttacking, false);
+                    }
+                    else
+                    {
+                        
+                        if (!other.CompareTag("Enemy")) 
+                            return;
+                        SelectTarget();
+                    }
                     break;
                 case AbilityType.Utility:
                     if (!other.CompareTag("Player") && !other.CompareTag("Unit"))
@@ -231,11 +239,13 @@ namespace Units.Unit.BaseUnits
                 case AbilityType.Damage:
                     FixRotation(target);
                     ((DamageAbility) Ability).Cast(spawnPos, target, Caster.Unit);
+                    Animator.SetBool(IsAttacking, true);
                     break;
                 case AbilityType.Utility:
                     if (((UtilityAbility) Ability).HandleStay)
                     {
                         ((UtilityAbility) Ability).OnStay(target);
+                        Animator.SetBool(IsCasting, true);
                     }
                     break;
                 default:

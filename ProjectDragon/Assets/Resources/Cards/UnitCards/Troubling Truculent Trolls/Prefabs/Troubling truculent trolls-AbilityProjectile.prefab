@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 5871381125263691328}
-  myCollider: {fileID: 0}
+  myCollider: {fileID: 6015472915615364342}
 --- !u!33 &542178190147937786
 MeshFilter:
   m_ObjectHideFlags: 0

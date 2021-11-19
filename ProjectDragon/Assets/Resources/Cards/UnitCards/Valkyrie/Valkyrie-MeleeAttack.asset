@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Valkyrie-MeleeAttack
   m_EditorClassIdentifier: 
   abilityType: 0
-  coolDown: 1
+  coolDown: 1.25
   damage: 30
   attackRange: 3
   prefabProjectile: {fileID: 837948568487164293, guid: fb6bc8fb8ff5ce8448433d95cc6ee9cc,
     type: 3}
-  duration: 1

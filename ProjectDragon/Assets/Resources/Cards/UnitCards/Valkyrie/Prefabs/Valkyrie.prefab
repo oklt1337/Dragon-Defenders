@@ -9,9 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1878347255398759570}
+  - component: {fileID: 7371985324953453458}
   - component: {fileID: 1907779300698245864}
   - component: {fileID: 1897128248372631474}
   - component: {fileID: 1968164550424620266}
+  - component: {fileID: 3656263274651174620}
+  - component: {fileID: 7331423686655689157}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -33,6 +36,20 @@ Transform:
   m_Father: {fileID: 5187876600055922472}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -156.005, y: 37.268005, z: 95.33}
+--- !u!114 &7371985324953453458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875599684963361784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23683f776bff6f543bbdcc8dea7505a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRigidbody: {fileID: 3656263274651174620}
+  myCollider: {fileID: 7331423686655689157}
 --- !u!33 &1907779300698245864
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -102,36 +119,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &3084651373499198935
-GameObject:
+--- !u!54 &3656263274651174620
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9125543820037244219}
-  m_Layer: 2
-  m_Name: SpawnPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9125543820037244219
-Transform:
+  m_GameObject: {fileID: 1875599684963361784}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &7331423686655689157
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3084651373499198935}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.27, z: 0.54}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5179563293921228640}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1875599684963361784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 3, z: 0.05}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &5184686414162935262
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +710,6 @@ Transform:
   m_Children:
   - {fileID: 5179410447999591248}
   - {fileID: 5187654400559927448}
-  - {fileID: 9125543820037244219}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -710,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d032f57014191984d8851647e1c5e735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPos: {fileID: 9125543820037244219}
+  spawnPos: {fileID: 1878347255398759570}
   animator: {fileID: 5090501607505387226}
   sphereCollider: {fileID: -8430466530072733724}
 --- !u!95 &5090501607505387226
