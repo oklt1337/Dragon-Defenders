@@ -47,7 +47,7 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
             if (TimeLeft > 0) 
                 return;
             StartCooldown = true;
-            Casted?.Invoke();
+            Casted?.Invoke(target);
             
             var singeShotAbilityObj = (SingleShotAbilityObj) AbilityAbilityObj;
             singeShotAbilityObj.Cast(spawnPoint, target, caster, Damage, ProjectileSpeed);

@@ -34,7 +34,7 @@ namespace Abilities.Ability.Scripts
         public Transform Owner { get; set; }
 
         public bool StartCooldown { get; internal set; }
-        public Action Casted;
+        public Action<Transform> Casted;
 
         protected Ability(AbilityObj abilityAbilityObj)
         {

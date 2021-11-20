@@ -43,7 +43,7 @@ namespace Abilities.EndAbilities.DashInLookDirection.Scripts
             if (!CanDash(Owner.forward, EffectRange))
                 return;
             StartCooldown = true;
-            Casted?.Invoke();
+            Casted?.Invoke(target);
             Charges--;
             
             DashInLookDirectionAbilityObj.Cast(Owner, EffectRange);

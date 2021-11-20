@@ -15,7 +15,7 @@ namespace SkillSystem.Nodes.EffectNodes.Scripts
         {
             if (!(visitor is SingleShotAbility ability)) 
                 return;
-            ability.Casted += Shot;
+            ability.Casted += (t) => {Shot();};
             singleShotAbility = ability;
         }
 

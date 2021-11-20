@@ -30,7 +30,7 @@ namespace Abilities.EndAbilities.MeleeAttack.Scripts
             if (TimeLeft > 0) 
                 return;
             StartCooldown = true;
-            Casted?.Invoke();
+            Casted?.Invoke(target);
             
             MeleeAttackAbilityObj.Cast(spawnPoint, caster, Damage);
         }

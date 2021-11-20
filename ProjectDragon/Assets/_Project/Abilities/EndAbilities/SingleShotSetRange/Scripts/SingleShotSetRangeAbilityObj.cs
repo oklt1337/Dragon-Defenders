@@ -38,7 +38,7 @@ namespace Abilities.EndAbilities.SingleShotSetRange.Scripts
             if (TimeLeft > 0) 
                 return;
             StartCooldown = true;
-            Casted?.Invoke();
+            Casted?.Invoke(target);
             
             var abilityObj = (SingleShotSetRangeAbilityObj) AbilityAbilityObj;
             abilityObj.Cast(spawnPoint, target, caster, Damage, ProjectileSpeed, TravelRange);

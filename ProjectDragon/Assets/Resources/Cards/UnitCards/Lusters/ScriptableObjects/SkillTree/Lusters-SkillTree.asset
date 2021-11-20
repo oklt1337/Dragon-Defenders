@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
+  m_Name: Lusters-SkillTree
+  m_EditorClassIdentifier: 
+  nodeObjs:
+  - {fileID: 11400000, guid: 254a63f694bd64740bd28fb0434a7277, type: 2}
+  - {fileID: 11400000, guid: c11ef30e08cabce48bd28c8900f365d9, type: 2}
+  - {fileID: 11400000, guid: 7810137c1c38e5942aa3f4f24f6b02c0, type: 2}
+  - {fileID: 11400000, guid: fce6240a5b143414b820fd74b5a30e03, type: 2}
+  - {fileID: 11400000, guid: 4585be4462ea62643b12c166af86947e, type: 2}

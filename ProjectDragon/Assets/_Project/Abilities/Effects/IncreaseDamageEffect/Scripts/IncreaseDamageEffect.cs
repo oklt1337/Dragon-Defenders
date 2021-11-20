@@ -17,7 +17,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
             if (!(unit.Ability is DamageAbility damageAbility)) 
                 return;
             
-            unit.Ability.Casted += () => casted = true;
+            unit.Ability.Casted += (t) => casted = true;
             ability = damageAbility;
             ability.Damage *= increaseValue;
             duration = buffDuration;
