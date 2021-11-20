@@ -1,11 +1,8 @@
 using System;
-using Abilities.EndAbilities.SingleShot.Scripts;
-using Abilities.Projectiles.Scripts;
-using Abilities.Projectiles.Scripts.BaseProjectiles;
+using System.Collections.Generic;
 using Abilities.VisitorPattern.Scripts;
+using Faction;
 using SkillSystem.Nodes.BaseNodes.Scripts;
-using SkillSystem.SkillTree.Scripts;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Abilities.Ability.Scripts
@@ -32,6 +29,7 @@ namespace Abilities.Ability.Scripts
         public float CoolDown { get; set; }
         public float TimeLeft { get; set; }
         public Transform Owner { get; set; }
+        public List<ClassAndFaction.Class> AllowedAttackingTypes { get; set; }
 
         public bool StartCooldown { get; internal set; }
         public Action<Transform> Casted;

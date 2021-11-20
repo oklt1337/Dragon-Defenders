@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Abilities.Ability.Scripts
 {
+    public enum DamageType
+    {
+        Piercing,
+        Burn
+    }
+    
     public abstract class DamageAbilityObj : AbilityObj
     {
         [SerializeField] private float damage;
@@ -18,6 +24,7 @@ namespace Abilities.Ability.Scripts
     {
         public float Damage { get; set; }
         public float AttackRange { get; set; }
+        public DamageType DamageType { get; set; }
 
         public DamageAbility(DamageAbilityObj abilityAbilityObj) : base(abilityAbilityObj)
         {

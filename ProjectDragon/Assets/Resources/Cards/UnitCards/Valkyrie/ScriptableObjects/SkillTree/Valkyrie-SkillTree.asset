@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
   m_Name: Valkyrie-SkillTree
   m_EditorClassIdentifier: 
+  nodeObjs:
+  - {fileID: 11400000, guid: dcd271db923366b4cbf89870c6f0040b, type: 2}
+  - {fileID: 11400000, guid: b7e94d0d9449e9f4c83f25bf9406087d, type: 2}
+  - {fileID: 11400000, guid: 065219f90606a6d4eb97d8293821d779, type: 2}
+  - {fileID: 11400000, guid: a5a731e60dfe90c48922e47cfeee8176, type: 2}
+  - {fileID: 11400000, guid: 84ff5298f668ad34e927ce334552c113, type: 2}
