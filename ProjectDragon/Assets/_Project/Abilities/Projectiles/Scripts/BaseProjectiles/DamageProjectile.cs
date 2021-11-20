@@ -28,11 +28,13 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
 
         protected virtual void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.tag);
             switch (Caster)
             {
                 case Caster.Unit:
                     if (other.CompareTag("Enemy"))
                     {
+                        Debug.Log("Enemy");
                         var enemy = other.GetComponent<Enemy>();
                         enemy.TakeDamage(Damage);
                         Destroy(gameObject);

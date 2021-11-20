@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24713dfea0d842549917a4b4e17d399f, type: 3}
   m_Name: Rackl, the Heroic Dragon-DashInLookDirection
   m_EditorClassIdentifier: 
-  abilityType: 0
+  abilityType: 1
   coolDown: 5
   effectRange: 3
   duration: 0
