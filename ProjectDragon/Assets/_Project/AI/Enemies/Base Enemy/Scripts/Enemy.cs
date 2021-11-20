@@ -1,3 +1,4 @@
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
 using static GamePlay.GameManager.Scripts.GameManager;
 
@@ -49,6 +50,11 @@ namespace AI.Enemies.Base_Enemy.Scripts
 
         #region Unity Methods
 
+        private void Awake()
+        {
+            Instance.OnGameStateChanged += SafetyNet;
+        }
+
         protected virtual void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("HQ"))
@@ -56,6 +62,11 @@ namespace AI.Enemies.Base_Enemy.Scripts
 
             Instance.Hq.Hq.TakeDamage(hqDamage);
             Death(false);
+        }
+
+        private void OnDestroy()
+        {
+            Instance.OnGameStateChanged -= SafetyNet;
         }
 
         #endregion
@@ -110,5 +121,14 @@ namespace AI.Enemies.Base_Enemy.Scripts
         }
 
         #endregion
+
+        /// <summary>
+        /// Prevents a game crash if there is ever an error.
+        /// </summary>
+        /// <param name="state"></param>
+        private void SafetyNet(GameState state)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -18,5 +18,5 @@ MonoBehaviour:
   attackRange: 2.5
   prefabProjectile: {fileID: 6858757532033793912, guid: 1b5e4fde70a6f354189cf51d5117dfd6,
     type: 3}
-  aoeRange: 1
+  aoeRange: 2.5
   duration: 0.1
