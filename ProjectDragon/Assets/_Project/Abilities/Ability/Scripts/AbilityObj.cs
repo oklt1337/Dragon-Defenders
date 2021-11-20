@@ -46,7 +46,7 @@ namespace Abilities.Ability.Scripts
             node.Accept(this);
         }
 
-        public void Tick(float deltaTime)
+        public virtual void Tick(float deltaTime)
         {
             if (StartCooldown)
             {

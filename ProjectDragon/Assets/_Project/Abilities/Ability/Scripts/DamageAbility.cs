@@ -27,6 +27,5 @@ namespace Abilities.Ability.Scripts
 
 
         public abstract void Cast(Transform spawnPoint, Transform target, Caster caster);
-
     }
 }

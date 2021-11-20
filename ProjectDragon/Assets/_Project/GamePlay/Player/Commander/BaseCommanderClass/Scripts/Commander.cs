@@ -185,7 +185,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                         ((IncreaseDamageForSetTimeAbility) abilities[index]).OnStay(unit.transform);
                     }
                 }
-
+                
                 ((UtilityAbility) abilities[index]).OnStay(target);
             }
         }
