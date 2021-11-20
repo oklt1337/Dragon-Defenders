@@ -1,8 +1,7 @@
-using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using UnityEngine;
 
-namespace SkillSystem.SkillTree.Scripts
+namespace SkillSystem.Nodes.Scripts
 {
     public enum NodeState
     {
@@ -22,7 +21,7 @@ namespace SkillSystem.SkillTree.Scripts
 
         public abstract void Execute(IVisitor visitor);
 
-        public Node CreateInstance(SkillTree skillTree)
+        public Node CreateInstance(SkillTree.Scripts.SkillTree skillTree)
         {
             return new Node(this, skillTree);
         }
@@ -33,9 +32,9 @@ namespace SkillSystem.SkillTree.Scripts
         public NodeState NodeState { get; private set; }
         public NodeObj NodeObj { get; }
 
-        private readonly SkillTree skillTree;
+        private readonly SkillTree.Scripts.SkillTree skillTree;
 
-        public Node(NodeObj nodeObj, SkillTree newSkillTree)
+        public Node(NodeObj nodeObj, SkillTree.Scripts.SkillTree newSkillTree)
         {
             NodeObj = nodeObj;
             skillTree = newSkillTree;

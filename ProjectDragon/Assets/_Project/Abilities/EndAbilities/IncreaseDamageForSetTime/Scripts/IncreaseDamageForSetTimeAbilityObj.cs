@@ -6,7 +6,7 @@ using Unit = Units.Unit.BaseUnits.Unit;
 
 namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/IncreaseDamageForSetTime", fileName = "IncreaseDamageForSetTime")]
+    [CreateAssetMenu(menuName = "AbilitySystem/Abilities/UtilityAbilities/IncreaseDamageForSetTime", fileName = "IncreaseDamageForSetTime")]
     public class IncreaseDamageForSetTimeAbilityObj : UtilityAbilityObj
     {
         [SerializeField] private float increaseAttackValueInPercentage;

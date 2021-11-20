@@ -16,11 +16,18 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
     {
         protected float Damage { get; set; }
         protected Caster Caster { get; set; }
-        private float maxLifetime = 10;
+        private const float MAXLifetime = 10;
+        private float lifeTime;
+
+        private void Awake()
+        {
+            lifeTime = MAXLifetime;
+        }
+
         protected virtual void Update()
         {
-            maxLifetime -= Time.deltaTime;
-            if (maxLifetime < 0)
+            lifeTime -= Time.deltaTime;
+            if (lifeTime < 0)
             {
                 Destroy(gameObject);
             }
@@ -28,13 +35,12 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
 
         protected virtual void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.tag);
             switch (Caster)
             {
                 case Caster.Unit:
                     if (other.CompareTag("Enemy"))
                     {
-                        Debug.Log("Enemy");
+                        Debug.Log($"Caster = {Caster} " + "Hit Enemy");
                         var enemy = other.GetComponent<Enemy>();
                         enemy.TakeDamage(Damage);
                         Destroy(gameObject);
@@ -57,6 +63,7 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
                 case Caster.Enemy:
                     if(other.CompareTag("Player"))
                     {
+                        Debug.Log($"Caster = {Caster} " + "Hit Player");
                         var commander = other.GetComponent<Commander>();
                         commander.TakeDamage(Damage);
                         Destroy(gameObject);

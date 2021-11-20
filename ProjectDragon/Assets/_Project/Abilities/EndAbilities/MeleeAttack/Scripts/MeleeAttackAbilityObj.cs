@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Abilities.EndAbilities.MeleeAttack.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/MeleeAttack", fileName = "MeleeAttack")]
+    [CreateAssetMenu(menuName = "AbilitySystem/Abilities/DamageAbilities/MeleeAttack", fileName = "MeleeAttack")]
     public class MeleeAttackAbilityObj : DamageAbilityObj
     {
         public static void Cast(Transform spawnPoint, Caster caster, float abilityDamage)

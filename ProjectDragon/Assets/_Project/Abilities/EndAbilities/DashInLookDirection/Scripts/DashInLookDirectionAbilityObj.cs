@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Abilities.EndAbilities.DashInLookDirection.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/DashInLookDirection", fileName = "DashInLookDirection")]
+    [CreateAssetMenu(menuName = "AbilitySystem/Abilities/UtilityAbilities/DashInLookDirection", fileName = "DashInLookDirection")]
     public class DashInLookDirectionAbilityObj : UtilityAbilityObj
     {
         [SerializeField] private int charges;

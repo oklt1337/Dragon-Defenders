@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Abilities.EndAbilities.SingleShot.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/SingleShot", fileName = "SingleShot")]
+    [CreateAssetMenu(menuName = "AbilitySystem/Abilities/DamageAbilities/SingleShot", fileName = "SingleShot")]
     public class SingleShotAbilityObj : DamageAbilityObj
     {
         [SerializeField] private float projectileSpeed;

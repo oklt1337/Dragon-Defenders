@@ -10,7 +10,7 @@ using Unit = Units.Unit.BaseUnits.Unit;
 
 namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/DecreaseCooldownOfDamage", fileName = "DecreaseCooldownOfDamage")]
+    [CreateAssetMenu(menuName = "AbilitySystem/Abilities/UtilityAbilities/DecreaseCooldownOfDamage", fileName = "DecreaseCooldownOfDamage")]
     public class DecreaseCooldownOfDamageAbilityObj : UtilityAbilityObj
     {
         [SerializeField] private float decreaseCooldownValueInPercentage;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GamePlay.GameManager.Scripts;
+using SkillSystem.Nodes.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UI.Managers.Scripts;
 using UnityEngine;
@@ -73,7 +74,7 @@ namespace UI.In_Game.Building.Scripts
 
             skillTree = newSkillTree;
 
-            if (skillTree.Nodes.Keys.Count > 6)
+            if (skillTree.Nodes.Count > 6)
             {
                 commanderPanel.gameObject.SetActive(true);
             }
@@ -97,7 +98,7 @@ namespace UI.In_Game.Building.Scripts
             if (skillTree.Nodes[index].NodeState != NodeState.Learnable)
                 return;
 
-            if (skillTree.Nodes.Keys.Count > 6)
+            if (skillTree.Nodes.Count > 6)
             {
                 // Checks if player has reached the appropriate wave for the level up. 
                 if (skillTree.Nodes[index].NodeObj.Cost > GameManager.Instance.WaveManager.CurrentWaveIndex)
@@ -125,7 +126,7 @@ namespace UI.In_Game.Building.Scripts
         /// </summary>
         private void UpdateImages()
         {
-            var activeSkillImages = skillTree.Nodes.Keys.Count > 6 ? commanderSkillImages : unitSkillImages;
+            var activeSkillImages = skillTree.Nodes.Count > 6 ? commanderSkillImages : unitSkillImages;
 
             for (int i = 0; i < activeSkillImages.Count; i++)
             {

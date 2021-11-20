@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
+using Sirenix.Serialization;
+using SkillSystem.Nodes.Scripts;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
@@ -8,7 +10,8 @@ namespace SkillSystem.SkillTree.Scripts
 {
     public class SkillTreeObj : ScriptableObject
     {
-        public readonly Dictionary<int, NodeObj> NodeObjs = new Dictionary<int, NodeObj>();
+        [SerializeField] private List<NodeObj> nodeObjs = new List<NodeObj>();
+        public List<NodeObj> NodeObjs => nodeObjs;
         
         public SkillTree CreateInstance(Client client)
         {
@@ -18,16 +21,16 @@ namespace SkillSystem.SkillTree.Scripts
 
     public class SkillTree
     {
-        public readonly Dictionary<int, Node> Nodes = new Dictionary<int, Node>();
+        public readonly List<Node> Nodes = new List<Node>();
         private int currentRow;
         public Client Client { get; }
 
-        public SkillTree(SkillTreeObj skillTreeObj,Client client)
+        public SkillTree(SkillTreeObj skillTreeObj, Client client)
         {
             Client = client;
             foreach (var node in skillTreeObj.NodeObjs)
             {
-                Nodes.Add(node.Key ,node.Value.CreateInstance(this));
+                Nodes.Add(node.CreateInstance(this));
             }
         }
 

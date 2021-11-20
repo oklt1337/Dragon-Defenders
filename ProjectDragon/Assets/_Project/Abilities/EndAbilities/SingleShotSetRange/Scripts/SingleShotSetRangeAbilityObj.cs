@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Abilities.EndAbilities.SingleShotSetRange.Scripts
 {
-    [CreateAssetMenu(menuName = "Tools/Abilities/SingleShotSetRange", fileName = "SingleShotSetRange")]
+    [CreateAssetMenu(menuName = "AbilitySystem/Abilities/DamageAbilities/SingleShotSetRange", fileName = "SingleShotSetRange")]
     public class SingleShotSetRangeAbilityObj : SingleShotAbilityObj
     {
         [SerializeField] private float travelRange;
