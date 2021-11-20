@@ -92,8 +92,12 @@ namespace UI.Deck_Manager_Screen.Scripts
         public void OnClickDeck(Button btn)
         {
             if (int.Parse(btn.name) >= DeckManager.Instance.Decks.Count)
+            {
+                // Quality of life change for players.
+                OnAddClick();            
                 return;
-
+            }
+            
             if (!previewDeckPanel.gameObject.activeSelf)
                 previewDeckPanel.gameObject.SetActive(true);
 
