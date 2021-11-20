@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using Sirenix.Serialization;
-using SkillSystem.Nodes.Scripts;
+using SkillSystem.Nodes.BaseNodes.Scripts;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 

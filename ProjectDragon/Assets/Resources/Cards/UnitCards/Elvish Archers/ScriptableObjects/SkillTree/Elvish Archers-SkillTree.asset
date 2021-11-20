@@ -15,3 +15,6 @@ MonoBehaviour:
   nodeObjs:
   - {fileID: 11400000, guid: 2392056a521f26f4a9ac904bb5e7313d, type: 2}
   - {fileID: 11400000, guid: c3a8b012e608acd42ace804bc5ac840b, type: 2}
+  - {fileID: 11400000, guid: 83ac96d5db6fac446b1cf9f83e54fba7, type: 2}
+  - {fileID: 11400000, guid: 962a7c5a27984644c92c5c5e535be3ef, type: 2}
+  - {fileID: 11400000, guid: b35341ad582690a429204ea8ce58cfaf, type: 2}

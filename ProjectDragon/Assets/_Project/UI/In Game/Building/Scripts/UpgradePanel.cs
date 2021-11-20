@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using GamePlay.GameManager.Scripts;
-using SkillSystem.Nodes.Scripts;
+using SkillSystem.Nodes.BaseNodes.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UI.Managers.Scripts;
 using UnityEngine;

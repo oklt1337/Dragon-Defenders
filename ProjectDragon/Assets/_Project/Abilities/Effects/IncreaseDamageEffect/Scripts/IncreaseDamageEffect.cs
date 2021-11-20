@@ -8,7 +8,6 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
     {
         private Unit unit;
         private DamageAbility ability;
-        private float value;
         private float duration;
         private bool casted;
 

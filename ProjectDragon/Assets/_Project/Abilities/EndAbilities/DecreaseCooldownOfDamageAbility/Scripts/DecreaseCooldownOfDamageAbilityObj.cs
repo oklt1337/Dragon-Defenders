@@ -57,12 +57,7 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
         {
             DecreaseCooldownValueInPercentage = abilityObj.DecreaseCooldownValueInPercentage;
         }
-        
-        public override void Init(Transform owner)
-        {
-            Owner = owner;
-        }
-        
+
         public override void OnEnter(Transform target)
         {
             if (!target.CompareTag("Unit"))

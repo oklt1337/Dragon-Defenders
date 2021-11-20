@@ -40,6 +40,5 @@ namespace Abilities.Ability.Scripts
         public abstract void OnEnter(Transform target);
         public abstract void OnStay(Transform target);
         public abstract void OnExit(Transform target);
-        public abstract void Init(Transform owner);
     }
 }

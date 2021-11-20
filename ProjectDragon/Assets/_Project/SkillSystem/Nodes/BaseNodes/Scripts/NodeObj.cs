@@ -1,7 +1,7 @@
 using Abilities.VisitorPattern.Scripts;
 using UnityEngine;
 
-namespace SkillSystem.Nodes.Scripts
+namespace SkillSystem.Nodes.BaseNodes.Scripts
 {
     public enum NodeState
     {

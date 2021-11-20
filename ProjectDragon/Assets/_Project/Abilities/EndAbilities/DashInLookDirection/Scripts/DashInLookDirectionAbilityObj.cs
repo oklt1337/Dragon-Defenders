@@ -53,11 +53,6 @@ namespace Abilities.EndAbilities.DashInLookDirection.Scripts
         {
         }
 
-        public override void Init(Transform owner)
-        {
-            Owner = owner;
-        }
-        
         public override void Tick(float deltaTime)
         {
             if (StartCooldown)

@@ -136,6 +136,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                     case AbilityType.Damage:
                         var damageAbilityObj = (DamageAbilityObj) ability;
                         var damageAbility = damageAbilityObj.CreateInstance<DamageAbility>();
+                        damageAbility.Init(transform);
                         abilities.Add(damageAbility);
                         client.Visitors.Add(damageAbility);
                         break;

@@ -3,7 +3,7 @@ using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.Projectiles.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
-using SkillSystem.Nodes.Scripts;
+using SkillSystem.Nodes.BaseNodes.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,8 +30,8 @@ namespace Abilities.Ability.Scripts
     {
         public AbilityObj AbilityAbilityObj { get; }
         public float CoolDown { get; set; }
-
         public float TimeLeft { get; set; }
+        public Transform Owner { get; set; }
 
         public bool StartCooldown { get; internal set; }
         public Action Casted;
@@ -40,6 +40,11 @@ namespace Abilities.Ability.Scripts
         {
             AbilityAbilityObj = abilityAbilityObj;
             CoolDown = abilityAbilityObj.CoolDown;
+        }
+
+        public void Init(Transform owner)
+        {
+            Owner = owner;
         }
 
         public void Visit(Node node)

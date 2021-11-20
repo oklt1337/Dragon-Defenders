@@ -55,10 +55,5 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
         public override void OnExit(Transform target)
         {
         }
-
-        public override void Init(Transform owner)
-        {
-            Owner = owner;
-        }
     }
 }

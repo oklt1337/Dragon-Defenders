@@ -9,7 +9,7 @@ using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.UnitCard.Scripts;
 using Faction;
 using GamePlay.GameManager.Scripts;
-using SkillSystem.Nodes.Scripts;
+using SkillSystem.Nodes.BaseNodes.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UnityEngine;
 
@@ -50,6 +50,8 @@ namespace Units.Unit.BaseUnits
         #endregion
 
         #region Public Propeties
+
+        public Transform SpawnPos => spawnPos;
 
         public Animator Animator
         {
@@ -217,6 +219,7 @@ namespace Units.Unit.BaseUnits
             {
                 var abilityObj = (DamageAbilityObj) unitCard.abilityDataBase.Abilities[0];
                 var damageAbility = abilityObj.CreateInstance<DamageAbility>();
+                damageAbility.Init(transform);
                 Ability = damageAbility;
                 sphereCollider.radius = damageAbility.AttackRange;
             }

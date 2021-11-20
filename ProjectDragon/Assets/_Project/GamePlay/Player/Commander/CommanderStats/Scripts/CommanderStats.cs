@@ -1,7 +1,7 @@
 using System;
 using Abilities.VisitorPattern.Scripts;
 using Faction;
-using SkillSystem.Nodes.Scripts;
+using SkillSystem.Nodes.BaseNodes.Scripts;
 using SkillSystem.SkillTree.Scripts;
 
 namespace GamePlay.Player.Commander.CommanderStats.Scripts
