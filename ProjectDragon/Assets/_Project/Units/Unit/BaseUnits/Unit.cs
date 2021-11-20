@@ -39,6 +39,7 @@ namespace Units.Unit.BaseUnits
 
         #region Private Fields
 
+        private UnitCard card;
         private List<Transform> enteredEnemies = new List<Transform>();
         private AttackOrder attackOrder;
         private ClassAndFaction.Faction faction;
@@ -170,6 +171,15 @@ namespace Units.Unit.BaseUnits
             Ability.Tick(Time.deltaTime);
         }
 
+        private void OnDestroy()
+        {
+            if (GameManager.Instance.UnitManager.Units.Contains(this))
+            {
+                GameManager.Instance.UnitManager.Units.Remove(this);
+            }
+            GameManager.Instance.UnitManager.RemovePlacedUnit(card);
+        }
+
         #endregion
 
         #region Private Methods
@@ -275,6 +285,7 @@ namespace Units.Unit.BaseUnits
         public void Initialize(UnitCard unitCard)
         {
             //Base Implement
+            card = unitCard;
             faction = unitCard.Faction;
             unitClass = unitCard.Class;
             CreateAbility(unitCard);

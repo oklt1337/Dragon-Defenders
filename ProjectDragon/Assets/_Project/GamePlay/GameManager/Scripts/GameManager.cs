@@ -170,12 +170,10 @@ namespace GamePlay.GameManager.Scripts
                 case GameState.Prepare:
                     buildCamera.gameObject.SetActive(false);
                     commanderCamera.gameObject.SetActive(false);
-                    Debug.LogError($"GameState: {state}");
                     break;
                 case GameState.End:
                     buildCamera.gameObject.SetActive(false);
                     commanderCamera.gameObject.SetActive(true);
-                    Debug.LogError($"GameState: {state}");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
