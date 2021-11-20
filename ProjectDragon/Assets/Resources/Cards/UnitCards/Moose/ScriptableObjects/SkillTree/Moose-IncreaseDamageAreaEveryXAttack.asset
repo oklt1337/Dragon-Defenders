@@ -9,6 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
-  m_Name: Moose-SkillTree
+  m_Script: {fileID: 11500000, guid: 773b860c0c8c417281e1a6cebd1089d5, type: 3}
+  m_Name: Moose-IncreaseDamageAreaEveryXAttack
   m_EditorClassIdentifier: 
+  nodeName: ' Scream of the wild'
+  icon: {fileID: 0}
+  cost: 600
+  value: 2
+  xTime: 3
