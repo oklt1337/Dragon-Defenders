@@ -43,9 +43,10 @@ namespace UI.In_Game.Settings.Scripts
             gameObject.SetActive(false);
         }
 
-        public void OnLobbyClick()
+        public void OnBackClick()
         {
-            SceneManager.ChangeScene(Scene.Lobby);
+            // Only for Prototype
+            SceneManager.ChangeScene(Scene.MainMenu);
         }
         
         public void OnSfxChange()

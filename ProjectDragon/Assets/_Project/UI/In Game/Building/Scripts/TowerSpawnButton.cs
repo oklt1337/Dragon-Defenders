@@ -73,7 +73,12 @@ namespace UI.In_Game.Building.Scripts
                 return;
 
             if (!GameManager.Instance.UnitManager.AddPlacedUnit(unit))
+            {
+                // Give the player his money back.
+                GameManager.Instance.PlayerModel.ModifyMoney(unit.GoldCost);
                 return;
+            }
+                
 
             // Do the spawning when everything works out.
             var tower = PhotonNetwork.Instantiate(unit.PrefabPath, hit.point, Quaternion.identity).GetComponent<Unit>();

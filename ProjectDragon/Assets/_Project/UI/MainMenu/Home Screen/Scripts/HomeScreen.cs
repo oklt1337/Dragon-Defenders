@@ -44,7 +44,9 @@ namespace UI.MainMenu.Home_Screen.Scripts
 
         public void OnClickLobby()
         {
-            SceneManager.ChangeScene(Scene.Lobby);
+            // For the Prototype a Lobby is not needed.
+            //SceneManager.ChangeScene(Scene.Lobby);
+            SceneManager.ChangeScene(Scene.GameScene);
         }
 
         public void OnClickSettings()
