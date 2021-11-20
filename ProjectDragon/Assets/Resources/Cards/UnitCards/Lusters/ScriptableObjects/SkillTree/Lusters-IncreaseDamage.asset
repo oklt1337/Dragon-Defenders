@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Exploder
   icon: {fileID: 0}
   cost: 200
-  multiplier: 1.33333
+  multiplier: 1.333

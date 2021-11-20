@@ -23,7 +23,6 @@ namespace Abilities.Ability.Scripts
     {
         public float EffectRange { get; set; }
         public float Duration { get; set; }
-        public Transform Owner { get; set; }
         public bool HandleEnter { get; set; }
         public bool HandleStay { get; set; }
         public bool HandleExit { get; set; }

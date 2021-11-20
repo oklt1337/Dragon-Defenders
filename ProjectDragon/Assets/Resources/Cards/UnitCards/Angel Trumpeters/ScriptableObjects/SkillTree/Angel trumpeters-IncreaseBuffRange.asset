@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d62e5079926490f84203a0460bccc7c, type: 3}
-  m_Name: Lusters-IncreaseAoeRange2
+  m_Script: {fileID: 11500000, guid: 94c1018963ef4a5b9137176436b03a9d, type: 3}
+  m_Name: Angel trumpeters-IncreaseBuffRange
   m_EditorClassIdentifier: 
-  nodeName: Cap Detonator
+  nodeName: Insignis
   icon: {fileID: 0}
-  cost: 400
-  multiplier: 1.666
+  cost: 200
+  multiplier: 1.333

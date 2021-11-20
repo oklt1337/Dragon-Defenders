@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d62e5079926490f84203a0460bccc7c, type: 3}
-  m_Name: Lusters-IncreaseAoeRange2
+  m_Script: {fileID: 11500000, guid: 9a4e92b4e0cd4927bf5548a29074a9d3, type: 3}
+  m_Name: Angel Trumpeters-ReduceCoolDownRandomWith2Values
   m_EditorClassIdentifier: 
-  nodeName: Cap Detonator
+  nodeName: Versicolor
   icon: {fileID: 0}
   cost: 400
-  multiplier: 1.666
+  multiplier: 0.6
+  range: 0.8

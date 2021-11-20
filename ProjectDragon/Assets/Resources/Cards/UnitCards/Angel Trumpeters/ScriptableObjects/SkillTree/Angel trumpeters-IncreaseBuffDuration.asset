@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
-  m_Name: Angel Trumpeters-SkillTree
+  m_Script: {fileID: 11500000, guid: cce68d7963e54c1390539daeef729f15, type: 3}
+  m_Name: Angel trumpeters-IncreaseBuffDuration
   m_EditorClassIdentifier: 
+  nodeName: Suaveolens
+  icon: {fileID: 0}
+  cost: 400
+  multiplier: 1.5
