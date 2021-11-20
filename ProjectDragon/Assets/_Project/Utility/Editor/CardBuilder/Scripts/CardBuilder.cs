@@ -359,12 +359,14 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
             string path;
             string guid;
             int index;
+            string pathSkillTree;
+            string pathAbilities;
             switch (toolBarIndex)
             {
                 case 0:
                     // Create Commander
                     guid = AssetDatabase.CreateFolder(CommanderPath, newCardName);
-                    path = CreateFolders(guid, newCardName);
+                    path = CreateFolders(guid, newCardName, out pathSkillTree, out pathAbilities);
 
                     //Create Instance
                     var commanderCard = CreateInstance<CommanderCard>();
@@ -375,10 +377,9 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
 
                     //Create Assets
                     AssetDatabase.CreateAsset(commanderCard, string.Concat(path, "-Card", ".asset"));
-                    AssetDatabase.CreateAsset(commanderCard.SkillTreeObj,
-                        string.Concat(path, "-CommanderSkillTree", ".asset"));
+                    AssetDatabase.CreateAsset(commanderCard.SkillTreeObj, string.Concat(pathSkillTree, "-CommanderSkillTree", ".asset"));
                     AssetDatabase.CreateAsset(commanderCard.AbilityDataBase,
-                        string.Concat(path, "-CommanderAbilityDataBase", ".asset"));
+                        string.Concat(pathAbilities, "-CommanderAbilityDataBase", ".asset"));
                     AssetDatabase.SaveAssets();
 
                     // Set new Card as selected
@@ -395,7 +396,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
                 case 1:
                     // Create Unit
                     guid = AssetDatabase.CreateFolder(UnitPath, newCardName);
-                    path = CreateFolders(guid, newCardName);
+                    path = CreateFolders(guid, newCardName, out pathSkillTree, out pathAbilities);
                     
                     var unitCard = CreateInstance<UnitCard>();
                     unitCard.PrefabPath = string.Concat("Cards/UnitCards/", newCardName, "/Prefabs/");
@@ -405,8 +406,8 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
 
                     //Create Assets
                     AssetDatabase.CreateAsset(unitCard, string.Concat(path, "-Card", ".asset"));
-                    AssetDatabase.CreateAsset(unitCard.SkillTreeObj,string.Concat(path, "-SkillTree", ".asset"));
-                    AssetDatabase.CreateAsset(unitCard.AbilityDataBase, string.Concat(path, "-AbilityDataBase", ".asset"));
+                    AssetDatabase.CreateAsset(unitCard.SkillTreeObj,string.Concat(pathSkillTree, "-SkillTree", ".asset"));
+                    AssetDatabase.CreateAsset(unitCard.AbilityDataBase, string.Concat(pathAbilities, "-AbilityDataBase", ".asset"));
                     AssetDatabase.SaveAssets();
 
                     // Set new Card as selected
@@ -422,13 +423,18 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
             }
         }
 
-        private static string CreateFolders(string guid, string newCardName)
+        private static string CreateFolders(string guid, string newCardName, out string pathSkillTree, out string pathAbilities)
         {
             AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Prefabs");
             AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Materials");
             AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Animations");
             AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Sounds");
             guid = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "ScriptableObjects");
+            var guidSkillTree = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "SkillTree");
+            pathSkillTree = string.Concat(AssetDatabase.GUIDToAssetPath(guidSkillTree), "/", newCardName);
+            var guidAbilities = AssetDatabase.CreateFolder(AssetDatabase.GUIDToAssetPath(guid), "Abilities");
+            pathAbilities = string.Concat(AssetDatabase.GUIDToAssetPath(guidAbilities), "/", newCardName);
+            
             return string.Concat(AssetDatabase.GUIDToAssetPath(guid), "/", newCardName);
         }
 

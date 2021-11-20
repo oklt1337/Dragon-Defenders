@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1613c12e19f4b44789ea58f8b726736, type: 3}
-  m_Name: IncreaseProjectileSpeed
+  m_Script: {fileID: 11500000, guid: 24b11e8c9d924780a8c531eb171d8fe4, type: 3}
+  m_Name: Elvish Archers-IncreaseRangedAttackRange
   m_EditorClassIdentifier: 
-  nodeName: Quick Draw
+  nodeName: Hawkeye
   icon: {fileID: 0}
   cost: 200
-  multiplier: 1.6
+  multiplier: 2
