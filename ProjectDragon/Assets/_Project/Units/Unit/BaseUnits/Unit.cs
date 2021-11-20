@@ -52,6 +52,7 @@ namespace Units.Unit.BaseUnits
         #region Public Propeties
 
         public Transform SpawnPos => spawnPos;
+        public SphereCollider SphereCollider => sphereCollider;
 
         public Animator Animator
         {

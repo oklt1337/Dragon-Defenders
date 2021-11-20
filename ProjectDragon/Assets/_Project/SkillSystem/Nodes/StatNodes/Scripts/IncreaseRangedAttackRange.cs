@@ -1,6 +1,7 @@
 ﻿using Abilities.EndAbilities.SingleShot.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using SkillSystem.Nodes.BaseNodes.Scripts;
+using Units.Unit.BaseUnits;
 using UnityEngine;
 
 namespace SkillSystem.Nodes.StatNodes.Scripts
@@ -13,6 +14,11 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
             if (!(visitor is SingleShotAbility ability)) 
                 return;
             ability.AttackRange *= multiplier;
+            var unit = ability.Owner.GetComponent<Unit>();
+            if (unit != null)
+            {
+                unit.SphereCollider.radius = ability.AttackRange;
+            }
         }
     }
 }
