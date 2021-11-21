@@ -26,7 +26,6 @@ namespace Units.Unit.BaseUnits
         LowestHealth
     }
     
-    [RequireComponent(typeof(SphereCollider))]
     public sealed class Unit : MonoBehaviour, IVisitor
     {
         #region SerializeFields

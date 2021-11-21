@@ -49,6 +49,9 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
             StartCooldown = true;
             Casted?.Invoke(target);
             
+            Debug.Log(IncreaseAttackValueInPercentage);
+            Debug.Log(Duration);
+            Debug.Log(CoolDown);
             IncreaseDamageForSetTimeAbilityObj.Cast(target, Duration, IncreaseAttackValueInPercentage);
         }
 

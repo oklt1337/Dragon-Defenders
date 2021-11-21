@@ -20,7 +20,11 @@ namespace SkillSystem.Nodes.EffectNodes.Scripts
                     var enemy = enemyTrans.GetComponent<Enemy>();
                     if (enemy == null) 
                         return;
-                    var effect = enemy.gameObject.AddComponent<DamageOverTimeEffect>();
+                    var effect = enemy.GetComponent<DamageOverTimeEffect>();
+                    if (effect != null)
+                        Destroy(effect);
+
+                    effect = enemy.gameObject.AddComponent<DamageOverTimeEffect>();
                     effect.Init(duration, value, tick);
                 };
             }

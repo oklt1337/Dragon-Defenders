@@ -25,6 +25,7 @@ namespace Abilities.Effects.DamageOverTimeEffect.Scripts
 
         private void Update()
         {
+            duration -= Time.deltaTime;
             if (duration > 0)
             {
                 DamageTicker();
@@ -45,7 +46,6 @@ namespace Abilities.Effects.DamageOverTimeEffect.Scripts
 
         private void DurationCounter()
         {
-            duration -= Time.deltaTime;
             if (!(duration <= 0)) 
                 return;
             Destroy(this);
