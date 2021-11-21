@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Niszuh, King of the Giants-Card
   m_EditorClassIdentifier: 
   cardID: 10105001
-  prefabPath: Cards/UnitCards/Niszuh, King of the Giants/Prefabs/
+  prefabPath: Cards/UnitCards/Niszuh, King of the Giants/Prefabs/Niszuh, King of
+    Giants
   cardName: Niszuh, King of the Giants
   description: Swings his arm in front of him.
   model: {fileID: 2229329172281099898, guid: f4e4c03bd3d7c5a499a9200eaa0e8074, type: 3}
@@ -23,6 +24,6 @@ MonoBehaviour:
   skillTreeObj: {fileID: 11400000, guid: af0ffa5c41960ca469181266dd6c1c33, type: 2}
   abilityDataBase: {fileID: 11400000, guid: 358e354b7cd8eef419e627e974ac6025, type: 2}
   demo: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 360c01700b76843a1aca829fce1f2b7e, type: 3}
   limit: 1
   goldCost: 200

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Troubling Truculent Trolls-Card
   m_EditorClassIdentifier: 
   cardID: 10102001
-  prefabPath: Cards/UnitCards/Troubling Truculent Trolls/Prefabs/
+  prefabPath: Cards/UnitCards/Troubling Truculent Trolls/Prefabs/Troubling Truculent
+    Troll
   cardName: Troubling Truculent Trolls
   description: Throws stones... yeah thats it
   model: {fileID: 6724679398089075884, guid: 21dbaea21a9a3dd44a1db82737d72e09, type: 3}
@@ -23,6 +24,6 @@ MonoBehaviour:
   skillTreeObj: {fileID: 11400000, guid: 00623d265ad3b0b498b2e72f9b209712, type: 2}
   abilityDataBase: {fileID: 11400000, guid: ff00bdcd89c4efc4095221d1227b436c, type: 2}
   demo: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6375ee604922547709d4cba093674eac, type: 3}
   limit: 10
   goldCost: 40

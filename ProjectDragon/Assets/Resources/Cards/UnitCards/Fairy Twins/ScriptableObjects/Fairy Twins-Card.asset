@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fairy Twins-Card
   m_EditorClassIdentifier: 
   cardID: 20204001
-  prefabPath: Cards/UnitCards/Fairy Twins/Prefabs/
+  prefabPath: Cards/UnitCards/Fairy Twins/Prefabs/Fairy Twins
   cardName: Fairy Twins
   description: Buffs closest commander or unit.
   model: {fileID: 7335341134899545673, guid: 9b2c2191df9aace45b8029608cad0017, type: 3}
@@ -23,6 +23,6 @@ MonoBehaviour:
   skillTreeObj: {fileID: 11400000, guid: ff196e7df1563fd478f9fc103e4ce123, type: 2}
   abilityDataBase: {fileID: 11400000, guid: b9dc504bf332d174ea47743f07f153bd, type: 2}
   demo: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 62e9347c13b144b04be777bb8ff4bc26, type: 3}
   limit: 2
   goldCost: 175

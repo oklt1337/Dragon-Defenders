@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rackl, the Heroic Dragon-Card
   m_EditorClassIdentifier: 
   cardID: 0
-  prefabPath: Cards/CommanderCards/Rackl, the Heroic Dragon/Prefabs/
+  prefabPath: Cards/CommanderCards/Rackl, the Heroic Dragon/Prefabs/Rackl, the Heroic
+    Dragon-Prefab
   cardName: Rackl, the Heroic Dragon
   description: Small boy whos wish it is to be a hero one day.
   model: {fileID: 6606831500922802972, guid: 60a38428ba211b745807b021e0fb5650, type: 3}
@@ -23,7 +24,7 @@ MonoBehaviour:
   skillTreeObj: {fileID: 11400000, guid: b0f9ca15f573a5949a027f55e388758b, type: 2}
   abilityDataBase: {fileID: 11400000, guid: 34b06e55c80953243a518dd5ca87a724, type: 2}
   demo: {fileID: 0}
-  icon: {fileID: 21300000, guid: 3d20a5e89dd5bdf4a94f6017bdb6cf6e, type: 3}
+  icon: {fileID: 21300000, guid: d004641a16caf40fb823547e6c80b6c8, type: 3}
   health: 1000
   mana: 250
   attackDamageModifier: 100

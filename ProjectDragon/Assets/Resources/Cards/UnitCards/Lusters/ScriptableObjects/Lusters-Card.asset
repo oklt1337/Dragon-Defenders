@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lusters-Card
   m_EditorClassIdentifier: 
   cardID: 20301001
-  prefabPath: Cards/UnitCards/Lusters/Prefabs/
+  prefabPath: Cards/UnitCards/Lusters/Prefabs/Luster
   cardName: Lusters
   description: Erupts in a fireball.
   model: {fileID: 7198736320795054384, guid: bd89b3da6d353784a82b27fed5906398, type: 3}
@@ -23,6 +23,6 @@ MonoBehaviour:
   skillTreeObj: {fileID: 11400000, guid: 884c13a1c8d16be4dbe0b040b4b3356c, type: 2}
   abilityDataBase: {fileID: 11400000, guid: 2dbc59c3b0358674ba425f006465a81d, type: 2}
   demo: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ba21e48f675c44360ab2f2adf0f09a65, type: 3}
   limit: 3
   goldCost: 75

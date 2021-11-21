@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Elvish Archers-Card
   m_EditorClassIdentifier: 
   cardID: 20201001
-  prefabPath: Cards/UnitCards/Elvish Archers/Prefabs/
+  prefabPath: Cards/UnitCards/Elvish Archers/Prefabs/Elvish Archer
   cardName: Elvish Archers
   description: Shoots arrows at enemies.
   model: {fileID: 6815718579237173541, guid: d505de9e533bc704bb3524c7dd1fb825, type: 3}
@@ -23,6 +23,6 @@ MonoBehaviour:
   skillTreeObj: {fileID: 11400000, guid: 658983d5509d7e24cab1a003c5f6441e, type: 2}
   abilityDataBase: {fileID: 11400000, guid: b23c58cab63971b499e34b9f17c0dfd2, type: 2}
   demo: {fileID: 0}
-  icon: {fileID: 21300000, guid: 1384c38ad09879f4bb06dc82df1e36fd, type: 3}
+  icon: {fileID: 21300000, guid: 4605842eabbad4f418393fc5812bca96, type: 3}
   limit: 8
   goldCost: 50
