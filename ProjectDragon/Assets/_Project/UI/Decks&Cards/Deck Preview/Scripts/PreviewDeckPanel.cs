@@ -4,7 +4,6 @@ using Deck_Cards.Cards.BaseCards.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using Deck_Cards.DeckManager.Scripts;
 using Deck_Cards.Decks.Scripts;
-using GamePlay.GameManager.Scripts;
 using TMPro;
 using UI.MainMenu.Manager.Scripts;
 using UI.Managers.Scripts;
@@ -81,7 +80,6 @@ namespace UI.Deck_Preview.Scripts
             }
 
             DeckManager.SaveDeck(PreviewDeck);
-            // Future TODO:
         }
 
         public void OnDeleteClick()
@@ -189,7 +187,7 @@ namespace UI.Deck_Preview.Scripts
         /// <summary>
         /// Adds a Unit Card to the preview deck if there is free space.
         /// </summary>
-        /// <param name="addCard"></param>
+        /// <param name="addCard"> The card that shall be added. </param>
         public void AddUnitCardToPreviewDeck(BaseCard addCard)
         {
             for (int i = 0; i < PreviewDeck.UnitCards.Length; i++)
@@ -202,7 +200,6 @@ namespace UI.Deck_Preview.Scripts
                     return;
 
                 unitButtons[i].SetCard(addCard);
-                unitButtons[i].Button.image.sprite = addCard.Icon;
                 unitButtons[i].Text.text = addCard.cardName;
                 return;
             }
