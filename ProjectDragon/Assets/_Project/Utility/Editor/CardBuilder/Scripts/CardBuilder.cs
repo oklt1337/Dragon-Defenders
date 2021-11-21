@@ -314,7 +314,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
         private void SetBaseStats(BaseCard baseCard)
         {
             cardID = baseCard.CardID;
-            prefabPath = baseCard.PrefabPath;
+            prefabPath = baseCard.GetRawPath;
             cardName = baseCard.CardName;
             description = baseCard.Description;
             model = baseCard.Model;

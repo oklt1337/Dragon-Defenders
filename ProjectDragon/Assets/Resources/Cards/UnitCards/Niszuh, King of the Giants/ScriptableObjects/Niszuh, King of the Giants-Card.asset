@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Niszuh, King of the Giants-Card
   m_EditorClassIdentifier: 
   cardID: 10105001
-  prefabPath: Cards/UnitCards/Niszuh, King of the Giants/Prefabs/Niszuh, King of
-    Giants
+  prefabPath: Cards/UnitCards/Niszuh, King of the Giants/Prefabs/
   cardName: Niszuh, King of the Giants
   description: Swings his arm in front of him.
   model: {fileID: 2229329172281099898, guid: f4e4c03bd3d7c5a499a9200eaa0e8074, type: 3}
