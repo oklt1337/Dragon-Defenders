@@ -130,21 +130,12 @@ namespace UI.In_Game.Building.Scripts
 
             for (int i = 0; i < activeSkillImages.Count; i++)
             {
-                var key = (i + 1);
-
                 // Fail check.
-                if (skillTree.Nodes[key].NodeObj.Icon == null)
-                {
-                    activeSkillImages[i].sprite = missingSprite;
-                    continue;
-                }
-
-                // Update the sprite.
-                activeSkillImages[i].sprite = skillTree.Nodes[key].NodeObj.Icon;
+                activeSkillImages[i].sprite = skillTree.Nodes[i].NodeObj.Icon == null ? missingSprite : skillTree.Nodes[i].NodeObj.Icon;
 
                 // Make the image grey when the skill was neither learned nor is learnable.
-                if (skillTree.Nodes[key].NodeState == NodeState.Learnable ||
-                    skillTree.Nodes[key].NodeState == NodeState.Activated)
+                if (skillTree.Nodes[i].NodeState == NodeState.Learnable ||
+                    skillTree.Nodes[i].NodeState == NodeState.Activated)
                     activeSkillImages[i].color = Color.white;
                 else
                     activeSkillImages[i].color = Color.gray;
