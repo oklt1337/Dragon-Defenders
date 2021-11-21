@@ -112,14 +112,13 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
-            CommanderStats.OnCommanderSpeedChanged += speed => navMeshAgent.speed = speed;
         }
 
         private void Update()
         {
             if (playerModel.CurrentState != State.Move) 
                 return;
-            var dist=navMeshAgent.remainingDistance;
+            var dist= navMeshAgent.remainingDistance;
             if (!float.IsPositiveInfinity(dist) && navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete &&
                 navMeshAgent.remainingDistance == 0)
                 playerModel.ChangeState(State.Idle);
@@ -135,8 +134,10 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             commanderStats = new CommanderStats.Scripts.CommanderStats(commanderCard.Faction, commanderCard.Class,
                 commanderCard.Health, commanderCard.Mana, commanderCard.AttackDamageModifier, commanderCard.Defense,
                 commanderCard.Speed);
+            commanderStats.OnCommanderSpeedChanged += speed => navMeshAgent.speed = speed;
+            commanderStats.Speed = commanderCard.Speed;
+            
             client.Visitors.Add(commanderStats);
-
             foreach (var ability in commanderCard.abilityDataBase.Abilities)
             {
                 switch (ability.AbilityType)

@@ -68,8 +68,6 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
         public override void OnStay(Transform target)
         {
             SelectTarget(target);
-            Debug.Log(DecreaseCooldownValueInPercentage);
-            Debug.Log(MaxTargets);
         }
 
         public override void OnExit(Transform target)

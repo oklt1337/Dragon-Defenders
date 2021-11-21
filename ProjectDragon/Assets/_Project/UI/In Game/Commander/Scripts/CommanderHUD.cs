@@ -20,14 +20,16 @@ namespace UI.In_Game.Commander.Scripts
         private void Awake()
         {
             GameManager.Instance.OnGameStateChanged += ChangeHUD;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderHealthChanged += ChangeCommanderHealth;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged += ChangeCommanderMana;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXHealthChanged += ModifyHealth;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXManaChanged += ModifyMana;
         }
 
         private void Start()
         {
+            var commanderStat = GameManager.Instance.PlayerModel.Commander.CommanderStats;
+            commanderStat.OnCommanderHealthChanged += ChangeCommanderHealth;
+            commanderStat.OnCommanderManaChanged += ChangeCommanderMana;
+            commanderStat.OnCommanderMAXHealthChanged += ModifyHealth;
+            commanderStat.OnCommanderMAXManaChanged += ModifyMana;
+            
             for (int i = 0; i < abilities.Length; i++)
             {
                 abilities[i].image.sprite = GameManager.Instance.PlayerModel.Commander.Abilities[i].Icon;
@@ -47,10 +49,12 @@ namespace UI.In_Game.Commander.Scripts
         private void OnDestroy()
         {
             GameManager.Instance.OnGameStateChanged -= ChangeHUD;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderHealthChanged -= ChangeCommanderHealth;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged -= ChangeCommanderMana;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXHealthChanged -= ModifyHealth;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXManaChanged -= ModifyMana;
+            
+            var commanderStat = GameManager.Instance.PlayerModel.Commander.CommanderStats;
+            commanderStat.OnCommanderHealthChanged -= ChangeCommanderHealth;
+            commanderStat.OnCommanderManaChanged -= ChangeCommanderMana;
+            commanderStat.OnCommanderMAXHealthChanged -= ModifyHealth;
+            commanderStat.OnCommanderMAXManaChanged -= ModifyMana;
         }
 
         #endregion
