@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Aurea
   icon: {fileID: 0}
   cost: 200
-  multiplier: 2
+  multiplier: 1.091

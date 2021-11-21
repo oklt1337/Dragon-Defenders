@@ -18,8 +18,6 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
 
         public static void Cast(Transform target, float value)
         {
-            if (target.GetComponent<ReduceDamageAbilityCooldownEffect>() != null)
-                return;
             var unit = target.GetComponent<Unit>();
             if (unit != null)
             {
@@ -52,7 +50,7 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
         public event Action<Transform> OnTargetChanged;
         
         private readonly List<Transform> units = new List<Transform>();
-        private List<Transform> lastTargets;
+        private readonly List<Transform> lastTargets = new List<Transform>();
 
         public DecreaseCooldownOfDamageAbility(DecreaseCooldownOfDamageAbilityObj abilityObj) : base(abilityObj)
         {
@@ -70,6 +68,8 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
         public override void OnStay(Transform target)
         {
             SelectTarget(target);
+            Debug.Log(DecreaseCooldownValueInPercentage);
+            Debug.Log(MaxTargets);
         }
 
         public override void OnExit(Transform target)
@@ -143,13 +143,12 @@ namespace Abilities.EndAbilities.DecreaseCooldownOfDamageAbility.Scripts
 
         private void RemoveBuffOfOldTarget(Transform target)
         {
-            if (lastTargets.Contains(target))
-            {
-                lastTargets.Remove(target);
-                var component = target.GetComponent<ReduceDamageAbilityCooldownEffect>();
-                if (component != null)
-                    component.Destroy();
-            }
+            if (!lastTargets.Contains(target)) 
+                return;
+            lastTargets.Remove(target);
+            var component = target.GetComponent<ReduceDamageAbilityCooldownEffect>();
+            if (component != null)
+                component.Destroy();
         }
     }
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityType: 0
   coolDown: 2
+  icon: {fileID: 0}
   damage: 100
   attackRange: 2
   prefabProjectile: {fileID: 4881260519214633195, guid: 6ccaad65cd168da499e6d545b52ae739,

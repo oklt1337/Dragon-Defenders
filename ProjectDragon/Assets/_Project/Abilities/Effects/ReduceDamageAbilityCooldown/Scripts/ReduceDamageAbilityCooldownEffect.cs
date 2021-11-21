@@ -15,8 +15,10 @@ namespace Abilities.Effects.ReduceDamageAbilityCooldown.Scripts
 
         public event Action OnEffectDestroyed;
 
-        public void Init(float increaseValue)
+        public void Init(float decreaseValue)
         {
+            Debug.Log(decreaseValue);
+            
             unit = GetComponent<Unit>();
             commander = GetComponent<Commander>();
             if (unit != null)
@@ -25,7 +27,7 @@ namespace Abilities.Effects.ReduceDamageAbilityCooldown.Scripts
                     return;
                 
                 ability = damageAbility;
-                ability.CoolDown *= increaseValue;
+                ability.CoolDown *= decreaseValue;
             }
             else if (commander != null)
             {
@@ -33,7 +35,7 @@ namespace Abilities.Effects.ReduceDamageAbilityCooldown.Scripts
                     return;
                 
                 ability = damageAbility;
-                ability.CoolDown *= increaseValue;
+                ability.CoolDown *= decreaseValue;
             }
         }
 

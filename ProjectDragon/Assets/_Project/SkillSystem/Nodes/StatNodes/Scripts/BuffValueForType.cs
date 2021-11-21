@@ -8,31 +8,37 @@ using UnityEngine;
 
 namespace SkillSystem.Nodes.StatNodes.Scripts
 {
-    [CreateAssetMenu(menuName = "AbilitySystem/SkillTree/Nodes/StatNodes/BuffValueForType", fileName = "BuffValueForType")]
+    [CreateAssetMenu(menuName = "AbilitySystem/SkillTree/Nodes/StatNodes/BuffValueForType",
+        fileName = "BuffValueForType")]
     public class BuffValueForType : StatNode
     {
         [SerializeField] private ClassAndFaction.Class @class;
-        
+
+        private IncreaseDamageForSetTimeAbility increaseDamageForSetTimeAbility;
         public override void Execute(IVisitor visitor)
         {
-            if (!(visitor is IncreaseDamageForSetTimeAbility ability)) 
+            if (!(visitor is IncreaseDamageForSetTimeAbility ability))
                 return;
-            ability.Casted += (t) =>
-            {
-                var unit = t.GetComponent<Unit>();
-                if (unit == null) 
-                    return;
-                if (unit.UnitClass != @class)
-                    return;
-                var effect = unit.GetComponent<IncreaseDamageEffect>();
-                if (effect == null) 
-                    return;
+
+            increaseDamageForSetTimeAbility = ability;
+            increaseDamageForSetTimeAbility.Casted += ApplyBuff;
+            if (increaseDamageForSetTimeAbility.CurrenTarget == null)
+                return;
+            ApplyBuff(increaseDamageForSetTimeAbility.CurrenTarget);
+        }
+
+        private void ApplyBuff(Transform target)
+        {
+            var unit = target.GetComponent<Unit>();
+            if (unit == null)
+                return;
+            if (unit.UnitClass != @class)
+                return;
+            var effect = unit.gameObject.AddComponent<IncreaseDamageEffect>();
+            if (effect != null)
                 Destroy(effect);
-                effect = unit.gameObject.AddComponent<IncreaseDamageEffect>();
-                var value = ((IncreaseDamageForSetTimeAbilityObj) ability.AbilityAbilityObj)
-                    .IncreaseAttackValueInPercentage * multiplier;
-                effect.Init(ability.Duration, value);
-            };
+            
+            effect.Init(increaseDamageForSetTimeAbility.Duration, multiplier);
         }
     }
 }

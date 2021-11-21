@@ -129,7 +129,7 @@ namespace GamePlay.GameManager.Scripts
 
         private void Start()
         {
-            PlayerModel.ModifyMoney(1000);
+            PlayerModel.ModifyMoney(1000000);
             CurrentGameState = GameState.Build;
         }
 

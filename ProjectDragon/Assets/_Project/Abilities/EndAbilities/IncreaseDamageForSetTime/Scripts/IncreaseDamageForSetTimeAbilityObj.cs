@@ -14,11 +14,6 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
         
         public static void Cast(Transform target ,float abilityDuration ,float abilityIncreaseAttackValueInPercentage)
         {
-            if (target.GetComponent<IncreaseDamageEffect>() != null)
-                return;
-            if (!(target.GetComponent<Unit>().Ability is DamageAbility)) 
-                return;
-            
             var effect = target.AddComponent<IncreaseDamageEffect>();
             effect.Init(abilityDuration, abilityIncreaseAttackValueInPercentage);
         }
@@ -32,6 +27,7 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
     public class IncreaseDamageForSetTimeAbility : UtilityAbility
     {
         public float IncreaseAttackValueInPercentage { get; set; }
+        public Transform CurrenTarget { get; set; }
         
         public IncreaseDamageForSetTimeAbility(IncreaseDamageForSetTimeAbilityObj abilityObj) : base(abilityObj)
         {
@@ -46,12 +42,14 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
         {
             if (TimeLeft > 0) 
                 return;
+            if (target.GetComponent<IncreaseDamageEffect>() != null)
+                return;
+            if (!(target.GetComponent<Unit>().Ability is DamageAbility)) 
+                return;
+            
             StartCooldown = true;
             Casted?.Invoke(target);
-            
-            Debug.Log(IncreaseAttackValueInPercentage);
-            Debug.Log(Duration);
-            Debug.Log(CoolDown);
+            CurrenTarget = target;
             IncreaseDamageForSetTimeAbilityObj.Cast(target, Duration, IncreaseAttackValueInPercentage);
         }
 

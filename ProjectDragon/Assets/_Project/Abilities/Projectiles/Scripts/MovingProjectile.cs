@@ -12,7 +12,7 @@ namespace Abilities.Projectiles.Scripts
             Damage = damage;
             Speed = speed;
             Caster = caster;
-            
+
             MoveProjectile(target);
         }
 

@@ -19,7 +19,7 @@ namespace Abilities.Effects.IncreaseDamageAreaEveryXAttackEffect.Scripts
             meleeAttackAbility = ability;
             scale = value;
             counter = xTime;
-            boxCollider = ability.Owner.GetComponent<MeleeProjectile>().GetComponent<BoxCollider>();
+            boxCollider = ability.Owner.GetComponentInChildren<MeleeProjectile>().GetComponent<BoxCollider>();
             size = boxCollider.size;
             center = boxCollider.center;
             meleeAttackAbility.Casted += (t) => Counter();

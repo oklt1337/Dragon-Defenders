@@ -15,5 +15,5 @@ MonoBehaviour:
   nodeName: Arborea
   icon: {fileID: 0}
   cost: 400
-  multiplier: 6
+  multiplier: 1.8
   class: 1

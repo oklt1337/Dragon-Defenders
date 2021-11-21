@@ -21,9 +21,12 @@ namespace SkillSystem.Nodes.EffectNodes.Scripts
                     if (commander == null) 
                         return;
                     var effect = commander.GetComponent<ReduceDamageAbilityCooldownEffect>();
-                    if (effect == null) 
+                    if (effect == null)
                         return;
-                    var regenEffect = commander.gameObject.AddComponent<RegenHealthOverTimeEffect>();
+                    var regenEffect = commander.gameObject.GetComponent<RegenHealthOverTimeEffect>();
+                    if (regenEffect != null)
+                        return;
+                    regenEffect = commander.gameObject.AddComponent<RegenHealthOverTimeEffect>();
                     regenEffect.Init(value, tick);
                     effect.OnEffectDestroyed += regenEffect.Destroy;
                 };
