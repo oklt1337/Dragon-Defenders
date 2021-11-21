@@ -26,6 +26,14 @@ namespace UI.In_Game.Commander.Scripts
             GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXManaChanged += ModifyMana;
         }
 
+        private void Start()
+        {
+            for (int i = 0; i < abilities.Length; i++)
+            {
+                abilities[i].image.sprite = GameManager.Instance.PlayerModel.Commander.Abilities[i].Icon;
+            }
+        }
+
         private void OnEnable()
         {
             CanvasManager.Instance.Subscribe(this);
