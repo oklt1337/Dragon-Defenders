@@ -112,7 +112,7 @@ namespace UI.In_Game.Building.Scripts
 
                 GameManager.Instance.PlayerModel.ModifyMoney(-skillTree.Nodes[index].NodeObj.Cost);
             }
-
+            
             skillTree.SetNodeActive(index);
             UpdateImages();
         }

@@ -12,7 +12,7 @@ namespace SkillSystem.SkillTree.Scripts
     {
         [SerializeField] private List<NodeObj> nodeObjs = new List<NodeObj>();
         public List<NodeObj> NodeObjs => nodeObjs;
-        
+
         public SkillTree CreateInstance(Client client)
         {
             return new SkillTree(this, client);
@@ -41,10 +41,13 @@ namespace SkillSystem.SkillTree.Scripts
 
         public void SetNodeActive(int nodeIndex)
         {
+            if (Nodes[nodeIndex].NodeState == NodeState.Activated)
+                return;
+
             Nodes[nodeIndex].SetState(NodeState.Activated);
 
             // Deactivate other Nodes
-            if (nodeIndex + 1 <= Nodes.Count)
+            if (nodeIndex + 1 < Nodes.Count)
             {
                 if (Nodes[nodeIndex + 1].NodeState == NodeState.Learnable)
                 {
@@ -62,7 +65,7 @@ namespace SkillSystem.SkillTree.Scripts
 
             // Set new nodes Learnable
             var index = currentRow + nodeIndex + 1;
-            
+
             for (var i = 1; i < 3; i++)
             {
                 if (index + i < Nodes.Count)
@@ -70,6 +73,7 @@ namespace SkillSystem.SkillTree.Scripts
                     Nodes[index + i].SetState(NodeState.Learnable);
                 }
             }
+
             currentRow++;
         }
     }
