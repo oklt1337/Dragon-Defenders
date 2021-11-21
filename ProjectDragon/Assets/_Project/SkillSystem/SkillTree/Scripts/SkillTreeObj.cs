@@ -32,6 +32,11 @@ namespace SkillSystem.SkillTree.Scripts
             {
                 Nodes.Add(node.CreateInstance(this));
             }
+
+            for (int i = 0; i < Nodes.Count; i++)
+            {
+                Nodes[i].SetState(i < 2 ? NodeState.Learnable : NodeState.Deactivated);
+            }
         }
 
         public void SetNodeActive(int nodeIndex)
@@ -39,20 +44,31 @@ namespace SkillSystem.SkillTree.Scripts
             Nodes[nodeIndex].SetState(NodeState.Activated);
 
             // Deactivate other Nodes
-            if (Nodes[nodeIndex + 1].NodeState == NodeState.Learnable)
+            if (nodeIndex + 1 <= Nodes.Count)
             {
-                Nodes[nodeIndex + 1].SetState(NodeState.Deactivated);
+                if (Nodes[nodeIndex + 1].NodeState == NodeState.Learnable)
+                {
+                    Nodes[nodeIndex + 1].SetState(NodeState.Deactivated);
+                }
             }
-            else if (Nodes[nodeIndex - 1].NodeState == NodeState.Learnable)
+
+            if (nodeIndex - 1 >= 0)
             {
-                Nodes[nodeIndex - 1].SetState(NodeState.Deactivated);
+                if (Nodes[nodeIndex - 1].NodeState == NodeState.Learnable)
+                {
+                    Nodes[nodeIndex - 1].SetState(NodeState.Deactivated);
+                }
             }
 
             // Set new nodes Learnable
-            var index = currentRow + nodeIndex;
+            var index = currentRow + nodeIndex + 1;
+            
             for (var i = 1; i < 3; i++)
             {
-                Nodes[index + i].SetState(NodeState.Learnable);
+                if (index + i < Nodes.Count)
+                {
+                    Nodes[index + i].SetState(NodeState.Learnable);
+                }
             }
             currentRow++;
         }

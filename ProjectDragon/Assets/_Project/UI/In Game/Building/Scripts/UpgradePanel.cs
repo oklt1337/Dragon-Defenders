@@ -37,7 +37,7 @@ namespace UI.In_Game.Building.Scripts
 
         private void Update()
         {
-            CheckClosing();
+            //CheckClosing();
         }
 
         private void OnEnable()
@@ -92,7 +92,7 @@ namespace UI.In_Game.Building.Scripts
         /// <param name="btn"> The Button that was pressed. </param>
         public void OnClick(Button btn)
         {
-            string buttonName = btn.gameObject.name;
+            var buttonName = btn.gameObject.name;
             int.TryParse(buttonName, out var index);
 
             if (skillTree.Nodes[index].NodeState != NodeState.Learnable)

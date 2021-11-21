@@ -86,6 +86,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         {
             transform.position = GameManager.Scripts.GameManager.Instance.PlayerSpawn.position;
             inputHandler.CommanderCam = GameManager.Scripts.GameManager.Instance.CommanderCamera;
+            inputHandler.BuildCamera = GameManager.Scripts.GameManager.Instance.BuildCamera;
             Initialize(GameManager.Scripts.GameManager.DefaultDeck);
         }
 
@@ -102,8 +103,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         {
             if (!Physics.Raycast(ray, out var hit))
                 return;
-
-            Debug.Log(hit.collider.tag, hit.collider.gameObject);
+            
             if (hit.collider.CompareTag("Enemy") &&
                 GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
             {
@@ -120,14 +120,12 @@ namespace GamePlay.Player.PlayerModel.Scripts
                 var unit = hit.collider.gameObject.GetComponent<Unit>();
                 if (unit != null)
                 {
-                    Debug.Log("Unit Skill");
                     OnTryUpgradeSkill?.Invoke(unit.SkillTree);
                 }
             }
             else if (hit.collider.CompareTag("Player") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
-                Debug.Log("Player Skill");
                 OnTryUpgradeSkill?.Invoke(commander.SkillTree);
             }
         }
@@ -143,7 +141,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
             commander.InitializeCommander(deck.CommanderCard);
 
             //Init Rest
-            inputHandler.Initialize(this);
+            inputHandler.Initialize();
             commander.Initialize(this);
             animationHandler.Init(this, commander.Animator);
         }

@@ -290,6 +290,11 @@ namespace Units.Unit.BaseUnits
             unitClass = unitCard.Class;
             CreateAbility(unitCard);
             SkillTree = unitCard.SkillTreeObj.CreateInstance(client);
+
+            foreach (var node in SkillTree.Nodes)
+            {
+               Debug.Log(node.NodeState);
+            }
             GameManager.Instance.UnitManager.Units.Add(this);
         }
 
