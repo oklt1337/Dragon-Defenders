@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Rackl, the Heroic Dragon-Card
   m_EditorClassIdentifier: 
   cardID: 0
-  prefabPath: Cards/CommanderCards/Rackl, the Heroic Dragon/Prefabs/Rackl, the Heroic
-    Dragon-Prefab
+  prefabPath: Cards/CommanderCards/Rackl, the Heroic Dragon/Prefabs/
   cardName: Rackl, the Heroic Dragon
   description: Small boy whos wish it is to be a hero one day.
   model: {fileID: 6606831500922802972, guid: 60a38428ba211b745807b021e0fb5650, type: 3}

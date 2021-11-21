@@ -1,6 +1,7 @@
 ﻿using Abilities.Ability.Scripts;
 using Abilities.VisitorPattern.Scripts;
 using AI.Enemies.Base_Enemy.Scripts;
+using GamePlay.GameManager.Scripts;
 using SkillSystem.Nodes.BaseNodes.Scripts;
 using UnityEngine;
 
@@ -13,9 +14,9 @@ namespace SkillSystem.Nodes.RandomNodes.Scripts
         private DamageAbility damageAbility;
         public override void Execute(IVisitor visitor)
         {
-            if (visitor is DamageAbility ability)
+            if (visitor is DamageAbility)
             {
-                //Subscribe to all enemyies DeathEvent 
+                GameManager.Instance.EnemySpawner.OnEnemyDeath += PlaySound;
             }
         }
 

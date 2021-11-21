@@ -12,9 +12,13 @@ namespace GamePlay.Player.PlayerModel.Scripts
 {
     public enum State
     {
+        Blocked,
         Idle,
         Move,
-        Blocked
+        AutoAttack,
+        Attack1,
+        Attack2,
+        Attack3
     }
 
     public class PlayerModel : MonoBehaviour
@@ -134,12 +138,8 @@ namespace GamePlay.Player.PlayerModel.Scripts
             //Init Rest
             inputHandler.Initialize(this);
             commander.Initialize(this);
-            animationHandler.Animator = commander.Animator;
+            animationHandler.Init(this, commander.Animator);
         }
-
-        #endregion
-
-        #region Protected Methods
 
         #endregion
 

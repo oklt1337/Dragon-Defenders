@@ -51,9 +51,9 @@ namespace GamePlay.Player.InputHandler.Scripts
                 if (!Input.GetMouseButtonDown(0))
                     return;
 
-                Vector3 screenPos = Input.mousePosition;
+                var screenPos = Input.mousePosition;
                 screenPos.z = CommanderCam.nearClipPlane;
-                Ray ray = CommanderCam.ScreenPointToRay(screenPos);
+                var ray = CommanderCam.ScreenPointToRay(screenPos);
 
                 OnTouch?.Invoke(ray);
             }

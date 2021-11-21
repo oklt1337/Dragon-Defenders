@@ -25,27 +25,22 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Fields
 
-        [Header("PlayerModel")] 
-        private PlayerModel.Scripts.PlayerModel playerModel;
+        [Header("PlayerModel")] private PlayerModel.Scripts.PlayerModel playerModel;
 
-        [Header("Basic")] 
-        private string commanderName;
+        [Header("Basic")] private string commanderName;
 
-        [Header("Stats")] 
-        private CommanderStats.Scripts.CommanderStats commanderStats;
+        [Header("Stats")] private CommanderStats.Scripts.CommanderStats commanderStats;
         private SkillTree skillTree;
         private List<Ability> abilities = new List<Ability>();
         private readonly Client client = new Client();
 
-        [Header("Runtime")] 
-        private bool dyingBreath;
+        [Header("Runtime")] private bool dyingBreath;
         private byte rank;
         private byte level;
         private float experience;
         private const float MINDamage = 10f;
 
-        [Header("Movement")] 
-        private Coroutine movementCo;
+        [Header("Movement")] private Coroutine movementCo;
         private Vector3 destination;
 
         #endregion
@@ -112,6 +107,14 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
+        }
+
+        private void Update()
+        {
+            if (playerModel.CurrentState != State.Move)
+                return;
+            if (navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+                playerModel.ChangeState(State.Idle);
         }
 
         #endregion
@@ -184,7 +187,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                         ((IncreaseDamageForSetTimeAbility) abilities[index]).OnStay(unit.transform);
                     }
                 }
-                
+
                 ((UtilityAbility) abilities[index]).OnStay(target);
             }
         }
@@ -224,21 +227,25 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         public void AutoAttack(Transform target)
         {
             Cast(0, target);
+            playerModel.ChangeState(State.AutoAttack);
         }
 
         public void Attack1(Transform target)
         {
             Cast(1, target);
+            playerModel.ChangeState(State.Attack1);
         }
 
         public void Attack2(Transform target)
         {
             Cast(2, target);
+            playerModel.ChangeState(State.Attack2);
         }
 
         public void Attack3(Transform target)
         {
             Cast(3, target);
+            playerModel.ChangeState(State.Attack3);
         }
 
         public void TakeDamage(float damage)
