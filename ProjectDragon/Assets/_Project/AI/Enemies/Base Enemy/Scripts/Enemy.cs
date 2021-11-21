@@ -84,7 +84,7 @@ namespace AI.Enemies.Base_Enemy.Scripts
                 Instance.PlayerModel.Commander.AddExp(expDrop);
             }
             
-            Instance.EnemySpawner.IncreaseKilledEnemies();
+            Instance.EnemySpawner.IncreaseKilledEnemies(this);
             Destroy(gameObject);
         }
 

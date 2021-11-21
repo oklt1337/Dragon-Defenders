@@ -20,8 +20,8 @@ namespace UI.In_Game.Commander.Scripts
         private void Awake()
         {
             GameManager.Instance.OnGameStateChanged += ChangeHUD;
-            GameManager.Instance.PlayerModel.Commander.OnCommanderHealthChanged += ChangeCommanderHealth;
-            //GameManager.Instance.PlayerModel.Commander.OnCommanderManaChanged += ChangeCommanderMana;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderHealthChanged += ChangeCommanderHealth;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged += ChangeCommanderMana;
         }
 
         private void OnEnable()
@@ -37,8 +37,8 @@ namespace UI.In_Game.Commander.Scripts
         private void OnDestroy()
         {
             GameManager.Instance.OnGameStateChanged -= ChangeHUD;
-            GameManager.Instance.PlayerModel.Commander.OnCommanderHealthChanged -= ChangeCommanderHealth;
-            //GameManager.Instance.PlayerModel.Commander.OnCommanderManaChanged += ChangeCommanderMana;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderHealthChanged -= ChangeCommanderHealth;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged += ChangeCommanderMana;
         }
 
         #endregion
@@ -86,12 +86,9 @@ namespace UI.In_Game.Commander.Scripts
         /// Modifies the slider of the commander health.
         /// </summary>
         /// <param name="newMaxHealth"> The commanders new max health. </param>
-        /// <param name="newHealth"> The commanders health value. </param>
-        private void ModifyHealth(int newMaxHealth, float newHealth)
+        private void ModifyHealth(int newMaxHealth)
         {
             commanderHealth.maxValue = newMaxHealth;
-            commanderHealth.value = newHealth;
-            commanderHealthText.text = string.Concat((int)newHealth,"/" ,commanderHealth.maxValue);
         }
         
         /// <summary>
@@ -107,12 +104,9 @@ namespace UI.In_Game.Commander.Scripts
         /// Modifies the slider of the commander health.
         /// </summary>
         /// <param name="newMaxMana"> The commanders new max mana. </param>
-        /// <param name="newMana"> The commanders new mana value. </param>
-        private void ModifyMana(int newMaxMana, float newMana)
+        private void ModifyMana(int newMaxMana)
         {
             commanderMana.maxValue = newMaxMana;
-            commanderMana.value = newMana;
-            commanderManaText.text = string.Concat((int)newMana,"/" ,commanderMana.maxValue);
         }
     }
 }

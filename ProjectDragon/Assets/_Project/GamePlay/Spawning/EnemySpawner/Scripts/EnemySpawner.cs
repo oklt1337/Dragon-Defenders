@@ -24,6 +24,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         private bool coroutineIsRunning;
 
         public event Action<GameState> OnWaveSuccess;
+        public event Action<Enemy> OnEnemyDeath;
 
         public int KilledEnemies => killedEnemies;
 
@@ -38,6 +39,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         private void OnDestroy()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= StartSpawning;
+            GameManager.Scripts.GameManager.Instance.WaveManager.OnUpdateWave -= UpdateNextEnemies;
         }
 
         #endregion
@@ -47,7 +49,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         /// <summary>
         /// Increases the amount of killed enemies and potentially ends the wave.
         /// </summary>
-        public void IncreaseKilledEnemies()
+        public void IncreaseKilledEnemies(Enemy enemy)
         {
             killedEnemies++;
 
@@ -55,6 +57,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
                 return;
 
             OnWaveSuccess?.Invoke(GameState.Prepare);
+            OnEnemyDeath?.Invoke(enemy);
             killedEnemies = 0;
         }
 
