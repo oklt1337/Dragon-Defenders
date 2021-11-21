@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
+  m_Name: Fairy Twins-SkillTree
+  m_EditorClassIdentifier: 
+  nodeObjs:
+  - {fileID: 11400000, guid: 778e16d8328dd1d43b2eb1e13b6f7043, type: 2}
+  - {fileID: 11400000, guid: d2c911815f240694294d2f8c32e20aa1, type: 2}
+  - {fileID: 11400000, guid: d991d35f5012daa43b15177f8469b33d, type: 2}
+  - {fileID: 11400000, guid: c9d14872d64acb041b50a3d1f881251f, type: 2}
+  - {fileID: 11400000, guid: 40ea9e3d6e7fc3a48bbe6c7fbb3355c7, type: 2}

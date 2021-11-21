@@ -1,4 +1,5 @@
-﻿using Abilities.Ability.Scripts;
+﻿using System;
+using Abilities.Ability.Scripts;
 using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using Units.Unit.BaseUnits;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Abilities.Effects.ReduceDamageAbilityCooldown.Scripts
         private Commander commander;
         private DamageAbility ability;
         private float value;
+
+        public event Action OnEffectDestroyed;
 
         public void Init(float increaseValue)
         {
@@ -42,6 +45,7 @@ namespace Abilities.Effects.ReduceDamageAbilityCooldown.Scripts
         public void Destroy()
         {
             Destroy(this);
+            OnEffectDestroyed?.Invoke();
         }
     }
 }
