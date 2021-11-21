@@ -6,6 +6,7 @@ namespace Abilities.Effects.EveryXTimeIncreaseShotSpeedForXTimeEffect.Scripts
     public class EveryXTimeIncreaseShotSpeedForXTimeEffect : MonoBehaviour
     {
         private SingleShotAbility ability;
+        private float oldSpeed;
         private float value;
         private float buffDuration;
         private float buffTimer;
@@ -23,6 +24,7 @@ namespace Abilities.Effects.EveryXTimeIncreaseShotSpeedForXTimeEffect.Scripts
             buffDuration = newBuffDuration;
             buffTimer = buffDuration;
             recycleTimer = recycleDuration;
+            oldSpeed = ability.ProjectileSpeed;
 
             ApplyEffect();
         }
@@ -57,7 +59,7 @@ namespace Abilities.Effects.EveryXTimeIncreaseShotSpeedForXTimeEffect.Scripts
 
         private void ResetBuff()
         {
-            ability.ProjectileSpeed = ((SingleShotAbilityObj) ability.AbilityAbilityObj).ProjectileSpeed;
+            ability.ProjectileSpeed = oldSpeed;
             buffTimer = buffDuration;
             startBuffTimer = false;
         }
