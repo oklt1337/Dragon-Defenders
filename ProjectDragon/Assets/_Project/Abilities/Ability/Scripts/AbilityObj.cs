@@ -17,8 +17,10 @@ namespace Abilities.Ability.Scripts
     {
         [SerializeField] private AbilityType abilityType;
         [SerializeField] private float coolDown;
+        [SerializeField] private Sprite icon;
         public AbilityType AbilityType => abilityType;
         public float CoolDown => coolDown;
+        public Sprite Icon => icon;
 
         public new abstract T CreateInstance<T>() where T : Ability;
     }
@@ -29,6 +31,7 @@ namespace Abilities.Ability.Scripts
         public float CoolDown { get; set; }
         public float TimeLeft { get; set; }
         public Transform Owner { get; set; }
+        public Sprite Icon { get; set; }
         public List<ClassAndFaction.Class> AllowedAttackingTypes { get; set; }
 
         public bool StartCooldown { get; internal set; }
@@ -38,6 +41,7 @@ namespace Abilities.Ability.Scripts
         {
             AbilityAbilityObj = abilityAbilityObj;
             CoolDown = abilityAbilityObj.CoolDown;
+            Icon = abilityAbilityObj.Icon;
         }
 
         public void Init(Transform owner)

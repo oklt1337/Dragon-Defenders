@@ -111,9 +111,11 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         private void Update()
         {
-            if (playerModel.CurrentState != State.Move)
+            if (playerModel.CurrentState != State.Move) 
                 return;
-            if (navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+            var dist=navMeshAgent.remainingDistance;
+            if (!float.IsPositiveInfinity(dist) && navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete &&
+                navMeshAgent.remainingDistance == 0)
                 playerModel.ChangeState(State.Idle);
         }
 
@@ -214,9 +216,9 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             if (navMeshAgent.SetDestination(moveTo))
             {
+                playerModel.ChangeState(State.Move);
                 destination = moveTo;
                 GameManager.Scripts.GameManager.Instance.CommanderMoveIndicator.InitializeMovePoint(destination);
-                playerModel.ChangeState(State.Move);
             }
             else
             {
