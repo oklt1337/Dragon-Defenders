@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lusters-Card
   m_EditorClassIdentifier: 
   cardID: 20301001
-  prefabPath: Cards/UnitCards/Lusters/Prefabs/Luster
+  prefabPath: Cards/UnitCards/Lusters/Prefabs/
   cardName: Lusters
   description: Erupts in a fireball.
   model: {fileID: 7198736320795054384, guid: bd89b3da6d353784a82b27fed5906398, type: 3}

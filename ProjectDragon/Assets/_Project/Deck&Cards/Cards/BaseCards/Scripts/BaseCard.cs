@@ -44,6 +44,7 @@ namespace Deck_Cards.Cards.BaseCards.Scripts
             get => Model != null ? string.Concat(prefabPath, Model.name) : prefabPath;
             set => prefabPath = value;
         }
+        public string GetRawPath => prefabPath;
         public string CardName
         {
             get => cardName;
