@@ -25,22 +25,27 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Fields
 
-        [Header("PlayerModel")] private PlayerModel.Scripts.PlayerModel playerModel;
+        [Header("PlayerModel")] 
+        private PlayerModel.Scripts.PlayerModel playerModel;
 
-        [Header("Basic")] private string commanderName;
+        [Header("Basic")] 
+        private string commanderName;
 
-        [Header("Stats")] private CommanderStats.Scripts.CommanderStats commanderStats;
+        [Header("Stats")] 
+        private CommanderStats.Scripts.CommanderStats commanderStats;
         private SkillTree skillTree;
         private List<Ability> abilities = new List<Ability>();
         private readonly Client client = new Client();
 
-        [Header("Runtime")] private bool dyingBreath;
+        [Header("Runtime")] 
+        private bool dyingBreath;
         private byte rank;
         private byte level;
         private float experience;
         private const float MINDamage = 10f;
 
-        [Header("Movement")] private Coroutine movementCo;
+        [Header("Movement")] 
+        private Coroutine movementCo;
         private Vector3 destination;
 
         #endregion
@@ -99,13 +104,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             get => animator;
             set => animator = value;
         }
-
-        #endregion
-
-        #region Events
-
-        public event Action OnDeath;
-        public event Action<float> OnCommanderHealthChanged;
 
         #endregion
 
@@ -256,7 +254,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             else
             {
                 commanderStats.Health -= damage;
-                OnCommanderHealthChanged?.Invoke(commanderStats.Health);
                 dyingBreath = false;
             }
 
@@ -264,7 +261,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 return;
 
             commanderStats.Health = 0;
-            OnDeath?.Invoke();
         }
 
         public void AddExp(float gainedExp)
