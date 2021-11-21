@@ -22,6 +22,8 @@ namespace UI.In_Game.Commander.Scripts
             GameManager.Instance.OnGameStateChanged += ChangeHUD;
             GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderHealthChanged += ChangeCommanderHealth;
             GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged += ChangeCommanderMana;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXHealthChanged += ModifyHealth;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXManaChanged += ModifyMana;
         }
 
         private void OnEnable()
@@ -38,18 +40,77 @@ namespace UI.In_Game.Commander.Scripts
         {
             GameManager.Instance.OnGameStateChanged -= ChangeHUD;
             GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderHealthChanged -= ChangeCommanderHealth;
-            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged += ChangeCommanderMana;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderManaChanged -= ChangeCommanderMana;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXHealthChanged -= ModifyHealth;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderMAXManaChanged -= ModifyMana;
         }
 
         #endregion
 
+        #region Public Methods
 
+        public void CastSpellOne()
+        {
+            GameManager.Instance.PlayerModel.Commander.Attack1(null);
+        }
+        
+        public void CastSpellTwo()
+        {
+            GameManager.Instance.PlayerModel.Commander.Attack2(null);
+        }
+        
+        public void CastSpellThree()
+        {
+            GameManager.Instance.PlayerModel.Commander.Attack3(null);
+        }
+        
         public void ChangeInteractableStatus(bool status)
         {
             foreach (var ability in abilities)
             {
                 ability.interactable = status;
             }
+        }
+
+        #endregion
+
+
+        #region Private Methods
+
+        /// <summary>
+        /// Changes the Health of the Commander.
+        /// </summary>
+        private void ChangeCommanderHealth(float newHealth)
+        {
+            commanderHealth.value = newHealth;
+            commanderHealthText.text = string.Concat((int)newHealth, "/" ,commanderHealth.maxValue);
+        }
+
+        /// <summary>
+        /// Modifies the slider of the commander health.
+        /// </summary>
+        /// <param name="newMaxHealth"> The commanders new max health. </param>
+        private void ModifyHealth(float newMaxHealth)
+        {
+            commanderHealth.maxValue = newMaxHealth;
+        }
+        
+        /// <summary>
+        /// Changes the Health of the Commander.
+        /// </summary>
+        private void ChangeCommanderMana(float newMana)
+        {
+            commanderMana.value = newMana;
+            commanderManaText.text = string.Concat((int)newMana,"/" ,commanderMana.maxValue);
+        }
+
+        /// <summary>
+        /// Modifies the slider of the commander health.
+        /// </summary>
+        /// <param name="newMaxMana"> The commanders new max mana. </param>
+        private void ModifyMana(float newMaxMana)
+        {
+            commanderMana.maxValue = newMaxMana;
         }
 
         private void ChangeHUD(GameState state)
@@ -72,41 +133,8 @@ namespace UI.In_Game.Commander.Scripts
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
             }
         }
-
-        /// <summary>
-        /// Changes the Health of the Commander.
-        /// </summary>
-        private void ChangeCommanderHealth(float newHealth)
-        {
-            commanderHealth.value = newHealth;
-            commanderHealthText.text = string.Concat((int)newHealth, "/" ,commanderHealth.maxValue);
-        }
-
-        /// <summary>
-        /// Modifies the slider of the commander health.
-        /// </summary>
-        /// <param name="newMaxHealth"> The commanders new max health. </param>
-        private void ModifyHealth(int newMaxHealth)
-        {
-            commanderHealth.maxValue = newMaxHealth;
-        }
         
-        /// <summary>
-        /// Changes the Health of the Commander.
-        /// </summary>
-        private void ChangeCommanderMana(float newMana)
-        {
-            commanderMana.value = newMana;
-            commanderManaText.text = string.Concat((int)newMana,"/" ,commanderMana.maxValue);
-        }
-
-        /// <summary>
-        /// Modifies the slider of the commander health.
-        /// </summary>
-        /// <param name="newMaxMana"> The commanders new max mana. </param>
-        private void ModifyMana(int newMaxMana)
-        {
-            commanderMana.maxValue = newMaxMana;
-        }
+        #endregion
+        
     }
 }
