@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757ed17473a6431b86ccf8fa30c64bed, type: 3}
-  m_Name: Moose-Stun
+  m_Script: {fileID: 11500000, guid: 57af9034c8d04599beaf372620461d11, type: 3}
+  m_Name: Rackl, the Heroic Dragon-IncreaseMaxMana
   m_EditorClassIdentifier: 
-  nodeName: Small bump
+  nodeName: Acquiring Knowledge
   icon: {fileID: 0}
-  cost: 300
-  value: 2
+  cost: 5
+  value: 1.3

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AI.Enemies.Base_Enemy.Scripts;
 using GamePlay.GameManager.Scripts;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace GamePlay.Spawning.WaveManager.Scripts
@@ -22,6 +23,12 @@ namespace GamePlay.Spawning.WaveManager.Scripts
         private void OnDestroy()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged -= AdvanceToNextWave;
+        }
+
+        [Button]
+        public void Increase()
+        {
+            CurrentWaveIndex++;
         }
 
         /// <summary>

@@ -17,8 +17,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
     public class Commander : MonoBehaviour
     {
         #region SerializeFields
-
-        [SerializeField] private NavMeshAgent navMeshAgent;
+        
         [SerializeField] private Animator animator;
 
         #endregion
@@ -45,6 +44,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private const float MINDamage = 10f;
 
         [Header("Movement")] 
+        private NavMeshAgent navMeshAgent;
         private Coroutine movementCo;
         private Vector3 destination;
 
@@ -112,6 +112,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void Awake()
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
+            CommanderStats.OnCommanderSpeedChanged += speed => navMeshAgent.speed = speed;
         }
 
         private void Update()
@@ -131,7 +132,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private void SetStats(CommanderCard commanderCard)
         {
             commanderName = commanderCard.CardName;
-
             commanderStats = new CommanderStats.Scripts.CommanderStats(commanderCard.Faction, commanderCard.Class,
                 commanderCard.Health, commanderCard.Mana, commanderCard.AttackDamageModifier, commanderCard.Defense,
                 commanderCard.Speed);

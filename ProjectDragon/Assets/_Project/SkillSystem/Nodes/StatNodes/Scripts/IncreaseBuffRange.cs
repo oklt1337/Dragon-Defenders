@@ -13,7 +13,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (!(visitor is UtilityAbility ability)) 
                 return;
-            ability.EffectRange *= multiplier;
+            ability.EffectRange *= value;
             var unit = ability.Owner.GetComponent<Unit>();
             if (unit != null)
             {

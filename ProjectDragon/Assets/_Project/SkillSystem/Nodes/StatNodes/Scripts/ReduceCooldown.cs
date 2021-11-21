@@ -12,7 +12,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (visitor is Ability ability)
             {
-                ability.CoolDown *= multiplier;
+                ability.CoolDown *= value;
             }
         }
     }

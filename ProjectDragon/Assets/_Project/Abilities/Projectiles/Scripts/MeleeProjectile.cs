@@ -30,7 +30,8 @@ namespace Abilities.Projectiles.Scripts
                     {
                         var enemy = other.GetComponent<Enemy>();
                         enemy.TakeDamage(Damage);
-                        enemy.Stun(stunTime);
+                        if (stunTime > 0)
+                            enemy.Stun(stunTime);
                     }
                     break;
                 case Caster.Commander:

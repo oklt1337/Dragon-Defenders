@@ -12,7 +12,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (!(visitor is AoeAreaAbility ability))
                 return;
-            ability.AoeRange *= multiplier;
+            ability.AoeRange *= value;
         }
     }
 }

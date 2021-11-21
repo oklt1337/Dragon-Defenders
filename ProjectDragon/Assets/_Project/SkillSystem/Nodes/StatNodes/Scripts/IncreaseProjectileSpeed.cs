@@ -12,7 +12,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (!(visitor is SingleShotAbility ability)) 
                 return;
-            ability.ProjectileSpeed *= multiplier;
+            ability.ProjectileSpeed *= value;
         }
     }
 }

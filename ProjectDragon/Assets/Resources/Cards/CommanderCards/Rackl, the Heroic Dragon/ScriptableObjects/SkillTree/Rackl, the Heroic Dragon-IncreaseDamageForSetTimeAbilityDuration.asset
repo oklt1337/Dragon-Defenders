@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757ed17473a6431b86ccf8fa30c64bed, type: 3}
-  m_Name: Moose-Stun
+  m_Script: {fileID: 11500000, guid: 9f769d34007f4ef5ba16f851bfefa7e8, type: 3}
+  m_Name: Rackl, the Heroic Dragon-IncreaseDamageForSetTimeAbilityDuration
   m_EditorClassIdentifier: 
-  nodeName: Small bump
+  nodeName: Master of Support
   icon: {fileID: 0}
-  cost: 300
-  value: 2
+  cost: 10
+  value: 1.5

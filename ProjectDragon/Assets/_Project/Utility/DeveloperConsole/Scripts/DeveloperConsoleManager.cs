@@ -23,8 +23,8 @@ namespace Utility.DeveloperConsole.Scripts
 
         #region Private Fields
 
-        private float _pausedTimeScale;
-        private DeveloperConsole _developerConsole;
+        private float pausedTimeScale;
+        private DeveloperConsole developerConsole;
 
         #endregion
 
@@ -34,10 +34,10 @@ namespace Utility.DeveloperConsole.Scripts
         {
             get
             {
-                if (_developerConsole != null)
-                    return _developerConsole;
+                if (developerConsole != null)
+                    return developerConsole;
 
-                return _developerConsole = new DeveloperConsole(prefix, commands);
+                return developerConsole = new DeveloperConsole(prefix, commands);
             }
         }
 
@@ -75,12 +75,12 @@ namespace Utility.DeveloperConsole.Scripts
         {
             if (console.activeSelf)
             {
-                Time.timeScale = _pausedTimeScale;
+                Time.timeScale = pausedTimeScale;
                 console.SetActive(false);
             }
             else
             {
-                _pausedTimeScale = Time.timeScale;
+                pausedTimeScale = Time.timeScale;
                 Time.timeScale = 0;
                 console.SetActive(true);
                 inputField.ActivateInputField();

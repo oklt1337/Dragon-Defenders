@@ -10,9 +10,8 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
     {
         public override void Execute(IVisitor visitor)
         {
-            if (!(visitor is UtilityAbility ability)) 
-                return;
-            ability.Duration *= multiplier;
+            if (visitor is UtilityAbility ability) 
+                ability.Duration *= value;
         }
     }
 }

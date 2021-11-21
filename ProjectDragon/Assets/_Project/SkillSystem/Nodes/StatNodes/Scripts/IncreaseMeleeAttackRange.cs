@@ -14,14 +14,14 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (!(visitor is MeleeAttackAbility ability)) 
                 return;
-            ability.AttackRange *= multiplier;
+            ability.AttackRange *= value;
             var projectile = ability.Owner.GetComponentInChildren<MeleeProjectile>();
             var collider = projectile.GetComponent<BoxCollider>();
             var center = collider.center;
-            center = new Vector3(center.z, center.y * multiplier, center.z);
+            center = new Vector3(center.z, center.y * value, center.z);
             collider.center = center;
             var size = collider.size;
-            size = new Vector3(size.x, size.y * multiplier, size.z);
+            size = new Vector3(size.x, size.y * value, size.z);
             collider.size = size;
 
             var unit = ability.Owner.GetComponent<Unit>();

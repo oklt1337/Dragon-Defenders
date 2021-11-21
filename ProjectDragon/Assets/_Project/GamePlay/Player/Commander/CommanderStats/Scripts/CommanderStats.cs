@@ -27,6 +27,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
         private float maxHealth;
         private float maxMana;
         private float mana;
+        private float speed;
 
         public ClassAndFaction.Faction Faction { get; internal set; }
         public ClassAndFaction.Class CommanderClass { get; internal set; }
@@ -51,6 +52,9 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
             get => maxHealth;
             internal set
             {
+                if (value > maxHealth)
+                    Health += value - maxHealth;
+                
                 maxHealth = value;
                 OnCommanderMAXHealthChanged?.Invoke(maxHealth);
             }
@@ -70,19 +74,30 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
             get => maxMana;
             internal set
             {
+                if (value > maxMana)
+                    Mana += value - maxMana;
+                
                 maxMana = value;
                 OnCommanderMAXManaChanged?.Invoke(maxMana);
             } 
         }
         public float AttackDamageModifier { get; internal set; }
         public float Defense { get; internal set; }
-        public float Speed { get; internal set; }
+        public float Speed { 
+            get => speed;
+            internal set
+            {
+                speed = value;
+                OnCommanderSpeedChanged?.Invoke(speed);
+            } 
+        }
         
         public event Action OnCommanderDeath;
         public event Action<float> OnCommanderHealthChanged;
         public event Action<float> OnCommanderMAXHealthChanged;
         public event Action<float> OnCommanderManaChanged; 
         public event Action<float> OnCommanderMAXManaChanged;
+        public event Action<float> OnCommanderSpeedChanged;
 
         public void Visit(Node node)
         {

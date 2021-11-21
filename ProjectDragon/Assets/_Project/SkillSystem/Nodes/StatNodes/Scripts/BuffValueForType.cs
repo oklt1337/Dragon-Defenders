@@ -38,7 +38,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
             if (effect != null)
                 Destroy(effect);
             
-            effect.Init(increaseDamageForSetTimeAbility.Duration, multiplier);
+            effect.Init(increaseDamageForSetTimeAbility.Duration, value);
         }
     }
 }

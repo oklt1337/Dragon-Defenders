@@ -13,7 +13,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (!(visitor is Ability ability)) 
                 return;
-            ability.CoolDown *= UnityEngine.Random.Range(multiplier, range);
+            ability.CoolDown *= UnityEngine.Random.Range(value, range);
         }
     }
 }

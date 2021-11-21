@@ -1,4 +1,6 @@
+using GamePlay.GameManager.Scripts;
 using UnityEngine;
+using Utility.SceneManager.Scripts;
 
 namespace Utility.DeveloperConsole.Scripts.Commands.PlayerCommands
 {
@@ -11,10 +13,12 @@ namespace Utility.DeveloperConsole.Scripts.Commands.PlayerCommands
             if (args.Length != 1)
                 return false;
 
-            if (!float.TryParse(args[0], out float value))
+            if (!float.TryParse(args[0], out var value))
                 return false;
 
-            //PlayerClass.SetSpeed(value);
+            if (SceneManager.Scripts.SceneManager.CurrentScene != Scene.GameScene) 
+                return false;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.Speed = value;
             return true;
         }
     }

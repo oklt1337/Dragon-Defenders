@@ -25,11 +25,14 @@ namespace GamePlay.Player.PlayerModel.Scripts
     {
         #region SerializeFields
 
-        [Header("State")] [SerializeField] private State currentState;
+        [Header("State")] 
+        [SerializeField] private State currentState;
 
-        [Header("Commander")] [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
+        [Header("Commander")] 
+        [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
 
-        [Header("Handler")] [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
+        [Header("Handler")]
+        [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
         [SerializeField] private SoundHandler.Scripts.SoundHandler soundHandler;
         [SerializeField] private InputHandler.Scripts.InputHandler inputHandler;
 

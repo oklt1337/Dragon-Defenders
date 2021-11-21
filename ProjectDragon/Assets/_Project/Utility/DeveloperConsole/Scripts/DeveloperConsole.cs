@@ -9,8 +9,8 @@ namespace Utility.DeveloperConsole.Scripts
     {
         #region Private Fields
 
-        private readonly string _prefix;
-        private readonly IEnumerable<IConsoleCommand> _commands;
+        private readonly string prefix;
+        private readonly IEnumerable<IConsoleCommand> commands;
 
         #endregion
 
@@ -18,8 +18,8 @@ namespace Utility.DeveloperConsole.Scripts
 
         public DeveloperConsole(string prefix, IEnumerable<IConsoleCommand> commands)
         {
-            _prefix = prefix;
-            _commands = commands;
+            this.prefix = prefix;
+            this.commands = commands;
         }
         
         #endregion
@@ -33,7 +33,7 @@ namespace Utility.DeveloperConsole.Scripts
         /// <param name="args">args</param>
         private void ProcessCommand(string commandInput, string[] args)
         {
-            foreach (IConsoleCommand command in _commands)
+            foreach (IConsoleCommand command in commands)
             {
                 if (!commandInput.Equals(command.CommandLine, StringComparison.OrdinalIgnoreCase))
                 {
@@ -57,10 +57,10 @@ namespace Utility.DeveloperConsole.Scripts
         /// <param name="inputValue">string</param>
         public void ProcessCommand(string inputValue)
         {
-            if (!inputValue.StartsWith(_prefix))
+            if (!inputValue.StartsWith(prefix))
                 return;
 
-            inputValue = inputValue.Remove(0, _prefix.Length);
+            inputValue = inputValue.Remove(0, prefix.Length);
 
             string[] inputSplit = inputValue.Split(' ');
             string commandInput = inputSplit[0];

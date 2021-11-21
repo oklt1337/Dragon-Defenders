@@ -17,7 +17,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (state == GameState.Build)
             {
-                GameManager.Instance.PlayerModel.ModifyMoney(-(int) multiplier);
+                GameManager.Instance.PlayerModel.ModifyMoney(-(int) value);
             }
         }
     }

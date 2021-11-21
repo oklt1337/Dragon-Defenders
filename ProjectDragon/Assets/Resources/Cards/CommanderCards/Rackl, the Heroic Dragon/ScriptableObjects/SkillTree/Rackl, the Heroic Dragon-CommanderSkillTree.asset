@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
   m_Name: Rackl, the Heroic Dragon-CommanderSkillTree
   m_EditorClassIdentifier: 
+  nodeObjs:
+  - {fileID: 11400000, guid: 12cb04ad7536a1b4296d82afd27af520, type: 2}
+  - {fileID: 11400000, guid: c90e65d6d8f61174090b28b806b31a42, type: 2}
+  - {fileID: 11400000, guid: cd65da27cf16e52428027a2bc1cb971c, type: 2}
+  - {fileID: 11400000, guid: 26165c001f68fd14eb4baebdd8005dec, type: 2}
+  - {fileID: 11400000, guid: 65a7ada03f5ea87469907ae65d3a9b1d, type: 2}

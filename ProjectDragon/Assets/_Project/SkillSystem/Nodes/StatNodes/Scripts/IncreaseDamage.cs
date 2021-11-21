@@ -12,7 +12,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (visitor is DamageAbility ability)
             {
-                ability.Damage *= multiplier;
+                ability.Damage *= value;
             }
         }
     }

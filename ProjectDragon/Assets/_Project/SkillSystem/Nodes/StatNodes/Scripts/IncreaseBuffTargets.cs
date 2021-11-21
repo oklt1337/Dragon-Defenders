@@ -12,7 +12,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (visitor is DecreaseCooldownOfDamageAbility ability)
             {
-                ability.MaxTargets = multiplier;
+                ability.MaxTargets = value;
             }
         }
     }

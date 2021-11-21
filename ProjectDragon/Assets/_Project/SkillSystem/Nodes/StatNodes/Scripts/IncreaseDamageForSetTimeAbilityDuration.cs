@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace SkillSystem.Nodes.StatNodes.Scripts
 {
-    [CreateAssetMenu(menuName = "AbilitySystem/SkillTree/Nodes/StatNodes/IncreaseBuffValue", fileName = "IncreaseBuffValue")]
-    public class IncreaseBuffValue : StatNode
+    [CreateAssetMenu(menuName = "AbilitySystem/SkillTree/Nodes/StatNodes/IncreaseDamageForSetTimeAbilityDuration", fileName = "IncreaseDamageForSetTimeAbilityDuration")]
+    public class IncreaseDamageForSetTimeAbilityDuration : StatNode
     {
         public override void Execute(IVisitor visitor)
         {
             if (visitor is IncreaseDamageForSetTimeAbility ability)
             {
-                ability.IncreaseAttackValueInPercentage *= value;
+                ability.Duration *= value;
             }
         }
     }

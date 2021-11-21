@@ -13,7 +13,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (!(visitor is SingleShotAbility ability)) 
                 return;
-            ability.AttackRange *= multiplier;
+            ability.AttackRange *= value;
             var unit = ability.Owner.GetComponent<Unit>();
             if (unit != null)
             {

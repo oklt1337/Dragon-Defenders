@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757ed17473a6431b86ccf8fa30c64bed, type: 3}
-  m_Name: Moose-Stun
+  m_Script: {fileID: 11500000, guid: b5bba88f4c6a403ab2173c20044d408f, type: 3}
+  m_Name: Rackl, the Heroic Dragon-IncreaseDamageSingleShotSetRange
   m_EditorClassIdentifier: 
-  nodeName: Small bump
+  nodeName: True Justice
   icon: {fileID: 0}
-  cost: 300
+  cost: 10
   value: 2
