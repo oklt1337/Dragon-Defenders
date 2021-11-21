@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 88390380783621394}
   - component: {fileID: 4971263755016524788}
   m_Layer: 0
-  m_Name: 1
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,7 +1037,7 @@ GameObject:
   - component: {fileID: 3353630481039376445}
   - component: {fileID: 2904087259330092244}
   m_Layer: 0
-  m_Name: 4
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1170,7 +1170,7 @@ GameObject:
   - component: {fileID: 6820186400137648944}
   - component: {fileID: 8908321505178566361}
   m_Layer: 0
-  m_Name: 6
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1515,7 +1515,7 @@ GameObject:
   - component: {fileID: 3703038980439744146}
   - component: {fileID: 8442530517442613247}
   m_Layer: 0
-  m_Name: 7
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1727,7 +1727,7 @@ GameObject:
   - component: {fileID: 5998348068960468052}
   - component: {fileID: 8997006716058431205}
   m_Layer: 0
-  m_Name: 9
+  m_Name: 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2018,7 +2018,7 @@ GameObject:
   - component: {fileID: 2600490202472508634}
   - component: {fileID: 4513975817866886553}
   m_Layer: 0
-  m_Name: 8
+  m_Name: 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2309,7 +2309,7 @@ GameObject:
   - component: {fileID: 7580660356963040668}
   - component: {fileID: 7580660356963040669}
   m_Layer: 0
-  m_Name: 3
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2523,7 +2523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7580660357326846197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2610,7 +2610,7 @@ MonoBehaviour:
   - {fileID: 2384133747651299685}
   - {fileID: 2638300024286824076}
   - {fileID: 6733198305346162372}
-  missingSprite: {fileID: 21300000, guid: e02b13b719e8ce741a9a2dbf4c31e1ad, type: 3}
+  missingSprite: {fileID: 21300000, guid: f00feafcf0675cd47a48f83ae42b06d4, type: 3}
   commanderPanel: {fileID: 2448190588806653165}
   commanderSkillImages:
   - {fileID: 88390380783621394}
@@ -2721,7 +2721,7 @@ GameObject:
   - component: {fileID: 7580660357795052073}
   - component: {fileID: 7580660357795052074}
   m_Layer: 0
-  m_Name: 5
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2854,7 +2854,7 @@ GameObject:
   - component: {fileID: 6813742417583029769}
   - component: {fileID: 1114335833239716172}
   m_Layer: 0
-  m_Name: 2
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
