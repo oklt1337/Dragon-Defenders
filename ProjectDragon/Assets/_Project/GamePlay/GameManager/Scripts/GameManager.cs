@@ -31,7 +31,7 @@ namespace GamePlay.GameManager.Scripts
         public static GameManager Instance;
 
         #region SerializedFields
-        
+
         [Header("Cameras")] 
         [SerializeField] private Camera buildCamera;
         [SerializeField] private Camera commanderCamera;
@@ -154,7 +154,7 @@ namespace GamePlay.GameManager.Scripts
             ChangeState(GameState.End);
             //TODO: Show score and so on.
         }
-        
+
         private void ChangeCamera(GameState state)
         {
             switch (state)

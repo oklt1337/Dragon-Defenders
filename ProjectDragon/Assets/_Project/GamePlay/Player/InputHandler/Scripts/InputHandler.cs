@@ -31,9 +31,6 @@ namespace GamePlay.Player.InputHandler.Scripts
         #region Unity Methods
         private void Update()
         {
-            if (playerModel.CurrentState == State.Blocked)
-                return;
-            
             if (Input.touchSupported)
             {
                 switch (Input.touchCount)
@@ -67,7 +64,7 @@ namespace GamePlay.Player.InputHandler.Scripts
         {
             Vector3 screenPosMobile = Input.GetTouch(0).position;
             screenPosMobile.z = CommanderCam.nearClipPlane;
-            Ray rayMobile = CommanderCam.ScreenPointToRay(screenPosMobile);
+            var rayMobile = CommanderCam.ScreenPointToRay(screenPosMobile);
             return rayMobile;
         }
 

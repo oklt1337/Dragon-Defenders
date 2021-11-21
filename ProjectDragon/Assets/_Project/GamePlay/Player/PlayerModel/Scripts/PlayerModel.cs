@@ -25,14 +25,11 @@ namespace GamePlay.Player.PlayerModel.Scripts
     {
         #region SerializeFields
 
-        [Header("State")] 
-        [SerializeField] private State currentState;
+        [Header("State")] [SerializeField] private State currentState;
 
-        [Header("Commander")]
-        [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
+        [Header("Commander")] [SerializeField] private Commander.BaseCommanderClass.Scripts.Commander commander;
 
-        [Header("Handler")] 
-        [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
+        [Header("Handler")] [SerializeField] private AnimationHandler.Scripts.AnimationHandler animationHandler;
         [SerializeField] private SoundHandler.Scripts.SoundHandler soundHandler;
         [SerializeField] private InputHandler.Scripts.InputHandler inputHandler;
 
@@ -82,6 +79,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         private void Awake()
         {
             inputHandler.OnTouch += ProcessInput;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ChangeRay;
         }
 
         private void Start()
@@ -95,11 +93,17 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         #region Private Methods
 
+        private void ChangeRay(GameState state)
+        {
+            gameObject.layer = state == GameState.Build ? 0 : 2;
+        }
+
         private void ProcessInput(Ray ray)
         {
             if (!Physics.Raycast(ray, out var hit))
                 return;
 
+            Debug.Log(hit.collider.tag, hit.collider.gameObject);
             if (hit.collider.CompareTag("Enemy") &&
                 GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Wave)
             {
@@ -116,12 +120,14 @@ namespace GamePlay.Player.PlayerModel.Scripts
                 var unit = hit.collider.gameObject.GetComponent<Unit>();
                 if (unit != null)
                 {
+                    Debug.Log("Unit Skill");
                     OnTryUpgradeSkill?.Invoke(unit.SkillTree);
                 }
             }
             else if (hit.collider.CompareTag("Player") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
+                Debug.Log("Player Skill");
                 OnTryUpgradeSkill?.Invoke(commander.SkillTree);
             }
         }
@@ -129,7 +135,8 @@ namespace GamePlay.Player.PlayerModel.Scripts
         private void Initialize(Deck deck)
         {
             var myTransform = transform;
-            var commanderObj = PhotonNetwork.Instantiate(deck.CommanderCard.PrefabPath, myTransform.position, Quaternion.identity);
+            var commanderObj = PhotonNetwork.Instantiate(deck.CommanderCard.PrefabPath, myTransform.position,
+                Quaternion.identity);
             commander = commanderObj.GetComponent<Commander.BaseCommanderClass.Scripts.Commander>();
             commander.transform.parent = myTransform;
             commander.NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();

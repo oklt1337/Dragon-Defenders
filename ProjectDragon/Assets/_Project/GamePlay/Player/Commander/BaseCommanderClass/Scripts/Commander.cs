@@ -25,22 +25,27 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         #region Private Fields
 
-        [Header("PlayerModel")] private PlayerModel.Scripts.PlayerModel playerModel;
+        [Header("PlayerModel")] 
+        private PlayerModel.Scripts.PlayerModel playerModel;
 
-        [Header("Basic")] private string commanderName;
+        [Header("Basic")] 
+        private string commanderName;
 
-        [Header("Stats")] private CommanderStats.Scripts.CommanderStats commanderStats;
+        [Header("Stats")]
+        private CommanderStats.Scripts.CommanderStats commanderStats;
         private SkillTree skillTree;
         private List<Ability> abilities = new List<Ability>();
         private readonly Client client = new Client();
 
-        [Header("Runtime")] private bool dyingBreath;
+        [Header("Runtime")]
+        private bool dyingBreath;
         private byte rank;
         private byte level;
         private float experience;
         private const float MINDamage = 10f;
 
-        [Header("Movement")] private Coroutine movementCo;
+        [Header("Movement")] 
+        private Coroutine movementCo;
         private Vector3 destination;
 
         #endregion
@@ -214,6 +219,9 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         public void Move(Vector3 moveTo)
         {
+            if (playerModel.CurrentState == State.Blocked)
+                return;
+            
             if (navMeshAgent.SetDestination(moveTo))
             {
                 playerModel.ChangeState(State.Move);
