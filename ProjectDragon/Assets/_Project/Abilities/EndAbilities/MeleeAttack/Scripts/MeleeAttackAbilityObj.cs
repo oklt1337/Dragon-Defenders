@@ -8,9 +8,9 @@ namespace Abilities.EndAbilities.MeleeAttack.Scripts
     [CreateAssetMenu(menuName = "AbilitySystem/Abilities/DamageAbilities/MeleeAttack", fileName = "MeleeAttack")]
     public class MeleeAttackAbilityObj : DamageAbilityObj
     {
-        public static void Cast(Transform spawnPoint, Caster caster, float abilityDamage)
+        public static void Cast(Transform spawnPoint, Caster caster, float abilityDamage, float abilityStun)
         {
-            spawnPoint.GetComponent<MeleeProjectile>().Init(caster, abilityDamage);
+            spawnPoint.GetComponent<MeleeProjectile>().Init(caster, abilityDamage, abilityStun);
         }
 
         public override T CreateInstance<T>()
@@ -21,8 +21,10 @@ namespace Abilities.EndAbilities.MeleeAttack.Scripts
 
     public class MeleeAttackAbility : DamageAbility
     {
+        public float StunTime { get; set; }
         public MeleeAttackAbility(DamageAbilityObj abilityObj) : base(abilityObj)
         {
+            StunTime = 0;
         }
         
         public override void Cast(Transform spawnPoint, Transform target, Caster caster)
@@ -32,7 +34,7 @@ namespace Abilities.EndAbilities.MeleeAttack.Scripts
             StartCooldown = true;
             Casted?.Invoke(target);
             
-            MeleeAttackAbilityObj.Cast(spawnPoint, caster, Damage);
+            MeleeAttackAbilityObj.Cast(spawnPoint, caster, Damage, StunTime);
         }
     }
 }

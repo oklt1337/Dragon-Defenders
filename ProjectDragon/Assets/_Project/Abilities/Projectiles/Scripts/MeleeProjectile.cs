@@ -9,10 +9,12 @@ namespace Abilities.Projectiles.Scripts
 {
     public class MeleeProjectile : DamageProjectile
     {
-        public void Init(Caster caster, float damage)
+        private float stunTime;
+        public void Init(Caster caster, float damage, float stun)
         {
             Damage = damage;
             Caster = caster;
+            stunTime = stun;
         }
 
         protected override void Update()
@@ -28,6 +30,7 @@ namespace Abilities.Projectiles.Scripts
                     {
                         var enemy = other.GetComponent<Enemy>();
                         enemy.TakeDamage(Damage);
+                        enemy.Stun(stunTime);
                     }
                     break;
                 case Caster.Commander:

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 757ed17473a6431b86ccf8fa30c64bed, type: 3}
-  m_Name: Moose-KnockBack
+  m_Name: Moose-Stun
   m_EditorClassIdentifier: 
   nodeName: Small bump
   icon: {fileID: 0}
   cost: 300
   value: 1111
+  stunTime: 2
