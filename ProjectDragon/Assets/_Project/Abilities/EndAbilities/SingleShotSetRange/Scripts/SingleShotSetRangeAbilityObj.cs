@@ -15,7 +15,7 @@ namespace Abilities.EndAbilities.SingleShotSetRange.Scripts
         {
             //Spawn projectile
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<MovingSetRangeProjectile>();
-            projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed, abilityProjectileSpeed);
+            projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed, abilityTravelRange);
             FixRotation(target, projectile.transform);
         }
 
