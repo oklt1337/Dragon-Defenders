@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Angel Trumpeters-ReduceCoolDownRandomWith2Values
   m_EditorClassIdentifier: 
   nodeName: Versicolor
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a2af0f3b72d83431ba35eaa1cc13556d, type: 3}
   cost: 400
-  multiplier: 0.6
+  value: 0
   range: 0.8

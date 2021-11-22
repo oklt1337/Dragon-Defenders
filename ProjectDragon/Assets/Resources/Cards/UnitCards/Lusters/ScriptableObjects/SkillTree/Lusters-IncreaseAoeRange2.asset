@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Lusters-IncreaseAoeRange2
   m_EditorClassIdentifier: 
   nodeName: Cap Detonator
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9a99d085bb9cc4e72972e075606cf4b9, type: 3}
   cost: 400
-  multiplier: 1.666
+  value: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Troubling truculent trolls-TakeMoneyAfterRound
   m_EditorClassIdentifier: 
   nodeName: Snatcher
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bf2f25e354f8d41eea4fd4355f065041, type: 3}
   cost: 250
-  multiplier: 10
+  value: 0

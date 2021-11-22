@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Angel trumpeters-IncreaseBuffDuration
   m_EditorClassIdentifier: 
   nodeName: Suaveolens
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea, type: 3}
   cost: 400
-  multiplier: 1.5
+  value: 0

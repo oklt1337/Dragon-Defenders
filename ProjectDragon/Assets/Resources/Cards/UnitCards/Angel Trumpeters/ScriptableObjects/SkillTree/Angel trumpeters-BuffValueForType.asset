@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Angel trumpeters-BuffValueForType
   m_EditorClassIdentifier: 
   nodeName: Arborea
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1d24290f967d845358a5920bb8b3d6c0, type: 3}
   cost: 400
-  multiplier: 1.8
+  value: 0
   class: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Valkyrie-ChangeDamageType
   m_EditorClassIdentifier: 
   nodeName: Pierce
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d4a705875607743d7896c2beadcfb775, type: 3}
   cost: 500
   damageType: 0

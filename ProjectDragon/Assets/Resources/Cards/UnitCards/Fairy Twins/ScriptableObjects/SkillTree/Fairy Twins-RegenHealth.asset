@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fairy Twins-RegenHealth
   m_EditorClassIdentifier: 
   nodeName: Heal ray
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4a08933ae0c5a418391bfd3337c7e066, type: 3}
   cost: 800
   value: 0.5
   tick: 1

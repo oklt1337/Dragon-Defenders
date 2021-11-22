@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Troubling truculent trolls-DecreaseDamageEveryXAttack
   m_EditorClassIdentifier: 
   nodeName: "That\u2019s my strong arm"
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9385f137644d94b41a94f1d3e135b018, type: 3}
   cost: 500
   value: 0.5
   xTime: 2

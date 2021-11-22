@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Lusters-IncreaseAoeRange1
   m_EditorClassIdentifier: 
   nodeName: Detonator
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 00d24408568984f129b7023cb677c0cd, type: 3}
   cost: 200
-  multiplier: 1.5
+  value: 0
