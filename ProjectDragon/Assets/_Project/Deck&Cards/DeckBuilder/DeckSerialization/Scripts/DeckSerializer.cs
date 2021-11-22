@@ -9,23 +9,19 @@ namespace Deck_Cards.DeckBuilder.DeckSerialization.Scripts
 {
     public static class DeckSerializer
     {
-        private const string ProjectName = "Project-Dragon";
         private static readonly string ID = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile
             .ProfileModel.PlayerId;
 
         public static void SaveDeck(Deck deck)
         {
-            var deckFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                ProjectName, ID);
+            var deckFolderPath = Path.Combine(Application.persistentDataPath, ID);
             CreateDeckFolderAndUserFolder(deckFolderPath);
             File.WriteAllText(Path.Combine(deckFolderPath, deck.DeckName + ".json"), JsonUtility.ToJson(deck, true));
         }
 
         public static void DeleteDeckSaveFile(Deck deck)
         {
-            var deckFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                ProjectName, ID);
-
+            var deckFolderPath = Path.Combine(Application.persistentDataPath, ID);
             var path = Path.Combine(deckFolderPath, deck.DeckName + ".json");
             File.Delete(path);
         }

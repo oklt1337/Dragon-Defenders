@@ -10,13 +10,12 @@ namespace Deck_Cards.DeckBuilder.DeckSerialization.Scripts
 {
     public static class DeckDeserializer
     {
-        private const string ProjectName = "Project-Dragon";
         private static readonly string ID = NetworkManager.Instance.PlayFabManager.PlayFabProfileHandler.PlayerProfile
             .ProfileModel.PlayerId;
         
         public static List<Deck> LoadDecks()
         {
-            var deckFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ProjectName, ID);
+            var deckFolder = Path.Combine(Application.persistentDataPath, ID);
             if (!Directory.Exists(deckFolder) || Directory.GetFiles(deckFolder).Length == 0)
                 return new List<Deck>();
 
