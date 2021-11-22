@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce24d03c0e60cf941ad3d7a4e943dfa3, type: 3}
-  m_Name: SetPlayerSpeedCommand
+  m_Script: {fileID: 11500000, guid: 504ae0033e2cfd94f856072988975b86, type: 3}
+  m_Name: GetCommanderData
   m_EditorClassIdentifier: 
-  commandLine: playerspeed
+  commandLine: getcommanderdata

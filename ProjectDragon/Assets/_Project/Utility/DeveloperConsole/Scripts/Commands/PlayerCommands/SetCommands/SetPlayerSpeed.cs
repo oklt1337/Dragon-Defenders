@@ -2,10 +2,10 @@ using GamePlay.GameManager.Scripts;
 using UnityEngine;
 using Utility.SceneManager.Scripts;
 
-namespace Utility.DeveloperConsole.Scripts.Commands.PlayerCommands
+namespace Utility.DeveloperConsole.Scripts.Commands.PlayerCommands.SetCommands
 {
     [CreateAssetMenu(fileName = "New Set Player Speed Command",
-        menuName = "Utilities/DeveloperConsole/Commands/Player/Set Player Speed Command")]
+        menuName = "Utilities/DeveloperConsole/Commands/Player/Set Commands/Set Player Speed Command")]
     public class SetPlayerSpeed : ConsoleCommand
     {
         public override bool Process(string[] args)

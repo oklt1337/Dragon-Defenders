@@ -33,7 +33,7 @@ namespace Utility.DeveloperConsole.Scripts
         /// <param name="args">args</param>
         private void ProcessCommand(string commandInput, string[] args)
         {
-            foreach (IConsoleCommand command in commands)
+            foreach (var command in commands)
             {
                 if (!commandInput.Equals(command.CommandLine, StringComparison.OrdinalIgnoreCase))
                 {
@@ -62,9 +62,9 @@ namespace Utility.DeveloperConsole.Scripts
 
             inputValue = inputValue.Remove(0, prefix.Length);
 
-            string[] inputSplit = inputValue.Split(' ');
-            string commandInput = inputSplit[0];
-            string[] args = inputSplit.Skip(1).ToArray();
+            var inputSplit = inputValue.Split(' ');
+            var commandInput = inputSplit[0];
+            var args = inputSplit.Skip(1).ToArray();
             
             ProcessCommand(commandInput, args);
         }

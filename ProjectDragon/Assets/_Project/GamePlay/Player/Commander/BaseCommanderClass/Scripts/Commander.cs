@@ -40,7 +40,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         [Header("Runtime")]
         private bool dyingBreath;
-        private byte rank;
         private byte level;
         private float experience;
         private const float MINDamage = 10f;
@@ -74,12 +73,6 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         {
             get => commanderStats;
             private set => commanderStats = value;
-        }
-
-        public byte Rank
-        {
-            get => rank;
-            private set => rank = value;
         }
 
         public byte Level

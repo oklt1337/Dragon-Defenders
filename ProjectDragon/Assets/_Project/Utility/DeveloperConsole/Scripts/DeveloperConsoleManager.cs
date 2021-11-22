@@ -1,13 +1,16 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 using Utility.DeveloperConsole.Scripts.Commands;
 
 namespace Utility.DeveloperConsole.Scripts
 {
     public class DeveloperConsoleManager : MonoBehaviour
     {
-        private static DeveloperConsoleManager Instance;
+        public static DeveloperConsoleManager Instance;
         
         #region SerialzeFields
 
@@ -18,6 +21,7 @@ namespace Utility.DeveloperConsole.Scripts
         [SerializeField] private GameObject console;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private TextMeshProUGUI debugLog;
+        [SerializeField] private ScrollRect debugLogScroll;
 
         #endregion
 
@@ -100,12 +104,28 @@ namespace Utility.DeveloperConsole.Scripts
             if (string.IsNullOrEmpty(inputText))
                 return;
 
-            string trimmedInput = inputText.TrimStart();
+
+            if (debugLog.text.Length > 3500)
+            {
+                ClearConsole();
+                debugLog.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -4429.866f);
+            }
+            var trimmedInput = inputText.TrimStart();
             debugLog.text += string.IsNullOrEmpty(debugLog.text) ? trimmedInput : $"\n{trimmedInput}";
-            
+
             DeveloperConsole.ProcessCommand(trimmedInput);
 
             inputField.text = string.Empty;
+        }
+
+        public void Print(string inputText)
+        {
+            debugLog.text += $"\n{inputText}";
+        }
+
+        public void ClearConsole()
+        {
+            debugLog.text = string.Empty;
         }
 
         #endregion

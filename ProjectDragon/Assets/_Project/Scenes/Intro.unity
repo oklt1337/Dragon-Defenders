@@ -1100,6 +1100,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 384267478}
     m_Modifications:
+    - target: {fileID: 4699626745671311791, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559309774972034630, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2900
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376979555438904754, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 320a19abb39aa9e4a94747a7c0c938d4,
+        type: 2}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0fc4e70fc8297fa4f8814dfea6bbf5d0,
+        type: 2}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76e57a18f150f964e89a08849d16a2f6,
+        type: 2}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 734b85d404f7c6d47b42281be423825f,
+        type: 2}
     - target: {fileID: 8298953313305346569, guid: 1a25e152df3fd934791867183504f64a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1159,6 +1203,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeveloperConsole
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298953314287478542, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 8298953314287478542, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298953314287478576, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298953314287478579, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a25e152df3fd934791867183504f64a, type: 3}
