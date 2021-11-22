@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acfb4217990ab54dbec755717246eff, type: 3}
   m_Name: Niszuh, King of the Giants-SkillTree
   m_EditorClassIdentifier: 
+  nodeObjs:
+  - {fileID: 11400000, guid: 9877625c18ce56643af1bcc8828d5db3, type: 2}
+  - {fileID: 11400000, guid: 45821d3034d9af446800b6aac1535577, type: 2}
+  - {fileID: 11400000, guid: ec816798970209648a4280b3ac76046c, type: 2}
+  - {fileID: 11400000, guid: fbc30e5f4025e64478941b0846554061, type: 2}
+  - {fileID: 11400000, guid: e331b634bb33d8b4bad78ac536ab33a6, type: 2}
