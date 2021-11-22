@@ -1,3 +1,5 @@
+using System;
+using Photon.Pun;
 using TMPro;
 using UI.MainMenu.Manager.Scripts;
 using UI.Managers.Scripts;
@@ -18,8 +20,16 @@ namespace UI.MainMenu.Home_Screen.Scripts
         [SerializeField] private Button eggHatchingButton;
         [SerializeField] private Button notificationButton;
 
+        [SerializeField] private TextMeshProUGUI nickName;
         [SerializeField] private TextMeshProUGUI currency;
-        
+
+        #region Unity Methods
+
+        private void Start()
+        {
+            nickName.text = string.Concat("Nickname:\n",PhotonNetwork.LocalPlayer.NickName);
+        }
+
         private void OnEnable()
         {
             CanvasManager.Instance.Subscribe(this);
@@ -29,7 +39,10 @@ namespace UI.MainMenu.Home_Screen.Scripts
         {
             CanvasManager.Instance.Unsubscribe(this);
         }
-        
+
+        #endregion
+
+
         public void ChangeInteractableStatus(bool status)
         {
             lobbyButton.interactable = status;
@@ -41,6 +54,8 @@ namespace UI.MainMenu.Home_Screen.Scripts
             eggHatchingButton.interactable = status;
             notificationButton.interactable = status;
         }
+
+        #region Button Methods
 
         public void OnClickLobby()
         {
@@ -60,5 +75,7 @@ namespace UI.MainMenu.Home_Screen.Scripts
             MainMenuCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
+
+        #endregion
     }
 }

@@ -28,4 +28,4 @@ MonoBehaviour:
   mana: 250
   attackDamageModifier: 100
   defense: 100
-  speed: 100
+  speed: 4
