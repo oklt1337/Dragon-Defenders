@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Super Buff
   icon: {fileID: 21300000, guid: bb94a5a193dc1427fadc70a9be71b3ef, type: 3}
   cost: 800
-  value: 0
+  value: 0.5
