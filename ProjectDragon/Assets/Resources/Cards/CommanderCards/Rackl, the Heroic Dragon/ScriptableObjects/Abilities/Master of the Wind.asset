@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24713dfea0d842549917a4b4e17d399f, type: 3}
-  m_Name: Rackl, the Heroic Dragon-DashInLookDirection
+  m_Name: Master of the Wind
   m_EditorClassIdentifier: 
   abilityType: 1
+  abilityName: Master of the Wind
   coolDown: 5
   icon: {fileID: 21300000, guid: efb02282f82714606817167f8bc958eb, type: 3}
   effectRange: 3

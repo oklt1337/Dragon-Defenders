@@ -16,9 +16,11 @@ namespace Abilities.Ability.Scripts
     public abstract class AbilityObj : ScriptableObject
     {
         [SerializeField] private AbilityType abilityType;
+        [SerializeField] private string abilityName;
         [SerializeField] private float coolDown;
         [SerializeField] private Sprite icon;
         public AbilityType AbilityType => abilityType;
+        public string AbilityName => abilityName;
         public float CoolDown => coolDown;
         public Sprite Icon => icon;
 
@@ -28,6 +30,7 @@ namespace Abilities.Ability.Scripts
     public abstract class Ability : IVisitor
     {
         public AbilityObj AbilityAbilityObj { get; }
+        public string AbilityName { get; }
         public float CoolDown { get; set; }
         public float TimeLeft { get; set; }
         public Transform Owner { get; set; }
@@ -40,6 +43,7 @@ namespace Abilities.Ability.Scripts
         protected Ability(AbilityObj abilityAbilityObj)
         {
             AbilityAbilityObj = abilityAbilityObj;
+            AbilityName = abilityAbilityObj.AbilityName;
             CoolDown = abilityAbilityObj.CoolDown;
             Icon = abilityAbilityObj.Icon;
         }
