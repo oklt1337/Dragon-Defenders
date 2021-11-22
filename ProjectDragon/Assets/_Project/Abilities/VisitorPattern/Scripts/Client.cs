@@ -16,6 +16,5 @@ namespace Abilities.VisitorPattern.Scripts
     {
         public static GlobalClients Instance => _instance ?? new GlobalClients();
         private static GlobalClients _instance;
-        
     }
 }

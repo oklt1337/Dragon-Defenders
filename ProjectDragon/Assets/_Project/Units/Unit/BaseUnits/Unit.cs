@@ -76,6 +76,8 @@ namespace Units.Unit.BaseUnits
 
         public Ability Ability { get; private set; }
 
+        public UnitCard Card => card;
+
         #endregion
 
         #region Unity Methods

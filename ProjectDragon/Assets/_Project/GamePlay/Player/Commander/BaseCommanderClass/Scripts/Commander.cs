@@ -62,6 +62,8 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             get => commanderName;
             private set => commanderName = value;
         }
+        
+        public CommanderCard Card { get; private set; }
 
         public CommanderStats.Scripts.CommanderStats CommanderStats
         {
@@ -206,6 +208,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         internal void InitializeCommander(CommanderCard commanderCard)
         {
+            Card = commanderCard;
             SetStats(commanderCard);
         }
 

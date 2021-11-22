@@ -6,6 +6,7 @@ using SkillSystem.SkillTree.Scripts;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Unit = Units.Unit.BaseUnits.Unit;
 
 namespace GamePlay.Player.PlayerModel.Scripts
@@ -71,7 +72,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
 
         #region Events
 
-        public event Action<SkillTree> OnTryUpgradeSkill;
+        public event Action<SkillTree, Sprite> OnTryUpgradeSkill;
         public event Action<State> OnPlayerStateChanged;
         public event Action<float> OnPlayerMoneyChanged;
 
@@ -123,13 +124,13 @@ namespace GamePlay.Player.PlayerModel.Scripts
                 var unit = hit.collider.gameObject.GetComponent<Unit>();
                 if (unit != null)
                 {
-                    OnTryUpgradeSkill?.Invoke(unit.SkillTree);
+                    OnTryUpgradeSkill?.Invoke(unit.SkillTree, unit.Card.Icon);
                 }
             }
             else if (hit.collider.CompareTag("Player") &&
                      GameManager.Scripts.GameManager.Instance.CurrentGameState == GameState.Build)
             {
-                OnTryUpgradeSkill?.Invoke(commander.SkillTree);
+                OnTryUpgradeSkill?.Invoke(commander.SkillTree, commander.Card.Icon);
             }
         }
 
