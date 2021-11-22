@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Timing Control
   icon: {fileID: 21300000, guid: ee59484629a8541c09bf5f07a129d247, type: 3}
   cost: 400
-  value: 0
+  value: 0.6
