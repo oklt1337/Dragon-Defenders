@@ -4,7 +4,6 @@ using SkillSystem.Nodes.BaseNodes.Scripts;
 using SkillSystem.SkillTree.Scripts;
 using UI.Managers.Scripts;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.In_Game.Building.Scripts
@@ -35,11 +34,6 @@ namespace UI.In_Game.Building.Scripts
 
         #region Unity Methods
 
-        private void Update()
-        {
-            //CheckClosing();
-        }
-
         private void OnEnable()
         {
             CanvasManager.Instance.Subscribe(this);
@@ -68,6 +62,9 @@ namespace UI.In_Game.Building.Scripts
         /// <param name="newSkillTree">SkillTree</param>
         public void UpdateSkillTree(SkillTree newSkillTree)
         {
+            // Closing the settings to make sure both aren't open at the same time.
+            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.InGameSettingsScreen.OnCloseSettingsClick();
+            
             // Turning them of for fail save reasons.
             commanderPanel.SetActive(false);
             unitPanel.SetActive(false);
@@ -116,6 +113,17 @@ namespace UI.In_Game.Building.Scripts
             skillTree.SetNodeActive(index);
             UpdateImages();
         }
+        
+        /// <summary>
+        /// Checks if the player wants to close the panel.
+        /// </summary>
+        public void Close()
+        {
+            commanderPanel.SetActive(false);
+            unitPanel.SetActive(false);
+            gameObject.SetActive(false);
+            skillTree = null;
+        }
 
         #endregion
 
@@ -140,19 +148,6 @@ namespace UI.In_Game.Building.Scripts
                 else
                     activeSkillImages[i].color = Color.gray;
             }
-        }
-
-        /// <summary>
-        /// Checks if the player wants to close the panel.
-        /// </summary>
-        private void CheckClosing()
-        {
-            if (EventSystem.current.IsPointerOverGameObject(0))
-                return;
-
-            commanderPanel.SetActive(false);
-            unitPanel.SetActive(false);
-            gameObject.SetActive(false);
         }
 
         #endregion

@@ -38,6 +38,8 @@ namespace UI.In_Game.Base_UI.Scripts
 
         public void OnClickSettings()
         {
+            // Make sure the Upgrade Panel is closed during the settings.
+            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.UpgradePanel.Close();
             InGameCanvasManager.Scripts.InGameCanvasManager.Instance.InGameSettingsScreen.gameObject.SetActive(true);
         }
 
