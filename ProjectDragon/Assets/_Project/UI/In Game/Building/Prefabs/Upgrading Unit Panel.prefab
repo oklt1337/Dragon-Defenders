@@ -2532,7 +2532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7580660357326846197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2632,6 +2632,7 @@ MonoBehaviour:
   - {fileID: 3703038980439744146}
   - {fileID: 2600490202472508634}
   - {fileID: 5998348068960468052}
+  unitIcon: {fileID: 2507760556818643676}
   unitSkillImages:
   - {fileID: 298302224361057539}
   - {fileID: 8954437444649336279}
@@ -3482,7 +3483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7951774049465556753
 RectTransform:
   m_ObjectHideFlags: 0
