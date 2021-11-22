@@ -21,6 +21,8 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
         
         protected static void FixRotation(Transform target, Transform projectile)
         {
+            if (target == null) 
+                return;
             var rotation = Quaternion.LookRotation(target.position - projectile.position, Vector3.up).eulerAngles;
             rotation.z = 0;
             rotation.x = 0;

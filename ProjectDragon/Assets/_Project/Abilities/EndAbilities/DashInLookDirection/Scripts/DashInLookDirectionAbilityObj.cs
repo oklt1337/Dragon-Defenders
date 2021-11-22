@@ -1,4 +1,5 @@
 ﻿using Abilities.Ability.Scripts;
+using GamePlay.Player.Commander.BaseCommanderClass.Scripts;
 using UnityEngine;
 
 namespace Abilities.EndAbilities.DashInLookDirection.Scripts
@@ -15,6 +16,10 @@ namespace Abilities.EndAbilities.DashInLookDirection.Scripts
 
         public static void Cast(Transform target, float abilityDashDistance)
         {
+            var owner = target.GetComponent<Commander>();
+            if (owner != null)
+                target = owner.PlayerModel.transform;
+            
             target.position += target.forward * abilityDashDistance;
         }
     }

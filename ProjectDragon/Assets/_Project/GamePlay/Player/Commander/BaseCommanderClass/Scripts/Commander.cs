@@ -19,6 +19,8 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region SerializeFields
         
         [SerializeField] private Animator animator;
+        [SerializeField] private Transform spawnPos;
+        [SerializeField] private Transform target;
 
         #endregion
 
@@ -51,6 +53,9 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #endregion
 
         #region Public Properties
+
+        public PlayerModel.Scripts.PlayerModel PlayerModel => playerModel;
+        public Transform Target => target;
 
         internal NavMeshAgent NavMeshAgent
         {
@@ -176,11 +181,11 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             };
         }
 
-        private void Cast(int index, Transform target)
+        private void Cast(int index, Transform newTarget)
         {
             if (abilities[index].AbilityAbilityObj.AbilityType == AbilityType.Damage)
             {
-                ((DamageAbility) abilities[index]).Cast(transform, target, Caster.Commander);
+                ((DamageAbility) abilities[index]).Cast(spawnPos, newTarget, Caster.Commander);
             }
             else
             {
@@ -198,7 +203,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                     }
                 }
 
-                ((UtilityAbility) abilities[index]).OnStay(target);
+                ((UtilityAbility) abilities[index]).OnStay(newTarget);
             }
         }
 
@@ -238,27 +243,27 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             }
         }
 
-        public void AutoAttack(Transform target)
+        public void AutoAttack(Transform newTarget)
         {
-            Cast(0, target);
+            Cast(0, newTarget);
             playerModel.ChangeState(State.AutoAttack);
         }
 
-        public void Attack1(Transform target)
+        public void Attack1(Transform newTarget)
         {
-            Cast(1, target);
+            Cast(1, newTarget);
             playerModel.ChangeState(State.Attack1);
         }
 
-        public void Attack2(Transform target)
+        public void Attack2(Transform newTarget)
         {
-            Cast(2, target);
+            Cast(2, newTarget);
             playerModel.ChangeState(State.Attack2);
         }
 
-        public void Attack3(Transform target)
+        public void Attack3(Transform newTarget)
         {
-            Cast(3, target);
+            Cast(3, newTarget);
             playerModel.ChangeState(State.Attack3);
         }
 

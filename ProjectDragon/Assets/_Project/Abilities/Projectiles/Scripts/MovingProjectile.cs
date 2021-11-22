@@ -18,15 +18,9 @@ namespace Abilities.Projectiles.Scripts
 
         protected void MoveProjectile(Transform target)
         {
-            Vector3 dir;
-            if (target != null)
-            {
-                dir = (target.position - transform.position).normalized * Speed;
-            }
-            else
-            {
-                dir = (Vector3.forward - transform.position).normalized * Speed;
-            }
+            if (target == null) 
+                return;
+            var dir = (target.position - transform.position).normalized * Speed;
             myRigidbody.AddForce(dir, ForceMode.VelocityChange);
         }
     }
