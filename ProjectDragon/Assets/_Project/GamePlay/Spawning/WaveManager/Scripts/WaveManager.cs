@@ -28,6 +28,8 @@ namespace GamePlay.Spawning.WaveManager.Scripts
         [Button]
         public void Increase()
         {
+            Terrain t = Terrain.activeTerrain;
+
             CurrentWaveIndex++;
         }
 

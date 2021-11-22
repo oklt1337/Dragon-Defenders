@@ -14,9 +14,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
         {
             Faction = faction;
             CommanderClass = @class;
-            Health = health;
             MAXHealth = health;
-            Mana = mana;
             MAXMana = mana;
             AttackDamageModifier = attackDamageModifier;
             Defense = defense;
