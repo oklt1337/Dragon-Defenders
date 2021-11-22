@@ -32,7 +32,7 @@ namespace UI.In_Game.Commander.Scripts
             
             for (int i = 0; i < abilities.Length; i++)
             {
-                abilities[i].image.sprite = GameManager.Instance.PlayerModel.Commander.Abilities[i].Icon;
+                abilities[i].image.sprite = GameManager.Instance.PlayerModel.Commander.Abilities[i + 1].Icon;
             }
         }
 
