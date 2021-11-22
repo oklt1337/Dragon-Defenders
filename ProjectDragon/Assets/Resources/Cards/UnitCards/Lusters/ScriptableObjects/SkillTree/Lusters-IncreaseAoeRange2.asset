@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Cap Detonator
   icon: {fileID: 21300000, guid: 9a99d085bb9cc4e72972e075606cf4b9, type: 3}
   cost: 400
-  value: 0
+  value: 1.666

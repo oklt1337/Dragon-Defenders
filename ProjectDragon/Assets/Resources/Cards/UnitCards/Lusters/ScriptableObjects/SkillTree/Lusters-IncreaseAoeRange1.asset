@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Detonator
   icon: {fileID: 21300000, guid: 00d24408568984f129b7023cb677c0cd, type: 3}
   cost: 200
-  value: 0
+  value: 1.5
