@@ -63,17 +63,20 @@ namespace UI.In_Game.Commander.Scripts
 
         public void CastSpellOne()
         {
-            GameManager.Instance.PlayerModel.Commander.Attack1(null);
+            var commander = GameManager.Instance.PlayerModel.Commander;
+            commander.Attack1(commander.Target);
         }
         
         public void CastSpellTwo()
         {
-            GameManager.Instance.PlayerModel.Commander.Attack2(null);
+            var commander = GameManager.Instance.PlayerModel.Commander;
+            commander.Attack2(commander.Target);
         }
         
         public void CastSpellThree()
         {
-            GameManager.Instance.PlayerModel.Commander.Attack3(null);
+            var commander = GameManager.Instance.PlayerModel.Commander;
+            commander.Attack3(commander.Target);
         }
         
         public void ChangeInteractableStatus(bool status)
