@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef796ce1b42c7f74497994704806b8f0, type: 3}
-  m_Name: Rackl, the Heroic Dragon-Fireball of Justice-SingleShotSetRange
+  m_Name: Fireball of Justice
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: Fireball of Justice
   coolDown: 4
   icon: {fileID: 21300000, guid: dac5cf845653a4f689dbe9d871259451, type: 3}
   damage: 100
