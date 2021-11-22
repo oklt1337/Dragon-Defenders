@@ -84,6 +84,7 @@ namespace GamePlay.Player.PlayerModel.Scripts
         {
             inputHandler.OnTouch += ProcessInput;
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ChangeRay;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ChangeStateWithGameState;
         }
 
         private void Start()
@@ -148,6 +149,27 @@ namespace GamePlay.Player.PlayerModel.Scripts
             inputHandler.Initialize();
             commander.Initialize(this);
             animationHandler.Init(this, commander.Animator);
+        }
+
+        private void ChangeStateWithGameState(GameState state)
+        {
+            switch(state)
+            {
+                case GameState.Prepare:
+                    ChangeState(State.Blocked);
+                    break;
+                case GameState.Build:
+                    ChangeState(State.Blocked);
+                    break;
+                case GameState.Wave:
+                    ChangeState(State.Idle);
+                    break;
+                case GameState.End:
+                    ChangeState(State.Blocked);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
+            }
         }
 
         #endregion
