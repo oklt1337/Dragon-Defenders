@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rackl, the Heroic Dragon-IncreaseDamageSingleShotSetRange
   m_EditorClassIdentifier: 
   nodeName: True Justice
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f3a851859767547c6b5d9a9d9d995af7, type: 3}
   cost: 10
   value: 2

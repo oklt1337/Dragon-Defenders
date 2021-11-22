@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rackl, the Heroic Dragon-IncreaseMaxDashCharges
   m_EditorClassIdentifier: 
   nodeName: Help where I can
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f8d1ec532fcbb47a28aa4ba80bbe98f2, type: 3}
   cost: 10
   value: 1
