@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Suaveolens
   icon: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea, type: 3}
   cost: 400
-  value: 0
+  value: 1.5
