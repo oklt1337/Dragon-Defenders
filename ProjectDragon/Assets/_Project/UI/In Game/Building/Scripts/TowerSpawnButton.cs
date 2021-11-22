@@ -66,6 +66,9 @@ namespace UI.In_Game.Building.Scripts
 
             Physics.Raycast(ray, out RaycastHit hit);
 
+            if(hit.collider == null)
+                return;
+            
             if (!hit.collider.CompareTag("Ground"))
                 return;
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rackl, the Heroic Dragon-IncreaseMaxMana
   m_EditorClassIdentifier: 
   nodeName: Acquiring Knowledge
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 31db59f0a66f144f99d4d7d6ef9bbb9f, type: 3}
   cost: 5
   value: 1.3
