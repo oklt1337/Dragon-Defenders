@@ -71,6 +71,8 @@ namespace UI.In_Game.Building.Scripts
 
             skillTree = newSkillTree;
 
+            print(skillTree);
+            print(skillTree.Nodes.Count);
             if (skillTree.Nodes.Count > 6)
             {
                 commanderPanel.gameObject.SetActive(true);
@@ -146,7 +148,7 @@ namespace UI.In_Game.Building.Scripts
                     skillTree.Nodes[i].NodeState == NodeState.Activated)
                     activeSkillImages[i].color = Color.white;
                 else
-                    activeSkillImages[i].color = Color.gray;
+                    activeSkillImages[i].color = Color.black;
             }
         }
 
