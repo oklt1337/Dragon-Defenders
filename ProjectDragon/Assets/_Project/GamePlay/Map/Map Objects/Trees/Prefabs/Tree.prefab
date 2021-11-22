@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6343296129008660515}
   - component: {fileID: 4946510912376182753}
   - component: {fileID: -8320576600027017368}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tree
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -111,6 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5de845efcfee54fb4c61a0001d21d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshFilter: {fileID: 0}
+  goodMesh: {fileID: 0}
+  evilMesh: {fileID: 0}
+  neutralMesh: {fileID: 0}
   interior: {fileID: 0}
   health: 40
 --- !u!54 &-8320576600027017368

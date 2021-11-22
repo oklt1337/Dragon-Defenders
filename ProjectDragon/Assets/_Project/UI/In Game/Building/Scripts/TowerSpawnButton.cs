@@ -68,7 +68,7 @@ namespace UI.In_Game.Building.Scripts
 
             if(hit.collider == null)
                 return;
-            
+
             if (!hit.collider.CompareTag("Ground"))
                 return;
 
