@@ -21,6 +21,7 @@ namespace UI.In_Game.Building.Scripts
         [SerializeField] private List<Image> commanderSkillImages = new List<Image>();
 
         [Header("Unit Stuff")] 
+        [SerializeField] private Image unitIcon;
         [SerializeField] private List<Image> unitSkillImages = new List<Image>();
         [SerializeField] private GameObject unitPanel;
 
@@ -60,7 +61,7 @@ namespace UI.In_Game.Building.Scripts
         /// Upgrades the skill tree.
         /// </summary>
         /// <param name="newSkillTree">SkillTree</param>
-        public void UpdateSkillTree(SkillTree newSkillTree)
+        public void UpdateSkillTree(SkillTree newSkillTree, Sprite img)
         {
             // Closing the settings to make sure both aren't open at the same time.
             InGameCanvasManager.Scripts.InGameCanvasManager.Instance.InGameSettingsScreen.OnCloseSettingsClick();
@@ -71,8 +72,6 @@ namespace UI.In_Game.Building.Scripts
 
             skillTree = newSkillTree;
 
-            print(skillTree);
-            print(skillTree.Nodes.Count);
             if (skillTree.Nodes.Count > 6)
             {
                 commanderPanel.gameObject.SetActive(true);
@@ -80,6 +79,7 @@ namespace UI.In_Game.Building.Scripts
             else
             {
                 unitPanel.gameObject.SetActive(true);
+                unitIcon.sprite = img;
             }
 
             UpdateImages();

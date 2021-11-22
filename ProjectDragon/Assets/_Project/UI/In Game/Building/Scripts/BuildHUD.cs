@@ -76,10 +76,10 @@ namespace UI.In_Game.Building.Scripts
             }
         }
 
-        private void OpenUpgradePanel(SkillTree skillTree)
+        private void OpenUpgradePanel(SkillTree skillTree, Sprite img)
         {
             InGameCanvasManager.Scripts.InGameCanvasManager.Instance.UpgradePanel.gameObject.SetActive(true);
-            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.UpgradePanel.UpdateSkillTree(skillTree);
+            InGameCanvasManager.Scripts.InGameCanvasManager.Instance.UpgradePanel.UpdateSkillTree(skillTree, img);
         }
 
         #endregion
