@@ -15,4 +15,4 @@ MonoBehaviour:
   nodeName: Quick Slash
   icon: {fileID: 21300000, guid: 5193186771e11435f8761b7ece8ba3ba, type: 3}
   cost: 250
-  value: 0
+  value: 0.48
