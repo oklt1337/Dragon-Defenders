@@ -29,6 +29,8 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
 
         public ClassAndFaction.Faction Faction { get; internal set; }
         public ClassAndFaction.Class CommanderClass { get; internal set; }
+        public float AttackDamageModifier { get; internal set; }
+        public float Defense { get; internal set; }
 
         public float Health
         {
@@ -79,8 +81,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
                 OnCommanderMAXManaChanged?.Invoke(maxMana);
             } 
         }
-        public float AttackDamageModifier { get; internal set; }
-        public float Defense { get; internal set; }
+        
         public float Speed { 
             get => speed;
             internal set
