@@ -1118,7 +1118,7 @@ PrefabInstance:
     - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
         type: 3}
       propertyPath: commands.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
         type: 3}
@@ -1143,6 +1143,18 @@ PrefabInstance:
       propertyPath: commands.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 734b85d404f7c6d47b42281be423825f,
+        type: 2}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: f1b9a4d54cce0c146adfaa1e0c642612,
+        type: 2}
+    - target: {fileID: 8298953313305346568, guid: 1a25e152df3fd934791867183504f64a,
+        type: 3}
+      propertyPath: commands.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: abbbc32f5a99fc243b55b7965dc6f604,
         type: 2}
     - target: {fileID: 8298953313305346569, guid: 1a25e152df3fd934791867183504f64a,
         type: 3}

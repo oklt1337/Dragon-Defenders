@@ -12,7 +12,6 @@ namespace Utility.DeveloperConsole.Scripts.Commands.PlayerCommands.SetCommands
         {
             if (args.Length != 1)
                 return false;
-
             if (!float.TryParse(args[0], out var value))
                 return false;
 

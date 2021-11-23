@@ -21,7 +21,6 @@ namespace Utility.DeveloperConsole.Scripts
         [SerializeField] private GameObject console;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private TextMeshProUGUI debugLog;
-        [SerializeField] private ScrollRect debugLogScroll;
 
         #endregion
 
@@ -126,6 +125,7 @@ namespace Utility.DeveloperConsole.Scripts
         public void ClearConsole()
         {
             debugLog.text = string.Empty;
+            debugLog.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -4429.866f);
         }
 
         #endregion
