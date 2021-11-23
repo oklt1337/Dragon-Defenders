@@ -11,7 +11,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
         private DamageAbility ability;
         private float duration;
         private bool casted;
-        public event Action OnEffectDetroyed;
+        public event Action OnEffectDestroyed;
 
         public void Init(float buffDuration, float increaseValue)
         {
@@ -37,7 +37,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
         private void OnDestroy()
         {
             ability.Damage = ((DamageAbilityObj) ability.AbilityAbilityObj).Damage;
-            OnEffectDetroyed?.Invoke();
+            OnEffectDestroyed?.Invoke();
         }
     }
 }

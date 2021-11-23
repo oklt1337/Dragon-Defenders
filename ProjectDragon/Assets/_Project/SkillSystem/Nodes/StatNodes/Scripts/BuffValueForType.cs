@@ -37,7 +37,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
             var effect = unit.gameObject.GetComponent<IncreaseDamageEffect>();
             if (effect != null)
             {
-                effect.OnEffectDetroyed += () => AddEffect(unit);
+                effect.OnEffectDestroyed += () => AddEffect(unit);
                 Destroy(effect);
             }
             else
