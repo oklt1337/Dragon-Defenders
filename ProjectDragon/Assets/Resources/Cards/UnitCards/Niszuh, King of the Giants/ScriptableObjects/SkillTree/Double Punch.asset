@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Double Punch
   m_EditorClassIdentifier: 
   nodeName: Double Punch
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 77e89db99165742f7abf29e1271938c7, type: 3}
   cost: 1000
   animBool: DoubleAttack
   state: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Who needs Cooldown
   m_EditorClassIdentifier: 
   nodeName: Who needs Cooldown
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ee59484629a8541c09bf5f07a129d247, type: 3}
   cost: 20
   value: 0.1
