@@ -27,6 +27,7 @@ namespace UI.In_Game.Base_UI.Scripts
             GameManager.Instance.PlayerModel.OnPlayerMoneyChanged += OnMoneyChange;
             GameManager.Instance.Hq.Hq.OnHqHealthChanged += OnHqHealthChange;
             GameManager.Instance.Hq.Hq.OnDeath += GameOver;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderDeath += GameOver;
         }
 
         private void OnEnable()
@@ -44,6 +45,7 @@ namespace UI.In_Game.Base_UI.Scripts
             GameManager.Instance.PlayerModel.OnPlayerMoneyChanged -= OnMoneyChange;
             GameManager.Instance.Hq.Hq.OnHqHealthChanged -= OnHqHealthChange;
             GameManager.Instance.Hq.Hq.OnDeath -= GameOver;
+            GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderDeath -= GameOver; 
         }
 
         #endregion
