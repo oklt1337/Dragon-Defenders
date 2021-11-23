@@ -7,10 +7,11 @@ using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using GamePlay.GameManager.Scripts;
-using GamePlay.Player.PlayerModel.Scripts;
 using SkillSystem.SkillTree.Scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using State = GamePlay.Player.PlayerModel.Scripts.State;
 
 namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
@@ -116,6 +117,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         private void Update()
         {
+            TickAbilities();
             if (playerModel.CurrentState != State.Move) 
                 return;
             var dist= navMeshAgent.remainingDistance;
@@ -127,6 +129,14 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #endregion
 
         #region Private Methods
+
+        private void TickAbilities()
+        {
+            foreach (var ability in abilities.Where(ability => ability.StartCooldown || ability.TimeLeft > 0))
+            {
+                ability.Tick(Time.deltaTime);
+            }
+        }
 
         private void SetStats(CommanderCard commanderCard)
         {

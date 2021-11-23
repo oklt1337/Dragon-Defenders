@@ -41,8 +41,6 @@ namespace Abilities.EndAbilities.DashInLookDirection.Scripts
 
         public override void OnStay(Transform target)
         {
-            if (TimeLeft > 0) 
-                return;
             if (Charges < 1)
                 return;
             if (!CanDash(Owner.forward, EffectRange))

@@ -50,7 +50,6 @@ namespace Abilities.Projectiles.Scripts
         protected override void Update()
         {
             base.Update();
-            Debug.Log(Vector3.Distance(startPos, transform.position));
             if (Math.Abs(Vector3.Distance(startPos, transform.position) - TravelRange) < 0.1f)
             {
                 Destroy(gameObject);
