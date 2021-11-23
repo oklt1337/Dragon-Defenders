@@ -11,7 +11,7 @@ namespace Abilities.EndAbilities.HomingShot.Scripts
         public override void Cast(Transform spawnPoint, Transform target, Caster caster, float abilityDamage , float abilityProjectileSpeed)
         {
             //Spawn projectile
-            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity, spawnPoint).GetComponent<MovingProjectile>();
+            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<HomingProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
         }
         

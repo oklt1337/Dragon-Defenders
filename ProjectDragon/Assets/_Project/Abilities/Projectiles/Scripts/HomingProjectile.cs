@@ -20,5 +20,16 @@ namespace Abilities.Projectiles.Scripts
             base.Update();
             MoveProjectile(Target);
         }
+
+        private void MoveProjectile(Transform target)
+        {
+            if (target == null) 
+                return;
+            var myTransform = transform;
+            var position = myTransform.position;
+            var dir = (target.position - position).normalized * Speed;
+            position += dir * Time.deltaTime;
+            myTransform.position = position;
+        }
     }
 }
