@@ -33,6 +33,11 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
             }
         }
 
+        private void OnDestroy()
+        {
+            Debug.Log("Destroy");
+        }
+
         protected virtual void OnTriggerEnter(Collider other)
         {
             switch (Caster)
