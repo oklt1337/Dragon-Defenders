@@ -93,7 +93,7 @@ namespace UI.In_Game.Building.Scripts
 
         public void ChangeInteractableStatus(bool status)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         /// <summary>

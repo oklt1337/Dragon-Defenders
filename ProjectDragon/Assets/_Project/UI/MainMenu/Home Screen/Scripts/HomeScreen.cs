@@ -1,4 +1,5 @@
 using System;
+using GamePlay.GameManager.Scripts;
 using Photon.Pun;
 using TMPro;
 using UI.MainMenu.Manager.Scripts;
@@ -62,6 +63,10 @@ namespace UI.MainMenu.Home_Screen.Scripts
         {
             // For the Prototype a Lobby is not needed.
             //SceneManager.ChangeScene(Scene.Lobby);
+            
+            if(!(GameManager.DefaultDeck is {IsUseAble: true}))
+                return;
+            
             SceneManager.ChangeScene(Scene.GameScene);
             AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[0]);
         }

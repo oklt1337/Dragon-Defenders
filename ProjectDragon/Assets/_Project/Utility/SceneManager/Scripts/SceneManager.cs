@@ -1,5 +1,6 @@
 using System;
 using Photon.Pun;
+using UI.Managers.Scripts;
 using UnityEngine;
 
 namespace Utility.SceneManager.Scripts
@@ -52,6 +53,7 @@ namespace Utility.SceneManager.Scripts
         public static void ChangeScene(Scene newScene)
         {
             PhotonNetwork.LoadLevel(newScene.ToString());
+            CanvasManager.Instance.ChangeInteractableStatus(false);
         }
 
         #endregion

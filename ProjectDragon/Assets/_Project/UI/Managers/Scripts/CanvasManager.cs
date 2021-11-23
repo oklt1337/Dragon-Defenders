@@ -37,7 +37,7 @@ namespace UI.Managers.Scripts
         /// <param name="status">bool</param>
         public void ChangeInteractableStatus(bool status)
         {
-            foreach (ICanvas canvas in SceneCanvases)
+            foreach (var canvas in SceneCanvases)
             {
                 canvas.ChangeInteractableStatus(status);
             }
