@@ -359,8 +359,8 @@ MonoBehaviour:
   hqDamage: 5
   health: 65
   maxHealth: 65
-  speed: 8
-  maxSpeed: 8
+  speed: 4
+  maxSpeed: 4
   follower: {fileID: 8032877401873976240}
   attackRange: 10
   abilitySpawnPosition: {fileID: 6617843740922720578}

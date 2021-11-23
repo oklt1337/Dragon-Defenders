@@ -1033,10 +1033,10 @@ MonoBehaviour:
   hqDamage: 2
   health: 25
   maxHealth: 25
-  speed: 5
-  maxSpeed: 7
+  speed: 3
+  maxSpeed: 5
   follower: {fileID: 7441545932884290839}
-  speedUpValue: 5
+  speedUpValue: 2
 --- !u!1 &5857874052185745633
 GameObject:
   m_ObjectHideFlags: 0
