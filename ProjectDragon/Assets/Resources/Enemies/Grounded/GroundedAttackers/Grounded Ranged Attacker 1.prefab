@@ -103,11 +103,10 @@ GameObject:
   - component: {fileID: 1885910656907654992}
   - component: {fileID: 1979140051179241428}
   - component: {fileID: 8001795257714521831}
-  - component: {fileID: 2201997670869663247}
-  - component: {fileID: 5654060346964969855}
   - component: {fileID: 8032877401873976240}
   - component: {fileID: 5362413770000526700}
   - component: {fileID: 2873003485920201158}
+  - component: {fileID: 3799360211138147058}
   m_Layer: 0
   m_Name: Grounded Ranged Attacker 1
   m_TagString: Enemy
@@ -129,6 +128,7 @@ Transform:
   - {fileID: 1886411717245611220}
   - {fileID: 1886364496289061848}
   - {fileID: 6617843740922720578}
+  - {fileID: 1248684820687401282}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,32 +167,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &2201997670869663247
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882696365300591854}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!135 &5654060346964969855
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882696365300591854}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8032877401873976240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +339,20 @@ MonoBehaviour:
   attackRange: 10
   abilitySpawnPosition: {fileID: 6617843740922720578}
   attackObj: {fileID: 11400000, guid: ff80d31a2b2d58441abc40e4c335c039, type: 2}
+--- !u!136 &3799360211138147058
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882696365300591854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1882698331256876810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,6 +1529,50 @@ Transform:
   m_Father: {fileID: 1886202368794949394}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8331476670433001187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248684820687401282}
+  - component: {fileID: 5083512806202704016}
+  m_Layer: 2
+  m_Name: AttackScan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248684820687401282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331476670433001187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1885910656907654992}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5083512806202704016
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8331476670433001187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9024838395459453604
 GameObject:
   m_ObjectHideFlags: 0

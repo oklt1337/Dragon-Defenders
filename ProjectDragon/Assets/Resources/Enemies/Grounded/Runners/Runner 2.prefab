@@ -288,10 +288,10 @@ GameObject:
   - component: {fileID: 8423223579784354690}
   - component: {fileID: 8477855373374148762}
   - component: {fileID: 7502059779081527291}
-  - component: {fileID: 3920239393157672140}
   - component: {fileID: 7272453280375803065}
   - component: {fileID: 3986032912168583202}
   - component: {fileID: 6243952515104382651}
+  - component: {fileID: 2732610171060550550}
   m_Layer: 0
   m_Name: Runner 2
   m_TagString: Enemy
@@ -350,19 +350,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &3920239393157672140
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8426415188354621992}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7272453280375803065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +520,20 @@ MonoBehaviour:
   maxSpeed: 8
   follower: {fileID: 3986032912168583202}
   speedUpValue: 3
+--- !u!136 &2732610171060550550
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426415188354621992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8426469634481679236
 GameObject:
   m_ObjectHideFlags: 0
