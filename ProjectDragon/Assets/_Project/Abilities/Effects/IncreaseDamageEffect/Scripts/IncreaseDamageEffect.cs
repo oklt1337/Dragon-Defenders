@@ -1,4 +1,5 @@
-﻿using Abilities.Ability.Scripts;
+﻿using System;
+using Abilities.Ability.Scripts;
 using Units.Unit.BaseUnits;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
         private DamageAbility ability;
         private float duration;
         private bool casted;
+        public event Action OnEffectDetroyed;
 
         public void Init(float buffDuration, float increaseValue)
         {
@@ -20,6 +22,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
             unit.Ability.Casted += (t) => casted = true;
             ability = damageAbility;
             ability.Damage *= increaseValue;
+            Debug.Log(ability.Damage);
             duration = buffDuration;
         }
 
@@ -34,6 +37,7 @@ namespace Abilities.Effects.IncreaseDamageEffect.Scripts
         private void OnDestroy()
         {
             ability.Damage = ((DamageAbilityObj) ability.AbilityAbilityObj).Damage;
+            OnEffectDetroyed?.Invoke();
         }
     }
 }

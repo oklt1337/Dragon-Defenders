@@ -20,9 +20,9 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
             if (!(visitor is IncreaseDamageForSetTimeAbility ability))
                 return;
 
-            increaseDamageForSetTimeAbility = ability;
-            increaseDamageForSetTimeAbility.Casted += ApplyBuff;
-            if (increaseDamageForSetTimeAbility.CurrenTarget == null)
+            increaseDamageForSetTimeAbility = ability.AbilityAbilityObj.CreateInstance<IncreaseDamageForSetTimeAbility>();
+            ability.Casted += ApplyBuff;
+            if (ability.CurrenTarget == null)
                 return;
             ApplyBuff(increaseDamageForSetTimeAbility.CurrenTarget);
         }
@@ -34,10 +34,21 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
                 return;
             if (unit.UnitClass != @class)
                 return;
-            var effect = unit.gameObject.AddComponent<IncreaseDamageEffect>();
+            var effect = unit.gameObject.GetComponent<IncreaseDamageEffect>();
             if (effect != null)
+            {
+                effect.OnEffectDetroyed += () => AddEffect(unit);
                 Destroy(effect);
-            
+            }
+            else
+            {
+                AddEffect(unit);
+            }
+        }
+
+        private void AddEffect(Component unit)
+        {
+            var effect = unit.gameObject.AddComponent<IncreaseDamageEffect>();
             effect.Init(increaseDamageForSetTimeAbility.Duration, value);
         }
     }

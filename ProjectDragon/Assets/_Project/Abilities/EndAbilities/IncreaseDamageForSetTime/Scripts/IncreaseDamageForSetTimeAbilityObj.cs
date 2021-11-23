@@ -48,9 +48,9 @@ namespace Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts
                 return;
             
             StartCooldown = true;
-            Casted?.Invoke(target);
             CurrenTarget = target;
             IncreaseDamageForSetTimeAbilityObj.Cast(target, Duration, IncreaseAttackValueInPercentage);
+            Casted?.Invoke(target);
         }
 
         public override void OnExit(Transform target)
