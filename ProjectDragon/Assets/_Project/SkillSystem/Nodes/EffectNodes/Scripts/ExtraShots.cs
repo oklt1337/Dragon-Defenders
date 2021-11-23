@@ -10,41 +10,28 @@ namespace SkillSystem.Nodes.EffectNodes.Scripts
     [CreateAssetMenu(menuName = "AbilitySystem/SkillTree/Nodes/EffectNodes/ExtraShots", fileName = "ExtraShots")]
     public class ExtraShots : BaseNodes.Scripts.EffectNodes
     {
+        private Unit unit;
         private SingleShotAbility singleShotAbility;
         public override void Execute(IVisitor visitor)
         {
             if (!(visitor is SingleShotAbility ability)) 
-                return;
-            ability.Casted += (t) => {Shot();};
-            singleShotAbility = ability;
+                return; 
+            
+            unit = ability.Owner.GetComponent<Unit>();
+            singleShotAbility = ability.AbilityAbilityObj.CreateInstance<SingleShotAbility>();
+            
+            ability.Casted += Shot;
         }
 
-        private void Shot()
+        private void Shot(Transform target)
         {
-            var unit = singleShotAbility.Owner.GetComponent<Unit>();
-            var commander = singleShotAbility.Owner.GetComponent<Commander>();
-            if (unit != null)
-            {
-                singleShotAbility.Cast(unit.SpawnPos, GetDirectionTransform(value), Caster.Unit);
-                singleShotAbility.Cast(unit.SpawnPos, GetDirectionTransform(-value), Caster.Unit);
-            }
-            else if (commander != null)
-            {
-                singleShotAbility.Cast(commander.transform, GetDirectionTransform(value), Caster.Commander);
-                singleShotAbility.Cast(commander.transform, GetDirectionTransform(-value), Caster.Commander);
-            }
-        }
-
-        private Transform GetDirectionTransform(float eulerAngle)
-        {
-            var target = singleShotAbility.Owner.rotation;
-            var euler = target.eulerAngles;
-            euler.y = eulerAngle;
-            Transform shotTrans = new RectTransform();
-            shotTrans.rotation = Quaternion.Euler(euler);
-            shotTrans.position = singleShotAbility.Owner.forward;
-
-            return shotTrans;
+            var dir = target.position - unit.SpawnPos.position;
+            var up = unit.SpawnPos.up;
+            var point = Quaternion.AngleAxis(value, up) * dir;
+            var point2 = Quaternion.AngleAxis(-value, up) * dir;
+            
+            singleShotAbility.Cast(unit.SpawnPos, point.normalized, Caster.Unit);
+            singleShotAbility.Cast(unit.SpawnPos, point2.normalized, Caster.Unit);
         }
     }
 }

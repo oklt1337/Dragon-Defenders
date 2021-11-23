@@ -16,17 +16,34 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
             //Spawn projectile
             var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<MovingProjectile>();
             projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
+            if (target != null)
+            {
+                FixRotation(target, projectile.transform);
+            }
+        }
+        
+        public void Cast(Transform spawnPoint, Vector3 target, Caster caster, float abilityDamage , float abilityProjectileSpeed)
+        {
+            //Spawn projectile
+            var projectile = Instantiate(PrefabProjectile, spawnPoint.position, Quaternion.identity).GetComponent<MovingProjectile>();
+            projectile.Init(target, caster, abilityDamage, abilityProjectileSpeed);
             FixRotation(target, projectile.transform);
         }
         
         protected static void FixRotation(Transform target, Transform projectile)
         {
-            if (target == null) 
-                return;
             var rotation = Quaternion.LookRotation(target.position - projectile.position, Vector3.up).eulerAngles;
             rotation.z = 0;
             rotation.x = 0;
             projectile.rotation = Quaternion.Euler(rotation);
+        }
+
+        private static void FixRotation(Vector3 target, Component projectile)
+        {
+            var rotation = Quaternion.LookRotation(target, Vector3.up).eulerAngles;
+            rotation.z = 0;
+            rotation.x = 0;
+            projectile.transform.rotation = Quaternion.Euler(rotation);
         }
 
         public override T CreateInstance<T>()
@@ -53,6 +70,17 @@ namespace Abilities.EndAbilities.SingleShot.Scripts
             
             var singeShotAbilityObj = (SingleShotAbilityObj) AbilityAbilityObj;
             singeShotAbilityObj.Cast(spawnPoint, target, caster, Damage, ProjectileSpeed);
+        }
+
+        public void Cast(Transform spawnPoint, Vector3 direction, Caster caster)
+        {
+            if (TimeLeft > 0) 
+                return;
+            StartCooldown = true;
+            Casted?.Invoke(null);
+            
+            var singeShotAbilityObj = (SingleShotAbilityObj) AbilityAbilityObj;
+            singeShotAbilityObj.Cast(spawnPoint, direction, caster, Damage, ProjectileSpeed);
         }
     }
 }

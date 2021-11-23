@@ -16,6 +16,14 @@ namespace Abilities.Projectiles.Scripts
             direction = (target.position - transform.position).normalized * Speed;
         }
         
+        public void Init(Vector3 dir, Caster caster, float damage, float speed)
+        {
+            Damage = damage;
+            Speed = speed;
+            Caster = caster;
+            direction = dir * Speed;
+        }
+
         protected override void Update()
         {
             base.Update();
