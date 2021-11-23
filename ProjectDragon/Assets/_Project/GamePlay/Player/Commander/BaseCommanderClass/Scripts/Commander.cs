@@ -20,6 +20,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         #region SerializeFields
         
         [SerializeField] private Animator animator;
+        [SerializeField] private AudioClip hurtSound;
         [SerializeField] private Transform spawnPos;
         [SerializeField] private Transform target;
 
@@ -291,6 +292,9 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 commanderStats.Health -= damage;
                 dyingBreath = false;
             }
+            
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClipOneShot(hurtSound);
+            Handheld.Vibrate();
 
             if (!(commanderStats.Health <= 0) || dyingBreath)
                 return;

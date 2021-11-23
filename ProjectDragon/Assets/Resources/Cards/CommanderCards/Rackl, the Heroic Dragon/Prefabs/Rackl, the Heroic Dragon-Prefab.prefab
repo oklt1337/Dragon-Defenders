@@ -346,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6606831500930068150}
+  hurtSound: {fileID: 8300000, guid: 8bfe5060ca81a2740abf18bd9c5dccc5, type: 3}
   spawnPos: {fileID: 2885406117612178938}
   target: {fileID: 7083630179224973432}
 --- !u!95 &6606831500930068150
