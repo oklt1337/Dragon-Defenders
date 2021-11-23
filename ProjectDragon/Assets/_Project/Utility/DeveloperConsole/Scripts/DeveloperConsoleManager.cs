@@ -26,6 +26,7 @@ namespace Utility.DeveloperConsole.Scripts
 
         #region Private Fields
 
+        private const int MAXLines = 200;
         private float pausedTimeScale;
         private DeveloperConsole developerConsole;
 
@@ -103,8 +104,8 @@ namespace Utility.DeveloperConsole.Scripts
             if (string.IsNullOrEmpty(inputText))
                 return;
 
-
-            if (debugLog.text.Length > 3500)
+            var lines = debugLog.text.Split('\n');
+            if (lines.Length > MAXLines)
             {
                 ClearConsole();
                 debugLog.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -4429.866f);
