@@ -46,7 +46,7 @@ namespace UI.In_Game.Building.Scripts
             for (var i = 0; i < skillImages.Count; i++)
             {
                 skillImages[i].sprite = card.SkillTreeObj.NodeObjs[i].Icon;
-                skillText[i].text = string.Concat(card.SkillTreeObj.NodeObjs[i].NodeName,": ");
+                skillText[i].text = string.Concat(card.SkillTreeObj.NodeObjs[i].NodeName,": ", card.SkillTreeObj.NodeObjs[i].Description);
             }
         }
 
