@@ -1691,7 +1691,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 8b89bd161b3fb41458d33532456a7ba0, type: 2}
   audioSource: {fileID: 1503258820}
-  uiSound: []
+  uiSound:
+  - {fileID: 8300000, guid: 2872b203e2fa54b43b00b503cb7c67f2, type: 3}
+  - {fileID: 8300000, guid: 2f68ad6481aebb1498fc6a9576a5ab63, type: 3}
+  - {fileID: 8300000, guid: e07987f911ed06340885d8e9bb76aeb9, type: 3}
   backgroundMusic: []
 --- !u!1 &1566234970
 GameObject:

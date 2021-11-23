@@ -19,6 +19,9 @@ namespace AudioManager.Scripts
         [SerializeField] private List<AudioClip> uiSound;
         [SerializeField] private List<AudioClip> backgroundMusic;
 
+        public List<AudioClip> UiSound => uiSound;
+        public List<AudioClip> BackgroundMusic => backgroundMusic;
+        
         private void Awake()
         {
             if (Instance != null)

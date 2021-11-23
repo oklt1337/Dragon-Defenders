@@ -47,6 +47,7 @@ namespace UI.In_Game.Settings.Scripts
         {
             // Only for Prototype
             SceneManager.ChangeScene(Scene.MainMenu);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[0]);
         }
         
         public void OnSfxChange()

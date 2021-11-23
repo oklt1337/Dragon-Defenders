@@ -67,6 +67,8 @@ namespace UI.Deck_Manager_Screen.Scripts
                 LobbyCanvasManager.Instance.LobbyScreen.gameObject.SetActive(true);
                 gameObject.SetActive(false);
             }
+            
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         /// <summary>
@@ -84,6 +86,8 @@ namespace UI.Deck_Manager_Screen.Scripts
                 LobbyCanvasManager.Instance.NewDeckScreen.gameObject.SetActive(true);
                 ChangeInteractableStatus(false);
             }
+            
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         /// <summary>
@@ -102,16 +106,19 @@ namespace UI.Deck_Manager_Screen.Scripts
                 previewDeckPanel.gameObject.SetActive(true);
 
             previewDeckPanel.SetPreviewDeck(DeckManager.Instance.Decks[int.Parse(btn.name)]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[2]);
         }
 
         public void OnAddCardClick(AddCardButton addCardButton)
         {
             previewDeckPanel.AddUnitCardToPreviewDeck(addCardButton.Card);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[2]);
         }
 
         public void OnDeckViewClick()
         {
             previewDeckPanel.ChangeView();
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         #endregion

@@ -62,17 +62,20 @@ namespace UI.MainMenu.Home_Screen.Scripts
             // For the Prototype a Lobby is not needed.
             //SceneManager.ChangeScene(Scene.Lobby);
             SceneManager.ChangeScene(Scene.GameScene);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[0]);
         }
 
         public void OnClickSettings()
         {
             MainMenuCanvasManager.Instance.MainMenuSettingsScreen.gameObject.SetActive(true);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
             gameObject.SetActive(false);
         }
 
         public void OnClickCards()
         {
             MainMenuCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
             gameObject.SetActive(false);
         }
 
