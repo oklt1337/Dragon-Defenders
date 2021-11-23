@@ -22,6 +22,7 @@ namespace GamePlay.CameraMovement.TrackingShot
         [SerializeField] private float startOrtho;
         [SerializeField] private float endOrtho;
 
+        private Vector3 buildPos;
         private bool startTrackingShot;
         private bool isBuildToWave = true;
         private float speed;
@@ -34,6 +35,7 @@ namespace GamePlay.CameraMovement.TrackingShot
         {
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += EnableTrackingShot;
             playerModel = GameManager.Scripts.GameManager.Instance.PlayerModel;
+            buildPos = GameManager.Scripts.GameManager.Instance.BuildCamera.transform.position;
             speed = dollyCart.m_Speed;
             modSpeed = speed * speedModifier;
         }
@@ -144,7 +146,7 @@ namespace GamePlay.CameraMovement.TrackingShot
                     break;
                 case false:
                     path.m_Waypoints[0].position = GameManager.Scripts.GameManager.Instance.CommanderCamera.transform.position;
-                    path.m_Waypoints[1].position = GameManager.Scripts.GameManager.Instance.BuildCamera.transform.position;
+                    path.m_Waypoints[1].position = buildPos;
                     break;
             }
         }

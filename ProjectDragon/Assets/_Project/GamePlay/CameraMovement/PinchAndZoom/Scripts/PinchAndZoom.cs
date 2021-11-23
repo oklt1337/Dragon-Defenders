@@ -30,14 +30,17 @@ namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
         [SerializeField] private float commanderZoomMaxBound = 12f;
         
         private Camera cam;
+        private Vector3 resetCamPos;
         private float zoomMinBound;
         private float zoomMaxBound;
 
         private void Awake()
         {
             cam = Camera.current;
+            resetCamPos = buildCam.transform.position;
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += SelectCamera;
             GameManager.Scripts.GameManager.Instance.PlayerModel.InputHandler.OnMultiTouch += PinchDetection;
+            GameManager.Scripts.GameManager.Instance.OnGameStateChanged += ResetBuildCam;
         }
 
         private void Update()
@@ -71,6 +74,14 @@ namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void ResetBuildCam(GameState state)
+        {
+            if (state != GameState.Build) 
+                return;
+            buildCam.transform.position = resetCamPos;
+            buildCam.orthographicSize = buildZoomMaxBound;
         }
 
         /// <summary>
