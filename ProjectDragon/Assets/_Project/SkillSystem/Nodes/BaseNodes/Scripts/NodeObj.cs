@@ -12,10 +12,12 @@ namespace SkillSystem.Nodes.BaseNodes.Scripts
     public abstract class NodeObj : ScriptableObject
     {
         [SerializeField] private string nodeName;
+        [SerializeField] private string description;
         [SerializeField] private Sprite icon;
         [SerializeField] private int cost;
         
         public string NodeName => nodeName;
+        public string Description => description;
         public Sprite Icon => icon;
         public int Cost => cost;
 

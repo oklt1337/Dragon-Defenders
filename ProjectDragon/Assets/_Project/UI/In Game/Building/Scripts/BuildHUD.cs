@@ -10,6 +10,9 @@ namespace UI.In_Game.Building.Scripts
     public class BuildHUD : MonoBehaviour, ICanvas
     {
         [SerializeField] private Button startWaveButton;
+        [SerializeField] private UnitDisplayPanel unitDisplayPanel;
+        
+        public UnitDisplayPanel UnitDisplayPanel => unitDisplayPanel;
 
         public event Action<GameState> OnWaveStart;
 

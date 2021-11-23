@@ -96,6 +96,11 @@ namespace UI.In_Game.Building.Scripts
             
         }
 
+        public void OnClick()
+        {
+            GameManager.Instance.BuildHUD.UnitDisplayPanel.Initialize(unit);
+        }
+
         /// <summary>
         /// Updates the unit and the displayed info.
         /// </summary>
