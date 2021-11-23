@@ -88,7 +88,7 @@ namespace GamePlay.Player.InputHandler.Scripts
             return rayMobile;
         }
 
-        private List<Touch> GetTouches()
+        private static List<Touch> GetTouches()
         {
             var touches = new List<Touch>
             {

@@ -46,7 +46,6 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
                 case Caster.Unit:
                     if (other.CompareTag("Enemy"))
                     {
-                        Debug.Log($"Caster = {Caster} " + "Hit Enemy");
                         var enemy = other.GetComponent<Enemy>();
                         enemy.TakeDamage(Damage);
                         Destroy(gameObject);
@@ -69,7 +68,6 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
                 case Caster.Enemy:
                     if(other.CompareTag("Player"))
                     {
-                        Debug.Log($"Caster = {Caster} " + "Hit Player");
                         var commander = other.GetComponent<Commander>();
                         commander.TakeDamage(Damage);
                         Destroy(gameObject);

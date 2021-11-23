@@ -47,7 +47,7 @@ namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
             if (Input.touchSupported)
                 return;
             
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            var scroll = Input.GetAxis("Mouse ScrollWheel");
 
             if (scroll == 0)
                 return;
@@ -80,6 +80,9 @@ namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
         /// <param name="touches">List of Touches</param>
         private void PinchDetection(List<Touch> touches)
         {
+            if (touches.Count != 2)
+                return;
+            
             // get current touch positions
             var tZero = touches[0];
             var tOne = touches[1];
@@ -92,7 +95,6 @@ namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
             var currentTouchDistance = Vector2.Distance(tZero.position, tOne.position);
 
             // get offset value
-            
             var deltaDistance = oldTouchDistance - currentTouchDistance;
             
             switch (GameManager.Scripts.GameManager.Instance.CurrentGameState)
@@ -102,7 +104,9 @@ namespace GamePlay.CameraMovement.PinchAndZoom.Scripts
                     break;
                 case GameState.Build:
                 {
-                    Vector3 desiredPosition = 0.5f * (tZero.position + tOne.position);
+                    var screenPosition = 0.5f * (tZero.position + tOne.position);
+                    var ray = cam.ScreenPointToRay(screenPosition);
+                    var desiredPosition = Physics.Raycast(ray , out var hit) ? hit.point : transform.position;
                     
                     Zoom(deltaDistance, touchZoomSpeed, desiredPosition);
                     break;
