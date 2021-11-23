@@ -15,7 +15,8 @@ namespace AudioManager.Scripts
         public static AudioManager Instance;
 
         [SerializeField] private AudioMixer masterMixer;
-        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioSource soundSource;
+        [SerializeField] private AudioSource musicSource;
         [SerializeField] private List<AudioClip> uiSound;
         [SerializeField] private List<AudioClip> backgroundMusic;
 
@@ -40,10 +41,10 @@ namespace AudioManager.Scripts
         /// Plays an desired audio clip.
         /// </summary>
         /// <param name="audioClip"> The desired audio clip. </param>
-        public void PlayAudio(AudioClip audioClip)
+        public void PlayAudioClip(AudioClip audioClip)
         {
-            audioSource.clip = audioClip;
-            audioSource.Play();
+            soundSource.clip = audioClip;
+            soundSource.Play();
         }
 
         /// <summary>
@@ -52,7 +53,20 @@ namespace AudioManager.Scripts
         /// <param name="audioClip"> The desired audio clip. </param>
         public void PlayAudioClipOneShot(AudioClip audioClip)
         {
-            audioSource.PlayOneShot(audioClip);
+            soundSource.PlayOneShot(audioClip);
+        }
+
+        /// <summary>
+        /// Plays a desired music.
+        /// </summary>
+        /// <param name="music"></param>
+        public void PlayMusic(AudioClip music)
+        {
+            if(musicSource.clip == music)
+                return;
+            
+            musicSource.clip = music;
+            musicSource.Play();
         }
 
         /// <summary>

@@ -112,7 +112,7 @@ namespace UI.In_Game.Building.Scripts
                 GameManager.Instance.PlayerModel.ModifyMoney(-skillTree.Nodes[index].NodeObj.Cost);
             }
             
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[2]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[2]);
             skillTree.SetNodeActive(index);
             UpdateImages();
         }

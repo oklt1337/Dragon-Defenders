@@ -28,6 +28,7 @@ namespace UI.MainMenu.Home_Screen.Scripts
         private void Start()
         {
             nickName.text = string.Concat("Nickname:\n",PhotonNetwork.LocalPlayer.NickName);
+            AudioManager.Scripts.AudioManager.Instance.PlayMusic(AudioManager.Scripts.AudioManager.Instance.BackgroundMusic[0]);
         }
 
         private void OnEnable()
@@ -62,20 +63,20 @@ namespace UI.MainMenu.Home_Screen.Scripts
             // For the Prototype a Lobby is not needed.
             //SceneManager.ChangeScene(Scene.Lobby);
             SceneManager.ChangeScene(Scene.GameScene);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[0]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[0]);
         }
 
         public void OnClickSettings()
         {
             MainMenuCanvasManager.Instance.MainMenuSettingsScreen.gameObject.SetActive(true);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
             gameObject.SetActive(false);
         }
 
         public void OnClickCards()
         {
             MainMenuCanvasManager.Instance.DeckManagerScreen.gameObject.SetActive(true);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
             gameObject.SetActive(false);
         }
 

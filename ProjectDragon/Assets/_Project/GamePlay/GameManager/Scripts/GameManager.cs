@@ -129,8 +129,9 @@ namespace GamePlay.GameManager.Scripts
 
         private void Start()
         {
-            PlayerModel.ModifyMoney(1000000);
+            PlayerModel.ModifyMoney(100);
             CurrentGameState = GameState.Build;
+            AudioManager.Scripts.AudioManager.Instance.PlayMusic(AudioManager.Scripts.AudioManager.Instance.BackgroundMusic[1]);
         }
 
         #endregion

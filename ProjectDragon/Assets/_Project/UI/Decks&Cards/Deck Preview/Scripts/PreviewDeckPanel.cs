@@ -50,7 +50,7 @@ namespace UI.Deck_Preview.Scripts
         public void OnEditDeckClick()
         {
             ChangeView();
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace UI.Deck_Preview.Scripts
                 return;
 
             DeckManager.Instance.SetDeckAsDefault(PreviewDeck.DeckId);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         public void OnSaveDeckClick()
@@ -82,7 +82,7 @@ namespace UI.Deck_Preview.Scripts
             }
 
             DeckManager.SaveDeck(PreviewDeck);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         public void OnDeleteClick()
@@ -104,7 +104,7 @@ namespace UI.Deck_Preview.Scripts
             ChangeView();
 
             gameObject.SetActive(false);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
         }
 
         public void OnRemoveCardClick(PreviewDeckButton deckButton)
@@ -123,7 +123,7 @@ namespace UI.Deck_Preview.Scripts
             }
 
             deckButton.SetCard(null);
-            AudioManager.Scripts.AudioManager.Instance.PlayAudio(AudioManager.Scripts.AudioManager.Instance.UiSound[2]);
+            AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[2]);
         }
 
         #endregion
