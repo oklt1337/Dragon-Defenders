@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cap Detonator
   m_EditorClassIdentifier: 
   nodeName: Cap Detonator
+  description: 'Increases the radius of the attack even further to 2.5. '
   icon: {fileID: 21300000, guid: 9a99d085bb9cc4e72972e075606cf4b9, type: 3}
   cost: 400
   value: 1.666

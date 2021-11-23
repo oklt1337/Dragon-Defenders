@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Minor Buff
   m_EditorClassIdentifier: 
   nodeName: Minor Buff
+  description: Cooldown is reduced by 50%.
   icon: {fileID: 21300000, guid: b16cbe6e226bd4dc981f998f1067d7a9, type: 3}
   cost: 400
   value: 0.5

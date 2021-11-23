@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Exploder
   m_EditorClassIdentifier: 
   nodeName: Exploder
+  description: Increases the strength to 80.
   icon: {fileID: 21300000, guid: af115e57966564c01adfc3db1c776223, type: 3}
   cost: 200
   value: 1.333

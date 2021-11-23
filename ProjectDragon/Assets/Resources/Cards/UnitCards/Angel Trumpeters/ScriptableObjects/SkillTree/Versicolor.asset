@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Versicolor
   m_EditorClassIdentifier: 
   nodeName: Versicolor
+  description: The Cooldown of the Buff is random between 3-4 seconds.
   icon: {fileID: 21300000, guid: a2af0f3b72d83431ba35eaa1cc13556d, type: 3}
   cost: 400
   value: 0.6

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Kings Aura
   m_EditorClassIdentifier: 
   nodeName: Kings Aura
+  description: Nearby Units gain -30% Cooldown.
   icon: {fileID: 21300000, guid: efc5905b14f2043fca6bdb234e72a74c, type: 3}
   cost: 1000
   value: 0.7

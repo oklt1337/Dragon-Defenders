@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Igniter
   m_EditorClassIdentifier: 
   nodeName: Igniter
+  description: Attack can burn enemies for 2 seconds dealing 20 dmg/s.
   icon: {fileID: 21300000, guid: daa11df1d31094594a022d21ddf853a1, type: 3}
   cost: 400
   value: 20

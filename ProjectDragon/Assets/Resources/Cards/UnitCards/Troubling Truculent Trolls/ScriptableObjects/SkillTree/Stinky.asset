@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Stinky
   m_EditorClassIdentifier: 
   nodeName: Stinky
+  description: Every 10 seconds the Troll lets out a fart sound.
   icon: {fileID: 21300000, guid: a92c0687f473b4427ba6de7fd7cc9bff, type: 3}
   cost: 250
   value: 10

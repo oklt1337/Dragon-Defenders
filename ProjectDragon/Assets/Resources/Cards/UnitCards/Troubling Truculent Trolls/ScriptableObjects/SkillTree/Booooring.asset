@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Booooring
   m_EditorClassIdentifier: 
   nodeName: Booooring
+  description: "The Troll destroys itself\u2026 of boredom."
   icon: {fileID: 21300000, guid: 9dde46eb5e29d40d7bfcfe0245d0377e, type: 3}
   cost: 500

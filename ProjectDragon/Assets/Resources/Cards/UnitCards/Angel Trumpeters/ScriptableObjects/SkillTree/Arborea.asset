@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Arborea
   m_EditorClassIdentifier: 
   nodeName: Arborea
+  description: Forrest Units gain 80% Attack instead.
   icon: {fileID: 21300000, guid: 1d24290f967d845358a5920bb8b3d6c0, type: 3}
   cost: 400
   value: 1.8

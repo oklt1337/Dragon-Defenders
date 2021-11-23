@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dual Buffing
   m_EditorClassIdentifier: 
   nodeName: Dual Buffing
+  description: Spell helps 2 closest now.
   icon: {fileID: 21300000, guid: e79a89c643e05434fa4099c84af754ac, type: 3}
   cost: 800
   value: 2

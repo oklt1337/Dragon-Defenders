@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Blessing of the Trees
   m_EditorClassIdentifier: 
   nodeName: Blessing of the Trees
+  description: Every 10 seconds doubles shot speed for 4 seconds.
   icon: {fileID: 21300000, guid: 1d24290f967d845358a5920bb8b3d6c0, type: 3}
   cost: 400
   value: 2

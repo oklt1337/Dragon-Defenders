@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Loud Cheer
   m_EditorClassIdentifier: 
   nodeName: Loud Cheer
+  description: Increases Range to 5.
   icon: {fileID: 21300000, guid: fa1e2e0fbf69d4804a326872558cec08, type: 3}
   cost: 400
   value: 1.666

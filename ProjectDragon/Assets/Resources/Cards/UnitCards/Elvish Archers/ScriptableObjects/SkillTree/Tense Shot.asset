@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tense Shot
   m_EditorClassIdentifier: 
   nodeName: Tense Shot
+  description: Damage times 5.
   icon: {fileID: 21300000, guid: dbef0a76fe3974542888e09e324d1836, type: 3}
   cost: 400
   value: 5
