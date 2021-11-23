@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Angel trumpeters-IncreaseDamageForSetTime
   m_EditorClassIdentifier: 
   abilityType: 1
+  abilityName: 
+  description: Every 5 seconds they buff units that are 6 away from them increasing
+    their strength by 10%.
   coolDown: 5
+  icon: {fileID: 0}
   effectRange: 6
   duration: 2
   handleEnter: 0

@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Lusters-AoeArea
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: 
+  description: Spawn a firefield every .5 seconds that deals 60 damage in a circle
+    around them.
   coolDown: 0.5
+  icon: {fileID: 0}
   damage: 60
   attackRange: 2.5
   prefabProjectile: {fileID: 6858757532033793912, guid: 1b5e4fde70a6f354189cf51d5117dfd6,

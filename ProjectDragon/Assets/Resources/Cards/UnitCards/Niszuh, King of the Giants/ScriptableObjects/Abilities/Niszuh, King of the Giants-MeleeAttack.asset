@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Niszuh, King of the Giants-MeleeAttack
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: 
+  description: Swings his arm every 4 seconds in front of him dealing 200 damage.
   coolDown: 4
+  icon: {fileID: 0}
   damage: 200
   attackRange: 4
   prefabProjectile: {fileID: 190852853199072332, guid: db55195a1f4fe0741953d59dbaa7aedc,
     type: 3}
-  duration: 5

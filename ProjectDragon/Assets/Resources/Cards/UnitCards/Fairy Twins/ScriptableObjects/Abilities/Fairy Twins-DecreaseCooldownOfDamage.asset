@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Fairy Twins-DecreaseCooldownOfDamage
   m_EditorClassIdentifier: 
   abilityType: 1
+  abilityName: 
+  description: Reduces closest allys cooldown by 25%.
   coolDown: 0.5
+  icon: {fileID: 0}
   effectRange: 3
   duration: 0
   handleEnter: 1
