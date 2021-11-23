@@ -17,10 +17,12 @@ namespace Abilities.Ability.Scripts
     {
         [SerializeField] private AbilityType abilityType;
         [SerializeField] private string abilityName;
+        [SerializeField] private string description;
         [SerializeField] private float coolDown;
         [SerializeField] private Sprite icon;
         public AbilityType AbilityType => abilityType;
         public string AbilityName => abilityName;
+        public string Description => description;
         public float CoolDown => coolDown;
         public Sprite Icon => icon;
 
@@ -31,6 +33,7 @@ namespace Abilities.Ability.Scripts
     {
         public AbilityObj AbilityAbilityObj { get; }
         public string AbilityName { get; }
+        public string Description { get; }
         public float CoolDown { get; set; }
         public float TimeLeft { get; set; }
         public Transform Owner { get; set; }
@@ -44,6 +47,7 @@ namespace Abilities.Ability.Scripts
         {
             AbilityAbilityObj = abilityAbilityObj;
             AbilityName = abilityAbilityObj.AbilityName;
+            Description = abilityAbilityObj.Description;
             CoolDown = abilityAbilityObj.CoolDown;
             Icon = abilityAbilityObj.Icon;
         }
