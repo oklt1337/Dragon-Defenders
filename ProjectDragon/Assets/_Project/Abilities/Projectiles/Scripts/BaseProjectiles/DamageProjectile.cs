@@ -36,6 +36,7 @@ namespace Abilities.Projectiles.Scripts.BaseProjectiles
         private void OnDestroy()
         {
             Debug.Log("Destroy");
+            Debug.Log(Caster);
         }
 
         protected virtual void OnTriggerEnter(Collider other)
