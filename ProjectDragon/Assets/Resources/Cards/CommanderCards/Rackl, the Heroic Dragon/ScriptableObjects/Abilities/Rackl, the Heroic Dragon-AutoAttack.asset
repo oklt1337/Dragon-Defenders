@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Rackl, the Heroic Dragon-AutoAttack
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: 
   coolDown: 1
+  icon: {fileID: 0}
   damage: 20
   attackRange: 6
   prefabProjectile: {fileID: 5848175371879555877, guid: 954db506240d47e46accd0481248151a,

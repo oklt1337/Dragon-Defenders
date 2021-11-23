@@ -195,18 +195,24 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
                 if (abilities[index] is IncreaseDamageForSetTimeAbility)
                 {
                     var units = GameManager.Scripts.GameManager.Instance.UnitManager.Units;
-
+                    if (units.Count <= 0) 
+                        return;
+                    Debug.Log("In");
+                        
                     foreach (var unit in units
                         .Where(unit =>
                             Vector3.Distance(unit.transform.position, transform.position) <=
                             ((IncreaseDamageForSetTimeAbility) abilities[index]).EffectRange).Where(unit =>
                             unit.Ability.AbilityAbilityObj.AbilityType == AbilityType.Damage))
                     {
+                        Debug.Log(unit.gameObject.name);
                         ((IncreaseDamageForSetTimeAbility) abilities[index]).OnStay(unit.transform);
                     }
                 }
-
-                ((UtilityAbility) abilities[index]).OnStay(newTarget);
+                else
+                {
+                    ((UtilityAbility) abilities[index]).OnStay(newTarget);
+                }
             }
         }
 
