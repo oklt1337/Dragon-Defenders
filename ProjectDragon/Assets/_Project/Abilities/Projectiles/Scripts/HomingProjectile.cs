@@ -1,4 +1,5 @@
 ﻿using Abilities.Projectiles.Scripts.BaseProjectiles;
+using AI.Enemies.Base_Enemy.Scripts;
 using UnityEngine;
 
 namespace Abilities.Projectiles.Scripts
@@ -13,6 +14,10 @@ namespace Abilities.Projectiles.Scripts
             Speed = speed;
             Caster = caster;
             Target = target;
+
+            var enemy = target.GetComponent<Enemy>();
+            if (enemy != null)
+                enemy.OnDeath += (b) => Destroy(gameObject);
         }
 
         protected override void Update()

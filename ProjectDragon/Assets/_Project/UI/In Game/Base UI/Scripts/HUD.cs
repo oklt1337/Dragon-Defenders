@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace UI.In_Game.Base_UI.Scripts
 {
+    [DefaultExecutionOrder(100)]
     public class HUD : MonoBehaviour, ICanvas
     {
         [SerializeField] private Button settings;
@@ -27,6 +28,10 @@ namespace UI.In_Game.Base_UI.Scripts
             GameManager.Instance.PlayerModel.OnPlayerMoneyChanged += OnMoneyChange;
             GameManager.Instance.Hq.Hq.OnHqHealthChanged += OnHqHealthChange;
             GameManager.Instance.Hq.Hq.OnDeath += GameOver;
+        }
+
+        private void Start()
+        {
             GameManager.Instance.PlayerModel.Commander.CommanderStats.OnCommanderDeath += GameOver;
         }
 
@@ -97,8 +102,8 @@ namespace UI.In_Game.Base_UI.Scripts
             InGameCanvasManager.Scripts.InGameCanvasManager.Instance.CommanderHUD.gameObject.SetActive(false);
             settings.gameObject.SetActive(false);
 
-            waveScore.text = string.Concat("You Reached Wave: ", GameManager.Instance.WaveManager.CurrentWaveIndex.ToString());
-            highScore.text = string.Concat("Your Score was:\n", GameManager.Instance.WaveManager.CurrentWaveIndex.ToString());
+            waveScore.text = string.Concat("You Reached Wave: ", GameManager.Instance.WaveManager.CurrentWaveIndex);
+            highScore.text = string.Concat("Your Score was:\n", GameManager.Instance.HighScoreManager.HighScore);
         }
     }
 }

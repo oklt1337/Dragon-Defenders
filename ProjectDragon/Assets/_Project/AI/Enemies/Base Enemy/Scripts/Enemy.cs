@@ -1,3 +1,4 @@
+using System;
 using GamePlay.GameManager.Scripts;
 using UnityEngine;
 using static GamePlay.GameManager.Scripts.GameManager;
@@ -48,6 +49,12 @@ namespace AI.Enemies.Base_Enemy.Scripts
 
         #endregion
 
+        #region Events
+
+        public event Action<bool> OnDeath;
+
+        #endregion
+
         #region Unity Methods
 
         private void Awake()
@@ -85,6 +92,7 @@ namespace AI.Enemies.Base_Enemy.Scripts
             }
             
             Instance.EnemySpawner.IncreaseKilledEnemies(this);
+            OnDeath?.Invoke(byPlayer);
             Destroy(gameObject);
         }
 

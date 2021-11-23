@@ -25,6 +25,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
 
         public event Action<GameState> OnWaveSuccess;
         public event Action<Enemy> OnEnemyDeath;
+        public event Action<Enemy> OnEnemySpawn;
 
         public int KilledEnemies => killedEnemies;
 
@@ -117,6 +118,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
                 var en = PhotonNetwork.Instantiate(string.Concat(enemy.EnemyPath, enemy.EnemyName),
                     spawnPositions[currentSpawnPosition].position, Quaternion.identity);
                 en.transform.parent = transform;
+                OnEnemySpawn?.Invoke(enemy);
                 yield return new WaitForSeconds(enemySpawnDelay);
             }
 

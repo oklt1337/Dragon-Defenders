@@ -49,6 +49,7 @@ namespace GamePlay.GameManager.Scripts
         [SerializeField] private WaveGenerator waveGenerator;
         [SerializeField] private HqManager hqManager;
         [SerializeField] private UnitManager.Scripts.UnitManager unitManager;
+        [SerializeField] private HighScoreManager.Scripts.HighScoreManager highScoreManager;
 
         [Header("Camera")] 
         [SerializeField] private TrackingShotBuildToWave cameraTrackingShotBuildToWave;
@@ -92,6 +93,7 @@ namespace GamePlay.GameManager.Scripts
         public PlayerModel PlayerModel => player;
         public HqManager Hq => hqManager;
         public UnitManager.Scripts.UnitManager UnitManager => unitManager;
+        public HighScoreManager.Scripts.HighScoreManager HighScoreManager => highScoreManager;
         public CommanderMoveIndicator CommanderMoveIndicator => commanderMoveIndicator;
         public TrackingShotBuildToWave CameraTrackingShotBuildToWave => cameraTrackingShotBuildToWave;
         public HUD HUD => hud;
