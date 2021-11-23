@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Valkyrie-MeleeAttack
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: 
+  description: Slashes with her sword in front of her every 1.25 seconds dealing
+    30 damage.
   coolDown: 1.25
+  icon: {fileID: 0}
   damage: 30
   attackRange: 3
   prefabProjectile: {fileID: 837948568487164293, guid: fb6bc8fb8ff5ce8448433d95cc6ee9cc,

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Elvish Archers-SingleShot
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: 
+  description: Shoots an arrow every 1.4 seconds dealing 20 damage.
   coolDown: 1.4
+  icon: {fileID: 0}
   damage: 20
   attackRange: 5
-  projectileSpeed: 5
   prefabProjectile: {fileID: 3640525822310599416, guid: 8ae5f37ed12ec3c47865ba8942e7fbeb,
     type: 3}
+  projectileSpeed: 5

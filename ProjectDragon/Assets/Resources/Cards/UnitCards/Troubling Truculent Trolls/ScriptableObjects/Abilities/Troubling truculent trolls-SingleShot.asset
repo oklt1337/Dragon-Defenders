@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Troubling truculent trolls-SingleShot
   m_EditorClassIdentifier: 
   abilityType: 0
+  abilityName: 
+  description: Ar a range of 4 throw stones every 2.4 seconds that deal 19 damage.
   coolDown: 2.4
+  icon: {fileID: 0}
   damage: 19
   attackRange: 4
   prefabProjectile: {fileID: 573337230578082824, guid: 3a8055edda1e6f147bfcf008330cfcaa,
