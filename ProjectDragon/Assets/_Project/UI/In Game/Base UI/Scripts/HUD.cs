@@ -96,7 +96,7 @@ namespace UI.In_Game.Base_UI.Scripts
             settings.gameObject.SetActive(false);
 
             waveScore.text = string.Concat("You Reached Wave: ", GameManager.Instance.WaveManager.CurrentWaveIndex.ToString());
-            highScore.text = string.Concat("Your Score was: ", GameManager.Instance.WaveManager.CurrentWaveIndex.ToString());
+            highScore.text = string.Concat("Your Score was:\n", GameManager.Instance.WaveManager.CurrentWaveIndex.ToString());
         }
     }
 }
