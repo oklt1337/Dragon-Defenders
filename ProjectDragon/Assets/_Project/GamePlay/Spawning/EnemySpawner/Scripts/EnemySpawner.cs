@@ -27,7 +27,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         public event Action<Enemy> OnEnemyDeath;
         public event Action<Enemy> OnEnemySpawn;
 
-        public int KilledEnemies => killedEnemies;
+        private int KilledEnemies => killedEnemies;
 
         #region Unity Methods
 
@@ -53,7 +53,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         public void IncreaseKilledEnemies(Enemy enemy)
         {
             killedEnemies++;
-
+            
             if (KilledEnemies < waveSize)
                 return;
 
@@ -111,7 +111,7 @@ namespace GamePlay.Spawning.EnemySpawner.Scripts
         private IEnumerator SpawnEnemies()
         {
             coroutineIsRunning = true;
-
+           
             foreach (var enemy in enemies)
             {
                 UpdateSpawnPoints();

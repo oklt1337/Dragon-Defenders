@@ -106,6 +106,9 @@ namespace AI.Enemies.Base_Enemy.Scripts
         /// <param name="damage"> How much damage the attack is dealing. </param>
         public virtual void TakeDamage(float damage)
         {
+            if(health <= 0)
+                return;
+            
             if (damage < defense)
                 return;
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Project.GamePlay.Spawning.Wave.Scripts;
 using AI.Enemies.Base_Enemy.Scripts;
 using GamePlay.GameManager.Scripts;
 using Sirenix.OdinInspector;
@@ -9,8 +10,9 @@ namespace GamePlay.Spawning.WaveManager.Scripts
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private _Project.GamePlay.Spawning.Wave.Scripts.Wave currentWave;
-        
+        [SerializeField] private Wave currentWave;
+
+        public Wave CurrentWave => currentWave;
         public int CurrentWaveIndex { get; private set; }
 
         public event Action<List<Enemy>> OnUpdateWave;
