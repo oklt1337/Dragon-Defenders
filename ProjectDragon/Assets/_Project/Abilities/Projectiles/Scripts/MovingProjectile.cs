@@ -21,7 +21,7 @@ namespace Abilities.Projectiles.Scripts
             Damage = damage;
             Speed = speed;
             Caster = caster;
-            direction = dir * Speed;
+            direction = dir.normalized * Speed;
         }
 
         protected override void Update()
