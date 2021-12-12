@@ -5,7 +5,7 @@ namespace AbilitySystem.Handler.Scripts
 {
     public abstract class Handler
     {
-        private Entity.Scripts.Entity entity;
+        private readonly Entity.Scripts.Entity entity;
         public List<Effect> Effects { get; } = new List<Effect>();
         
         public Handler(Entity.Scripts.Entity entity)

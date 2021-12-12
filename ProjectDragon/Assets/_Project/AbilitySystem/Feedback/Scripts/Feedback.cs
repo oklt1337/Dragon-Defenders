@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace AbilitySystem.Feedback.Scripts
 {
-    public abstract class Feedback : ScriptableObject
+    [Serializable]
+    public abstract class Feedback
     {
         public FeedbackType feedbackType;
         public abstract void ProcessFeedback();

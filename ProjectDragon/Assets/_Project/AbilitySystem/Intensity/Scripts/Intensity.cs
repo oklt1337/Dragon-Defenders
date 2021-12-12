@@ -1,8 +1,11 @@
-﻿namespace AbilitySystem.Intensity.Scripts
+﻿using System;
+
+namespace AbilitySystem.Intensity.Scripts
 {
-    public class Intensity
+    [Serializable]
+    public abstract class Intensity
     {
-        public IntensityType IntensityType;
+        public IntensityType intensityType;
         public float value;
     }
 }

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace AbilitySystem.Effects.Scripts
 {
-    public abstract class Effect : ScriptableObject
+    [Serializable]
+    public abstract class Effect
     {
         public Type.Scripts.Type Type;
         public Intensity.Scripts.Intensity Intensity;

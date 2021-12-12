@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Sirenix.Serialization;
 
 namespace AbilitySystem.Context.Scripts
 {
-    public class Context : ScriptableObject
+    [Serializable]
+    public class Context
     {
         public bool isActive;
         public bool hasDuration;
         public float duration;
-        public readonly List<Condition.Scripts.Condition> Conditions = new List<Condition.Scripts.Condition>();
+        [OdinSerialize] public List<Condition.Scripts.Condition> Conditions = new List<Condition.Scripts.Condition>();
 
         /// <summary>
         /// Checks Conditions if all conditions are true and !isActive;

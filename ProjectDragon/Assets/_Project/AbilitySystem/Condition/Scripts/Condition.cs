@@ -1,9 +1,9 @@
 ﻿using System;
-using UnityEngine;
 
 namespace AbilitySystem.Condition.Scripts
 {
-    public abstract class Condition : ScriptableObject
+    [Serializable]
+    public abstract class Condition
     {
         public ConditionType conditionType;
         public abstract bool CheckCondition();

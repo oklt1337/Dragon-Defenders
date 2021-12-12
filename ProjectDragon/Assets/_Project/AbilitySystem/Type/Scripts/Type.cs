@@ -1,8 +1,11 @@
-﻿namespace AbilitySystem.Type.Scripts
+﻿using System;
+
+namespace AbilitySystem.Type.Scripts
 {
+    [Serializable]
     public abstract class Type
     {
-        public EffectType EffectType;
-        public ComputationType ComputationType;
+        public EffectType effectType;
+        public ComputationType computationType;
     }
 }

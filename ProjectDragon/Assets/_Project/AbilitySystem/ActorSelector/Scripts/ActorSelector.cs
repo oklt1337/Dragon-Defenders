@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Sirenix.Serialization;
 
 namespace AbilitySystem.ActorSelector.Scripts
 {
+    [Serializable]
     public abstract class ActorSelector
     {
-        public readonly List<ValidTargets> Targets = new List<ValidTargets>();
-        public bool ValidateTarget(ValidTargets target)
-        {
-            return Targets.Contains(target);
-        }
+        [OdinSerialize] public List<ValidTargets> targets = new List<ValidTargets>();
+        public abstract bool ValidateTarget(ValidTargets target);
     }
 }
