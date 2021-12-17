@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9a34ffa45b490595c74766403a0f49, type: 3}
   m_Name: Ability
   m_EditorClassIdentifier: 
+  modifier:
+    context:
+      isActive: 0
+      hasDuration: 0
+      duration: 0

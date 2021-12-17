@@ -3,7 +3,7 @@
 namespace AbilitySystem.Intensity.Scripts
 {
     [Serializable]
-    public abstract class Intensity
+    public class Intensity
     {
         public IntensityType intensityType;
         public float value;

@@ -3,10 +3,12 @@ using AbilitySystem.Effects.Scripts;
 
 namespace AbilitySystem.Handler.Scripts
 {
-    public abstract class Handler
+    public class Handler
     {
         private readonly Entity.Scripts.Entity entity;
         public List<Effect> Effects { get; } = new List<Effect>();
+
+        public bool HasEntries => Effects.Count > 0;
         
         public Handler(Entity.Scripts.Entity entity)
         {
@@ -16,7 +18,6 @@ namespace AbilitySystem.Handler.Scripts
         public void AddEntry(Effect effect)
         {
             Effects.Add(effect);
-            ProcessEntries();
         }
 
         public void ProcessEntries()
