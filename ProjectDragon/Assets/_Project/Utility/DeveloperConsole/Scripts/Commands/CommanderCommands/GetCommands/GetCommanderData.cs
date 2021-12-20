@@ -39,9 +39,9 @@ namespace Utility.DeveloperConsole.Scripts.Commands.CommanderCommands.GetCommand
             DeveloperConsoleManager.Instance.Print(string.Concat("Faction: ", stats.Faction));
             DeveloperConsoleManager.Instance.Print(string.Concat("Class: ", stats.CommanderClass));
             DeveloperConsoleManager.Instance.Print(string.Concat("Speed: ", stats.Speed));
-            DeveloperConsoleManager.Instance.Print(string.Concat("Max Health: ", stats.MAXHealth));
+            DeveloperConsoleManager.Instance.Print(string.Concat("Max Health: ", stats.MaxHealth));
             DeveloperConsoleManager.Instance.Print(string.Concat("Health: ", stats.Health));
-            DeveloperConsoleManager.Instance.Print(string.Concat("Max Mana: ", stats.MAXMana));
+            DeveloperConsoleManager.Instance.Print(string.Concat("Max Mana: ", stats.MaxMana));
             DeveloperConsoleManager.Instance.Print(string.Concat("Mana: ", stats.Mana));
             DeveloperConsoleManager.Instance.Print(string.Concat("Attack: ", stats.AttackDamageModifier));
             DeveloperConsoleManager.Instance.Print(string.Concat("Defense: ", stats.Defense));

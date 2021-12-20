@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AbilitySystem.Effects.BaseEffects.Scripts;
 using AbilitySystem.Effects.Scripts;
 
 namespace AbilitySystem.Handler.Scripts

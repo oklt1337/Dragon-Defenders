@@ -51,7 +51,7 @@ namespace _Project.Utility.Editor.CardBuilder.Scripts
         private int limit;
         private int goldCost;
 
-        [MenuItem("Window/Card Builder")]
+        [MenuItem("Window/Custom/Card Builder")]
         public static void Init()
         {
             Instance = GetWindow<CardBuilder>("Card Builder");

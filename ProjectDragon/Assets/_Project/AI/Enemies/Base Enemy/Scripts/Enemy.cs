@@ -1,11 +1,12 @@
 using System;
+using AbilitySystem.Entity.Scripts;
 using GamePlay.GameManager.Scripts;
 using UnityEngine;
 using static GamePlay.GameManager.Scripts.GameManager;
 
 namespace AI.Enemies.Base_Enemy.Scripts
 {
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : Entity
     {
         #region Private Fields
 
@@ -41,6 +42,7 @@ namespace AI.Enemies.Base_Enemy.Scripts
         #region Public Properties
 
         public float EnemyHealth => health;
+        public float MaxHealth => maxHealth;
         public float StunDuration => stunDuration;
         public string EnemyName => enemyName;
         public string EnemyPath => enemyPath;

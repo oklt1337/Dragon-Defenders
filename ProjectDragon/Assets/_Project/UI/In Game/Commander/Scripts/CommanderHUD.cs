@@ -27,8 +27,8 @@ namespace UI.In_Game.Commander.Scripts
             var commanderStat = GameManager.Instance.PlayerModel.Commander.CommanderStats;
             commanderStat.OnCommanderHealthChanged += ChangeCommanderHealth;
             commanderStat.OnCommanderManaChanged += ChangeCommanderMana;
-            commanderStat.OnCommanderMAXHealthChanged += ModifyHealth;
-            commanderStat.OnCommanderMAXManaChanged += ModifyMana;
+            commanderStat.OnCommanderMaxHealthChanged += ModifyHealth;
+            commanderStat.OnCommanderMaxManaChanged += ModifyMana;
             
             for (int i = 0; i < abilities.Length; i++)
             {
@@ -53,8 +53,8 @@ namespace UI.In_Game.Commander.Scripts
             var commanderStat = GameManager.Instance.PlayerModel.Commander.CommanderStats;
             commanderStat.OnCommanderHealthChanged -= ChangeCommanderHealth;
             commanderStat.OnCommanderManaChanged -= ChangeCommanderMana;
-            commanderStat.OnCommanderMAXHealthChanged -= ModifyHealth;
-            commanderStat.OnCommanderMAXManaChanged -= ModifyMana;
+            commanderStat.OnCommanderMaxHealthChanged -= ModifyHealth;
+            commanderStat.OnCommanderMaxManaChanged -= ModifyMana;
         }
 
         #endregion

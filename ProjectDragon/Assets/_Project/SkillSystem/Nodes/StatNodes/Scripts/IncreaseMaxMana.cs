@@ -12,7 +12,7 @@ namespace SkillSystem.Nodes.StatNodes.Scripts
         {
             if (visitor is CommanderStats commanderStats)
             {
-                commanderStats.MAXMana *= value;
+                commanderStats.MaxMana *= value;
             }
         }
     }

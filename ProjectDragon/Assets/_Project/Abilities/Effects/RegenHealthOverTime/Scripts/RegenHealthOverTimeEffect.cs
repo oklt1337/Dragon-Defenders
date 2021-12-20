@@ -33,7 +33,7 @@ namespace Abilities.Effects.RegenHealthOverTime.Scripts
             coolDown = tick;
             if (commander != null)
             {
-                commander.CommanderStats.Health += commander.CommanderStats.MAXHealth * regenValue;
+                commander.CommanderStats.Health += commander.CommanderStats.MaxHealth * regenValue;
             }
         }
 

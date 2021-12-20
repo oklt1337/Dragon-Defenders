@@ -2,7 +2,6 @@ using System;
 using Abilities.VisitorPattern.Scripts;
 using Faction;
 using SkillSystem.Nodes.BaseNodes.Scripts;
-using SkillSystem.SkillTree.Scripts;
 
 namespace GamePlay.Player.Commander.CommanderStats.Scripts
 {
@@ -14,8 +13,8 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
         {
             Faction = faction;
             CommanderClass = @class;
-            MAXHealth = health;
-            MAXMana = mana;
+            MaxHealth = health;
+            MaxMana = mana;
             AttackDamageModifier = attackDamageModifier;
             Defense = defense;
             Speed = speed;
@@ -47,7 +46,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
             }
         }
 
-        public float MAXHealth
+        public float MaxHealth
         {
             get => maxHealth;
             internal set
@@ -56,7 +55,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
                     Health += value - maxHealth;
                 
                 maxHealth = value;
-                OnCommanderMAXHealthChanged?.Invoke(maxHealth);
+                OnCommanderMaxHealthChanged?.Invoke(maxHealth);
             }
         }
 
@@ -69,7 +68,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
                 OnCommanderManaChanged?.Invoke(mana);
             } 
         }
-        public float MAXMana
+        public float MaxMana
         {
             get => maxMana;
             internal set
@@ -78,7 +77,7 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
                     Mana += value - maxMana;
                 
                 maxMana = value;
-                OnCommanderMAXManaChanged?.Invoke(maxMana);
+                OnCommanderMaxManaChanged?.Invoke(maxMana);
             } 
         }
         
@@ -93,9 +92,9 @@ namespace GamePlay.Player.Commander.CommanderStats.Scripts
         
         public event Action OnCommanderDeath;
         public event Action<float> OnCommanderHealthChanged;
-        public event Action<float> OnCommanderMAXHealthChanged;
+        public event Action<float> OnCommanderMaxHealthChanged;
         public event Action<float> OnCommanderManaChanged; 
-        public event Action<float> OnCommanderMAXManaChanged;
+        public event Action<float> OnCommanderMaxManaChanged;
         public event Action<float> OnCommanderSpeedChanged;
 
         public void Visit(Node node)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AbilitySystem.Effects.BaseEffects.Scripts;
 using AbilitySystem.Effects.Scripts;
 using Sirenix.Serialization;
 

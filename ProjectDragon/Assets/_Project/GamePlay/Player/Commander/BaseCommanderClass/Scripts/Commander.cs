@@ -5,6 +5,7 @@ using Abilities.Ability.Scripts;
 using Abilities.EndAbilities.IncreaseDamageForSetTime.Scripts;
 using Abilities.Projectiles.Scripts.BaseProjectiles;
 using Abilities.VisitorPattern.Scripts;
+using AbilitySystem.Entity.Scripts;
 using Deck_Cards.Cards.CommanderCard.Scripts;
 using GamePlay.GameManager.Scripts;
 using SkillSystem.SkillTree.Scripts;
@@ -15,7 +16,7 @@ using State = GamePlay.Player.PlayerModel.Scripts.State;
 
 namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 {
-    public class Commander : MonoBehaviour
+    public class Commander : Entity
     {
         #region SerializeFields
         
@@ -44,7 +45,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
         private bool dyingBreath;
         private byte level;
         private float experience;
-        private const float MINDamage = 10f;
+        private const float MinDamage = 10f;
 
         [Header("Movement")] 
         private NavMeshAgent navMeshAgent;
@@ -116,8 +117,9 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
             GameManager.Scripts.GameManager.Instance.OnGameStateChanged += StopMovement;
         }
 
-        private void Update()
+        public override void Update()
         {
+            base.Update();
             TickAbilities();
             if (playerModel.CurrentState != State.Move) 
                 return;
@@ -279,7 +281,7 @@ namespace GamePlay.Player.Commander.BaseCommanderClass.Scripts
 
         public void TakeDamage(float damage)
         {
-            damage = Mathf.Clamp((damage * commanderStats.Health / commanderStats.MAXHealth), MINDamage, damage) /
+            damage = Mathf.Clamp((damage * commanderStats.Health / commanderStats.MaxHealth), MinDamage, damage) /
                      commanderStats.Defense;
 
             if (commanderStats.Health - damage <= 0 && !dyingBreath)

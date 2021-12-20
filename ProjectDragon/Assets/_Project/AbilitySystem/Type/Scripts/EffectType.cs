@@ -2,6 +2,7 @@
 {
     public enum EffectType
     {
+        Damage,
         KnockBackApplied,
         BoostDuration,
         AttackSpeed
