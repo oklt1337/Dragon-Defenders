@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GamePlay.GameManager.Scripts;
 using GamePlay.Player.PlayerModel.Scripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.PlayerLoop;
 
 namespace GamePlay.Player.InputHandler.Scripts
@@ -11,6 +12,7 @@ namespace GamePlay.Player.InputHandler.Scripts
     {
         #region Private Fields
 
+        private int fingerID = -1;
         private Vector3 mousePos;
         private Camera activeCamera;
 
@@ -29,7 +31,9 @@ namespace GamePlay.Player.InputHandler.Scripts
         public event Action<List<Touch>> OnMultiTouch;
 
         #endregion
-
+#if !UNITY_EDITOR
+     fingerID = 0; 
+#endif
         #region Unity Methods
 
         private void Awake()
@@ -44,6 +48,8 @@ namespace GamePlay.Player.InputHandler.Scripts
                 switch (Input.touchCount)
                 {
                     case 1:
+                        if(EventSystem.current.IsPointerOverGameObject(fingerID))
+                            return;
                         OnTouch?.Invoke(GetTouchPosInWorldCoord());
                         break;
                     case 2:
@@ -60,6 +66,9 @@ namespace GamePlay.Player.InputHandler.Scripts
                 screenPos.z = activeCamera.nearClipPlane;
                 var ray = activeCamera.ScreenPointToRay(screenPos);
 
+                if(EventSystem.current.IsPointerOverGameObject(fingerID))
+                    return;
+                
                 OnTouch?.Invoke(ray);
             }
         }
