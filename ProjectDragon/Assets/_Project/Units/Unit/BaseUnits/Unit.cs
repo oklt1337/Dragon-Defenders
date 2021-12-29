@@ -95,6 +95,9 @@ namespace Units.Unit.BaseUnits
 
         private void OnTriggerEnter(Collider other)
         {
+            if (Ability == null)
+                return;
+            
             switch (Ability.AbilityAbilityObj.AbilityType)
             {
                 case AbilityType.Damage:
@@ -116,6 +119,9 @@ namespace Units.Unit.BaseUnits
 
         private void OnTriggerStay(Collider other)
         {
+            if (Ability == null)
+                return;
+
             switch (Ability.AbilityAbilityObj.AbilityType)
             {
                 case AbilityType.Damage:
@@ -144,6 +150,9 @@ namespace Units.Unit.BaseUnits
         
         private void OnTriggerExit(Collider other)
         {
+            if (Ability == null)
+                return;
+
             switch (Ability.AbilityAbilityObj.AbilityType)
             {
                 case AbilityType.Damage:

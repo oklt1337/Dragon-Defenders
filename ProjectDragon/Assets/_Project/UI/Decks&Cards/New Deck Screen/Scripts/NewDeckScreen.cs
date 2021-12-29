@@ -51,6 +51,8 @@ namespace UI.New_Deck_Screen.Scripts
             // Only for Prototype, pls don't ever look at this.
             DeckManager.Instance.Decks[DeckManager.Instance.Decks.Count - 1].AddCard(commanderCard);
             DeckManager.SaveDeck(DeckManager.Instance.Decks[DeckManager.Instance.Decks.Count - 1]);
+            
+            nameField.text = "";
         }
 
         /// <summary>
@@ -68,6 +70,8 @@ namespace UI.New_Deck_Screen.Scripts
             {
                 LobbyCanvasManager.Instance.DeckManagerScreen.ChangeInteractableStatus(true);
             }
+
+            nameField.text = "";
         }
 
         public void ChangeInteractableStatus(bool status)

@@ -83,6 +83,7 @@ namespace UI.Deck_Preview.Scripts
 
             DeckManager.SaveDeck(PreviewDeck);
             AudioManager.Scripts.AudioManager.Instance.PlayAudioClip(AudioManager.Scripts.AudioManager.Instance.UiSound[1]);
+            ChangeView();
         }
 
         public void OnDeleteClick()
