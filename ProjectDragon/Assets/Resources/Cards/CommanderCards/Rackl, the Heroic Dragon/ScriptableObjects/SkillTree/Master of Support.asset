@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Master of Support
   m_EditorClassIdentifier: 
   nodeName: Master of Support
-  icon: {fileID: 21300000, guid: e6411bdc3221b43ddb1a9fa885ef30cc, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: 8691389b681c26043ae785f76d906c0f, type: 3}
   cost: 10
   value: 1.5

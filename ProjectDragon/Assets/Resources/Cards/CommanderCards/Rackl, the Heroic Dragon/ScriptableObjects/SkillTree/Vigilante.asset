@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Vigilante
   m_EditorClassIdentifier: 
   nodeName: Vigilante
-  icon: {fileID: 21300000, guid: 899687626ff3842d99b58510c063abe0, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: 3ce700170a2bdd042aefcbe629763b6b, type: 3}
   cost: 20
   value: 10
   range: 5

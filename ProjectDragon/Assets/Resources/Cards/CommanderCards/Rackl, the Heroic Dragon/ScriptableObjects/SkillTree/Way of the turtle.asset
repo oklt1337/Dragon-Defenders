@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Way of the turtle
   m_EditorClassIdentifier: 
   nodeName: Way of the turtle
-  icon: {fileID: 21300000, guid: c23bb5c1541e4415bb82f430a308f7e3, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: e34184aa742bfb5489d63ac5562f4113, type: 3}
   cost: 20
   value: 1.4

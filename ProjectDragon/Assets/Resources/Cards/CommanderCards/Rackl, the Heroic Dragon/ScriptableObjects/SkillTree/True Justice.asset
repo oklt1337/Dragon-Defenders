@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: True Justice
   m_EditorClassIdentifier: 
   nodeName: True Justice
-  icon: {fileID: 21300000, guid: f3a851859767547c6b5d9a9d9d995af7, type: 3}
+  description: 
+  icon: {fileID: 21300000, guid: 9619da37f92f1d048877f69ed550d795, type: 3}
   cost: 10
   value: 2

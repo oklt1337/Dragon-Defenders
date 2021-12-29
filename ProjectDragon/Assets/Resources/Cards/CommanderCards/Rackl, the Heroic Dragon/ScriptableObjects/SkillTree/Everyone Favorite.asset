@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Everyone's Favorite
   description: 
-  icon: {fileID: 21300000, guid: efc5905b14f2043fca6bdb234e72a74c, type: 3}
+  icon: {fileID: 21300000, guid: 789b33e84aeba374987ade546f256e4b, type: 3}
   cost: 20
   value: 1.1
   range: 8
