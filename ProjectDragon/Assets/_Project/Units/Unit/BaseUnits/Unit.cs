@@ -174,6 +174,9 @@ namespace Units.Unit.BaseUnits
 
         private void OnDestroy()
         {
+            if(card == null)
+                return;
+            
             if (GameManager.Instance.UnitManager.Units.Contains(this))
             {
                 GameManager.Instance.UnitManager.Units.Remove(this);

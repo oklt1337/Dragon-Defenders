@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using UI.Managers.Scripts;
 using Units.Unit.BaseUnits;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,6 +19,9 @@ namespace UI.In_Game.Building.Scripts
         [SerializeField] private Camera buildCam;
         [SerializeField] private Image image;
         [SerializeField] private TextMeshProUGUI prototypeText;
+
+        private GameObject previewUnit;
+        private bool canPlace;
 
         #region Unity Methods
 
@@ -46,30 +50,44 @@ namespace UI.In_Game.Building.Scripts
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            //TODO: Instantiate transparent unit. (Not Photon Instantiate!)
+            // Spawns preview unit.
+            previewUnit = (GameObject)Instantiate
+                (Resources.Load(unit.PrefabPath),Input.mousePosition,quaternion.identity,GameManager.Instance.UnitManager.transform);
+
+            // fml
+            previewUnit.layer = 2;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            //TODO: Move transparent unit with courser.
+            // Moves the preview.
+            Vector3 screenPos = Input.mousePosition;
+            screenPos.z = buildCam.nearClipPlane;
+            Ray ray = buildCam.ScreenPointToRay(screenPos);
+            
+            Physics.Raycast(ray, out RaycastHit hit);
+            
+            previewUnit.transform.position = hit.point;
+            
+            // Checks if position is placeable. 
+            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            {
+                canPlace = true;
+            }
+            else
+            {
+                canPlace = false;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            Destroy(previewUnit);
+            
+            if(!canPlace)
+                return;
+            
             if (GameManager.Instance.PlayerModel.Money < unit.GoldCost)
-                return;
-
-            Vector3 screenPos = Input.mousePosition;
-            screenPos.z = buildCam.nearClipPlane;
-            Ray ray = buildCam.ScreenPointToRay(screenPos);
-
-
-            Physics.Raycast(ray, out RaycastHit hit);
-
-            if(hit.collider == null)
-                return;
-
-            if (!hit.collider.CompareTag("Ground"))
                 return;
 
             if (!GameManager.Instance.PlayerModel.ModifyMoney(-unit.GoldCost))
@@ -84,7 +102,7 @@ namespace UI.In_Game.Building.Scripts
                 
 
             // Do the spawning when everything works out.
-            var tower = PhotonNetwork.Instantiate(unit.PrefabPath, hit.point, Quaternion.identity).GetComponent<Unit>();
+            var tower = PhotonNetwork.Instantiate(unit.PrefabPath, previewUnit.transform.position, Quaternion.identity).GetComponent<Unit>();
             tower.Initialize(unit);
             tower.transform.parent = GameManager.Instance.UnitManager.transform;
         }
