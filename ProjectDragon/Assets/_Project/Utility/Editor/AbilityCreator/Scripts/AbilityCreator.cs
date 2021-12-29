@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AbilitySystem.ActorSelector.Scripts;
 using AbilitySystem.Condition.Scripts;
 using AbilitySystem.Feedback.Scripts;
@@ -9,12 +8,19 @@ using UnityEngine;
 
 namespace _Project.Utility.Editor.AbilityCreator.Scripts
 {
+    internal enum WindowMode
+    {
+        Default,
+        CreateCondition
+    }
+    
     public class AbilityCreator : EditorWindow
     {
         private static AbilityCreator Instance;
 
         [Header("General")] 
         private GameObject projectile;
+        private static WindowMode WindowMode;
 
         [Header("Modifier")]
         [Header("Context")]
@@ -22,8 +28,9 @@ namespace _Project.Utility.Editor.AbilityCreator.Scripts
         private bool hasDuration;
         private float duration;
         private List<Condition> conditions = new List<Condition>();
-        
-        [Header("Condition")]
+
+        [Header("Condition")] 
+        private ConditionEnum conditionEnum;
         private bool showCondition;
         private ConditionType conditionType;
         private float conditionValue;
@@ -41,6 +48,7 @@ namespace _Project.Utility.Editor.AbilityCreator.Scripts
         public static void Init()
         {
             Instance = GetWindow<AbilityCreator>("Ability Creator");
+            WindowMode = WindowMode.Default;
             Instance.Show();
         }
 
@@ -51,9 +59,42 @@ namespace _Project.Utility.Editor.AbilityCreator.Scripts
 
         private void OnGUI()
         {
-            DrawContext();
-            DrawFeedback();
-            DrawActorSelector();
+            if (WindowMode == WindowMode.Default)
+            {
+                DrawContext();
+                DrawFeedback();
+                DrawActorSelector();
+            }
+            else if (WindowMode == WindowMode.CreateCondition)
+            {
+                DrawCreateCondition();
+            }
+        }
+
+        private void DrawCreateCondition()
+        {
+            conditionEnum = (ConditionEnum) EditorGUILayout.EnumPopup(conditionEnum, GUIStyle.none);
+            if (GUILayout.Button("Create", GUIStyle.none))
+            {
+
+                switch (conditionEnum)
+                {
+                    case ConditionEnum.None:
+                        //conditions.Add((Condition) obj);
+                        break;
+                    case ConditionEnum.Default:
+                        //conditions.Add((Condition) obj);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+            }
+            
+            if (GUILayout.Button("Cancel", GUIStyle.none))
+            {
+                WindowMode = WindowMode.Default;
+            }
         }
 
         private void DrawActorSelector()
@@ -74,10 +115,12 @@ namespace _Project.Utility.Editor.AbilityCreator.Scripts
             showContext = EditorGUILayout.Foldout(showContext, "Context");
             if (!showContext) 
                 return;
+            EditorGUI.indentLevel++;
             hasDuration = EditorGUILayout.Toggle("Has Duration", hasDuration);
             if (hasDuration)
                 duration = EditorGUILayout.FloatField("Duration", duration);
             DrawCondition();
+            EditorGUI.indentLevel--;
         }
 
         private void DrawCondition()
@@ -85,8 +128,20 @@ namespace _Project.Utility.Editor.AbilityCreator.Scripts
             showCondition = EditorGUILayout.Foldout(showCondition, "Condition");
             if (!showCondition) 
                 return;
-            conditionType = (ConditionType) EditorGUILayout.EnumPopup("Condition Type", conditionType);
-            conditionValue = EditorGUILayout.FloatField("Value", conditionValue);
+
+            if (GUILayout.Button("+", GUIStyle.none))
+            {
+                //Fenster -> alle conditions -> add
+                WindowMode = WindowMode.CreateCondition;
+            }
+
+            /*for (int i = 0; i < conditions.Count; i++)
+            {
+                conditionType = conditions[i].conditionType;
+            }*/
+
+            //conditionType = (ConditionType) EditorGUILayout.EnumPopup("Condition Type", conditionType);
+            //conditionValue = EditorGUILayout.FloatField("Value", conditionValue);
         }
     }
 }
